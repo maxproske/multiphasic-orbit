@@ -142,8 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segments: 24
-  xAxis: 5
-  yAxis: 3
+  ellipse:
+    xAxis: 4
+    yAxis: 3
 --- !u!120 &1054935827
 LineRenderer:
   m_ObjectHideFlags: 0
