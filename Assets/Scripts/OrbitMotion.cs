@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Make class require a LineRenderer to be attached whenever we run this script
+[RequireComponent(typeof(LineRenderer))]
 public class OrbitMotion : MonoBehaviour {
 
 	// Will reference the motion of the planet model
 	public Transform orbitingObject;
+
+	// Get a reference to the LineRenderer
+	LineRenderer lr;
+
+	// Range attribute between 3 and 36 to determine # of segments in ellipse
+	[Range(3,36)]
+	public int segments;
 
 	// Serialized ellipse object
 	public Ellipse orbitPath;
@@ -20,6 +29,58 @@ public class OrbitMotion : MonoBehaviour {
 
 	// Allows us to toggle the orbit in-editor
 	public bool orbitActive = true;
+
+	void Awake() {
+		// Get reference when we start the game
+		lr = GetComponent<LineRenderer> ();
+
+		// Calculate ellipse right when we start the game
+		CalculateEllipse();
+	}
+
+	void FixedUpdate ()
+	{
+		if (Application.isPlaying && lr != null) {
+			CalculateEllipse ();
+		}
+	}
+
+
+	// Calculate the ellipse
+	void CalculateEllipse() {
+		// Create an array of Vector3's.
+		// Populate LineRenderer with array of points to render
+		// (segments + 1 to complete the ring around. We'll make the last element equal to the first element later.)
+		Vector3[] points = new Vector3[segments + 1];
+
+		// Iterate through these points
+		for (int i = 0; i < segments; i++) {
+
+			// Pass in t value (i/segments)
+			Vector2 position2D = orbitPath.Evaluate((float)i / (float)segments);
+
+			// Debug
+			//Debug.Log ("Position of sun: (" + orbitingObject.transform.parent.localPosition.x + ", " + orbitingObject.transform.parent.localPosition.z + ")");
+
+			// Set point at i equal to a new Vector2 of (x,y) and 0 for z value
+			points[i] = new Vector3(position2D.x + orbitingObject.transform.parent.localPosition.x, 0f, position2D.y + orbitingObject.transform.parent.localPosition.z);
+		}
+		// Remember we have segments + 1, and are 0-indexing
+		// Very last point in the array is equal to first point, completing the ellipse
+		points[segments] = points[0];
+
+		// Set LineRenderer using newer method positionCount
+		lr.positionCount = segments + 1;
+		// Pass in points array
+		lr.SetPositions(points);
+	}
+
+	// Call-back method. If we change values in-editor while we are playing the game, we can see those
+	void OnValidate() {
+		if (Application.isPlaying && lr != null) {
+			CalculateEllipse ();
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
