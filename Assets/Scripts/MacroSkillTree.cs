@@ -29,9 +29,14 @@ public class MacroSkillTree : MonoBehaviour {
 		instance = this;
 	}
 
+	void Setup() {
+
+	}
+
 	public bool Add (Planet planet) {
 		bool added = false;
-
+		Debug.Log (planets.Count);
+		Debug.Log(slots);
 		if (planets.Count < slots) {
 			// We have enough room, add planet
 			planets.Add (planet);

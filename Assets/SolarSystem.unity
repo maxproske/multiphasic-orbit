@@ -285,27 +285,13 @@ Prefab:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1840008382086942, guid: b57e3d02d528b9842be23e974bd18844, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114182955147336306, guid: b57e3d02d528b9842be23e974bd18844,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114182955147336306, guid: b57e3d02d528b9842be23e974bd18844,
-        type: 2}
-      propertyPath: m_RaycastTarget
-      value: 1
+      propertyPath: m_Name
+      value: Empty Planet Slot
       objectReference: {fileID: 0}
     - target: {fileID: 114182955147336306, guid: b57e3d02d528b9842be23e974bd18844,
         type: 2}
       propertyPath: m_Color.a
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1840008382086942, guid: b57e3d02d528b9842be23e974bd18844, type: 2}
-      propertyPath: m_Name
-      value: Empty Planet Slot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b57e3d02d528b9842be23e974bd18844, type: 2}
@@ -761,7 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6a4b671ef23d745a5a98b3c4352f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: 6
+  slots: 4
   planets: []
 --- !u!4 &519037294
 Transform:
@@ -861,6 +847,7 @@ GameObject:
   - component: {fileID: 553962183}
   - component: {fileID: 553962182}
   - component: {fileID: 553962181}
+  - component: {fileID: 553962185}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -945,6 +932,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &553962185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 553962180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c0f3294ba58554396081416c27dc53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetsParent: {fileID: 1648888993}
 --- !u!1001 &666067274
 Prefab:
   m_ObjectHideFlags: 0
@@ -1798,6 +1797,11 @@ Prefab:
       propertyPath: m_Name
       value: Carbon Planet Slot
       objectReference: {fileID: 0}
+    - target: {fileID: 114890658949351194, guid: b57e3d02d528b9842be23e974bd18844,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b57e3d02d528b9842be23e974bd18844, type: 2}
   m_IsPrefabParent: 0
@@ -2239,7 +2243,7 @@ GameObject:
   - component: {fileID: 1648888994}
   - component: {fileID: 1648888996}
   m_Layer: 5
-  m_Name: Planet Parent
+  m_Name: Planets Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
