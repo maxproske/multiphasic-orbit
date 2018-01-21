@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Make class require a LineRenderer to be attached whenever we run this script
 [RequireComponent(typeof(LineRenderer))]
-public class OrbitMotion : MonoBehaviour {
+public class Orbit : MonoBehaviour {
 
 	// Will reference the motion of the planet model
 	public Transform orbitingObject;
@@ -35,7 +35,9 @@ public class OrbitMotion : MonoBehaviour {
 		lr = GetComponent<LineRenderer> ();
 
 		// Calculate ellipse right when we start the game
-		CalculateEllipse();
+		if (orbitingObject.transform.parent != null) {
+			CalculateEllipse ();
+		}
 	}
 
 	void FixedUpdate ()
@@ -48,31 +50,31 @@ public class OrbitMotion : MonoBehaviour {
 
 	// Calculate the ellipse
 	void CalculateEllipse() {
-		// Create an array of Vector3's.
-		// Populate LineRenderer with array of points to render
-		// (segments + 1 to complete the ring around. We'll make the last element equal to the first element later.)
-		Vector3[] points = new Vector3[segments + 1];
+			// Create an array of Vector3's.
+			// Populate LineRenderer with array of points to render
+			// (segments + 1 to complete the ring around. We'll make the last element equal to the first element later.)
+			Vector3[] points = new Vector3[segments + 1];
 
-		// Iterate through these points
-		for (int i = 0; i < segments; i++) {
+			// Iterate through these points
+			for (int i = 0; i < segments; i++) {
 
-			// Pass in t value (i/segments)
-			Vector2 position2D = orbitPath.Evaluate((float)i / (float)segments);
+				// Pass in t value (i/segments)
+				Vector2 position2D = orbitPath.Evaluate ((float)i / (float)segments);
 
-			// Debug
-			//Debug.Log ("Position of sun: (" + orbitingObject.transform.parent.localPosition.x + ", " + orbitingObject.transform.parent.localPosition.z + ")");
+				// Debug
+				//Debug.Log ("Position of sun: (" + orbitingObject.transform.parent.localPosition.x + ", " + orbitingObject.transform.parent.localPosition.z + ")");
 
-			// Set point at i equal to a new Vector2 of (x,y) and 0 for z value
-			points[i] = new Vector3(position2D.x + orbitingObject.transform.parent.localPosition.x, 0f, position2D.y + orbitingObject.transform.parent.localPosition.z);
-		}
-		// Remember we have segments + 1, and are 0-indexing
-		// Very last point in the array is equal to first point, completing the ellipse
-		points[segments] = points[0];
+				// Set point at i equal to a new Vector2 of (x,y) and 0 for z value
+				points [i] = new Vector3 (position2D.x + orbitingObject.transform.parent.localPosition.x, 0f, position2D.y + orbitingObject.transform.parent.localPosition.z);
+			}
+			// Remember we have segments + 1, and are 0-indexing
+			// Very last point in the array is equal to first point, completing the ellipse
+			points [segments] = points [0];
 
-		// Set LineRenderer using newer method positionCount
-		lr.positionCount = segments + 1;
-		// Pass in points array
-		lr.SetPositions(points);
+			// Set LineRenderer using newer method positionCount
+			lr.positionCount = segments + 1;
+			// Pass in points array
+			lr.SetPositions (points);
 	}
 
 	// Call-back method. If we change values in-editor while we are playing the game, we can see those

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 // Implement pointer interfaces programatically, instead of Scene event triggers
-public class CloseOnBlur : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class CloseIfClickedOutsideUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
 	// Tracks if mouse is hovering over panel
 	private bool mouseHover;

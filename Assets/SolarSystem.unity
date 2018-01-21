@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 362652962}
   - component: {fileID: 362652961}
   - component: {fileID: 362652964}
+  - component: {fileID: 362652965}
   m_Layer: 5
   m_Name: Macro Skill Tree Button
   m_TagString: Untagged
@@ -326,20 +327,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 362652961}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1524296324}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &362652965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 362652960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a531eae793577de4b9d0ebed5006308b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  macroSkillTree: {fileID: 1524296324}
 --- !u!224 &406715373 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224895847720145094, guid: 00d99bf562329404aa1f07d1bb967a5e,
@@ -422,7 +424,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 519037294}
-  - component: {fileID: 519037293}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -430,17 +431,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &519037293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 519037292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d6a4b671ef23d745a5a98b3c4352f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &519037294
 Transform:
   m_ObjectHideFlags: 0
@@ -539,7 +529,6 @@ GameObject:
   - component: {fileID: 553962183}
   - component: {fileID: 553962182}
   - component: {fileID: 553962181}
-  - component: {fileID: 553962185}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -624,17 +613,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &553962185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 553962180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46c0f3294ba58554396081416c27dc53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &634179713 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224697232185376722, guid: e536f9ae9108e7a49984a6e382c7d649,
@@ -1055,7 +1033,7 @@ Prefab:
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224102221344692376, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
@@ -1155,17 +1133,17 @@ Prefab:
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2136152470}
+      objectReference: {fileID: 0}
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: createPlanet
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
@@ -1175,27 +1153,57 @@ Prefab:
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1524296324}
+      objectReference: {fileID: 0}
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4520ffcba53dfb4d90d472cc328781c, type: 2}
@@ -1632,7 +1640,6 @@ GameObject:
   - component: {fileID: 1524296328}
   - component: {fileID: 1524296327}
   - component: {fileID: 1524296326}
-  - component: {fileID: 1524296329}
   - component: {fileID: 1524296330}
   m_Layer: 5
   m_Name: Macro Skill Tree
@@ -1668,9 +1675,9 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1524296324}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea590dfbcc15c7847ab8558c13ed5f2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 105f863290d78c747bc59177a7797a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1524296327
@@ -1706,53 +1713,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1524296324}
---- !u!114 &1524296329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1524296324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 5
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1524296330}
-          m_MethodName: OnDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 13
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1524296330}
-          m_MethodName: BeginDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!114 &1524296330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,7 +1721,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1524296324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b1914f72a9ac3341ad3ec6ab88aac62, type: 3}
+  m_Script: {fileID: 11500000, guid: a40bc48b2045eca43856f7c762319699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1648888992
@@ -2281,5 +2241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d566fcd6fba883a4daa999c89ee3f867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetsParent: {fileID: 1648888993}
   sun: {fileID: 1694319099}
   planet: {fileID: 1302749218511646, guid: f3b7dd5c4eddf13478a0be8f56c9c540, type: 2}

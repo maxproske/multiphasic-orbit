@@ -216,16 +216,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302749218511646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a23b6686cf14a0a4f93de4a0fddce6ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 28ec7388caf3be2499b1836c871bc219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 4339871127361048}
   segments: 36
   orbitPath:
-    xAxis: 4
-    yAxis: 3
+    xAxis: 2
+    yAxis: 7
   orbitProgress: 0
-  orbitPeriod: 5
+  orbitPeriod: 3
   orbitActive: 1
 --- !u!120 &120631809419256310
 LineRenderer:
