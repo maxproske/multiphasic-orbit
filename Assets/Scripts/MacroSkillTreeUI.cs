@@ -3,6 +3,7 @@
 public class MacroSkillTreeUI : MonoBehaviour {
 
 	public Transform planetsParent;
+	public GameObject planetType1;
 
 	// Reference to macro skill tree
 	MacroSkillTree macroSkillTree;
@@ -16,6 +17,7 @@ public class MacroSkillTreeUI : MonoBehaviour {
 		// Trigger whenever a new planet has been added
 		macroSkillTree.onItemChangedCallback += UpdateUI;
 
+		// Reference to Planet Slots under Planets Parent object
 		slots = planetsParent.GetComponentsInChildren<PlanetSlot> ();
 
 		UpdateUI ();
@@ -30,11 +32,12 @@ public class MacroSkillTreeUI : MonoBehaviour {
 		Debug.Log("== UPDATING UI ==");
 		// Iterate through slots
 		for (int i = 0; i < slots.Length; i++) {
+			Debug.Log (macroSkillTree.planets.Count);
 			if (i < macroSkillTree.planets.Count) {
 				// Pass the corresponding planet into that slot
-				slots [i].AddPlanet (macroSkillTree.planets [i]);
+				slots [i].Enable (macroSkillTree.planets [i]);
 			} else {
-				slots [i].ClearSlot ();
+				slots [i].Disable ();
 			}
 		}
 	}

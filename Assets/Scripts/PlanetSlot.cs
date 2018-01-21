@@ -4,18 +4,19 @@ using UnityEngine.UI;
 
 public class PlanetSlot : MonoBehaviour {
 
-	public Image icon;
+	public Image background;
+	public Button button;
 	private Planet planet;
 
-	public void AddPlanet(Planet newPlanet) {
+	public void Enable (Planet newPlanet) {
 		planet = newPlanet;
-		icon.sprite = planet.icon;
-		icon.enabled = true;
+		button.interactable = true;
+		button.image = background;
 	}
 
-	public void ClearSlot () {
+	public void Disable () {
 		planet = null;
-		icon.sprite = null;
-		icon.enabled = false;
+		button.interactable = false;
+		button.image = background;
 	}
 }

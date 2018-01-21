@@ -12,7 +12,7 @@ public class MacroSkillTree : MonoBehaviour {
 	public OnItemChanged onItemChangedCallback;
 
 	// Maximum slots in skill ttree
-	public int slots = 6;
+	public int maxSlots = 4;
 
 	// Public list of planets
 	public List<Planet> planets = new List<Planet>();
@@ -30,14 +30,16 @@ public class MacroSkillTree : MonoBehaviour {
 	}
 
 	void Setup() {
-
+		for (int i = 0; i < maxSlots; i++) {
+			bool addedPlanet = Add(new Planet());
+		}
 	}
 
 	public bool Add (Planet planet) {
 		bool added = false;
 		Debug.Log (planets.Count);
-		Debug.Log(slots);
-		if (planets.Count < slots) {
+		Debug.Log(maxSlots);
+		if (planets.Count < maxSlots) {
 			// We have enough room, add planet
 			planets.Add (planet);
 
