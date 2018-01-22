@@ -72,10 +72,10 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 							Vector3 location = ray.GetPoint (distance);
 							go.transform.position = location;
 
-							// Simulate orbit path
+							// Simulate orbit path (absolute so the orbit direction doesn't change)
 							om.enabled = true;
-							om.orbitPath.xAxis = location.x;
-							om.orbitPath.yAxis = location.z;
+							om.orbitPath.xAxis = (Mathf.Abs(location.x));
+							om.orbitPath.yAxis = (Mathf.Abs(location.z));
 							float scale = 1.0f; 
 							om.transform.localScale = new Vector3 (scale, scale, scale);
 						}

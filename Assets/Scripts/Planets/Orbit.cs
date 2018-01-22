@@ -120,15 +120,12 @@ public class Orbit : MonoBehaviour {
 			orbitPeriod = 0.1f;
 		}
 
-
-
-
-
 		// If orbit is active, start orbit animation
 		while (orbitActive) {
 			// Make orbit faster closer to sun
-			float orbitSpeedMultiplier = (Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/6);
-			Debug.Log (orbitSpeedMultiplier);
+			float linearMultiplier = 2f;
+			int exponentialMultiplier = 3;
+			float orbitSpeedMultiplier = Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/linearMultiplier,exponentialMultiplier);
 
 			// Division is one of the least efficient thing in basic C#
 			// So use time.deltatime to see how far we're moving every frame
@@ -145,8 +142,6 @@ public class Orbit : MonoBehaviour {
 
 			// Set planet position based on orbit position
 			SetOrbitingObjectPosition ();
-
-
 
 			// Repeat until orbitActive is false
 			yield return null;
