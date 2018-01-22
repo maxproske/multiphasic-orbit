@@ -123,7 +123,7 @@ public class Orbit : MonoBehaviour {
 		// If orbit is active, start orbit animation
 		while (orbitActive) {
 			// Make orbit faster closer to sun
-			float linearMultiplier = 2f;
+			float linearMultiplier = 8f;
 			int exponentialMultiplier = 3;
 			float orbitSpeedMultiplier = Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/linearMultiplier,exponentialMultiplier);
 

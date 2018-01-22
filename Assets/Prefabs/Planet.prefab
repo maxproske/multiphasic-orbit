@@ -226,6 +226,7 @@ MonoBehaviour:
     yAxis: 7
   orbitProgress: 0
   orbitPeriod: 3
+  orbitSpeedMultiplier: 1
   orbitActive: 1
 --- !u!120 &120631809419256310
 LineRenderer:
@@ -241,7 +242,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: e78313479abb1a0498099435c3a83f27, type: 2}
+  - {fileID: 2100000, guid: 8c759018226173946b59dcbfd8814501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -265,7 +266,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.025
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
