@@ -123,9 +123,9 @@ public class Orbit : MonoBehaviour {
 		// If orbit is active, start orbit animation
 		while (orbitActive) {
 
-			// Make orbit speed be affected by universe
+			// Make orbit speed be affected by universe (disabled)
 			Vector2 orbitPos = orbitPath.Evaluate (orbitProgress);
-			int universeMultiplier = orbitPos.x < 0 ? 4 : 1;
+			int universeMultiplier = orbitPos.x < 0 ? 1 : 1;
 
 			// Make orbit faster closer to sun
 			float linearMultiplier = 8f;
