@@ -27,8 +27,12 @@ public class Orbit : MonoBehaviour {
 	// How long it will take in seconds to complete one orbit
 	public float orbitPeriod = 3f;
 
+	public float orbitSpeedMultiplier = 1f;
+
 	// Allows us to toggle the orbit in-editor
 	public bool orbitActive = true;
+
+
 
 	void Awake() {
 		// Get reference when we start the game
@@ -116,13 +120,22 @@ public class Orbit : MonoBehaviour {
 			orbitPeriod = 0.1f;
 		}
 
-		// Division is one of the least efficient thing in basic C#
-		// So use time.deltatime to see how far we're moving every frame
-		// We want the inverse of orbitPeriod to see how fast we need to catch up
-		float orbitSpeed = 1f / orbitPeriod;
+
+
+
 
 		// If orbit is active, start orbit animation
 		while (orbitActive) {
+			// Make orbit faster closer to sun
+			float orbitSpeedMultiplier = (Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/6);
+			Debug.Log (orbitSpeedMultiplier);
+
+			// Division is one of the least efficient thing in basic C#
+			// So use time.deltatime to see how far we're moving every frame
+			// We want the inverse of orbitPeriod to see how fast we need to catch up
+			float orbitSpeed = 1f / (orbitPeriod * orbitSpeedMultiplier);
+			//Debug.Log (orbitSpeed);
+
 			// (Amount of time frame has taken) * calculated orbit speed
 			orbitProgress += Time.deltaTime * orbitSpeed;
 
@@ -132,6 +145,8 @@ public class Orbit : MonoBehaviour {
 
 			// Set planet position based on orbit position
 			SetOrbitingObjectPosition ();
+
+
 
 			// Repeat until orbitActive is false
 			yield return null;
