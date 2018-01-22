@@ -122,10 +122,15 @@ public class Orbit : MonoBehaviour {
 
 		// If orbit is active, start orbit animation
 		while (orbitActive) {
+
+			// Make orbit speed be affected by universe
+			Vector2 orbitPos = orbitPath.Evaluate (orbitProgress);
+			int universeMultiplier = orbitPos.x < 0 ? 4 : 1;
+
 			// Make orbit faster closer to sun
 			float linearMultiplier = 8f;
 			int exponentialMultiplier = 3;
-			float orbitSpeedMultiplier = Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/linearMultiplier,exponentialMultiplier);
+			float orbitSpeedMultiplier = universeMultiplier * Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/linearMultiplier,exponentialMultiplier);
 
 			// Division is one of the least efficient thing in basic C#
 			// So use time.deltatime to see how far we're moving every frame
