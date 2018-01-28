@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Make class require a LineRenderer to be attached whenever we run this script
 [RequireComponent(typeof(LineRenderer))]
-public class Orbit : MonoBehaviour {
+public class Planet : MonoBehaviour {
 
 	// Will reference the motion of the planet model
 	public Transform orbitingObject;
@@ -32,9 +32,23 @@ public class Orbit : MonoBehaviour {
 	// Allows us to toggle the orbit in-editor
 	public bool orbitActive = true;
 
+    // Checks if in Fast or Slow Universe
+    bool fastUniverse;
 
+    // Variable to hold first letter of planet type
+    char type;
 
-	void Awake() {
+    // Resource Counters
+    private int carbon;
+    private int nitrogen;
+    private int hydrogen;
+
+    public Planet(char planetType)
+    {
+        type = planetType;
+    }
+
+    void Awake() {
 		// Get reference when we start the game
 		lr = GetComponent<LineRenderer> ();
 
@@ -48,6 +62,7 @@ public class Orbit : MonoBehaviour {
 	{
 		if (Application.isPlaying && lr != null) {
 			CalculateEllipse ();
+            Debug.Log(fastUniverse);
 		}
 	}
 
@@ -127,8 +142,10 @@ public class Orbit : MonoBehaviour {
 			Vector2 orbitPos = orbitPath.Evaluate (orbitProgress);
 			int universeMultiplier = orbitPos.x < 0 ? 1 : 1;
 
-			// Make orbit faster closer to sun
-			float linearMultiplier = 8f;
+            fastUniverse = orbitPos.x < 0 ? false : true;
+
+            // Make orbit faster closer to sun
+            float linearMultiplier = 8f;
 			int exponentialMultiplier = 3;
 			float orbitSpeedMultiplier = universeMultiplier * Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/linearMultiplier,exponentialMultiplier);
 
