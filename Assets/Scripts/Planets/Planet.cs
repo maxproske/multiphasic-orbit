@@ -43,9 +43,9 @@ public class Planet : MonoBehaviour {
     private int nitrogen;
     private int hydrogen;
 
-    public Planet(char planetType)
+    public Planet()
     {
-        type = planetType;
+
     }
 
     void Awake() {

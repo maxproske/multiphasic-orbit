@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Carbon : Planet {
 
-    public Carbon(char planetType) : base(planetType) {
+    public Carbon() {
 
     }
 
