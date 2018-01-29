@@ -17,7 +17,7 @@ public class Planet : MonoBehaviour {
 	public int segments;
 
 	// Serialized ellipse object
-	public Ellipse orbitPath;
+	public EllipseTester orbitPath;
 
 	// How far along the path of the ellipse we are
 	// Clamp between 0-1

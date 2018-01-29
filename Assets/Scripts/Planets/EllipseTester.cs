@@ -6,13 +6,13 @@ using UnityEngine;
 // Serialize. When we have an ellipse in our inspector, we'll be able to populate the
 // public field, instead of doing it only in code
 [System.Serializable]
-public class Ellipse {
+public class EllipseTester {
 
 	public float xAxis;
 	public float yAxis;
 
 	// If we are populating the axes in code, we should create a constructor
-	public Ellipse (float xAxis, float yAxis) {
+	public EllipseTester (float xAxis, float yAxis) {
 		this.xAxis = xAxis;
 		this.yAxis = yAxis;
 	}
