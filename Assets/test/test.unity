@@ -156,11 +156,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 143503657}
   orbitPath:
-    xAxis: 4
+    xAxis: 7
     yAxis: 3
   resource: 0
   orbitProgress: 0
-  orbitPeriod: 3
+  orbitPeriod: 2
   orbitActive: 0
   nextButton: {fileID: 1296733194}
   ifNext: 0
@@ -434,8 +434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 990775586}
   orbitPath:
-    xAxis: 6
-    yAxis: 5
+    xAxis: 4
+    yAxis: 6
   resource: 0
   orbitProgress: 0
   orbitPeriod: 3
@@ -559,11 +559,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 1107041058}
   orbitPath:
-    xAxis: 5
-    yAxis: 3
+    xAxis: 8
+    yAxis: 4
   resource: 0
   orbitProgress: 0
-  orbitPeriod: 3
+  orbitPeriod: 4
   orbitActive: 0
   nextButton: {fileID: 1296733194}
   ifNext: 0
@@ -1158,7 +1158,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 29882e893dd69499ba5ab8e91e282a1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
