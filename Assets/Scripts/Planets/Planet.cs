@@ -32,6 +32,12 @@ public class Planet : MonoBehaviour {
 	// Allows us to toggle the orbit in-editor
 	public bool orbitActive = true;
 
+	//check if the button pressed
+	public bool ifNext=false;
+
+	//set the float for startTime
+	private float startTime;
+
     // Checks if in Fast or Slow Universe
     bool fastUniverse;
 
@@ -64,6 +70,17 @@ public class Planet : MonoBehaviour {
 			CalculateEllipse ();
             Debug.Log(fastUniverse);
 		}
+
+//		float cTime = Time.time;
+//		if (cTime - startTime < 3) {
+//			if (ifNext == true) {
+//				orbitActive = true;
+//				StartCoroutine (AnimateOrbit ());
+//			}
+//		}else{
+//			orbitActive = false;
+//			ifNext = false;
+//		}
 	}
 
 
@@ -117,6 +134,13 @@ public class Planet : MonoBehaviour {
 
 		// If orbit is active, start orbit animation
 		StartCoroutine(AnimateOrbit());
+	}
+
+	//fuction that can start the Next turn
+	public void goNext(){
+		//we can add resouces here
+		startTime=Time.time;
+		ifNext = true;
 	}
 
 	void SetOrbitingObjectPosition() {
