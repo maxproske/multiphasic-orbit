@@ -15,7 +15,7 @@ public class OrbitMotion : MonoBehaviour {
 	public float orbitProgress;
 	public float orbitPeriod;
 	public bool orbitActive =false;
-	public Button nextButton;
+//	public Button nextButton;
 	public bool ifNext=false;
 	private float startTime;
 	private Button btn;
@@ -25,7 +25,7 @@ public class OrbitMotion : MonoBehaviour {
 			orbitActive = false;
 			return;
 		}
-		btn = nextButton.GetComponent<Button> ();
+		btn = GameObject.Find ("NextTurn").GetComponent<Button>();
 		btn.onClick.AddListener (goNext);
 		SetOrbitingObjectPosition ();
 

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 // Make class require a LineRenderer to be attached whenever we run this script
 [RequireComponent(typeof(LineRenderer))]
@@ -30,7 +32,7 @@ public class Planet : MonoBehaviour {
 	public float orbitSpeedMultiplier = 1f;
 
 	// Allows us to toggle the orbit in-editor
-	public bool orbitActive = true;
+	public bool orbitActive = false;
 
 	//check if the button pressed
 	public bool ifNext=false;
@@ -38,11 +40,16 @@ public class Planet : MonoBehaviour {
 	//set the float for startTime
 	private float startTime;
 
+	//declare a button for nextturn
+	private Button nextTurn;
+
     // Checks if in Fast or Slow Universe
     bool fastUniverse;
 
     // Variable to hold first letter of planet type
     char type;
+
+
 
     // Resource Counters
     private int carbon;
@@ -71,16 +78,16 @@ public class Planet : MonoBehaviour {
             Debug.Log(fastUniverse);
 		}
 
-//		float cTime = Time.time;
-//		if (cTime - startTime < 3) {
-//			if (ifNext == true) {
-//				orbitActive = true;
-//				StartCoroutine (AnimateOrbit ());
-//			}
-//		}else{
-//			orbitActive = false;
-//			ifNext = false;
-//		}
+		float cTime = Time.time;
+		if (cTime - startTime < 3) {
+			if (ifNext == true) {
+				orbitActive = true;
+				StartCoroutine (AnimateOrbit ());
+			}
+		}else{
+			orbitActive = false;
+			ifNext = false;
+		}
 	}
 
 
@@ -129,11 +136,14 @@ public class Planet : MonoBehaviour {
 			return;
 		}
 
+		nextTurn = GameObject.Find ("End Turn Button").GetComponent<Button> ();
+		nextTurn.onClick.AddListener (goNext);
 		// Set orbiting object position
 		SetOrbitingObjectPosition();
 
 		// If orbit is active, start orbit animation
-		StartCoroutine(AnimateOrbit());
+//		StartCoroutine(AnimateOrbit());
+
 	}
 
 	//fuction that can start the Next turn
@@ -160,7 +170,7 @@ public class Planet : MonoBehaviour {
 		}
 
 		// If orbit is active, start orbit animation
-		while (orbitActive) {
+
 
 			// Make orbit speed be affected by universe (disabled)
 			Vector2 orbitPos = orbitPath.Evaluate (orbitProgress);
@@ -191,6 +201,6 @@ public class Planet : MonoBehaviour {
 
 			// Repeat until orbitActive is false
 			yield return null;
-		}
+
 	}
 }
