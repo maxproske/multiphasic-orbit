@@ -56,6 +56,8 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 					// Only set orbit if clicking in-bounds
 					if (hit.collider.gameObject.name == "Orbit Plane") {
 						planetPlaced = true;
+						om.planetPlaced = true;
+						om.orbitActive = false;
 					}
 				}
 			}
@@ -70,7 +72,9 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 						// Only set orbit if clicking in-bounds
 						if (hit.collider.gameObject.name == "Orbit Plane") {
 							Vector3 location = ray.GetPoint (distance);
-							go.transform.position = location;
+
+							// Commented to prevent planet being placed under mouse
+							//go.transform.position = location;
 
 							// Simulate orbit path (absolute so the orbit direction doesn't change)
 							om.enabled = true;

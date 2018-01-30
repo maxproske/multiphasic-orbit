@@ -49,6 +49,10 @@ public class Planet : MonoBehaviour {
     // Variable to hold first letter of planet type
     char type;
 
+	// Was the planet placed?
+	public bool planetPlaced = false;
+
+	public bool coroutineFlag = false;
 
 
     // Resource Counters
@@ -75,19 +79,30 @@ public class Planet : MonoBehaviour {
 	{
 		if (Application.isPlaying && lr != null) {
 			CalculateEllipse ();
-            Debug.Log(fastUniverse);
+            //Debug.Log(fastUniverse);
 		}
 
 		float cTime = Time.time;
-		if (cTime - startTime < 3) {
-			if (ifNext == true) {
-				orbitActive = true;
-				StartCoroutine (AnimateOrbit ());
+
+		Debug.Log ("planetPlaced: " + planetPlaced + ", orbitActive: " + orbitActive);
+
+		// Planet must be placed before pausing its orbit
+		if (planetPlaced) {
+			if (cTime - startTime < 3) {
+				if (ifNext == true) {
+					orbitActive = true;
+
+					// Start coroutine ONCE
+					ifNext = false;
+					StartCoroutine(AnimateOrbit());
+				}
+			} else {
+				orbitActive = false;
+				ifNext = false;
 			}
-		}else{
-			orbitActive = false;
-			ifNext = false;
 		}
+
+
 	}
 
 
@@ -138,19 +153,23 @@ public class Planet : MonoBehaviour {
 
 		nextTurn = GameObject.Find ("End Turn Button").GetComponent<Button> ();
 		nextTurn.onClick.AddListener (goNext);
+
 		// Set orbiting object position
 		SetOrbitingObjectPosition();
 
 		// If orbit is active, start orbit animation
-//		StartCoroutine(AnimateOrbit());
+		StartCoroutine(AnimateOrbit());
 
 	}
 
 	//fuction that can start the Next turn
 	public void goNext(){
-		//we can add resouces here
-		startTime=Time.time;
-		ifNext = true;
+		// Don't stack button presses
+		if (!orbitActive) {
+			//we can add resouces here
+			startTime = Time.time;
+			ifNext = true;
+		}
 	}
 
 	void SetOrbitingObjectPosition() {
@@ -170,18 +189,18 @@ public class Planet : MonoBehaviour {
 		}
 
 		// If orbit is active, start orbit animation
-
+		while (orbitActive) {
 
 			// Make orbit speed be affected by universe (disabled)
 			Vector2 orbitPos = orbitPath.Evaluate (orbitProgress);
 			int universeMultiplier = orbitPos.x < 0 ? 1 : 1;
 
-            fastUniverse = orbitPos.x < 0 ? false : true;
+			fastUniverse = orbitPos.x < 0 ? false : true;
 
-            // Make orbit faster closer to sun
-            float linearMultiplier = 8f;
+			// Make orbit faster closer to sun
+			float linearMultiplier = 8f;
 			int exponentialMultiplier = 3;
-			float orbitSpeedMultiplier = universeMultiplier * Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis),Mathf.Abs(orbitPath.yAxis))/linearMultiplier,exponentialMultiplier);
+			float orbitSpeedMultiplier = universeMultiplier * Mathf.Pow (Mathf.Max (Mathf.Abs (orbitPath.xAxis), Mathf.Abs (orbitPath.yAxis)) / linearMultiplier, exponentialMultiplier);
 
 			// Division is one of the least efficient thing in basic C#
 			// So use time.deltatime to see how far we're moving every frame
@@ -201,6 +220,6 @@ public class Planet : MonoBehaviour {
 
 			// Repeat until orbitActive is false
 			yield return null;
-
+		}
 	}
 }
