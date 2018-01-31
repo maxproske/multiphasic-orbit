@@ -732,6 +732,7 @@ MonoBehaviour:
   carbonText: {fileID: 1194646389}
   nitrogenText: {fileID: 1290045271}
   hydrogenText: {fileID: 738413043}
+  simulate: 0
 --- !u!4 &519037294
 Transform:
   m_ObjectHideFlags: 0
@@ -1812,11 +1813,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1648888993}
     m_Modifications:
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 224102221344692376, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -1907,90 +1903,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+    - target: {fileID: 114359670800381552, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: planetsParent
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+      objectReference: {fileID: 1648888993}
+    - target: {fileID: 114359670800381552, guid: e4520ffcba53dfb4d90d472cc328781c,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: sun
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702875983290998, guid: e4520ffcba53dfb4d90d472cc328781c, type: 2}
-      propertyPath: m_Name
-      value: Carbon
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1694319099}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4520ffcba53dfb4d90d472cc328781c, type: 2}
   m_IsPrefabParent: 0
@@ -3448,23 +3370,3 @@ Transform:
   m_Father: {fileID: 1662605527}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2136152465 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1702875983290998, guid: e4520ffcba53dfb4d90d472cc328781c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1319534636}
---- !u!114 &2136152470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2136152465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d566fcd6fba883a4daa999c89ee3f867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planetsParent: {fileID: 1648888993}
-  sun: {fileID: 1694319099}
-  planet: {fileID: 1302749218511646, guid: f3b7dd5c4eddf13478a0be8f56c9c540, type: 2}
-  carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
