@@ -47,7 +47,7 @@ public class Planet : MonoBehaviour {
     bool fastUniverse;
 
     // Variable to hold first letter of planet type
-    char type;
+    //char type;
 
 	// Was the planet placed?
 	public bool planetPlaced = false;
@@ -56,14 +56,15 @@ public class Planet : MonoBehaviour {
 
 
     // Resource Counters
-    private int carbon;
-    private int nitrogen;
-    private int hydrogen;
+    public int carbon;
+    public int nitrogen;
+    public int hydrogen;
 
     public Planet()
     {
 
     }
+
 
     void Awake() {
 		// Get reference when we start the game
@@ -84,7 +85,7 @@ public class Planet : MonoBehaviour {
 
 		float cTime = Time.time;
 
-		Debug.Log ("planetPlaced: " + planetPlaced + ", orbitActive: " + orbitActive);
+		//Debug.Log ("planetPlaced: " + planetPlaced + ", orbitActive: " + orbitActive);
 
 		// Planet must be placed before pausing its orbit
 		if (planetPlaced) {
@@ -95,15 +96,24 @@ public class Planet : MonoBehaviour {
 					// Start coroutine ONCE
 					ifNext = false;
 					StartCoroutine(AnimateOrbit());
-				}
+                    CollectResources();
+                }
 			} else {
 				orbitActive = false;
 				ifNext = false;
-			}
+                
+            }
 		}
 
 
 	}
+
+    void CollectResources()
+    {
+        carbon += 1;
+        nitrogen += 2;
+        hydrogen += 3;
+    }
 
 
 	// Calculate the ellipse
@@ -151,7 +161,11 @@ public class Planet : MonoBehaviour {
 			return;
 		}
 
-		nextTurn = GameObject.Find ("End Turn Button").GetComponent<Button> ();
+        carbon = 1;
+        nitrogen = 2;
+        hydrogen = 3;
+
+        nextTurn = GameObject.Find ("End Turn Button").GetComponent<Button> ();
 		nextTurn.onClick.AddListener (goNext);
 
 		// Set orbiting object position
