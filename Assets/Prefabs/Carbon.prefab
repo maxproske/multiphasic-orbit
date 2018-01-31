@@ -37,11 +37,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4339871127361048}
-  - component: {fileID: 114461781821274964}
+  - component: {fileID: 114435880532778334}
   - component: {fileID: 120631809419256310}
   - component: {fileID: 96845862121695660}
   m_Layer: 0
-  m_Name: Planet
+  m_Name: Carbon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114461781821274964
+--- !u!114 &114435880532778334
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302749218511646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ec7388caf3be2499b1836c871bc219, type: 3}
+  m_Script: {fileID: 11500000, guid: ce89bf158b4f2454a95516493a9b2cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 4339871127361048}
@@ -230,9 +230,9 @@ MonoBehaviour:
   carbon: 0
   nitrogen: 0
   hydrogen: 0
-  addCarbon: 1
-  addNitrogen: 2
-  addHydrogen: 3
+  addCarbon: 4
+  addNitrogen: 1
+  addHydrogen: 1
 --- !u!120 &120631809419256310
 LineRenderer:
   m_ObjectHideFlags: 1

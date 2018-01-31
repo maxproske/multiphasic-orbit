@@ -5,16 +5,8 @@ using UnityEngine;
 public class Carbon : Planet {
 
     public Carbon() {
-
+        addCarbon = 4;
+        addNitrogen = 1;
+        addHydrogen = 1;
     }
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
