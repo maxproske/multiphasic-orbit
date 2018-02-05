@@ -71,8 +71,9 @@ public class Planet : MonoBehaviour
 	//add a collider for the object
 	public SphereCollider sc;
 
-
-
+	private float rectx, recty;
+	private bool collecting=false;
+	private int count = 0;
 
     public Planet()
     {
@@ -169,9 +170,30 @@ public class Planet : MonoBehaviour
                     ifNext = false;
                     gc.simulate = false;
 
+
+					collecting = true;
                 }
             }
         }
+
+		if (collecting) {
+			count++;
+			if (count == 30) {
+				Vector3 pos = Camera.main.WorldToScreenPoint (gameObject.transform.position);
+				rectx = pos.x;
+				recty = pos.y;
+				Debug.Log (rectx);
+				Debug.Log (recty);
+			}
+			if (count > 30) {
+
+				recty+=1;
+			}
+			if (count > 60) {
+				count = 0;
+				collecting = false;
+			}
+		}
     }
 
 
@@ -193,13 +215,21 @@ public class Planet : MonoBehaviour
 
 	void OnGUI(){
 		if (showInformation == true&&!orbitActive) {
-			GUIStyle guistyle = new GUIStyle();
+			
 	
 			GUI.Label (new Rect (Screen.width - Screen.width / 5, 50, 100, 50), "Carbon: " + carbon);
 			GUI.Label (new Rect (Screen.width - Screen.width / 5, 70, 100, 50), "Nitrogen: " + nitrogen);
 			GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
 
 
+		}
+		if (collecting == true && count>30) {
+			int preCar = carbon - addCarbon;
+			int preNit = nitrogen - addNitrogen;
+			int preHyd = hydrogen - addHydrogen;
+			GUI.Label (new Rect (rectx,Screen.height-recty-50, 100, 50), "Carbon: " +preCar+" + "+addCarbon);
+			GUI.Label (new Rect (rectx,Screen.height-recty-30, 100, 50), "Nitrogen: " + preNit+" + "+addNitrogen);
+			GUI.Label (new Rect (rectx,Screen.height-recty-10, 100, 50), "Hydrogen: " + preHyd+ " + " +addHydrogen);
 		}
 	}
     // Function that can start the Next turn
@@ -219,6 +249,7 @@ public class Planet : MonoBehaviour
         carbon += addCarbon;
         nitrogen += addNitrogen;
         hydrogen += addHydrogen;
+
     }
 
     public IEnumerator AnimateOrbit()
