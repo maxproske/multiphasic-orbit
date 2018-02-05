@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
@@ -16,8 +17,11 @@ public class GameController : MonoBehaviour
     private Planet planetScript;
 
     public bool simulate;
-
+	private float startTime;
     private Button nextTurn;
+	private EventSystem es;
+	private bool esgo = false;
+	private int i;
     // Use this for initialization
     void Start()
     {
@@ -25,6 +29,7 @@ public class GameController : MonoBehaviour
         nextTurn.onClick.AddListener(Simulate);
 
         planets = new List<GameObject>();
+		es = EventSystem.current;
         simulate = false;
     }
 
@@ -44,11 +49,27 @@ public class GameController : MonoBehaviour
             nitrogenText.text = planetScript.nitrogen.ToString();
             hydrogenText.text = planetScript.hydrogen.ToString();
         }
+		if (esgo == true) {
+			i++;
+			if(i>150){
+				es.enabled = true;
+				i = 0;
+				esgo = false;
+			}
+		}
+
     }
 
 
     void Simulate()
     {
         simulate = true;
+		startTime = Time.time;
+		es.enabled = false;
+		esgo = true;
     }
+
+
+
+
 }

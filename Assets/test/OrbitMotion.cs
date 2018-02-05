@@ -83,6 +83,7 @@ public class OrbitMotion : MonoBehaviour {
 		
 	}
 	IEnumerator AnimateOrbit(){
+		GameObject.Find ("sun").SetActive (false);
 		if (orbitPeriod < 0.1f) {
 			orbitPeriod = 0.1f;
 		}

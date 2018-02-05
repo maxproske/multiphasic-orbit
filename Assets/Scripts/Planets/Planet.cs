@@ -67,7 +67,11 @@ public class Planet : MonoBehaviour
 
 	//add a bool to check if the planet is selected
 	private bool showInformation=false;
+
+	//add a collider for the object
 	public SphereCollider sc;
+
+
 
 
     public Planet()
@@ -188,7 +192,7 @@ public class Planet : MonoBehaviour
 	//Function that can show the resource of this object
 
 	void OnGUI(){
-		if (showInformation == true) {
+		if (showInformation == true&&!orbitActive) {
 			GUIStyle guistyle = new GUIStyle();
 	
 			GUI.Label (new Rect (Screen.width - Screen.width / 5, 50, 100, 50), "Carbon: " + carbon);
