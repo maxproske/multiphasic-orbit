@@ -19,6 +19,9 @@ public class OrbitMotion : MonoBehaviour {
 	public bool ifNext=false;
 	private float startTime;
 	private Button btn;
+	public bool showIn=false;
+	public SphereCollider sc;
+
 	// Use this for initialization
 	void Start () {
 		if(orbitingObject ==null){
@@ -28,11 +31,11 @@ public class OrbitMotion : MonoBehaviour {
 		btn = GameObject.Find ("NextTurn").GetComponent<Button>();
 		btn.onClick.AddListener (goNext);
 		SetOrbitingObjectPosition ();
+		sc = gameObject.AddComponent<SphereCollider> ();
 
 	}
 
 	void FixedUpdate(){
-		
 		float ctime = Time.time;
 		if (ctime - startTime < 3) {
 			
@@ -47,7 +50,25 @@ public class OrbitMotion : MonoBehaviour {
 			orbitActive = false;
 			ifNext = false;
 		}
+
+
+	
 	}
+
+	void OnMouseDown(){
+		Debug.Log ("123");
+		if (showIn == false) {
+			showIn = true;
+		} else {
+			showIn = false;
+		}
+	}
+	public void OnGUI(){
+		if (showIn == true) {
+			GUI.Label (new Rect (Screen.width-Screen.width/6,50, 100, 300), "Resources:"+resource.ToString());
+		}
+	}
+
 	void SetOrbitingObjectPosition(){
 		Vector2 orbitPos = orbitPath.Evaluate(orbitProgress);
 		orbitingObject.localPosition = new Vector3 (orbitPos.x, 0, orbitPos.y);

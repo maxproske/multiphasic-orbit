@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
+
         if (GameObject.Find("Carbon(Clone)") != null)
         {
             planetScript = GameObject.Find("Carbon(Clone)").GetComponent<Planet>();
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
             hydrogenText.text = planetScript.hydrogen.ToString();
         }
     }
+
 
     void Simulate()
     {

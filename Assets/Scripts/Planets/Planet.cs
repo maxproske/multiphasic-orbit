@@ -62,7 +62,13 @@ public class Planet : MonoBehaviour
     public int addNitrogen;
     public int addHydrogen;
 
-    private GameController gc; // Access Game Controller script
+	private GameController gc; // Access Game Controller script
+
+
+	//add a bool to check if the planet is selected
+	private bool showInformation=false;
+	public SphereCollider sc;
+
 
     public Planet()
     {
@@ -104,6 +110,11 @@ public class Planet : MonoBehaviour
 
         // If orbit is active, start orbit animation
         StartCoroutine(AnimateOrbit());
+
+		//add a collider for this planet
+		sc=gameObject.AddComponent<SphereCollider>();
+		sc.radius = 0.5f;
+		sc.center = new Vector3 (0, 0, 0);
 
     }
 
@@ -159,6 +170,34 @@ public class Planet : MonoBehaviour
         }
     }
 
+
+
+	//Function that check if the mouse click this object
+
+	void OnMouseDown(){
+
+		Debug.Log ("123");
+		if (showInformation == false) {
+			showInformation = true;
+		} else {
+			showInformation = false;
+		}
+	}
+
+
+	//Function that can show the resource of this object
+
+	void OnGUI(){
+		if (showInformation == true) {
+			GUIStyle guistyle = new GUIStyle();
+	
+			GUI.Label (new Rect (Screen.width - Screen.width / 5, 50, 100, 50), "Carbon: " + carbon);
+			GUI.Label (new Rect (Screen.width - Screen.width / 5, 70, 100, 50), "Nitrogen: " + nitrogen);
+			GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
+
+
+		}
+	}
     // Function that can start the Next turn
     public void GoNext()
     {
