@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {     
+    {
         // handles un/locking of UI
         if (esgo == true)
         {
