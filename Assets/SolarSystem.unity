@@ -563,7 +563,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4153638829380084, guid: 4123078c59bdcb24cba2da0a488a4ba0, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23566167515721056, guid: 4123078c59bdcb24cba2da0a488a4ba0,
         type: 2}
@@ -733,6 +733,7 @@ MonoBehaviour:
   nitrogenText: {fileID: 1290045271}
   hydrogenText: {fileID: 738413043}
   simulate: 0
+  planetsParent: {fileID: 1648888993}
 --- !u!4 &519037294
 Transform:
   m_ObjectHideFlags: 0

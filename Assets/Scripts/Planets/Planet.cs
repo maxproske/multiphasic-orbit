@@ -62,18 +62,19 @@ public class Planet : MonoBehaviour
     public int addNitrogen;
     public int addHydrogen;
 
-	private GameController gc; // Access Game Controller script
+    private GameController gc; // Access Game Controller script
 
+    public Coroutine placing;
 
-	//add a bool to check if the planet is selected
-	private bool showInformation=false;
+    //add a bool to check if the planet is selected
+    private bool showInformation = false;
 
-	//add a collider for the object
-	public SphereCollider sc;
+    //add a collider for the object
+    public SphereCollider sc;
 
-	private float rectx, recty;
-	private bool collecting=false;
-	private int count = 0;
+    private float rectx, recty;
+    private bool collecting = false;
+    private int count = 0;
 
     public Planet()
     {
@@ -114,12 +115,12 @@ public class Planet : MonoBehaviour
         SetOrbitingObjectPosition();
 
         // If orbit is active, start orbit animation
-        StartCoroutine(AnimateOrbit());
+        placing = StartCoroutine(AnimateOrbit(1));
 
-		//add a collider for this planet
-		sc=gameObject.AddComponent<SphereCollider>();
-		sc.radius = 0.5f;
-		sc.center = new Vector3 (0, 0, 0);
+        //add a collider for this planet
+        sc = gameObject.AddComponent<SphereCollider>();
+        sc.radius = 0.5f;
+        sc.center = new Vector3(0, 0, 0);
 
     }
 
@@ -134,104 +135,112 @@ public class Planet : MonoBehaviour
         float cTime = Time.time;
 
 
-        
+
         //Debug.Log ("planetPlaced: " + planetPlaced + ", orbitActive: " + orbitActive);
 
-        // Planet must be placed before pausing its orbit
-        if (planetPlaced)
+        //   // Planet must be placed before pausing its orbit
+        //   if (planetPlaced)
+        //   {
+        //       // if simuate boolean is true in GameController
+        //       if (gc.simulate)
+        //       {
+        //           // same code as GoNext()
+        //           // Don't stack button presses
+        //           if (!orbitActive)
+        //           {
+        //               //we can add resouces here
+        //               startTime = Time.time;
+        //               ifNext = true;
+        //           }
+        //           if (cTime - startTime < 3)
+        //           {
+        //               if (ifNext == true)
+        //               {
+        //                   orbitActive = true;
+
+        //                   // Start coroutine ONCE
+        //                   ifNext = false;
+        //                   //gc.simulate = false;
+        //                   StartCoroutine(AnimateOrbit());
+        //                   CollectResources();
+        //               }
+        //           }
+        //           else
+        //           {
+        //               orbitActive = false;
+        //               ifNext = false;
+        //               gc.simulate = false;
+
+
+        //collecting = true;
+        //           }
+        //       }
+        //   }
+
+        // pop up of resources collected after simulation
+        if (collecting)
         {
-            // if simuate boolean is true in GameController
-            if (gc.simulate)
+            count++;
+            if (count == 30)
             {
-                // same code as GoNext()
-                // Don't stack button presses
-                if (!orbitActive)
-                {
-                    //we can add resouces here
-                    startTime = Time.time;
-                    ifNext = true;
-                }
-                if (cTime - startTime < 3)
-                {
-                    if (ifNext == true)
-                    {
-                        orbitActive = true;
+                Vector3 pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+                rectx = pos.x;
+                recty = pos.y;
+                Debug.Log(rectx);
+                Debug.Log(recty);
+            }
+            if (count > 30)
+            {
 
-                        // Start coroutine ONCE
-                        ifNext = false;
-                        //gc.simulate = false;
-                        StartCoroutine(AnimateOrbit());
-                        CollectResources();
-                    }
-                }
-                else
-                {
-                    orbitActive = false;
-                    ifNext = false;
-                    gc.simulate = false;
-
-
-					collecting = true;
-                }
+                recty += 1;
+            }
+            if (count > 60)
+            {
+                count = 0;
+                collecting = false;
             }
         }
-
-		if (collecting) {
-			count++;
-			if (count == 30) {
-				Vector3 pos = Camera.main.WorldToScreenPoint (gameObject.transform.position);
-				rectx = pos.x;
-				recty = pos.y;
-				Debug.Log (rectx);
-				Debug.Log (recty);
-			}
-			if (count > 30) {
-
-				recty+=1;
-			}
-			if (count > 60) {
-				count = 0;
-				collecting = false;
-			}
-		}
     }
 
 
 
-	//Function that check if the mouse click this object
+    //Function that check if the mouse click this object
 
-	//void OnMouseDown(){
+    //void OnMouseDown(){
 
-	//	Debug.Log ("123");
-	//	if (showInformation == false) {
-	//		showInformation = true;
-	//	} else {
-	//		showInformation = false;
-	//	}
-	//}
-
-
-	//Function that can show the resource of this object
-
-	void OnGUI(){
-		if (showInformation == true&&!orbitActive) {
-			
-	
-			GUI.Label (new Rect (Screen.width - Screen.width / 5, 50, 100, 50), "Carbon: " + carbon);
-			GUI.Label (new Rect (Screen.width - Screen.width / 5, 70, 100, 50), "Nitrogen: " + nitrogen);
-			GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
+    //	Debug.Log ("123");
+    //	if (showInformation == false) {
+    //		showInformation = true;
+    //	} else {
+    //		showInformation = false;
+    //	}
+    //}
 
 
-		}
-		if (collecting == true && count>30) {
-			int preCar = carbon - addCarbon;
-			int preNit = nitrogen - addNitrogen;
-			int preHyd = hydrogen - addHydrogen;
-			GUI.Label (new Rect (rectx,Screen.height-recty-50, 100, 50), "Carbon: " +preCar+" + "+addCarbon);
-			GUI.Label (new Rect (rectx,Screen.height-recty-30, 100, 50), "Nitrogen: " + preNit+" + "+addNitrogen);
-			GUI.Label (new Rect (rectx,Screen.height-recty-10, 100, 50), "Hydrogen: " + preHyd+ " + " +addHydrogen);
-		}
-	}
+    //Function that can show the resource of this object
+
+    void OnGUI()
+    {
+        //if (showInformation == true&&!orbitActive) {
+
+
+        //GUI.Label (new Rect (Screen.width - Screen.width / 5, 50, 100, 50), "Carbon: " + carbon);
+        //GUI.Label (new Rect (Screen.width - Screen.width / 5, 70, 100, 50), "Nitrogen: " + nitrogen);
+        //GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
+
+
+        //}
+        // pop up of resources collected after simulation
+        if (collecting == true && count > 30)
+        {
+            int preCar = carbon - addCarbon;
+            int preNit = nitrogen - addNitrogen;
+            int preHyd = hydrogen - addHydrogen;
+            GUI.Label(new Rect(rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCar + " + " + addCarbon);
+            GUI.Label(new Rect(rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNit + " + " + addNitrogen);
+            GUI.Label(new Rect(rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHyd + " + " + addHydrogen);
+        }
+    }
     // Function that can start the Next turn
     public void GoNext()
     {
@@ -249,11 +258,16 @@ public class Planet : MonoBehaviour
         carbon += addCarbon;
         nitrogen += addNitrogen;
         hydrogen += addHydrogen;
-
+        collecting = true;
+        //gc.simulate = false;
     }
 
-    public IEnumerator AnimateOrbit()
+    // Control the orbit
+    // Length determines how long will orbit in seconds
+    public IEnumerator AnimateOrbit(float length)
     {
+        float starting = 0f;
+
         // Is the orbit really close to 0? We don't want it to move too fast.
         // Set it to a more reasonable minimum (every 1/10 of a second) so it won't divide by 0
         if (orbitPeriod < 0.1f)
@@ -262,8 +276,16 @@ public class Planet : MonoBehaviour
         }
 
         // If orbit is active, start orbit animation
-        while (orbitActive)
+        //while (orbitActive)
+
+
+        while (starting < length) // https://answers.unity.com/questions/504843/c-make-something-happen-for-x-amount-of-seconds.html
         {
+            if (gc.simulate) // only during simulation will orbit for specific duration, else constantly orbits
+            {
+                starting += Time.deltaTime;
+            }
+            
 
             // Make orbit speed be affected by universe (disabled)
             Vector2 orbitPos = orbitPath.Evaluate(orbitProgress);
@@ -294,6 +316,11 @@ public class Planet : MonoBehaviour
 
             // Repeat until orbitActive is false
             yield return null;
+        }
+
+        if (gc.simulate) // after orbiting and during simulation will collect resources
+        {
+            CollectResources();
         }
     }
 

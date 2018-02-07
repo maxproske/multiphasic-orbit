@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public Text hydrogenText;
 
     private Planet planetScript;
+    private PlanetSlot planetSlotScript;
     private GameObject selected; // hold selected GameObject
 
     public bool simulate;
@@ -23,6 +24,9 @@ public class GameController : MonoBehaviour
     private EventSystem es;
     private bool esgo = false; // handles un/locking of UI
     private int i;
+
+    public Transform planetsParent; // Reference to skill tree slots parent
+
     // Use this for initialization
     void Start()
     {
@@ -37,6 +41,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //print(simulate);
         // handles un/locking of UI
         if (esgo == true)
         {
@@ -83,15 +88,31 @@ public class GameController : MonoBehaviour
     }
 
 
+    string name = "";
+
     void Simulate()
     {
         simulate = true;
-        startTime = Time.time;
-        es.enabled = false;
-        esgo = true;
+        //startTime = Time.time;
+        //es.enabled = false;
+        //esgo = true;
+
+        foreach (var planet in planets)
+        {
+            planetScript = planet.GetComponent<Planet>();
+            //print(planetScript.name);
+            planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
+            planetScript.planetPlaced = false;
+        }
+
+        // gets all of the buttons
+        Button[] buttons = planetsParent.GetComponentsInChildren<Button>(true);
+
+        // for now, interactability is toggled for carbon only
+        buttons[0].interactable = true;
+        planetSlotScript = buttons[0].GetComponent<PlanetSlot>();
+        planetSlotScript.go = null;
+        planetSlotScript.planetPlaced = false;
+        
     }
-
-
-
-
 }
