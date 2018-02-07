@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Track events through event systems
 using UnityEngine.EventSystems;
 
-// Implement pointer interfaces programatically, instead of Scene event triggers
-public class CloseIfClickedOutsideUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class ClosePlanetarySkillTree : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler  {
 
 	// Tracks if mouse is hovering over panel
 	public Transform planetsParent;
@@ -29,9 +27,15 @@ public class CloseIfClickedOutsideUI : MonoBehaviour, IPointerEnterHandler, IPoi
 
 	void Update () {
 		// When player clicks outside the panel
-		if (Input.GetMouseButtonUp (0) && !mouseHover) {
+		if (Input.GetMouseButtonUp (0) && mouseHover) {
+
+			// Set state backwards
+			if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT) {
+				gc.GAME_STATE = Constants.TURN_1_SKILL_TREE;
+			}
+
 			// Deactivate the panel
-			gameObject.SetActive (false);
+			this.transform.parent.gameObject.SetActive (false);
 		}
 	}
 }
