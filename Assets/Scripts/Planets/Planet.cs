@@ -198,6 +198,7 @@ public class Planet : MonoBehaviour
             {
                 count = 0;
                 collecting = false;
+                gc.simulate = false;
             }
         }
     }
