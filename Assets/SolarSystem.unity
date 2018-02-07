@@ -503,6 +503,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114351183648668268, guid: 00d99bf562329404aa1f07d1bb967a5e,
+        type: 2}
+      propertyPath: planetsParent
+      value: 
+      objectReference: {fileID: 1648888993}
+    - target: {fileID: 114351183648668268, guid: 00d99bf562329404aa1f07d1bb967a5e,
+        type: 2}
+      propertyPath: sun
+      value: 
+      objectReference: {fileID: 1694319099}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00d99bf562329404aa1f07d1bb967a5e, type: 2}
   m_IsPrefabParent: 0
@@ -2729,6 +2739,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114141649997158244, guid: cd6c791d73379b34586d936793ef6576,
+        type: 2}
+      propertyPath: planetsParent
+      value: 
+      objectReference: {fileID: 1648888993}
+    - target: {fileID: 114141649997158244, guid: cd6c791d73379b34586d936793ef6576,
+        type: 2}
+      propertyPath: sun
+      value: 
+      objectReference: {fileID: 1694319099}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd6c791d73379b34586d936793ef6576, type: 2}
   m_IsPrefabParent: 0

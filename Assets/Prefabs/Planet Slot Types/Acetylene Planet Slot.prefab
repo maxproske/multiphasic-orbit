@@ -39,8 +39,9 @@ GameObject:
   - component: {fileID: 222058410407775400}
   - component: {fileID: 114714335546910962}
   - component: {fileID: 114159180837182088}
+  - component: {fileID: 114141649997158244}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Acetylene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,6 +79,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114141649997158244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1639899772737768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d566fcd6fba883a4daa999c89ee3f867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetsParent: {fileID: 0}
+  sun: {fileID: 0}
+  planet: {fileID: 1302749218511646, guid: f3b7dd5c4eddf13478a0be8f56c9c540, type: 2}
+  carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
+  silicon: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
+  ammonia: {fileID: 1302749218511646, guid: aa091a671b56bb34e83ecaf777d71379, type: 2}
+  methane: {fileID: 1302749218511646, guid: 68c908146202de54a9c5a6a0e8d632ad, type: 2}
+  germaninum: {fileID: 1302749218511646, guid: 9e9ae8689dbae494ca6111fab0b22da8, type: 2}
+  acetylene: {fileID: 1302749218511646, guid: 5fce3d15b533a4746a5889ad5c932e4e, type: 2}
+  go: {fileID: 0}
+  planetPlaced: 0
 --- !u!114 &114159180837182088
 MonoBehaviour:
   m_ObjectHideFlags: 1
