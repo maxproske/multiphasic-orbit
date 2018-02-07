@@ -108,6 +108,11 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // When player is placing planet
         if (go != null && !planetPlaced)
         {
+			// Update the game state
+			if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT) {
+				gc.GAME_STATE = Constants.TURN_1_PLACE_PLANET;
+			}
+
             // Calculate 3D mouse coordinates
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -120,6 +125,11 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     // Only set orbit if clicking in-bounds
                     if (hit.collider.gameObject.name == "Orbit Plane")
                     {
+						// Update the game state
+						if (gc.GAME_STATE == Constants.TURN_1_PLACE_PLANET) {
+							gc.GAME_STATE = Constants.TURN_1_END_TURN;
+						}
+
                         StopCoroutine(p.placing);
                         planetPlaced = true;
                         //p.planetPlaced = true;
