@@ -130,6 +130,11 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 							gc.GAME_STATE = Constants.TURN_1_END_TURN;
 						}
 
+						// Update the game state
+						if (gc.GAME_STATE == Constants.TURN_2_PLACE_PLANET) {
+							gc.GAME_STATE = Constants.TURN_2_END_TURN;
+						}
+
                         StopCoroutine(p.placing);
                         planetPlaced = true;
                         //p.planetPlaced = true;

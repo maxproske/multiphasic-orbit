@@ -201,6 +201,17 @@ public class Planet : MonoBehaviour
                 count = 0;
                 collecting = false;
                 gc.simulate = false;
+
+				// Update Game State
+				if (gc.GAME_STATE == Constants.TURN_1_WATCH_SIMULATION) {
+					// Go to next step if the skill tree isn't open
+					if (!GameObject.Find ("Macro Skill Tree").activeSelf) {
+						gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
+					} else {
+						// Otherwide, skip ahead
+						gc.GAME_STATE = Constants.TURN_2_PLANET_SLOT;
+					}
+				}
             }
         }
     }

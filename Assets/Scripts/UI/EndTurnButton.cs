@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Track events through event systems
 using UnityEngine.EventSystems;
 
-// Implement pointer interfaces programatically, instead of Scene event triggers
-public class CloseIfClickedOutsideUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-
+public class EndTurnButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+	
 	// Tracks if mouse is hovering over panel
 	public Transform planetsParent;
 	private bool mouseHover;
@@ -22,11 +20,21 @@ public class CloseIfClickedOutsideUI : MonoBehaviour, IPointerEnterHandler, IPoi
 		mouseHover = false;
 	}
 
+	void Start()
+	{
+		gc = GameObject.Find("Game Manager").GetComponent<GameController>();
+	}
+
 	void Update () {
 		// When player clicks outside the panel
-		if (Input.GetMouseButtonUp (0) && !mouseHover) {
-			// Deactivate the panel
-			gameObject.SetActive (false);
+		if (Input.GetMouseButtonUp (0) && mouseHover) {
+			// Actually on second thought, let the simulation run first before updating the game state...
+			if (gc.GAME_STATE == Constants.TURN_1_END_TURN) {
+				gc.GAME_STATE = Constants.TURN_1_WATCH_SIMULATION;
+			}
+			if (gc.GAME_STATE == Constants.TURN_2_END_TURN) {
+				gc.GAME_STATE = Constants.TURN_2_WATCH_SIMULATION;
+			}
 		}
 	}
 }

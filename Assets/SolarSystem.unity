@@ -3407,6 +3407,23 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224462457936223476, guid: fac40481a9fa2104d9e7966f87cb3189,
     type: 2}
   m_PrefabInternal: {fileID: 1213028556}
+--- !u!1 &1844058688 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1268133399861412, guid: 8bd4361100e15ac4fb05b0300864a250,
+    type: 2}
+  m_PrefabInternal: {fileID: 752720639}
+--- !u!114 &1844058692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844058688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969ec592a5b2bcf4c98c0e6e79497180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetsParent: {fileID: 0}
 --- !u!1001 &1873475351
 Prefab:
   m_ObjectHideFlags: 0
