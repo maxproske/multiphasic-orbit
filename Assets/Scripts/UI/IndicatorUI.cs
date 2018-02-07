@@ -8,9 +8,10 @@ public class IndicatorUI : MonoBehaviour {
 	private float bounceDistance = 2f; // Pixels to bounce left
 		
 	IEnumerator Start () {
-		
+
 		Vector3 pointA = transform.position;
-		Vector3 pointB = transform.position + new Vector3(-bounceDistance, 0, 0);
+		Vector3 pointB = pointA + new Vector3(-bounceDistance, 0, 0);
+
 		while (true) {
 			yield return StartCoroutine(MoveObject(transform, pointA, pointB, speed));
 			yield return StartCoroutine(MoveObject(transform, pointB, pointA, speed));
@@ -23,6 +24,7 @@ public class IndicatorUI : MonoBehaviour {
 		while (i < 1.0f) {
 			i += Time.deltaTime * rate;
 			thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+			//Debug.Log (startPos);
 			yield return null;
 		}
 	}

@@ -156,8 +156,8 @@ public class GameController : MonoBehaviour
 				break;
 			case Constants.TURN_1_PLANET_SLOT:
 				Debug.Log ("TURN_1_PLANET_SLOT");
-				toggleHint("Macro Skill Tree Button");
-				toggleHint("Carbon Planet Slot");
+				toggleHint ("Macro Skill Tree Button");
+				toggleHint ("Carbon Planet Slot");
 				break;
 			default:
 				Debug.Log ("default");
@@ -177,20 +177,31 @@ public class GameController : MonoBehaviour
 			// Toggle the game object
 			hint.SetActive (!hint.activeSelf);
 			// Toggle the script component asyncronously
-			//var pui = hint.GetComponent<UnityEngine.UI.Extensions.PolygonUI> ();
-			//pui.enabled = !pui.enabled;
+			StartCoroutine (redrawHintAfterDelay (hint));
+		} else {
+			Debug.Log ("You tried to toggle the hint of a Game Object that doesn't exist!");
+		}
+	}
+
+	// Toggle the hint indicator
+	void enableHint(string parentGameObjectName) {
+		GameObject hint = getChildHintFromGameObjectWithName(parentGameObjectName);
+		if (hint != null) {
+			hint.SetActive (true);
+			StartCoroutine (redrawHintAfterDelay (hint));
 		} else {
 			Debug.Log ("You tried to toggle the hint of a Game Object that doesn't exist!");
 		}
 	}
 
 	// Call using StartCoroutine(DoSomethingAfterDelay(hint));
-	IEnumerator DoSomethingAfterDelay(GameObject hint)
+	IEnumerator redrawHintAfterDelay(GameObject hint)
 	{
-		yield return new WaitForSeconds(1f); // The parameter is the number of seconds to wait
+		// Wait...
+		yield return new WaitForSeconds(0.5f); // The parameter is the number of seconds to wait
 		// Do something...
-		//var pui = hint.GetComponent<UnityEngine.UI.Extensions.PolygonUI> ();
-		//pui.enabled = !pui.enabled;
+		var pui = hint.GetComponent<UnityEngine.UI.Extensions.PolygonUI> ();
+		pui.SetAllDirty ();
 	}
 
 	// Pass a game object name, and get its child hint
