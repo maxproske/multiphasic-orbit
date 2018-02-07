@@ -112,18 +112,36 @@ public class GameController : MonoBehaviour
             planetScript = planet.GetComponent<Planet>();
             //print(planetScript.name);
             planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
-            planetScript.planetPlaced = false;
+            planetScript.turnsToBuild--;
+            //planetScript.planetPlaced = false;
         }
 
         // gets all of the buttons
-        Button[] buttons = planetsParent.GetComponentsInChildren<Button>(true);
+        Button[] buttons = planetsParent.GetComponentsInChildren<Button>();
+
+        foreach (Button button in buttons)
+        {
+                button.interactable = true;
+        }
 
         // for now, interactability is toggled for carbon only
-        buttons[0].interactable = true;
-        planetSlotScript = buttons[0].GetComponent<PlanetSlot>();
-        planetSlotScript.go = null;
-        planetSlotScript.planetPlaced = false;
-        
+        //buttons[1].interactable = true;
+        //planetSlotScript = buttons[1].GetComponent<PlanetSlot>();
+        //planetSlotScript.go = null;
+        //planetSlotScript.planetPlaced = false;
+        //Button[] buttons = planetsParent.GetComponentsInChildren<Button>(false);
+        //foreach (var button in buttons)
+        //{
+        //    Debug.Log(button.interactable);
+        //    if (button.interactable == false)
+        //    {
+        //        button.interactable = true;
+        //        planetSlotScript = button.GetComponent<PlanetSlot>();
+        //        planetSlotScript.go = null;
+        //        planetSlotScript.planetPlaced = false;
+        //    }
+        //}
+
     }
 
 	// This function updates the hint indicator

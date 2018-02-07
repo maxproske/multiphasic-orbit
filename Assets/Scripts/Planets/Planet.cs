@@ -61,6 +61,7 @@ public class Planet : MonoBehaviour
     public int addCarbon;
     public int addNitrogen;
     public int addHydrogen;
+    public int turnsToBuild;
 
     private GameController gc; // Access Game Controller script
 
@@ -81,6 +82,7 @@ public class Planet : MonoBehaviour
         addCarbon = 0;
         addNitrogen = 0;
         addHydrogen = 0;
+        turnsToBuild = 0;
     }
 
     public void Awake()
@@ -186,8 +188,8 @@ public class Planet : MonoBehaviour
                 Vector3 pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
                 rectx = pos.x;
                 recty = pos.y;
-                Debug.Log(rectx);
-                Debug.Log(recty);
+                //Debug.Log(rectx);
+                //Debug.Log(recty);
             }
             if (count > 30)
             {
@@ -268,7 +270,6 @@ public class Planet : MonoBehaviour
     public IEnumerator AnimateOrbit(float length)
     {
         float starting = 0f;
-
         // Is the orbit really close to 0? We don't want it to move too fast.
         // Set it to a more reasonable minimum (every 1/10 of a second) so it won't divide by 0
         if (orbitPeriod < 0.1f)
@@ -319,7 +320,7 @@ public class Planet : MonoBehaviour
             yield return null;
         }
 
-        if (gc.simulate) // after orbiting and during simulation will collect resources
+        if (gc.simulate && turnsToBuild < 1) // after orbiting and during simulation will collect resources
         {
             CollectResources();
         }
