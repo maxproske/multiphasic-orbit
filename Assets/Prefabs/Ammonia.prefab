@@ -37,11 +37,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4339871127361048}
-  - component: {fileID: 114435880532778334}
+  - component: {fileID: 114766039192170016}
   - component: {fileID: 120631809419256310}
   - component: {fileID: 96845862121695660}
   m_Layer: 0
-  m_Name: Carbon
+  m_Name: Ammonia
   m_TagString: Carbon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bce5e75c4222c0c4e8bf2677825e2d30, type: 2}
+  - {fileID: 2100000, guid: 55903dc2c697ebe48b223cde4cbad75a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -204,7 +204,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114435880532778334
+--- !u!114 &114766039192170016
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -212,11 +212,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302749218511646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce89bf158b4f2454a95516493a9b2cea, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ff2de0e22f407749a5451c047e48b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 4339871127361048}
-  segments: 100
+  segments: 36
   orbitPath:
     xAxis: 2
     yAxis: 7
@@ -230,10 +230,10 @@ MonoBehaviour:
   carbon: 0
   nitrogen: 0
   hydrogen: 0
-  addCarbon: 4
-  addNitrogen: 1
-  addHydrogen: 1
-  turnsToBuild: 1
+  addCarbon: 2
+  addNitrogen: 6
+  addHydrogen: 2
+  turnsToBuild: 3
   sc: {fileID: 0}
 --- !u!120 &120631809419256310
 LineRenderer:

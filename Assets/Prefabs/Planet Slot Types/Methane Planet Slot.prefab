@@ -54,8 +54,9 @@ GameObject:
   - component: {fileID: 222411316867859336}
   - component: {fileID: 114992959956293272}
   - component: {fileID: 114682525081458950}
+  - component: {fileID: 114225778436947946}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Methane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,6 +145,26 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: CH4
+--- !u!114 &114225778436947946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752030905549810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d566fcd6fba883a4daa999c89ee3f867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetsParent: {fileID: 0}
+  sun: {fileID: 0}
+  planet: {fileID: 1302749218511646, guid: f3b7dd5c4eddf13478a0be8f56c9c540, type: 2}
+  carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
+  silicon: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
+  ammonia: {fileID: 1302749218511646, guid: aa091a671b56bb34e83ecaf777d71379, type: 2}
+  methane: {fileID: 1302749218511646, guid: 68c908146202de54a9c5a6a0e8d632ad, type: 2}
+  go: {fileID: 0}
+  planetPlaced: 0
 --- !u!114 &114682525081458950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +199,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 114992959956293272}
   m_OnClick:
     m_PersistentCalls:

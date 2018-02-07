@@ -136,6 +136,8 @@ MonoBehaviour:
   planet: {fileID: 1302749218511646, guid: f3b7dd5c4eddf13478a0be8f56c9c540, type: 2}
   carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
   silicon: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
+  ammonia: {fileID: 1302749218511646, guid: aa091a671b56bb34e83ecaf777d71379, type: 2}
+  methane: {fileID: 1302749218511646, guid: 68c908146202de54a9c5a6a0e8d632ad, type: 2}
   go: {fileID: 0}
   planetPlaced: 0
 --- !u!114 &114249785713609294
