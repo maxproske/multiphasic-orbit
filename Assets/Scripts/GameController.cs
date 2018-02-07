@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
+	public int GAME_STATE; // Control which hint indicator is active
+	private int PREVIOUS_GAME_STATE; // Done to improve performance
+
     public Button nextTurnButton;
     public List<GameObject> planets;
 
@@ -30,6 +33,10 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		// Start indicator pointing at the skill tree button
+		GAME_STATE = 0;
+		PREVIOUS_GAME_STATE = 0;
+
         nextTurn = GameObject.Find("End Turn Button").GetComponent<Button>();
         nextTurn.onClick.AddListener(Simulate);
 
@@ -41,6 +48,9 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		// Update the hint indicator
+		UpdateHintIndicator (PREVIOUS_GAME_STATE, GAME_STATE);
+
         //print(simulate);
         // handles un/locking of UI
         if (esgo == true)
@@ -115,4 +125,68 @@ public class GameController : MonoBehaviour
         planetSlotScript.planetPlaced = false;
         
     }
+
+	// This function updates the hint indicator
+	void UpdateHintIndicator(int previous, int current) {
+
+		// If previous game state is different than the current state
+		if (previous != current) {
+		// Something has changed...
+			switch (current) {
+			case Constants.TURN_1_SKILL_TREE:
+				Debug.Log ("TURN_1_SKILL_TREE (we should never be here)");
+				break;
+			case Constants.TURN_1_PLANET_SLOT:
+				Debug.Log ("TURN_1_PLANET_SLOT");
+				toggleHint("Macro Skill Tree Button");
+				toggleHint("Carbon Planet Slot");
+				break;
+			default:
+				Debug.Log ("default");
+				break;
+			}
+		}
+
+		// Set global previous state variable as we exit
+		PREVIOUS_GAME_STATE = current;
+	}
+
+	// Toggle the hint indicator
+	void toggleHint(string parentGameObjectName) {
+		GameObject hint = getChildHintFromGameObjectWithName(parentGameObjectName);
+		if (hint != null) {
+			//Debug.Log ("Found " + parentGameObjectName + "'s " + hint.name);
+			// Toggle the game object
+			hint.SetActive (!hint.activeSelf);
+			// Toggle the script component asyncronously
+			//var pui = hint.GetComponent<UnityEngine.UI.Extensions.PolygonUI> ();
+			//pui.enabled = !pui.enabled;
+		} else {
+			Debug.Log ("You tried to toggle the hint of a Game Object that doesn't exist!");
+		}
+	}
+
+	// Call using StartCoroutine(DoSomethingAfterDelay(hint));
+	IEnumerator DoSomethingAfterDelay(GameObject hint)
+	{
+		yield return new WaitForSeconds(1f); // The parameter is the number of seconds to wait
+		// Do something...
+		//var pui = hint.GetComponent<UnityEngine.UI.Extensions.PolygonUI> ();
+		//pui.enabled = !pui.enabled;
+	}
+
+	// Pass a game object name, and get its child hint
+	GameObject getChildHintFromGameObjectWithName(string fromGameObjectName) {
+		GameObject fromGameObject = GameObject.Find (fromGameObjectName);
+		//Debug.Log ("Found " + fromGameObject.name);
+		Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+		foreach (Transform t in ts) {
+			//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
+			if (t.gameObject.name == "Hint") {
+				return t.gameObject;
+			}
+		}
+		return null;
+	}
 }
+
