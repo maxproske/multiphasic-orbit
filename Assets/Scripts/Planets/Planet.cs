@@ -99,7 +99,8 @@ public class Planet : MonoBehaviour
 
     // Use this for initialization
     public void Start()
-    {
+    { 
+        
         // Check there are no objects to move around
         if (orbitingObject == null)
         {
@@ -107,6 +108,7 @@ public class Planet : MonoBehaviour
             // Return early
             return;
         }
+        
 
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
 
@@ -135,7 +137,6 @@ public class Planet : MonoBehaviour
         }
 
         float cTime = Time.time;
-
 
 
         //Debug.Log ("planetPlaced: " + planetPlaced + ", orbitActive: " + orbitActive);
@@ -291,6 +292,7 @@ public class Planet : MonoBehaviour
         if (turnsToBuild > 0)
         {
             gc.canBuild = false;
+            //renderer.material = Resources.Load("Carbon") as Material;
         } else
         {
             gc.canBuild = true;
