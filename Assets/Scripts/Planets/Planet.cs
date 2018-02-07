@@ -277,6 +277,14 @@ public class Planet : MonoBehaviour
             orbitPeriod = 0.1f;
         }
 
+        if (turnsToBuild > 0)
+        {
+            gc.canBuild = false;
+        } else
+        {
+            gc.canBuild = true;
+        }
+
         // If orbit is active, start orbit animation
         //while (orbitActive)
 
