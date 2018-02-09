@@ -241,8 +241,8 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                             p.enabled = true;
                             p.orbitPath.xAxis = (Mathf.Abs(location.x));
                             p.orbitPath.yAxis = (Mathf.Abs(location.z));
-                            float scale = 1.0f;
-                            p.transform.localScale = new Vector3(scale, scale, scale);
+                            //float scale = 1.0f;
+                            //p.transform.localScale = new Vector3(scale, scale, scale);
                         }
                     }
                 }
