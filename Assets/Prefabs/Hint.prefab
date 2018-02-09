@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85de71628c4320a4da08ee992fe76b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotated: 0
 --- !u!222 &222150075200236304
 CanvasRenderer:
   m_ObjectHideFlags: 1

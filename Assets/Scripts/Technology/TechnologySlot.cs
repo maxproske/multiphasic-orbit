@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
+// Track events through event systems
+using UnityEngine.EventSystems;
 
-public class TechnologySlot : MonoBehaviour {
+public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+
+	private GameController gc;
+	private bool mouseHover; // Tracks if mouse is hovering over panel
+	public GameObject microSkillTree; // Reference to micro skill tree
 
 	public Transform technologyParent; // Reference to the empty skill tree slots parent
 	public List<Transform> prereqs = new List<Transform>(); // Reference to the technology slots to draw lines to
 	public UnityEngine.UI.Extensions.UILineRenderer LineRenderer; // Assign Line Renderer in editor
 
+	public void OnPointerEnter (PointerEventData eventData) {
+		mouseHover = true;
+	}
+	public void OnPointerExit (PointerEventData eventData) {
+		mouseHover = false;
+	}
+
+	void Awake() {
+		gc = GameObject.Find ("Game Manager").GetComponent<GameController> ();
+	}
+		
 	// Use this for initialization
 	public void AddNewPoint (float xValue, float yValue) {
 		var point = new Vector2() { x = xValue, y = yValue };
@@ -80,6 +97,13 @@ public class TechnologySlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		// When player clicks on the icon
+		if (Input.GetMouseButtonUp (0) && mouseHover) {
+
+		}
+
+
 		/* FOR LINKING LATER
 		// Avoid object reference not set to an isntance of an object
 		if (prereqs != null) {

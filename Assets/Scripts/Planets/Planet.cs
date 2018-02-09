@@ -215,8 +215,8 @@ public class Planet : MonoBehaviour
 				}
 				else if (gc.GAME_STATE == Constants.TURN_2_WATCH_SIMULATION) {
 					// Make button interactable
-					var button = GameObject.Find("Micro Skill Tree Button").GetComponent<Button>();
-					button.interactable = true;
+					//var button = GameObject.Find("Micro Skill Tree Button").GetComponent<Button>();
+					//button.interactable = true;
 
 					// Go to next step if the skill tree isn't open
 					gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
