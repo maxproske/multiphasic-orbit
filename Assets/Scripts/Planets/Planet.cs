@@ -126,13 +126,13 @@ public class Planet : MonoBehaviour
         sc = gameObject.AddComponent<SphereCollider>();
         sc.radius = 0.5f;
         sc.center = new Vector3(0, 0, 0);
-		sc.isTrigger = true;
+
 	
     }
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.name == "Sphere") {
+		if (collision.gameObject.name == "comet") {
 			coll = true;
 			addCarbon /= 2;
 		}
