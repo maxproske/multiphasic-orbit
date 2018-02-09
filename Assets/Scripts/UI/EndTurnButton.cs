@@ -35,6 +35,7 @@ public class EndTurnButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 			if (gc.GAME_STATE == Constants.TURN_2_END_TURN) {
 				gc.GAME_STATE = Constants.TURN_2_WATCH_SIMULATION;
 			}
+			mouseHover = false;
 		}
 	}
 }

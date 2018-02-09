@@ -38,6 +38,9 @@ public class ClosePlanetarySkillTree : MonoBehaviour, IPointerEnterHandler, IPoi
 			else if (gc.GAME_STATE == Constants.TURN_2_PLANET_SLOT) {
 				gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
 			}
+			else if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
+				gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
+			}
 
 			// Prevent exit bug
 			mouseHover = false;

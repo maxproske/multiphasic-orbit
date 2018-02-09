@@ -12,4 +12,7 @@
 	public const int TURN_2_PLACE_PLANET = 12;
 	public const int TURN_2_END_TURN = 13;
 	public const int TURN_2_WATCH_SIMULATION = 14;
+
+	public const int TURN_3_TECH_TREE = 20;
+	public const int TURN_3_TECH_SLOT = 21;
 }

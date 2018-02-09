@@ -53,6 +53,11 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // When player clicks an active planet slot
         if (go == null && Input.GetMouseButtonUp(0) && this.GetComponent<Button>().interactable && mouseHover)
         {
+			// Update the game state
+			if (gc.GAME_STATE == Constants.TURN_2_PLANET_SLOT && (this.name == "Silicon" || this.name == "Ammonia" || this.name == "Methane")) {
+				gc.GAME_STATE = Constants.TURN_2_PLACE_PLANET;
+			}
+
             // if button's name is Carbon
             if (this.name == "Carbon")
             {
