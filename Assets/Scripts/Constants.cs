@@ -15,4 +15,6 @@
 
 	public const int TURN_3_TECH_TREE = 20;
 	public const int TURN_3_TECH_SLOT = 21;
+	public const int TURN_3_TECH_TREE_2 = 22;
+	public const int TURN_3_TECH_SLOT_2 = 23;
 }

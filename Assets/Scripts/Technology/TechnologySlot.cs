@@ -46,6 +46,8 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 				buttons[i].interactable = false;
 			}
 		}
+		// Enable math at the start
+		buttons [0].interactable = true;
 
 		// NOTE: The LineRenderer component is not suitable for drawing lines in the new UI
 		//this.gameObject.AddComponent<UILineRenderer> ();
@@ -100,7 +102,9 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 		// When player clicks on the icon
 		if (Input.GetMouseButtonUp (0) && mouseHover) {
-
+			if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
+				gc.GAME_STATE = Constants.TURN_3_TECH_TREE_2;
+			}
 		}
 
 

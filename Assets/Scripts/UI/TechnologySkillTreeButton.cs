@@ -26,7 +26,7 @@ public class TechnologySkillTreeButton : MonoBehaviour, IPointerEnterHandler, IP
 
 	void Update () {
 		// When player clicks on the icon
-		if (Input.GetMouseButtonUp (0) && mouseHover) {
+		if (Input.GetMouseButtonUp (0) && mouseHover && gc.GAME_STATE >= Constants.TURN_3_TECH_TREE) {
 			// Toggle the panel
 			microSkillTree.SetActive (!microSkillTree.activeSelf);
 
