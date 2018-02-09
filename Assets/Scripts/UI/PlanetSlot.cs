@@ -202,6 +202,9 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     // Only set orbit if clicking in-bounds
                     if (hit.collider.gameObject.name == "Orbit Plane")
                     {
+						// Allow player to end turn
+						GameObject.Find ("End Turn Button").GetComponent<Button> ().interactable = true;
+
 						// Update the game state
 						if (gc.GAME_STATE == Constants.TURN_1_PLACE_PLANET) {
 							gc.GAME_STATE = Constants.TURN_1_END_TURN;

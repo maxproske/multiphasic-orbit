@@ -28,6 +28,7 @@ public class EndTurnButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	void Update () {
 		// When player clicks outside the panel
 		if (Input.GetMouseButtonUp (0) && mouseHover) {
+
 			// Actually on second thought, let the simulation run first before updating the game state...
 			if (gc.GAME_STATE == Constants.TURN_1_END_TURN) {
 				gc.GAME_STATE = Constants.TURN_1_WATCH_SIMULATION;
