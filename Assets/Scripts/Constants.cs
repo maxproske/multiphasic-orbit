@@ -11,5 +11,5 @@
 	public const int TURN_2_PLANET_SLOT = 11;
 	public const int TURN_2_PLACE_PLANET = 12;
 	public const int TURN_2_END_TURN = 13;
-	public const int TURN_2_WATCH_SIMULATION = 13;
+	public const int TURN_2_WATCH_SIMULATION = 14;
 }

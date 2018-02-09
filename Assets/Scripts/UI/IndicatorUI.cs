@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class IndicatorUI : MonoBehaviour {
 	
-	private float speed = 0.3f; // Closer to zero = faster
-	private float bounceDistance = 0.25f; // Pixels to bounce left
+	private float speed = 0.2f; // Closer to zero = faster
+	private float bounceDistance = 0.333f; // Pixels to bounce left
 
 	private float lastX = 0;
 	private float lastY = 0;
 	private float addX = 0;
 	private float addY = 0;
+	public bool rotated = false;
 
 	/// Coroutines will stop when we disable the whole game object
 	void OnEnable() {
@@ -19,9 +20,16 @@ public class IndicatorUI : MonoBehaviour {
 	}
 
 	IEnumerator Start () {
+		Vector3 pointA = new Vector3 (0, 0, 0);
+		Vector3 pointB = new Vector3 (0, 0, 0);
 		// IT'S PURE MAGIC
-		Vector3 pointA = new Vector3(bounceDistance/2,0,0);
-		Vector3 pointB = pointA + new Vector3(-bounceDistance, 0, 0);
+		if (!rotated) {
+			pointA = new Vector3 (bounceDistance / 2, 0, 0);
+			pointB = pointA + new Vector3 (-bounceDistance, 0, 0);
+		} else {
+			pointA = new Vector3 (0, bounceDistance / 2, 0);
+			pointB = pointA + new Vector3 (0, -bounceDistance, 0);
+		}
 
 		while (true) {
 			yield return StartCoroutine(MoveObject(transform, pointA, pointB, speed));

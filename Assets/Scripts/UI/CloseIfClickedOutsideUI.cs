@@ -26,7 +26,7 @@ public class CloseIfClickedOutsideUI : MonoBehaviour, IPointerEnterHandler, IPoi
 		// When player clicks outside the panel
 		if (Input.GetMouseButtonUp (0) && !mouseHover) {
 			// Deactivate the panel
-			gameObject.SetActive (false);
+			///////////////////////gameObject.SetActive (false);
 		}
 	}
 }

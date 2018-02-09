@@ -33,6 +33,9 @@ public class ClosePlanetarySkillTree : MonoBehaviour, IPointerEnterHandler, IPoi
 			if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT) {
 				gc.GAME_STATE = Constants.TURN_1_SKILL_TREE;
 			}
+			else if (gc.GAME_STATE == Constants.TURN_2_PLANET_SLOT) {
+				gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
+			}
 
 			// Deactivate the panel
 			this.transform.parent.gameObject.SetActive (false);

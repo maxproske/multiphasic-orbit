@@ -206,7 +206,7 @@ public class Planet : MonoBehaviour
 				// Update Game State
 				if (gc.GAME_STATE == Constants.TURN_1_WATCH_SIMULATION) {
 					// Go to next step if the skill tree isn't open
-					if (!GameObject.Find ("Macro Skill Tree").activeSelf) {
+					if (GameObject.Find ("Macro Skill Tree") == null) {
 						gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
 					} else {
 						// Otherwide, skip ahead
