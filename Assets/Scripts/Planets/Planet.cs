@@ -77,7 +77,6 @@ public class Planet : MonoBehaviour
     private bool collecting = false;
     private int count = 0;
 
-	public bool coll = false;
     public Planet()
     {
         addCarbon = 0;
@@ -127,16 +126,8 @@ public class Planet : MonoBehaviour
         sc.radius = 0.5f;
         sc.center = new Vector3(0, 0, 0);
 
-	
     }
 
-	void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.name == "comet") {
-			coll = true;
-			addCarbon /= 2;
-		}
-	}
     public void FixedUpdate()
     {
         if (Application.isPlaying && lr != null)
