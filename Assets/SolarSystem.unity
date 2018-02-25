@@ -968,6 +968,12 @@ MonoBehaviour:
   carbonText: {fileID: 1194646389}
   nitrogenText: {fileID: 1290045271}
   hydrogenText: {fileID: 738413043}
+  carbonIncrement: 0
+  siliconIncrement: 0
+  ammoniaIncrement: 0
+  methaneIncrement: 0
+  germaniumIncrement: 0
+  acetyleneIncrement: 0
   microSkillTree: {fileID: 939411035}
   simulate: 0
   canBuild: 0

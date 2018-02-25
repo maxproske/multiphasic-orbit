@@ -56,23 +56,15 @@ public class Planet : MonoBehaviour
     public int carbon;
     public int nitrogen;
     public int hydrogen;
-
     // Add how many resources per turn
     public int addCarbon;
     public int addNitrogen;
     public int addHydrogen;
     public int turnsToBuild;
-
     private GameController gc; // Access Game Controller script
-
     public Coroutine placing;
-
-    //add a bool to check if the planet is selected
-    private bool showInformation = false;
-
     //add a collider for the object
     public SphereCollider sc;
-
     private float rectx, recty;
     private bool collecting = false;
     private int count = 0;

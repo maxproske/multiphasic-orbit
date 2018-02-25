@@ -6,11 +6,6 @@ public class IndicatorUI : MonoBehaviour {
 	
 	private float speed = 0.2f; // Closer to zero = faster
 	private float bounceDistance = 0.333f; // Pixels to bounce left
-
-	private float lastX = 0;
-	private float lastY = 0;
-	private float addX = 0;
-	private float addY = 0;
 	public bool rotated = false;
 
 	/// Coroutines will stop when we disable the whole game object
