@@ -40,7 +40,8 @@ public class ClosePlanetarySkillTree : MonoBehaviour, IPointerEnterHandler, IPoi
 			}
 			else if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
 				gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
-				GameObject.Find ("Micro Skill Tree Button").GetComponent<TechnologySkillTreeButton> ().enabled = true;
+				// Enable the panel
+				this.GetComponent<TechnologySkillTreeButton> ().enabled = true;
 			}
 
 			// Prevent exit bug

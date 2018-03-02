@@ -60,11 +60,9 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 					if (target != null) {
 
 						// M->ASD
-						AddNewPoint (115f+10f, 115f-75f);
-						AddNewPoint (45f+10f, 45f-75f);
-
-						//AddNewPoint (this.transform.position.x, this.transform.position.y);
-						//AddNewPoint (target.position.x, target.position.y);
+						//AddNewPoint (115f+10f, 115f-75f);
+						//AddNewPoint (45f+10f, 45f-75f);
+					
 
 						num++;
 					}
