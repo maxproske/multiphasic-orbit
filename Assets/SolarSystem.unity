@@ -1045,7 +1045,7 @@ MonoBehaviour:
   linkedAlready: 0
   planet1: {fileID: 0}
   planet2: {fileID: 0}
-  linkingText: {fileID: 0}
+  linkingText: {fileID: 509125480}
   planetText: {fileID: 182444763}
   carbonText: {fileID: 1194646389}
   nitrogenText: {fileID: 1290045271}
