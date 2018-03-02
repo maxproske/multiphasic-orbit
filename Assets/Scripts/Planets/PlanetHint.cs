@@ -36,7 +36,7 @@ public class PlanetHint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 				pause = false;
 			}
 			if (!pause) {
-				Debug.Log ("animating!");
+				//Debug.Log ("animating!");
 				light.range = Mathf.Abs (Mathf.Sin (Time.time * 4) * 3);
 				light.intensity = Mathf.Abs (Mathf.Sin (Time.time * 4) * 2);
 			} else {

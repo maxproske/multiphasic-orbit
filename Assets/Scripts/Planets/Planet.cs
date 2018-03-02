@@ -69,6 +69,9 @@ public class Planet : MonoBehaviour
     private bool collecting = false;
     private int count = 0;
 
+    // linking
+    public List<GameObject> linkedWith = new List<GameObject>(); // Each planet will have their own list of planets they have linked with
+
     public Planet()
     {
         addCarbon = 0;
