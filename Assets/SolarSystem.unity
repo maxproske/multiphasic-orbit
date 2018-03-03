@@ -2106,9 +2106,59 @@ Prefab:
       propertyPath: sun
       value: 
       objectReference: {fileID: 1694319099}
+    - target: {fileID: 114359670800381552, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: planetPlaced
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224606672486622376, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224877011313866196, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224340928162560908, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224589411706420692, guid: e4520ffcba53dfb4d90d472cc328781c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4520ffcba53dfb4d90d472cc328781c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1019248619 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1702875983290998, guid: e4520ffcba53dfb4d90d472cc328781c,
+    type: 2}
+  m_PrefabInternal: {fileID: 970103713}
+--- !u!114 &1019248622 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114110612181030912, guid: e4520ffcba53dfb4d90d472cc328781c,
+    type: 2}
+  m_PrefabInternal: {fileID: 970103713}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1019248625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1019248619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myString: Generates 4 Carbon, 1 Nitrogen, 1 Hydrogen per turn.
+  myButton: {fileID: 1019248622}
+  myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!224 &1048140118 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224550299848486836, guid: cd6c791d73379b34586d936793ef6576,
@@ -3145,7 +3195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1524296325
 RectTransform:
   m_ObjectHideFlags: 0
