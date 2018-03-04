@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 114332654335986486}
   - component: {fileID: 114175498776716988}
   - component: {fileID: 114716117897850650}
+  - component: {fileID: 114049321575451656}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -229,6 +230,7 @@ GameObject:
   - component: {fileID: 114728046728165036}
   - component: {fileID: 114645537399662580}
   - component: {fileID: 114003413424824058}
+  - component: {fileID: 114317786041192684}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -377,6 +379,7 @@ GameObject:
   - component: {fileID: 114255037218698676}
   - component: {fileID: 114372566129533318}
   - component: {fileID: 114804202448948352}
+  - component: {fileID: 114679973351770024}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -479,6 +482,21 @@ MonoBehaviour:
   technologyParent: {fileID: 224084417251901512}
   prereqs: []
   LineRenderer: {fileID: 0}
+--- !u!114 &114049321575451656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365018327683990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myString: +10% Resources.
+  myButton: {fileID: 114175498776716988}
+  myParent: {fileID: 0}
+  myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114133989182744260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -712,6 +730,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114317786041192684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1403683476370394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myString: Enable linking to trade between planets.
+  myButton: {fileID: 114645537399662580}
+  myParent: {fileID: 0}
+  myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114332654335986486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1035,6 +1068,21 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114679973351770024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1899128166911014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myString: ?????
+  myButton: {fileID: 114372566129533318}
+  myParent: {fileID: 0}
+  myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114689119933894366
 MonoBehaviour:
   m_ObjectHideFlags: 1
