@@ -178,6 +178,9 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // When player is placing planet
         if (go != null && !planetPlaced)
         {
+			// Update the global placing variable
+			gc.placing = true;
+
 			// Update the game state
 			if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT) {
 				gc.GAME_STATE = Constants.TURN_1_PLACE_PLANET;
@@ -210,6 +213,9 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
                         StopCoroutine(p.placing);
                         planetPlaced = true;
+
+						// Update the global placing variable
+						gc.placing = false;
                         //p.planetPlaced = true;
                         //p.orbitActive = false;
                         //this.GetComponent<Button>().interactable = false;
