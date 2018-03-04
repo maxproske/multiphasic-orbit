@@ -72,7 +72,7 @@ public class Planet : MonoBehaviour
 	public int maxResourceType = 0;
 	public int maxResource = 0;
 
-	private string name=" ";
+	private string planetname=" ";
 	private string tier=" ";
 
 
@@ -105,19 +105,19 @@ public class Planet : MonoBehaviour
     public void Start()
     { 
 		if (addCarbon == addHydrogen && addCarbon == addNitrogen) {
-			name = "Carbon";
+			planetname = "Carbon";
 			tier = "Tier 1 Planet";
 		}
 		if (addCarbon > addHydrogen && addCarbon > addNitrogen) {
-			name = "Silicon";
+			planetname = "Silicon";
 			tier = "Tier 2 Planet";
 		}
 		if (addHydrogen > addCarbon && addHydrogen > addNitrogen) {
-			name = "Hydrogen";
+			planetname = "Hydrogen";
 			tier = "Tier 2 Planet";
 		}
 		if (addNitrogen > addHydrogen && addNitrogen > addCarbon) {
-			name = "Nitrogen";
+			planetname = "Nitrogen";
 			tier = "Tier 2 Planet";
 		}
         // Check there are no objects to move around
@@ -348,7 +348,7 @@ public class Planet : MonoBehaviour
         //GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
 
 		if (ifHover == true) {
-			GUI.Box (new Rect (rectx+20, Screen.height - recty, 300, 50), name+": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen+"\n This is a "+tier);
+			GUI.Box (new Rect (rectx+20, Screen.height - recty, 300, 50), planetname+": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen+"\n This is a "+tier);
 
 		}
         //}
