@@ -39,7 +39,9 @@ public class CameraController : MonoBehaviour {
 
 			Quaternion rotation = Quaternion.Euler(y, x, 0);
 
-			distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel")*5, distanceMin, distanceMax);
+			// Disable scroll wheel
+			//distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel")*5, distanceMin, distanceMax);
+			distance = 5f;
 
 			RaycastHit hit;
 			if (Physics.Linecast (target.position, transform.position, out hit)) 
@@ -57,6 +59,11 @@ public class CameraController : MonoBehaviour {
 
 	public static float ClampAngle(float angle, float min, float max)
 	{
+		// Prevent camera view from crossing y=0
+		if (angle < 10) {
+			angle = 10f;
+		}
+
 		if (angle < -360F)
 			angle += 360F;
 		if (angle > 360F)

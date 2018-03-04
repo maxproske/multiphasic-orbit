@@ -935,6 +935,7 @@ MonoBehaviour:
   planets: []
   startLinkButton: {fileID: 0}
   linkButton: {fileID: 0}
+  placing: 0
   linking: 0
   firstPlanet: 0
   linkedAlready: 0

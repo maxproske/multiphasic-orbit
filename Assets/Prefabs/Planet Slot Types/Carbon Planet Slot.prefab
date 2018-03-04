@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myString: Generates <b><color=#c8c8c8ff>Carbon</color></b>, <b><color=#8f8fffff>1
+  myString: Generates <b><color=#c8c8c8ff>1 Carbon</color></b>, <b><color=#8f8fffff>1
     Nitrogen</color></b>, <b><color=#ffffffff>1 Hydrogen</color></b> per turn.
   myButton: {fileID: 114110612181030912}
   myParent: {fileID: 0}
@@ -350,10 +350,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110, y: -57}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224340928162560908
 RectTransform:
