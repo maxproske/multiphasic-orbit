@@ -215,7 +215,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                         planetPlaced = true;
 
 						// Update the global placing variable
-						gc.placing = false;
+						//gc.placing = false;
                         //p.planetPlaced = true;
                         //p.orbitActive = false;
                         //this.GetComponent<Button>().interactable = false;

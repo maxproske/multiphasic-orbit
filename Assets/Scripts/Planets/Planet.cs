@@ -48,7 +48,7 @@ public class Planet : MonoBehaviour
     bool fastUniverse;
 
     // Was the planet placed?
-    public bool planetPlaced = false;
+    public bool planetPlaced;
 
     public bool coroutineFlag = false;
 
@@ -127,6 +127,8 @@ public class Planet : MonoBehaviour
             // Return early
             return;
         }
+
+
         
 	
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
@@ -138,7 +140,13 @@ public class Planet : MonoBehaviour
         SetOrbitingObjectPosition();
 
         // If orbit is active, start orbit animation
-        placing = StartCoroutine(AnimateOrbit(1));
+
+        if (!planetPlaced)
+        {
+            // If orbit is active, start orbit animation
+            placing = StartCoroutine(AnimateOrbit(1));
+        }
+
 
         //add a collider for this planet
         sc = gameObject.AddComponent<SphereCollider>();
@@ -396,14 +404,14 @@ public class Planet : MonoBehaviour
             orbitPeriod = 0.1f;
         }
 
-        if (turnsToBuild > 0)
-        {
-            gc.canBuild = false;
-            //renderer.material = Resources.Load("Carbon") as Material;
-        } else
-        {
-            gc.canBuild = true;
-        }
+        //if (turnsToBuild > 0)
+        //{
+        //    gc.canBuild = false;
+        //    //renderer.material = Resources.Load("Carbon") as Material;
+        //} else
+        //{
+        //    gc.canBuild = true;
+        //}
 
         // If orbit is active, start orbit animation
         //while (orbitActive)
