@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 114490796144727158}
   - component: {fileID: 114110612181030912}
   - component: {fileID: 114359670800381552}
+  - component: {fileID: 114179499887383922}
   m_Layer: 5
   m_Name: Carbon
   m_TagString: Untagged
@@ -138,6 +139,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114179499887383922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1702875983290998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myString: Generates <b><color=#c8c8c8ff>Carbon</color></b>, <b><color=#8f8fffff>1
+    Nitrogen</color></b>, <b><color=#ffffffff>1 Hydrogen</color></b> per turn.
+  myButton: {fileID: 114110612181030912}
+  myParent: {fileID: 0}
+  myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114359670800381552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85de71628c4320a4da08ee992fe76b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotated: 0
 --- !u!114 &114856896817344902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,10 +350,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -57}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224340928162560908
 RectTransform:
