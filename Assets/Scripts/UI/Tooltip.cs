@@ -44,8 +44,8 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		tooltipSetActive (false);
 
 		// Make it a child of the button
-		go.transform.parent = myButton.transform;
-		go2.transform.parent = myParent.transform;
+		go.transform.SetParent(myButton.transform);
+		go2.transform.SetParent(myParent.transform);
 
 		// Get width of button for margin
 		rt = (RectTransform)myButton.transform.parent.transform;

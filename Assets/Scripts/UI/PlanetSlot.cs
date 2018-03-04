@@ -211,7 +211,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 							gc.GAME_STATE = Constants.TURN_2_END_TURN;
 						}
 
-                        StopCoroutine(p.placing);
+                        p.StopCoroutine(p.placing);
                         planetPlaced = true;
 
 						// Update the global placing variable
