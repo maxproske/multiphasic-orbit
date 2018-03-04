@@ -68,9 +68,18 @@ public class Planet : MonoBehaviour
     private float rectx, recty;
     private bool collecting = false;
     private int count = 0;
+	private bool ifHover=false;
+	public int maxResourceType = 0;
+	public int maxResource = 0;
+
+	private string name=" ";
+	private string tier=" ";
+
 
     // linking
-    public List<GameObject> linkedWith = new List<GameObject>(); // Each planet will have their own list of planets they have linked with
+	public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
+	public List<LineRenderer> links= new List<LineRenderer>();
+
 
     public Planet()
     {
@@ -95,7 +104,22 @@ public class Planet : MonoBehaviour
     // Use this for initialization
     public void Start()
     { 
-        
+		if (addCarbon == addHydrogen && addCarbon == addNitrogen) {
+			name = "Carbon";
+			tier = "Tier 1 Planet";
+		}
+		if (addCarbon > addHydrogen && addCarbon > addNitrogen) {
+			name = "Silicon";
+			tier = "Tier 2 Planet";
+		}
+		if (addHydrogen > addCarbon && addHydrogen > addNitrogen) {
+			name = "Hydrogen";
+			tier = "Tier 2 Planet";
+		}
+		if (addNitrogen > addHydrogen && addNitrogen > addCarbon) {
+			name = "Nitrogen";
+			tier = "Tier 2 Planet";
+		}
         // Check there are no objects to move around
         if (orbitingObject == null)
         {
@@ -104,7 +128,7 @@ public class Planet : MonoBehaviour
             return;
         }
         
-
+	
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
 
         //nextTurn = GameObject.Find("End Turn Button").GetComponent<Button>();
@@ -118,13 +142,27 @@ public class Planet : MonoBehaviour
 
         //add a collider for this planet
         sc = gameObject.AddComponent<SphereCollider>();
+//		linkline = gameObject.AddComponent<LineRenderer> ();
         sc.radius = 0.5f;
         sc.center = new Vector3(0, 0, 0);
+			
 
     }
 
     public void FixedUpdate()
     {
+			if (linkedWith.Count > 0) {
+			for (int i = 0; i < linkedWith.Count; i++) {
+				GameObject myline = new GameObject ();
+				myline.AddComponent<LineRenderer> ();
+				links[i]= myline.GetComponent<LineRenderer> ();
+			
+				links[i].SetPosition (0, transform.position);
+				links[i].SetPosition (1, linkedWith [i].transform.position);
+			}
+		}
+
+
         if (Application.isPlaying && lr != null)
         {
             CalculateEllipse();
@@ -186,6 +224,15 @@ public class Planet : MonoBehaviour
                 recty = pos.y;
                 //Debug.Log(rectx);
                 //Debug.Log(recty);
+
+				//trade
+				for (int i = 0; i < linkedWith.Count; i++) {
+					int j = 0;
+					if (j == 0) {
+						trade (linkedWith [i]);
+						j = 1;
+					}
+				}
             }
             if (count > 30)
             {
@@ -222,6 +269,52 @@ public class Planet : MonoBehaviour
 
 
 
+	//function that trade 
+	void trade(Planet temp){
+		getMaxResource ();
+		temp.getMaxResource ();
+
+		if (maxResourceType == 1) {
+			carbon -= 1;
+			temp.carbon += 1;
+		}
+		if (maxResourceType == 2) {
+			nitrogen -= 1;
+			temp.nitrogen += 1;
+
+		}
+		if (maxResourceType == 3) {
+			hydrogen -= 1;
+			temp.hydrogen += 1;
+		}
+		if (temp.maxResourceType == 1) {
+			temp.carbon -= 1;
+			carbon += 1;
+		}
+		if (temp.maxResourceType == 2) {
+			temp.nitrogen -= 1;
+			nitrogen += 1;
+		}
+		if (temp.maxResourceType == 3) {
+			temp.hydrogen -= 1;
+			hydrogen += 1;
+		}	
+
+	}
+
+	void getMaxResource(){
+		maxResource = Mathf.Max (carbon, nitrogen, hydrogen);
+		if (maxResource == carbon) {
+			maxResourceType = 1;
+		}
+		if (maxResource == nitrogen) {
+			maxResourceType = 2;
+		}
+		if (maxResource == hydrogen) {
+			maxResourceType = 3;
+		}
+	}
+
     //Function that check if the mouse click this object
 
     //void OnMouseDown(){
@@ -234,7 +327,15 @@ public class Planet : MonoBehaviour
     //	}
     //}
 
+	void OnMouseOver(){
+		ifHover = true;
+	}
+	void OnMouseExit(){
 
+				ifHover = false;
+
+		
+	}
     //Function that can show the resource of this object
 
     void OnGUI()
@@ -246,7 +347,10 @@ public class Planet : MonoBehaviour
         //GUI.Label (new Rect (Screen.width - Screen.width / 5, 70, 100, 50), "Nitrogen: " + nitrogen);
         //GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
 
+		if (ifHover == true) {
+			GUI.Box (new Rect (rectx+20, Screen.height - recty, 300, 50), name+": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen+"\n This is a "+tier);
 
+		}
         //}
         // pop up of resources collected after simulation
         if (collecting == true && count > 30)
