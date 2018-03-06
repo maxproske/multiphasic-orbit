@@ -9,6 +9,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	// Declare public variables
 	public string myString; // Message to display
 	public Button myButton; // Reference to button to check if intractable
+	private GameObject myParent; // Private because this can't be set in the editor
 	public GameObject myPrefab;
 
 	// Declare private variables
