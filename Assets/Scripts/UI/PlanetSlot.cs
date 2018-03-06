@@ -216,7 +216,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                         gc.canBuild = false;
 
 						// Update the global placing variable
-						//gc.placing = false;
+						gc.placing = false; // Must be false to let skill tree open
                         //p.planetPlaced = true;
                         //p.orbitActive = false;
                         //this.GetComponent<Button>().interactable = false;
