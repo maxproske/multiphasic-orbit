@@ -76,11 +76,14 @@ public class Planet : MonoBehaviour
 	private string tier=" ";
 
 
+
     // linking
 	public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
-	public List<LineRenderer> links= new List<LineRenderer>();
+	public LineRenderer[] links;
+	public GameObject[] lines;
 
-
+	public Vector3 pos;
+	private bool ifdraw=true;
     public Planet()
     {
         addCarbon = 0;
@@ -104,6 +107,8 @@ public class Planet : MonoBehaviour
     // Use this for initialization
     public void Start()
     { 
+
+	
 		if (addCarbon == addHydrogen && addCarbon == addNitrogen) {
 			planetname = "Carbon";
 			tier = "Tier 1 Planet";
@@ -159,18 +164,10 @@ public class Planet : MonoBehaviour
 
     public void FixedUpdate()
     {
-			if (linkedWith.Count > 0) {
-			for (int i = 0; i < linkedWith.Count; i++) {
-				GameObject myline = new GameObject ();
-				myline.AddComponent<LineRenderer> ();
-				links[i]= myline.GetComponent<LineRenderer> ();
-			
-				links[i].SetPosition (0, transform.position);
-				links[i].SetPosition (1, linkedWith [i].transform.position);
-			}
+
+		if (linkedWith.Count > 0) {
+			drawlink ();
 		}
-
-
         if (Application.isPlaying && lr != null)
         {
             CalculateEllipse();
@@ -227,7 +224,7 @@ public class Planet : MonoBehaviour
             count++;
             if (count == 30)
             {
-                Vector3 pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+				pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
                 rectx = pos.x;
                 recty = pos.y;
                 //Debug.Log(rectx);
@@ -276,7 +273,27 @@ public class Planet : MonoBehaviour
     }
 
 
+	void drawlink(){
+		
+		lines = null;
+		links = null;
 
+
+
+		lines = new GameObject[linkedWith.Count];
+		links = new LineRenderer[linkedWith.Count];
+
+		for (int i = 0; i < linkedWith.Count; i++) {
+			
+			lines [i] = new GameObject ();
+			links [i] = lines [i].AddComponent<LineRenderer> ();
+			links [i].SetWidth (0.1f, 0.1f);
+			links [i].SetPosition (0, transform.position);
+			links [i].SetPosition (1, linkedWith [i].transform.position);
+		}
+			
+
+	}
 	//function that trade 
 	void trade(Planet temp){
 		getMaxResource ();
