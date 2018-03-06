@@ -7,6 +7,7 @@ public class TechnologySkillTree : MonoBehaviour {
 
 	private GameController gc;
 	private Text title;
+	public Planet planetScript;
 
 	void Awake() {
 		// Make reference to the Game Controller
