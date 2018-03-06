@@ -35,6 +35,9 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	void setupTooltip ()
 	{
+		// Format string
+		myString = myString.Replace(";", "\n");
+
 		// Script cannot find Tooltips empty game object when set in editor
 		myParent = GameObject.Find ("Tooltips");
 
@@ -84,7 +87,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	{
 		go2.transform.position = go.transform.position;
 
-		if (mouseHover && myButton.interactable) 
+		if (mouseHover/*&& myButton.interactable*/) 
 		{
 			// Show tooltip
 			tooltipSetActive (true);

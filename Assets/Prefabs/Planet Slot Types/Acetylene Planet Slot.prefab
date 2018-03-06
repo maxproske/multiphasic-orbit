@@ -109,10 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myString: Generates <b><color=#c8c8c8ff>6 Carbon</color></b>, <b><color=#8f8fffff>6
-    Nitrogen</color></b>, <b><color=#ffffffff>6 Hydrogen</color></b> per turn.
+  myString: "Generates <b><color=#c8c8c8ff>6 Carbon</color></b>, <b><color=#8f8fffff>6
+    Nitrogen</color></b>, <b><color=#ffffffff>6 Hydrogen</color></b> per turn.;\u2022
+    Requires: Ammonia and Methane"
   myButton: {fileID: 114159180837182088}
-  myParent: {fileID: 0}
   myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114141649997158244
 MonoBehaviour:
@@ -368,10 +368,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 175, y: -187}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224559454677323294
 RectTransform:

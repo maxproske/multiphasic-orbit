@@ -508,11 +508,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114706129735058516, guid: 00d99bf562329404aa1f07d1bb967a5e,
-        type: 2}
-      propertyPath: myParent
-      value: 
-      objectReference: {fileID: 1115627305}
     - target: {fileID: 114351183648668268, guid: 00d99bf562329404aa1f07d1bb967a5e,
         type: 2}
       propertyPath: planetsParent
@@ -960,6 +955,7 @@ MonoBehaviour:
     type: 2}
   nextTurnButton: {fileID: 0}
   planets: []
+  microSkillTreeNames: []
   simulate: 0
   canBuild: 0
   planetsParent: {fileID: 1648888993}
@@ -1814,11 +1810,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114262557990377792, guid: ed6e85877651bdc4fbdaaeadd5729616,
-        type: 2}
-      propertyPath: myParent
-      value: 
-      objectReference: {fileID: 1115627305}
     - target: {fileID: 114103023676064122, guid: ed6e85877651bdc4fbdaaeadd5729616,
         type: 2}
       propertyPath: planetsParent
@@ -2628,11 +2619,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114550481912112690, guid: 08c2b5c1196a52e4e91e50975468f572,
-        type: 2}
-      propertyPath: myParent
-      value: 
-      objectReference: {fileID: 1115627305}
     - target: {fileID: 114225778436947946, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
       propertyPath: planetsParent
@@ -2931,11 +2917,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114039469788638138, guid: cd6c791d73379b34586d936793ef6576,
-        type: 2}
-      propertyPath: myParent
-      value: 
-      objectReference: {fileID: 1115627305}
     - target: {fileID: 114141649997158244, guid: cd6c791d73379b34586d936793ef6576,
         type: 2}
       propertyPath: planetsParent
@@ -3735,11 +3716,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114695259311078568, guid: cb71543d5a6f35b47b9ba7eebf0dea64,
-        type: 2}
-      propertyPath: myParent
-      value: 
-      objectReference: {fileID: 1115627305}
     - target: {fileID: 114114216757376190, guid: cb71543d5a6f35b47b9ba7eebf0dea64,
         type: 2}
       propertyPath: planetsParent
