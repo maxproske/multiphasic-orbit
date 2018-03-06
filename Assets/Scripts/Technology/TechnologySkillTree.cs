@@ -9,6 +9,10 @@ public class TechnologySkillTree : MonoBehaviour {
 	private Text title;
 	public Planet planetScript;
 
+	public int mathematics = 0;
+	public int interplanetaryNetworking = 0;
+	public int massParticleDisplacement = 0;
+
 	void Awake() {
 		// Make reference to the Game Controller
 		gc = GameObject.Find ("Game Manager").GetComponent<GameController> ();
@@ -18,6 +22,14 @@ public class TechnologySkillTree : MonoBehaviour {
 	void Start () {
 		// Make reference to the panel title
 		title = GameObject.Find("Title Text").GetComponent<Text>();
+	}
+
+	public void Update () {
+
+	}
+
+	void Unlock() {
+		Debug.Log ("Updating unlocks for " + title);
 	}
 
 	public void setTitle(string name) {

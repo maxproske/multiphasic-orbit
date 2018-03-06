@@ -26,7 +26,7 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 	void Awake() {
 		gc = GameObject.Find ("Game Manager").GetComponent<GameController> ();
 	}
-		
+
 	// Use this for initialization
 	public void AddNewPoint (float xValue, float yValue) {
 		var point = new Vector2() { x = xValue, y = yValue };
@@ -62,7 +62,7 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 						// M->ASD
 						//AddNewPoint (115f+10f, 115f-75f);
 						//AddNewPoint (45f+10f, 45f-75f);
-					
+
 
 						num++;
 					}
@@ -94,12 +94,32 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 		}
 		*/
 	}
-	
+
+	void getButtonName() {
+		var currentEventSystem = EventSystem.current;
+		if(currentEventSystem == null) { return; }
+
+		var currentSelectedGameObject = currentEventSystem.currentSelectedGameObject;
+		if(currentSelectedGameObject == null) { return; }
+
+		Debug.Log(currentSelectedGameObject.name);
+	}
+
 	// Update is called once per frame
 	void Update () {
 
 		// When player clicks on the icon
 		if (Input.GetMouseButtonUp (0) && mouseHover) {
+			// Get tech tree slot clicked
+			var clicked = this.GetComponent<Button> ().transform.parent.name;
+			// Get script
+			var tech = microSkillTree.GetComponent<TechnologySkillTree>();
+
+			// Unlock the next one.
+			if (clicked == "Mathematics Technology Slot") {
+				tech.mathematics = 1;
+			}
+
 			if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
 				gc.GAME_STATE = Constants.TURN_3_TECH_TREE_2;
 			}
