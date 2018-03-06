@@ -493,9 +493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myString: +10% Resources per turn.
+  myString: +10% Resources per turn.;- Costs <b><color=#c8c8c8ff>2 Carbon</color></b>,
+    <b><color=#8f8fffff>1 Nitrogen</color></b> to learn.
   myButton: {fileID: 114175498776716988}
-  myParent: {fileID: 0}
   myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114133989182744260
 MonoBehaviour:
@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2452975d683e41748b0a87128c10a6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetScript: {fileID: 0}
 --- !u!114 &114208410438423540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -741,9 +742,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myString: Enable linking to trade between planets.
+  myString: Enable linking to trade between planets.;- Costs <b><color=#c8c8c8ff>20
+    Carbon</color></b>, <b><color=#8f8fffff>4 Nitrogen</color></b>, <b><color=#ffffffff>3
+    Hydrogen</color></b> to learn.
   myButton: {fileID: 114645537399662580}
-  myParent: {fileID: 0}
   myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114332654335986486
 MonoBehaviour:
@@ -1079,9 +1081,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myString: +10% Resources per turn.
+  myString: +50% Resources per turn.;- Costs <b><color=#c8c8c8ff>100 Carbon</color></b>,
+    <b><color=#8f8fffff>75 Nitrogen</color></b>, <b><color=#ffffffff>70 Hydrogen</color></b>
+    to learn.
   myButton: {fileID: 114372566129533318}
-  myParent: {fileID: 0}
   myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
 --- !u!114 &114689119933894366
 MonoBehaviour:
