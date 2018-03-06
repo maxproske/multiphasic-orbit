@@ -24,9 +24,9 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 085af2200bf8f6f4d83457e2c15c60f4, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 20406c179608a6c4899973eae2d31d7b, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -926,6 +926,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GAME_STATE: 0
+  PREVIOUS_GAME_STATE: 0
+  nextTurn: {fileID: 0}
   startLinkButton: {fileID: 0}
   linkButton: {fileID: 0}
   placing: 0
@@ -2381,7 +2383,7 @@ Camera:
   m_GameObject: {fileID: 1240657473}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.0099481065, g: 0.009980918, b: 0.014705896, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -2389,7 +2391,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -1000
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 94
   orthographic: 1

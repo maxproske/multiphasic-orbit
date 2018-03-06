@@ -70,7 +70,7 @@ Material:
     - _GridSpacingY: 1
     - _GridSpacingZ: 0
     - _GridStep: 1
-    - _GridThickness: 0.05
+    - _GridThickness: 0.01
     - _GridWidth: 1
     - _Metallic: 0
     - _Mode: 0
