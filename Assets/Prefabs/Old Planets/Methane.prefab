@@ -39,12 +39,12 @@ GameObject:
   - component: {fileID: 4339871127361048}
   - component: {fileID: 120631809419256310}
   - component: {fileID: 96845862121695660}
-  - component: {fileID: 108799601468792308}
-  - component: {fileID: 114906765157303248}
-  - component: {fileID: 114108600533220330}
+  - component: {fileID: 114253439130564286}
+  - component: {fileID: 114769248250737598}
+  - component: {fileID: 108773164139411176}
   m_Layer: 0
-  m_Name: Rogue
-  m_TagString: Silicon
+  m_Name: Methane
+  m_TagString: Carbon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ Transform:
   m_GameObject: {fileID: 1302749218511646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.85}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4012213430800904}
   m_Father: {fileID: 0}
@@ -90,7 +90,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 57e5b9774b9182d4e9058c0cd7d765a0, type: 2}
+  - {fileID: 2100000, guid: 235e6faf51fce2e4c84ec0f28659363f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,7 +210,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!108 &108799601468792308
+--- !u!108 &108773164139411176
 Light:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -246,7 +246,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114108600533220330
+--- !u!114 &114253439130564286
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -254,31 +254,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302749218511646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5201c13c38ec2e045a859b30ea7089f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 376229e8b6d85b24cb96fc8d700a2a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 4339871127361048}
-  segments: 0
+  segments: 36
   orbitPath:
-    xAxis: 0
-    yAxis: 0
+    xAxis: 2
+    yAxis: 7
   orbitProgress: 0
   orbitPeriod: 3
   orbitSpeedMultiplier: 1
-  orbitActive: 0
+  orbitActive: 1
   ifNext: 0
   planetPlaced: 0
   coroutineFlag: 0
   carbon: 0
   nitrogen: 0
   hydrogen: 0
-  addCarbon: 0
-  addNitrogen: 0
-  addHydrogen: 0
-  turnsToBuild: 0
-  defensePower: 0
-  attackPower: 0
-  turnsToDie: 0
+  addCarbon: 2
+  addNitrogen: 2
+  addHydrogen: 6
+  turnsToBuild: 3
+  defensePower: 5
+  attackPower: 5
+  turnsToDie: 3
   sc: {fileID: 0}
   maxResourceType: 0
   maxResource: 0
@@ -286,8 +286,7 @@ MonoBehaviour:
   links: []
   lines: []
   pos: {x: 0, y: 0, z: 0}
-  dominatedPlanet: {fileID: 0}
---- !u!114 &114906765157303248
+--- !u!114 &114769248250737598
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

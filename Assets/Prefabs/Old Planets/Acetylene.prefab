@@ -37,12 +37,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4339871127361048}
-  - component: {fileID: 114461781821274964}
   - component: {fileID: 120631809419256310}
   - component: {fileID: 96845862121695660}
+  - component: {fileID: 114043664447671026}
+  - component: {fileID: 108616179765064552}
+  - component: {fileID: 114434164345388212}
   m_Layer: 0
-  m_Name: Planet
-  m_TagString: Untagged
+  m_Name: Acetylene
+  m_TagString: Silicon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +70,7 @@ Transform:
   m_GameObject: {fileID: 1302749218511646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 4012213430800904}
   m_Father: {fileID: 0}
@@ -83,11 +85,12 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bce5e75c4222c0c4e8bf2677825e2d30, type: 2}
+  - {fileID: 2100000, guid: 23a815a30ffedd44c9a5f1af874e9d2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +101,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -123,6 +127,7 @@ TrailRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -138,6 +143,7 @@ TrailRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -204,7 +210,43 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114461781821274964
+--- !u!108 &108616179765064552
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1302749218511646}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 1
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &114043664447671026
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -212,7 +254,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302749218511646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ec7388caf3be2499b1836c871bc219, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ec9a542a5d5f3043bc5cad18fe76ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 4339871127361048}
@@ -230,9 +272,33 @@ MonoBehaviour:
   carbon: 0
   nitrogen: 0
   hydrogen: 0
-  addCarbon: 1
-  addNitrogen: 2
-  addHydrogen: 3
+  addCarbon: 6
+  addNitrogen: 6
+  addHydrogen: 6
+  turnsToBuild: 5
+  defensePower: 10
+  attackPower: 10
+  turnsToDie: 4
+  sc: {fileID: 0}
+  maxResourceType: 0
+  maxResource: 0
+  linkedWith: []
+  links: []
+  lines: []
+  pos: {x: 0, y: 0, z: 0}
+--- !u!114 &114434164345388212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1302749218511646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5886c9d1b38b944c86d8f673fc1dbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animateHalo: 0
+  pause: 0
 --- !u!120 &120631809419256310
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -242,6 +308,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -257,6 +324,7 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

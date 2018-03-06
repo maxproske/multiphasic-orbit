@@ -37,14 +37,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4339871127361048}
-  - component: {fileID: 114766039192170016}
+  - component: {fileID: 114461781821274964}
   - component: {fileID: 120631809419256310}
   - component: {fileID: 96845862121695660}
-  - component: {fileID: 108618457831285702}
-  - component: {fileID: 114960182236183082}
   m_Layer: 0
-  m_Name: Ammonia
-  m_TagString: Carbon
+  m_Name: Planet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +68,7 @@ Transform:
   m_GameObject: {fileID: 1302749218511646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.85}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4012213430800904}
   m_Father: {fileID: 0}
@@ -90,7 +88,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 55903dc2c697ebe48b223cde4cbad75a, type: 2}
+  - {fileID: 2100000, guid: bce5e75c4222c0c4e8bf2677825e2d30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,43 +208,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!108 &108618457831285702
-Light:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1302749218511646}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 1
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!114 &114766039192170016
+--- !u!114 &114461781821274964
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -254,7 +216,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302749218511646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ff2de0e22f407749a5451c047e48b76, type: 3}
+  m_Script: {fileID: 11500000, guid: 28ec7388caf3be2499b1836c871bc219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orbitingObject: {fileID: 4339871127361048}
@@ -272,24 +234,20 @@ MonoBehaviour:
   carbon: 0
   nitrogen: 0
   hydrogen: 0
-  addCarbon: 2
-  addNitrogen: 6
-  addHydrogen: 2
-  turnsToBuild: 3
+  addCarbon: 1
+  addNitrogen: 2
+  addHydrogen: 3
+  turnsToBuild: 0
+  defensePower: 0
+  attackPower: 0
+  turnsToDie: 0
   sc: {fileID: 0}
---- !u!114 &114960182236183082
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1302749218511646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5886c9d1b38b944c86d8f673fc1dbdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animateHalo: 0
-  pause: 0
+  maxResourceType: 0
+  maxResource: 0
+  linkedWith: []
+  links: []
+  lines: []
+  pos: {x: 0, y: 0, z: 0}
 --- !u!120 &120631809419256310
 LineRenderer:
   m_ObjectHideFlags: 1
