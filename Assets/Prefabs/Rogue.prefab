@@ -85,6 +85,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -100,6 +101,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -125,6 +127,7 @@ TrailRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -140,6 +143,7 @@ TrailRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -268,13 +272,21 @@ MonoBehaviour:
   carbon: 0
   nitrogen: 0
   hydrogen: 0
-  addCarbon: 6
-  addNitrogen: 2
-  addHydrogen: 2
-  turnsToBuild: 3
+  addCarbon: 0
+  addNitrogen: 0
+  addHydrogen: 0
+  turnsToBuild: 0
+  defensePower: 0
+  attackPower: 0
   turnsToDie: 0
   sc: {fileID: 0}
+  maxResourceType: 0
+  maxResource: 0
   linkedWith: []
+  links: []
+  lines: []
+  pos: {x: 0, y: 0, z: 0}
+  dominatedPlanet: {fileID: 0}
 --- !u!114 &114906765157303248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,6 +309,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -312,6 +325,7 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

@@ -7,7 +7,10 @@ public class Germanium : Planet {
     public Germanium() {
         addCarbon = 0;
         addNitrogen = 15;
-        addHydrogen = 20;
+        addHydrogen = 0;
         turnsToBuild = 5;
+        defensePower = 10;
+        attackPower = 10;
+        turnsToDie = 4;
     }
 }

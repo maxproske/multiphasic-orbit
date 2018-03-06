@@ -17,4 +17,18 @@
 	public const int TURN_3_TECH_SLOT = 21;
 	public const int TURN_3_TECH_TREE_2 = 22;
 	public const int TURN_3_TECH_SLOT_2 = 23;
+
+    // Constants for attributes
+    public const int DEFENSE = 30;
+    public const int ATTACK = 31;
+
+    // Constants for starting values for planets
+    public const int CARBON_ADD_CARBON = 4;
+    public const int CARBON_ADD_NITROGEN = 1;
+    public const int CARBON_ADD_HYDROGEN = 1;
+    public const int CARBON_TURNS_TO_BUILD = 1;
+    public const int CARBON_DEFENSE_POWER = 3;
+    public const int CARBON_ATTACK_POWER = 3;
+    public const int CARBON_TURNS_TO_DIE = 2;
+
 }

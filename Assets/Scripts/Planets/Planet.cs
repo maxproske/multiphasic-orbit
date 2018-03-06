@@ -61,6 +61,9 @@ public class Planet : MonoBehaviour
     public int addNitrogen;
     public int addHydrogen;
     public int turnsToBuild;
+    public int defensePower;
+    public int attackPower;
+    public int turnsToDie;
     private GameController gc; // Access Game Controller script
     public Coroutine placing;
     //add a collider for the object
@@ -75,8 +78,6 @@ public class Planet : MonoBehaviour
 	private string planetname=" ";
 	private string tier=" ";
 
-
-
     // linking
 	public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
 	public LineRenderer[] links ;
@@ -90,8 +91,11 @@ public class Planet : MonoBehaviour
         addNitrogen = 0;
         addHydrogen = 0;
         turnsToBuild = 0;
+        defensePower = 0;
+        attackPower = 0;
+        turnsToDie = 0;
     }
-
+ 
     public void Awake()
     {
         // Get reference when we start the game
@@ -105,7 +109,7 @@ public class Planet : MonoBehaviour
     }
 
     // Use this for initialization
-    public void Start()
+    public virtual void Start()
     { 
 		lines = new GameObject[10];
 		links = new LineRenderer[10];

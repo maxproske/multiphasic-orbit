@@ -9,5 +9,8 @@ public class Methane : Planet {
         addNitrogen = 2;
         addHydrogen = 6;
         turnsToBuild = 3;
+        defensePower = 5;
+        attackPower = 5;
+        turnsToDie = 3;
     }
 }

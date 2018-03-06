@@ -272,11 +272,20 @@ MonoBehaviour:
   carbon: 0
   nitrogen: 0
   hydrogen: 0
-  addCarbon: 4
-  addNitrogen: 1
-  addHydrogen: 1
+  addCarbon: 6
+  addNitrogen: 2
+  addHydrogen: 2
   turnsToBuild: 3
+  defensePower: 5
+  attackPower: 5
+  turnsToDie: 3
   sc: {fileID: 0}
+  maxResourceType: 0
+  maxResource: 0
+  linkedWith: []
+  links: []
+  lines: []
+  pos: {x: 0, y: 0, z: 0}
 --- !u!114 &114906765157303248
 MonoBehaviour:
   m_ObjectHideFlags: 1

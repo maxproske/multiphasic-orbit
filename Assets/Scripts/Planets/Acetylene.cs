@@ -9,5 +9,8 @@ public class Acetylene : Planet {
         addNitrogen = 6;
         addHydrogen = 6;
         turnsToBuild = 5;
+        defensePower = 10;
+        attackPower = 10;
+        turnsToDie = 4;
     }
 }

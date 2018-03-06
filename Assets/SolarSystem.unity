@@ -926,8 +926,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GAME_STATE: 0
-  PREVIOUS_GAME_STATE: 0
-  nextTurn: {fileID: 0}
   startLinkButton: {fileID: 0}
   linkButton: {fileID: 0}
   placing: 0
@@ -3076,7 +3074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1524296325
 RectTransform:
   m_ObjectHideFlags: 0

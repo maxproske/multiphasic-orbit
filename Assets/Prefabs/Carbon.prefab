@@ -276,7 +276,16 @@ MonoBehaviour:
   addNitrogen: 1
   addHydrogen: 1
   turnsToBuild: 1
+  defensePower: 3
+  attackPower: 3
+  turnsToDie: 2
   sc: {fileID: 0}
+  maxResourceType: 0
+  maxResource: 0
+  linkedWith: []
+  links: []
+  lines: []
+  pos: {x: 0, y: 0, z: 0}
 --- !u!114 &114900308823736170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animateHalo: 0
+  pause: 0
 --- !u!120 &120631809419256310
 LineRenderer:
   m_ObjectHideFlags: 1

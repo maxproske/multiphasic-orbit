@@ -9,5 +9,8 @@ public class Ammonia : Planet {
         addNitrogen = 6;
         addHydrogen = 2;
         turnsToBuild = 3;
+        defensePower = 5;
+        attackPower = 5;
+        turnsToDie = 3;
     }
 }
