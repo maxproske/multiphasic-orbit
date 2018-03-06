@@ -9,7 +9,6 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	// Declare public variables
 	public string myString; // Message to display
 	public Button myButton; // Reference to button to check if intractable
-	public GameObject myParent; // What empty game object to
 	public GameObject myPrefab;
 
 	// Declare private variables
@@ -35,6 +34,9 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	void setupTooltip ()
 	{
+		// Script cannot find Tooltips empty game object when set in editor
+		myParent = GameObject.Find ("Tooltips");
+
 		// Instantiate a new tooltip prefab
 		go = Instantiate(myPrefab, new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;
 		go2 = Instantiate(myPrefab, new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;

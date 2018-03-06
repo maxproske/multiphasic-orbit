@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myString: +10% Resources.
+  myString: +10% Resources per turn.
   myButton: {fileID: 114175498776716988}
   myParent: {fileID: 0}
   myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myString: ?????
+  myString: +10% Resources per turn.
   myButton: {fileID: 114372566129533318}
   myParent: {fileID: 0}
   myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
