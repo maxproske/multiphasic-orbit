@@ -16,7 +16,6 @@ public class State : MonoBehaviour {
 	// This function updates the hint indicator
 	public void UpdateState(int previous, int current)
 	{
-		Debug.Log (previous + ", " + current);
 		// If previous game state is different than the current state
 		if (previous != current)
 		{

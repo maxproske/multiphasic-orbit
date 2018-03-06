@@ -51,7 +51,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		go2.transform.SetParent(myParent.transform);
 
 		// Get width of button for margin
-		rt = (RectTransform)myButton.transform.parent.transform;
+		rt = (RectTransform)myButton.transform;
 		float marginLeft = (rt.rect.width/2) + 5;
 
 		// Reset position and scale
