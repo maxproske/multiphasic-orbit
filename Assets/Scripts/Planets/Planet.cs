@@ -79,7 +79,7 @@ public class Planet : MonoBehaviour
 
     // linking
 	public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
-	public LineRenderer[] links;
+	public LineRenderer[] links ;
 	public GameObject[] lines;
 
 	public Vector3 pos;
@@ -107,7 +107,13 @@ public class Planet : MonoBehaviour
     // Use this for initialization
     public void Start()
     { 
-
+		lines = new GameObject[10];
+		links = new LineRenderer[10];
+		for (int i = 0; i < 10; i++) {
+			lines [i] = new GameObject ();
+			links [i] = lines [i].AddComponent<LineRenderer> ();
+			links [i].SetWidth (0.1f, 0.1f);
+		}
 	
 		if (addCarbon == addHydrogen && addCarbon == addNitrogen) {
 			planetname = "Carbon";
@@ -162,11 +168,16 @@ public class Planet : MonoBehaviour
 
     }
 
+
+
     public void FixedUpdate()
     {
 
 		if (linkedWith.Count > 0) {
-			drawlink ();
+			for (int i = 0; i < linkedWith.Count; i++) {
+				links [i].SetPosition (0, transform.position);
+				links [i].SetPosition (1, linkedWith [i].transform.position);
+			}
 		}
         if (Application.isPlaying && lr != null)
         {
@@ -272,28 +283,6 @@ public class Planet : MonoBehaviour
         }
     }
 
-
-	void drawlink(){
-		
-		lines = null;
-		links = null;
-
-
-
-		lines = new GameObject[linkedWith.Count];
-		links = new LineRenderer[linkedWith.Count];
-
-		for (int i = 0; i < linkedWith.Count; i++) {
-			
-			lines [i] = new GameObject ();
-			links [i] = lines [i].AddComponent<LineRenderer> ();
-			links [i].SetWidth (0.1f, 0.1f);
-			links [i].SetPosition (0, transform.position);
-			links [i].SetPosition (1, linkedWith [i].transform.position);
-		}
-			
-
-	}
 	//function that trade 
 	void trade(Planet temp){
 		getMaxResource ();
