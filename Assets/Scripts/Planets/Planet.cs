@@ -85,6 +85,11 @@ public class Planet : MonoBehaviour
 
 	public Vector3 pos;
 	private bool ifdraw=true;
+
+	private int tradecarbon = 0;
+	private int tradenitrogen = 0;
+	private int tradehydrogen = 0;
+
     public Planet()
     {
         addCarbon = 0;
@@ -119,19 +124,19 @@ public class Planet : MonoBehaviour
 			links [i].SetWidth (0.1f, 0.1f);
 		}
 	
-		if (addCarbon == addHydrogen && addCarbon == addNitrogen) {
+		if (addCarbon == 4 && addHydrogen == 1&& addNitrogen == 1) {
 			planetname = "Carbon";
 			tier = "Tier 1 Planet";
 		}
-		if (addCarbon > addHydrogen && addCarbon > addNitrogen) {
+		if (addCarbon == 6 && addHydrogen == 2&& addNitrogen == 2) {
 			planetname = "Silicon";
 			tier = "Tier 2 Planet";
 		}
-		if (addHydrogen > addCarbon && addHydrogen > addNitrogen) {
+		if (addCarbon == 2 && addHydrogen == 6&& addNitrogen == 2) {
 			planetname = "Hydrogen";
 			tier = "Tier 2 Planet";
 		}
-		if (addNitrogen > addHydrogen && addNitrogen > addCarbon) {
+		if (addCarbon == 2 && addHydrogen == 2&& addNitrogen == 6) {
 			planetname = "Nitrogen";
 			tier = "Tier 2 Planet";
 		}
@@ -245,14 +250,7 @@ public class Planet : MonoBehaviour
                 //Debug.Log(rectx);
                 //Debug.Log(recty);
 
-				//trade
-				for (int i = 0; i < linkedWith.Count; i++) {
-					int j = 0;
-					if (j == 0) {
-						trade (linkedWith [i]);
-						j = 1;
-					}
-				}
+
             }
             if (count > 30)
             {
@@ -294,28 +292,40 @@ public class Planet : MonoBehaviour
 
 		if (maxResourceType == 1) {
 			carbon -= 1;
+			tradecarbon -= 1;
 			temp.carbon += 1;
+			temp.tradecarbon += 1;
 		}
 		if (maxResourceType == 2) {
 			nitrogen -= 1;
+			tradenitrogen -= 1;
 			temp.nitrogen += 1;
+			temp.tradenitrogen += 1;
 
 		}
 		if (maxResourceType == 3) {
 			hydrogen -= 1;
+			tradehydrogen -= 1;
 			temp.hydrogen += 1;
+			temp.tradehydrogen += 1;
 		}
 		if (temp.maxResourceType == 1) {
 			temp.carbon -= 1;
+			temp.tradecarbon -= 1;
 			carbon += 1;
+			tradecarbon += 1;
 		}
 		if (temp.maxResourceType == 2) {
 			temp.nitrogen -= 1;
+			temp.tradenitrogen -= 1;
 			nitrogen += 1;
+			tradenitrogen += 1;
 		}
 		if (temp.maxResourceType == 3) {
 			temp.hydrogen -= 1;
+			temp.tradehydrogen -= 1;
 			hydrogen += 1;
+			tradehydrogen += 1;
 		}	
 
 	}
@@ -373,12 +383,16 @@ public class Planet : MonoBehaviour
         // pop up of resources collected after simulation
         if (collecting == true && count > 30)
         {
-            int preCar = carbon - addCarbon;
-            int preNit = nitrogen - addNitrogen;
-            int preHyd = hydrogen - addHydrogen;
-            GUI.Label(new Rect(rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCar + " + " + addCarbon);
-            GUI.Label(new Rect(rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNit + " + " + addNitrogen);
-            GUI.Label(new Rect(rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHyd + " + " + addHydrogen);
+			int totalcarbon = addCarbon + tradecarbon;
+			int totalnit = addNitrogen + tradenitrogen;
+			int totalhyd = addHydrogen + tradehydrogen;
+			int preCar = carbon - totalcarbon;
+			int preNit = nitrogen - totalnit;
+			int preHyd = hydrogen - totalhyd;
+
+			GUI.Label(new Rect(rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCar + " + " + totalcarbon);
+			GUI.Label(new Rect(rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNit + " + " + totalnit);
+			GUI.Label(new Rect(rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHyd + " + " + totalhyd);
         }
     }
     // Function that can start the Next turn
@@ -395,6 +409,17 @@ public class Planet : MonoBehaviour
 
     public void CollectResources()
     {
+		tradecarbon = 0;
+		tradenitrogen = 0;
+		tradehydrogen = 0;
+		//trade
+		for (int i = 0; i < linkedWith.Count; i++) {
+			int j = 0;
+			if (j == 0) {
+				trade (linkedWith [i]);
+				j = 1;
+			}
+		}
         carbon += addCarbon;
         nitrogen += addNitrogen;
         hydrogen += addHydrogen;
