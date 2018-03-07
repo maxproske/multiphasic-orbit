@@ -76,7 +76,7 @@ public class Planet : MonoBehaviour
 	public int maxResource = 0;
 
 	private string planetname=" ";
-	private string tier=" ";
+	public int tier=0;
 
     // linking
 	public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
@@ -126,19 +126,19 @@ public class Planet : MonoBehaviour
 	
 		if (addCarbon == 4 && addHydrogen == 1&& addNitrogen == 1) {
 			planetname = "Carbon";
-			tier = "Tier 1 Planet";
+			tier = 1;
 		}
 		if (addCarbon == 6 && addHydrogen == 2&& addNitrogen == 2) {
 			planetname = "Silicon";
-			tier = "Tier 2 Planet";
+			tier = 2;
 		}
 		if (addCarbon == 2 && addHydrogen == 6&& addNitrogen == 2) {
 			planetname = "Hydrogen";
-			tier = "Tier 2 Planet";
+			tier = 2;
 		}
 		if (addCarbon == 2 && addHydrogen == 2&& addNitrogen == 6) {
 			planetname = "Nitrogen";
-			tier = "Tier 2 Planet";
+			tier = 2;
 		}
         // Check there are no objects to move around
         if (orbitingObject == null)
@@ -376,7 +376,7 @@ public class Planet : MonoBehaviour
         //GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
 
 		if (ifHover == true) {
-			GUI.Box (new Rect (rectx+20, Screen.height - recty, 300, 50), planetname+": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen+"\n This is a "+tier);
+			GUI.Box (new Rect (rectx+20, Screen.height - recty, 300, 50), planetname+": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen+"\n This is a Tier "+tier+" Planet.");
 
 		}
         //}
