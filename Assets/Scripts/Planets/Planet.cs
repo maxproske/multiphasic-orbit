@@ -261,10 +261,10 @@ public class Planet : MonoBehaviour
             {
                 count = 0;
                 collecting = false;
-                gc.simulate = false;
+                //gc.simulate = false;
 
-				// Update Game State
-				if (gc.GAME_STATE == Constants.TURN_1_WATCH_SIMULATION) {
+                // Update Game State
+                if (gc.GAME_STATE == Constants.TURN_1_WATCH_SIMULATION) {
 					// Go to next step if the skill tree isn't open
 					if (GameObject.Find ("Macro Skill Tree") == null) {
 						gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
@@ -409,9 +409,11 @@ public class Planet : MonoBehaviour
 
     public void CollectResources()
     {
-		tradecarbon = 0;
+        collecting = true;
+        tradecarbon = 0;
 		tradenitrogen = 0;
 		tradehydrogen = 0;
+
 		//trade
 		for (int i = 0; i < linkedWith.Count; i++) {
 			int j = 0;
@@ -423,8 +425,10 @@ public class Planet : MonoBehaviour
         carbon += addCarbon;
         nitrogen += addNitrogen;
         hydrogen += addHydrogen;
-        collecting = true;
-        //gc.simulate = false;
+        
+        gc.simulate = false;
+        gc.nextTurn.interactable = true;
+        gc.ToggleInteractability(true);
     }
 
     // Control the orbit

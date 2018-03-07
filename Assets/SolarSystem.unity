@@ -754,7 +754,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1402850519361566, guid: 4123078c59bdcb24cba2da0a488a4ba0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4123078c59bdcb24cba2da0a488a4ba0, type: 2}
@@ -932,6 +932,10 @@ MonoBehaviour:
   GAME_STATE: 0
   PREVIOUS_GAME_STATE: 0
   nextTurn: {fileID: 0}
+  simulate: 0
+  canBuild: 0
+  planetsParent: {fileID: 1648888993}
+  planets: []
   startLinkButton: {fileID: 0}
   linkButton: {fileID: 0}
   placing: 0
@@ -940,29 +944,24 @@ MonoBehaviour:
   linkedAlready: 0
   planet1: {fileID: 0}
   planet2: {fileID: 0}
+  fail: 0
+  roguePrefab: {fileID: 1302749218511646, guid: 2163a4daf871d214c9c7c4b3b5355776,
+    type: 2}
+  microSkillTreeParent: {fileID: 659653473}
+  microSkillTree: {fileID: 1050443543319092, guid: 09b7382369042e040a0adcd991cdf3bc,
+    type: 2}
+  microSkillTreeNames: []
   linkingText: {fileID: 509125480}
   planetText: {fileID: 182444763}
   carbonText: {fileID: 1194646389}
   nitrogenText: {fileID: 1290045271}
   hydrogenText: {fileID: 738413043}
-  fail: 0
-  roguePrefab: {fileID: 1302749218511646, guid: 2163a4daf871d214c9c7c4b3b5355776,
-    type: 2}
   carbonIncrement: 0
   siliconIncrement: 0
   ammoniaIncrement: 0
   methaneIncrement: 0
   germaniumIncrement: 0
   acetyleneIncrement: 0
-  microSkillTreeParent: {fileID: 659653473}
-  microSkillTree: {fileID: 1050443543319092, guid: 09b7382369042e040a0adcd991cdf3bc,
-    type: 2}
-  nextTurnButton: {fileID: 0}
-  planets: []
-  microSkillTreeNames: []
-  simulate: 0
-  canBuild: 0
-  planetsParent: {fileID: 1648888993}
 --- !u!4 &519037294
 Transform:
   m_ObjectHideFlags: 0
@@ -2093,7 +2092,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1460300435041588, guid: aa68022d17cc95e48ba5ac6dddbdea7c, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa68022d17cc95e48ba5ac6dddbdea7c, type: 2}
