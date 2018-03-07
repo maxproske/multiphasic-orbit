@@ -15,6 +15,10 @@ public class CameraController : MonoBehaviour {
 	public float distanceMin = .5f;
 	public float distanceMax = 15f;
 
+	public float sizeMin = 100f;
+	public float sizeMax = 500f;
+	public float scrollAcceleration = 20f;
+
 	float x = 0.0f;
 	float y = 0.0f;
 
@@ -54,6 +58,19 @@ public class CameraController : MonoBehaviour {
 			transform.rotation = rotation;
 			// Multiply by 100 to prevent orbit path from clipping
 			transform.position = position * 100;
+		}
+		// Scroll in and out with the mouse scroll wheel
+		var scroll = Input.GetAxis ("Mouse ScrollWheel");
+		if (scroll != 0) {
+			// Clamp values if camera is too close or too far away
+
+			// Change the orthographic camera size
+			Camera.main.orthographicSize -= (scroll * scrollAcceleration);
+			if (Camera.main.orthographicSize < sizeMin) {
+				Camera.main.orthographicSize = sizeMin;
+			} else if (Camera.main.orthographicSize > sizeMax) {
+				Camera.main.orthographicSize = sizeMax;
+			}
 		}
 	}
 
