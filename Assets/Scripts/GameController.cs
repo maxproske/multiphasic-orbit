@@ -301,7 +301,7 @@ public class GameController : MonoBehaviour
             }
             else // otherwise chance to fail
             {
-                //CalculateFail();
+                CalculateFail();
             }
 
             if (!linkedAlready)
