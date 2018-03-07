@@ -9,8 +9,14 @@ using UnityEngine.UI;
 public class Planet : MonoBehaviour
 {
 
-    // Will reference the motion of the planet model
-    public Transform orbitingObject;
+    // class fields
+    public int addCarbon;
+    public int addNitrogen;
+    public int addHydrogen;
+    public int turnsToBuild;
+    public int defensePower;
+    public int attackPower;
+    public int turnsToDie;
 
     // Get a reference to the LineRenderer
     LineRenderer lr;
@@ -18,6 +24,10 @@ public class Planet : MonoBehaviour
     // Range attribute between 3 and 36 to determine # of segments in ellipse
     [Range(3, 36)]
     public int segments;
+
+    // orbit
+    // Will reference the motion of the planet model
+    public Transform orbitingObject;
 
     // Serialized ellipse object
     public EllipseTester orbitPath;
@@ -32,63 +42,49 @@ public class Planet : MonoBehaviour
 
     public float orbitSpeedMultiplier = 1f;
 
-    // Allows us to toggle the orbit in-editor
-    public bool orbitActive = false;
-
-    //check if the button pressed
-    public bool ifNext = false;
-
-    //set the float for startTime
-    private float startTime;
-
-    //declare a button for nextturn
-    private Button nextTurn;
-
     // Checks if in Fast or Slow Universe
     bool fastUniverse;
 
     // Was the planet placed?
     public bool planetPlaced;
 
-    public bool coroutineFlag = false;
-
     // Resource Counters
     public int carbon;
     public int nitrogen;
     public int hydrogen;
-    // Add how many resources per turn
-    public int addCarbon;
-    public int addNitrogen;
-    public int addHydrogen;
-    public int turnsToBuild;
-    public int defensePower;
-    public int attackPower;
-    public int turnsToDie;
+
+    // scripts 
     private GameController gc; // Access Game Controller script
+
     public Coroutine placing;
+
     //add a collider for the object
     public SphereCollider sc;
+
+    // GUI
     private float rectx, recty;
+    public Vector3 pos;
+
+    // collecting
     private bool collecting = false;
     private int count = 0;
-	private bool ifHover=false;
-	public int maxResourceType = 0;
-	public int maxResource = 0;
 
-	private string planetname=" ";
-	public int tier=0;
+    private bool ifHover = false;
+
+    // trading
+    public int maxResourceType = 0;
+    public int maxResource = 0;
+    private int tradecarbon = 0;
+    private int tradenitrogen = 0;
+    private int tradehydrogen = 0;
+
+    private string planetname = " ";
+    public int tier = 0;
 
     // linking
-	public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
-	public LineRenderer[] links ;
-	public GameObject[] lines;
-
-	public Vector3 pos;
-	private bool ifdraw=true;
-
-	private int tradecarbon = 0;
-	private int tradenitrogen = 0;
-	private int tradehydrogen = 0;
+    public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
+    public LineRenderer[] links;
+    public GameObject[] lines;
 
     public Planet()
     {
@@ -100,7 +96,7 @@ public class Planet : MonoBehaviour
         attackPower = 0;
         turnsToDie = 0;
     }
- 
+
     public void Awake()
     {
         // Get reference when we start the game
@@ -115,42 +111,37 @@ public class Planet : MonoBehaviour
 
     // Use this for initialization
     public virtual void Start()
-    { 
-		lines = new GameObject[10];
-		links = new LineRenderer[10];
-		for (int i = 0; i < 10; i++) {
-			lines [i] = new GameObject ();
-			links [i] = lines [i].AddComponent<LineRenderer> ();
-			links [i].SetWidth (0.1f, 0.1f);
-		}
-	
-		if (addCarbon == 4 && addHydrogen == 1&& addNitrogen == 1) {
-			planetname = "Carbon";
-			tier = 1;
-		}
-		if (addCarbon == 6 && addHydrogen == 2&& addNitrogen == 2) {
-			planetname = "Silicon";
-			tier = 2;
-		}
-		if (addCarbon == 2 && addHydrogen == 6&& addNitrogen == 2) {
-			planetname = "Hydrogen";
-			tier = 2;
-		}
-		if (addCarbon == 2 && addHydrogen == 2&& addNitrogen == 6) {
-			planetname = "Nitrogen";
-			tier = 2;
-		}
-        // Check there are no objects to move around
-        if (orbitingObject == null)
+    {
+        lines = new GameObject[10];
+        links = new LineRenderer[10];
+        for (int i = 0; i < 10; i++)
         {
-            orbitActive = false;
-            // Return early
-            return;
+            lines[i] = new GameObject();
+            links[i] = lines[i].AddComponent<LineRenderer>();
+            links[i].SetWidth(0.1f, 0.1f);
         }
 
+        if (addCarbon == 4 && addHydrogen == 1 && addNitrogen == 1)
+        {
+            planetname = "Carbon";
+            tier = 1;
+        }
+        if (addCarbon == 6 && addHydrogen == 2 && addNitrogen == 2)
+        {
+            planetname = "Silicon";
+            tier = 2;
+        }
+        if (addCarbon == 2 && addHydrogen == 6 && addNitrogen == 2)
+        {
+            planetname = "Hydrogen";
+            tier = 2;
+        }
+        if (addCarbon == 2 && addHydrogen == 2 && addNitrogen == 6)
+        {
+            planetname = "Nitrogen";
+            tier = 2;
+        }
 
-        
-	
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
 
         //nextTurn = GameObject.Find("End Turn Button").GetComponent<Button>();
@@ -167,13 +158,12 @@ public class Planet : MonoBehaviour
             placing = StartCoroutine(AnimateOrbit(1));
         }
 
-
         //add a collider for this planet
         sc = gameObject.AddComponent<SphereCollider>();
-//		linkline = gameObject.AddComponent<LineRenderer> ();
+        //		linkline = gameObject.AddComponent<LineRenderer> ();
         sc.radius = 0.5f;
         sc.center = new Vector3(0, 0, 0);
-			
+
 
     }
 
@@ -182,61 +172,19 @@ public class Planet : MonoBehaviour
     public void FixedUpdate()
     {
 
-		if (linkedWith.Count > 0) {
-			for (int i = 0; i < linkedWith.Count; i++) {
-				links [i].SetPosition (0, transform.position);
-				links [i].SetPosition (1, linkedWith [i].transform.position);
-			}
-		}
+        if (linkedWith.Count > 0)
+        {
+            for (int i = 0; i < linkedWith.Count; i++)
+            {
+                links[i].SetPosition(0, transform.position);
+                links[i].SetPosition(1, linkedWith[i].transform.position);
+            }
+        }
         if (Application.isPlaying && lr != null)
         {
             CalculateEllipse();
             //Debug.Log(fastUniverse);
         }
-
-        float cTime = Time.time;
-
-
-        //Debug.Log ("planetPlaced: " + planetPlaced + ", orbitActive: " + orbitActive);
-
-        //   // Planet must be placed before pausing its orbit
-        //   if (planetPlaced)
-        //   {
-        //       // if simuate boolean is true in GameController
-        //       if (gc.simulate)
-        //       {
-        //           // same code as GoNext()
-        //           // Don't stack button presses
-        //           if (!orbitActive)
-        //           {
-        //               //we can add resouces here
-        //               startTime = Time.time;
-        //               ifNext = true;
-        //           }
-        //           if (cTime - startTime < 3)
-        //           {
-        //               if (ifNext == true)
-        //               {
-        //                   orbitActive = true;
-
-        //                   // Start coroutine ONCE
-        //                   ifNext = false;
-        //                   //gc.simulate = false;
-        //                   StartCoroutine(AnimateOrbit());
-        //                   CollectResources();
-        //               }
-        //           }
-        //           else
-        //           {
-        //               orbitActive = false;
-        //               ifNext = false;
-        //               gc.simulate = false;
-
-
-        //collecting = true;
-        //           }
-        //       }
-        //   }
 
         // pop up of resources collected after simulation
         if (collecting)
@@ -244,7 +192,7 @@ public class Planet : MonoBehaviour
             count++;
             if (count == 30)
             {
-				pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+                pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
                 rectx = pos.x;
                 recty = pos.y;
                 //Debug.Log(rectx);
@@ -264,171 +212,170 @@ public class Planet : MonoBehaviour
                 //gc.simulate = false;
 
                 // Update Game State
-                if (gc.GAME_STATE == Constants.TURN_1_WATCH_SIMULATION) {
-					// Go to next step if the skill tree isn't open
-					if (GameObject.Find ("Macro Skill Tree") == null) {
-						gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
-					} else {
-						// Otherwide, skip ahead
-						gc.GAME_STATE = Constants.TURN_2_PLANET_SLOT;
-					}
-				}
-				else if (gc.GAME_STATE == Constants.TURN_2_WATCH_SIMULATION) {
-					// Make button interactable
-					//var button = GameObject.Find("Micro Skill Tree Button").GetComponent<Button>();
-					//button.interactable = true;
+                if (gc.GAME_STATE == Constants.TURN_1_WATCH_SIMULATION)
+                {
+                    // Go to next step if the skill tree isn't open
+                    if (GameObject.Find("Macro Skill Tree") == null)
+                    {
+                        gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
+                    }
+                    else
+                    {
+                        // Otherwide, skip ahead
+                        gc.GAME_STATE = Constants.TURN_2_PLANET_SLOT;
+                    }
+                }
+                else if (gc.GAME_STATE == Constants.TURN_2_WATCH_SIMULATION)
+                {
+                    // Make button interactable
+                    //var button = GameObject.Find("Micro Skill Tree Button").GetComponent<Button>();
+                    //button.interactable = true;
 
-					// Go to next step if the skill tree isn't open
-					gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
-				}
+                    // Go to next step if the skill tree isn't open
+                    gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
+                }
             }
         }
     }
 
-	//function that trade 
-	void trade(Planet temp){
-		getMaxResource ();
-		temp.getMaxResource ();
+    //function that trade 
+    void trade(Planet temp)
+    {
+        getMaxResource();
+        temp.getMaxResource();
 
-		if (maxResourceType == 1) {
-			carbon -= 1;
-			tradecarbon -= 1;
-			temp.carbon += 1;
-			temp.tradecarbon += 1;
-		}
-		if (maxResourceType == 2) {
-			nitrogen -= 1;
-			tradenitrogen -= 1;
-			temp.nitrogen += 1;
-			temp.tradenitrogen += 1;
+        if (maxResourceType == 1)
+        {
+            carbon -= 1;
+            tradecarbon -= 1;
+            temp.carbon += 1;
+            temp.tradecarbon += 1;
+        }
+        if (maxResourceType == 2)
+        {
+            nitrogen -= 1;
+            tradenitrogen -= 1;
+            temp.nitrogen += 1;
+            temp.tradenitrogen += 1;
 
-		}
-		if (maxResourceType == 3) {
-			hydrogen -= 1;
-			tradehydrogen -= 1;
-			temp.hydrogen += 1;
-			temp.tradehydrogen += 1;
-		}
-		if (temp.maxResourceType == 1) {
-			temp.carbon -= 1;
-			temp.tradecarbon -= 1;
-			carbon += 1;
-			tradecarbon += 1;
-		}
-		if (temp.maxResourceType == 2) {
-			temp.nitrogen -= 1;
-			temp.tradenitrogen -= 1;
-			nitrogen += 1;
-			tradenitrogen += 1;
-		}
-		if (temp.maxResourceType == 3) {
-			temp.hydrogen -= 1;
-			temp.tradehydrogen -= 1;
-			hydrogen += 1;
-			tradehydrogen += 1;
-		}	
+        }
+        if (maxResourceType == 3)
+        {
+            hydrogen -= 1;
+            tradehydrogen -= 1;
+            temp.hydrogen += 1;
+            temp.tradehydrogen += 1;
+        }
+        if (temp.maxResourceType == 1)
+        {
+            temp.carbon -= 1;
+            temp.tradecarbon -= 1;
+            carbon += 1;
+            tradecarbon += 1;
+        }
+        if (temp.maxResourceType == 2)
+        {
+            temp.nitrogen -= 1;
+            temp.tradenitrogen -= 1;
+            nitrogen += 1;
+            tradenitrogen += 1;
+        }
+        if (temp.maxResourceType == 3)
+        {
+            temp.hydrogen -= 1;
+            temp.tradehydrogen -= 1;
+            hydrogen += 1;
+            tradehydrogen += 1;
+        }
 
-	}
+    }
 
-	void getMaxResource(){
-		maxResource = Mathf.Max (carbon, nitrogen, hydrogen);
-		if (maxResource == carbon) {
-			maxResourceType = 1;
-		}
-		if (maxResource == nitrogen) {
-			maxResourceType = 2;
-		}
-		if (maxResource == hydrogen) {
-			maxResourceType = 3;
-		}
-	}
+    void getMaxResource()
+    {
+        maxResource = Mathf.Max(carbon, nitrogen, hydrogen);
+        if (maxResource == carbon)
+        {
+            maxResourceType = 1;
+        }
+        if (maxResource == nitrogen)
+        {
+            maxResourceType = 2;
+        }
+        if (maxResource == hydrogen)
+        {
+            maxResourceType = 3;
+        }
+    }
 
-    //Function that check if the mouse click this object
+    void OnMouseOver()
+    {
+        ifHover = true;
+    }
+    void OnMouseExit()
+    {
 
-    //void OnMouseDown(){
+        ifHover = false;
 
-    //	Debug.Log ("123");
-    //	if (showInformation == false) {
-    //		showInformation = true;
-    //	} else {
-    //		showInformation = false;
-    //	}
-    //}
 
-	void OnMouseOver(){
-		ifHover = true;
-	}
-	void OnMouseExit(){
+    }
 
-				ifHover = false;
-
-		
-	}
     //Function that can show the resource of this object
-
     void OnGUI()
     {
-        //if (showInformation == true&&!orbitActive) {
 
 
-        //GUI.Label (new Rect (Screen.width - Screen.width / 5, 50, 100, 50), "Carbon: " + carbon);
-        //GUI.Label (new Rect (Screen.width - Screen.width / 5, 70, 100, 50), "Nitrogen: " + nitrogen);
-        //GUI.Label (new Rect (Screen.width - Screen.width / 5, 90, 100, 50), "Hydrogen: " + hydrogen);
+        if (ifHover == true)
+        {
+            GUI.Box(new Rect(rectx + 20, Screen.height - recty, 300, 50), planetname + ": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen + "\n This is a Tier " + tier + " Planet.");
 
-		if (ifHover == true) {
-			GUI.Box (new Rect (rectx+20, Screen.height - recty, 300, 50), planetname+": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen+"\n This is a Tier "+tier+" Planet.");
-
-		}
+        }
         //}
         // pop up of resources collected after simulation
         if (collecting == true && count > 30)
         {
-			int totalcarbon = addCarbon + tradecarbon;
-			int totalnit = addNitrogen + tradenitrogen;
-			int totalhyd = addHydrogen + tradehydrogen;
-			int preCar = carbon - totalcarbon;
-			int preNit = nitrogen - totalnit;
-			int preHyd = hydrogen - totalhyd;
+            int totalcarbon = addCarbon + tradecarbon;
+            int totalnit = addNitrogen + tradenitrogen;
+            int totalhyd = addHydrogen + tradehydrogen;
+            int preCar = carbon - totalcarbon;
+            int preNit = nitrogen - totalnit;
+            int preHyd = hydrogen - totalhyd;
 
-			GUI.Label(new Rect(rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCar + " + " + totalcarbon);
-			GUI.Label(new Rect(rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNit + " + " + totalnit);
-			GUI.Label(new Rect(rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHyd + " + " + totalhyd);
-        }
-    }
-    // Function that can start the Next turn
-    public void GoNext()
-    {
-        // Don't stack button presses
-        if (!orbitActive)
-        {
-            //we can add resouces here
-            startTime = Time.time;
-            ifNext = true;
+            GUI.Label(new Rect(rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCar + " + " + totalcarbon);
+            GUI.Label(new Rect(rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNit + " + " + totalnit);
+            GUI.Label(new Rect(rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHyd + " + " + totalhyd);
         }
     }
 
     public void CollectResources()
     {
-        collecting = true;
-        tradecarbon = 0;
-		tradenitrogen = 0;
-		tradehydrogen = 0;
+        if (turnsToBuild < 1)
+        {
+            collecting = true;
+            tradecarbon = 0;
+            tradenitrogen = 0;
+            tradehydrogen = 0;
 
-		//trade
-		for (int i = 0; i < linkedWith.Count; i++) {
-			int j = 0;
-			if (j == 0) {
-				trade (linkedWith [i]);
-				j = 1;
-			}
-		}
-        carbon += addCarbon;
-        nitrogen += addNitrogen;
-        hydrogen += addHydrogen;
-        
-        gc.simulate = false;
-        gc.nextTurn.interactable = true;
-        gc.ToggleInteractability(true);
+
+
+            //trade
+            for (int i = 0; i < linkedWith.Count; i++)
+            {
+                int j = 0;
+                if (j == 0)
+                {
+                    trade(linkedWith[i]);
+                    j = 1;
+                }
+            }
+
+            carbon += addCarbon;
+            nitrogen += addNitrogen;
+            hydrogen += addHydrogen;
+
+            gc.simulate = false;
+            gc.nextTurn.interactable = true;
+            gc.ToggleInteractability(true);
+        }
     }
 
     // Control the orbit
@@ -443,26 +390,12 @@ public class Planet : MonoBehaviour
             orbitPeriod = 0.1f;
         }
 
-        //if (turnsToBuild > 0)
-        //{
-        //    gc.canBuild = false;
-        //    //renderer.material = Resources.Load("Carbon") as Material;
-        //} else
-        //{
-        //    gc.canBuild = true;
-        //}
-
-        // If orbit is active, start orbit animation
-        //while (orbitActive)
-
-
         while (starting < length) // https://answers.unity.com/questions/504843/c-make-something-happen-for-x-amount-of-seconds.html
         {
             if (gc.simulate) // only during simulation will orbit for specific duration, else constantly orbits
             {
                 starting += Time.deltaTime;
             }
-            
 
             // Make orbit speed be affected by universe (disabled)
             Vector2 orbitPos = orbitPath.Evaluate(orbitProgress);
@@ -491,14 +424,10 @@ public class Planet : MonoBehaviour
             // Set planet position based on orbit position
             SetOrbitingObjectPosition();
 
-            // Repeat until orbitActive is false
             yield return null;
         }
 
-        if (gc.simulate && turnsToBuild < 1) // after orbiting and during simulation will collect resources
-        {
-            CollectResources();
-        }
+        CollectResources();
     }
 
     // Calculate the ellipse
