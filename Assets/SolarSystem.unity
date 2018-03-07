@@ -2340,9 +2340,9 @@ MonoBehaviour:
   yMaxLimit: 80
   distanceMin: 0.5
   distanceMax: 15
-  sizeMin: 10
-  sizeMax: 400
-  scrollAcceleration: 1000
+  sizeMin: 100
+  sizeMax: 500
+  scrollAcceleration: 20
 --- !u!224 &1287655541 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224697232185376722, guid: e536f9ae9108e7a49984a6e382c7d649,
@@ -2472,22 +2472,22 @@ Prefab:
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 175
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -122
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
@@ -2497,7 +2497,7 @@ Prefab:
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
@@ -2507,7 +2507,7 @@ Prefab:
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224412221956097356, guid: 08c2b5c1196a52e4e91e50975468f572,
         type: 2}
