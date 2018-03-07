@@ -37,14 +37,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4339871127361048}
+  - component: {fileID: 114108600533220330}
   - component: {fileID: 120631809419256310}
   - component: {fileID: 96845862121695660}
   - component: {fileID: 108799601468792308}
   - component: {fileID: 114906765157303248}
-  - component: {fileID: 114108600533220330}
   m_Layer: 0
   m_Name: Rogue
-  m_TagString: Silicon
+  m_TagString: Rogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,21 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5201c13c38ec2e045a859b30ea7089f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbitingObject: {fileID: 4339871127361048}
-  segments: 0
-  orbitPath:
-    xAxis: 0
-    yAxis: 0
-  orbitProgress: 0
-  orbitPeriod: 3
-  orbitSpeedMultiplier: 1
-  orbitActive: 0
-  ifNext: 0
-  planetPlaced: 0
-  coroutineFlag: 0
-  carbon: 0
-  nitrogen: 0
-  hydrogen: 0
+  tier: 0
   addCarbon: 0
   addNitrogen: 0
   addHydrogen: 0
@@ -279,15 +265,27 @@ MonoBehaviour:
   defensePower: 0
   attackPower: 0
   turnsToDie: 0
+  segments: 0
+  orbitingObject: {fileID: 4339871127361048}
+  orbitPath:
+    xAxis: 0
+    yAxis: 0
+  orbitProgress: 0
+  orbitPeriod: 3
+  orbitSpeedMultiplier: 1
+  planetPlaced: 0
+  carbon: 0
+  nitrogen: 0
+  hydrogen: 0
+  placingCoroutineRunning: 0
   sc: {fileID: 0}
+  pos: {x: 0, y: 0, z: 0}
   maxResourceType: 0
   maxResource: 0
   linkedWith: []
   links: []
   lines: []
-  pos: {x: 0, y: 0, z: 0}
   dominatedPlanets: []
-  dominatedPlanet: {fileID: 0}
 --- !u!114 &114906765157303248
 MonoBehaviour:
   m_ObjectHideFlags: 1

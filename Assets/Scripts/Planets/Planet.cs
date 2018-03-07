@@ -348,17 +348,26 @@ public class Planet : MonoBehaviour
             tradenitrogen = 0;
             tradehydrogen = 0;
 
+            // old trade code
+            //for (int i = 0; i < linkedWith.Count; i++)
+            //{
+            //    int j = 0;
+            //    if (j == 0)
+            //    {
+            //        trade(linkedWith[i]);
+            //        j = 1;
+            //    }
+            //}
 
-
-            //trade
-            for (int i = 0; i < linkedWith.Count; i++)
+            // updated trade code to only trade with non-rogue planets
+            foreach (var planet in linkedWith)
             {
-                int j = 0;
-                if (j == 0)
+                if (!planet.CompareTag("Rogue") && !this.CompareTag("Rogue"))
                 {
-                    trade(linkedWith[i]);
-                    j = 1;
+                    Debug.Log(this.name + " traded with: " + planet.name);
+                    trade(planet);
                 }
+                
             }
 
             carbon += addCarbon;

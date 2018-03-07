@@ -23,6 +23,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public GameObject go; // New planet game object
     private Planet p; // Access new planet script
     public bool planetPlaced = false; // Flag for drawing planet orbit in realtime
+    private Button clickedSlot;
 
     private GameController gc; // Access Game Controller script
 
@@ -46,14 +47,15 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // When player clicks an active planet slot
         if (go == null && Input.GetMouseButtonUp(0) && this.GetComponent<Button>().interactable && mouseHover)
         {
+            clickedSlot = this.GetComponent<Button>();
             // Update the game state
-            if (gc.GAME_STATE == Constants.TURN_2_PLANET_SLOT && (this.name == "Silicon" || this.name == "Ammonia" || this.name == "Methane"))
+            if (gc.GAME_STATE == Constants.TURN_2_PLANET_SLOT && (clickedSlot.name == "Silicon" || clickedSlot.name == "Ammonia" || clickedSlot.name == "Methane"))
             {
                 gc.GAME_STATE = Constants.TURN_2_PLACE_PLANET;
             }
 
             // if button's name is Carbon
-            if (this.name == "Carbon")
+            if (clickedSlot.name == "Carbon")
             {
                 // Create a new planet
                 go = Instantiate(carbon) as GameObject;
@@ -69,7 +71,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
 
             // if button's name is Silicon
-            if (this.name == "Silicon")
+            if (clickedSlot.name == "Silicon")
             {
                 // Create a new planet
                 go = Instantiate(silicon) as GameObject;
@@ -85,7 +87,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
 
             // if button's name is Ammonia
-            if (this.name == "Ammonia")
+            if (clickedSlot.name == "Ammonia")
             {
                 // Create a new planet
                 go = Instantiate(ammonia) as GameObject;
@@ -101,7 +103,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
 
             // if button's name is Methane
-            if (this.name == "Methane")
+            if (clickedSlot.name == "Methane")
             {
                 // Create a new planet
                 go = Instantiate(methane) as GameObject;
@@ -117,7 +119,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
 
             // if button's name is Germanium
-            if (this.name == "Germanium")
+            if (clickedSlot.name == "Germanium")
             {
                 // Create a new planet
                 go = Instantiate(germaninum) as GameObject;
@@ -133,7 +135,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
 
             // if button's name is Acetylene
-            if (this.name == "Acetylene")
+            if (clickedSlot.name == "Acetylene")
             {
                 // Create a new planet
                 go = Instantiate(acetylene) as GameObject;
@@ -181,6 +183,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             // Update the global placing variable
             gc.placing = true;
+            gc.nextTurn.interactable = false;
 
             // Update the game state
             if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT)
@@ -191,6 +194,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             // Calculate 3D mouse coordinates
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+            // if over UI element, cannot place planet
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 // Set final orbit position on mouse up
@@ -223,9 +227,11 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                                 p.StopCoroutine(p.placing);
                             }
 
+                            gc.nextTurn.interactable = true;
                             planetPlaced = true;
                             gc.canBuild = false;
                             gc.ToggleInteractability(false);
+                            clickedSlot = null;
 
                             // Update the global placing variable
                             gc.placing = false; // Must be false to let skill tree open
@@ -267,5 +273,132 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 }
             }
         }
+
+        // if placing, press esc to reset everything
+        if (gc.placing && Input.GetKeyDown(KeyCode.Escape))
+        {
+            
+            if (clickedSlot != null)
+            {
+                // if button's name is Carbon
+                if (clickedSlot.name == "Carbon")
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    gc.carbonIncrement--;
+                    Debug.Log("2");
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    gc.planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+
+                // if button's name is Silicon
+                if (clickedSlot.name == "Silicon")
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    gc.siliconIncrement--;
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    gc.planets.Remove(go);
+                    Destroy(go);
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+
+                // if button's name is Ammonia
+                if (clickedSlot.name == "Ammonia")
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    gc.ammoniaIncrement--;
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    gc.planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+
+                // if button's name is Methane
+                if (clickedSlot.name == "Methane")
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    gc.methaneIncrement--;
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    gc.planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+
+                // if button's name is Germanium
+                if (clickedSlot.name == "Germanium")
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    gc.germaniumIncrement--;
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    gc.planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+
+                // if button's name is Acetylene
+                if (clickedSlot.name == "Acetylene")
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    gc.acetyleneIncrement--;
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    gc.planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+            }
+            
+        }
+    }
+
+    void ResetPlacing()
+    {
+        gc.placing = false;
+        //go = null;
+        planetPlaced = false;
+        Debug.Log("1");
+        gc.ToggleInteractability(true);
+        //clickedSlot = null;
     }
 }

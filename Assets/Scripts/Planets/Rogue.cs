@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rogue : Planet {
+public class Rogue : Planet
+{
 
     private Planet dominatedPlanetScript;
 
-    public List<GameObject> dominatedPlanets;
-
-    public Rogue() {
+    public Rogue()
+    {
         addCarbon = 0;
         addNitrogen = 0;
         addHydrogen = 0;
@@ -21,21 +21,33 @@ public class Rogue : Planet {
     public override void Start()
     {
         base.Start();
-        dominatedPlanets = new List<GameObject>();
+        //dominatedPlanets = new List<Planet>();
     }
-
-    // stores the planet that attempted to link with rogue planet
-    public GameObject dominatedPlanet;
 
     // function used to steal a fraction of dominatedPlanet's resources
     // parameters are how many resources stolen per turn
-    public void Steal(int carbon, int nitrogen, int hydrogen)
+    public void Steal(int sCarbon, int sNitrogen, int sHydrogen)
     {
-        dominatedPlanetScript = dominatedPlanet.GetComponent<Planet>();
-        dominatedPlanetScript.carbon -= carbon;
-        dominatedPlanetScript.nitrogen -= nitrogen;
-        dominatedPlanetScript.hydrogen -= hydrogen;
-
+        foreach (var dominatedPlanet in linkedWith)
+        {
+            dominatedPlanetScript = dominatedPlanet.GetComponent<Planet>();
+            // take away and add to this rogue planet's resources only if dominatedPlanet has more than 0 of that resource
+            if (dominatedPlanetScript.carbon > 0)
+            {
+                dominatedPlanetScript.carbon -= sCarbon;
+                carbon += sCarbon;
+            }
+            if (dominatedPlanetScript.nitrogen > 0)
+            {
+                dominatedPlanetScript.nitrogen -= sNitrogen;
+                nitrogen += sNitrogen;
+            }
+            if (dominatedPlanetScript.hydrogen > 0)
+            {
+                dominatedPlanetScript.hydrogen -= sHydrogen;
+                hydrogen += sHydrogen;
+            }
+        }
     }
 
     // function used to attack another planet anywhere that has been built
