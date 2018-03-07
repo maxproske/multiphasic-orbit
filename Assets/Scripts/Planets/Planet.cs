@@ -8,8 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(LineRenderer))]
 public class Planet : MonoBehaviour
 {
-
     // class fields
+    public int tier;
     public int addCarbon;
     public int addNitrogen;
     public int addHydrogen;
@@ -56,7 +56,9 @@ public class Planet : MonoBehaviour
     // scripts 
     private GameController gc; // Access Game Controller script
 
+    // store coroutine when placing so we can stop once planet is placed
     public Coroutine placing;
+    public bool placingCoroutineRunning;
 
     //add a collider for the object
     public SphereCollider sc;
@@ -79,7 +81,6 @@ public class Planet : MonoBehaviour
     private int tradehydrogen = 0;
 
     private string planetname = " ";
-    public int tier = 0;
 
     // linking
     public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
@@ -88,6 +89,7 @@ public class Planet : MonoBehaviour
 
     public Planet()
     {
+        tier = 0;
         addCarbon = 0;
         addNitrogen = 0;
         addHydrogen = 0;
@@ -121,53 +123,22 @@ public class Planet : MonoBehaviour
             links[i].SetWidth(0.1f, 0.1f);
         }
 
-        if (addCarbon == 4 && addHydrogen == 1 && addNitrogen == 1)
-        {
-            planetname = "Carbon";
-            tier = 1;
-        }
-        if (addCarbon == 6 && addHydrogen == 2 && addNitrogen == 2)
-        {
-            planetname = "Silicon";
-            tier = 2;
-        }
-        if (addCarbon == 2 && addHydrogen == 6 && addNitrogen == 2)
-        {
-            planetname = "Hydrogen";
-            tier = 2;
-        }
-        if (addCarbon == 2 && addHydrogen == 2 && addNitrogen == 6)
-        {
-            planetname = "Nitrogen";
-            tier = 2;
-        }
-
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
-
-        //nextTurn = GameObject.Find("End Turn Button").GetComponent<Button>();
-        //nextTurn.onClick.AddListener(GoNext);
 
         // Set orbiting object position
         SetOrbitingObjectPosition();
 
-        // If orbit is active, start orbit animation
-
         if (!planetPlaced)
         {
-            // If orbit is active, start orbit animation
             placing = StartCoroutine(AnimateOrbit(1));
         }
 
         //add a collider for this planet
         sc = gameObject.AddComponent<SphereCollider>();
-        //		linkline = gameObject.AddComponent<LineRenderer> ();
+        //	linkline = gameObject.AddComponent<LineRenderer> ();
         sc.radius = 0.5f;
         sc.center = new Vector3(0, 0, 0);
-
-
     }
-
-
 
     public void FixedUpdate()
     {
@@ -382,6 +353,7 @@ public class Planet : MonoBehaviour
     // Length determines how long will orbit in seconds
     public IEnumerator AnimateOrbit(float length)
     {
+        placingCoroutineRunning = true;
         float starting = 0f;
         // Is the orbit really close to 0? We don't want it to move too fast.
         // Set it to a more reasonable minimum (every 1/10 of a second) so it won't divide by 0
@@ -428,6 +400,7 @@ public class Planet : MonoBehaviour
         }
 
         CollectResources();
+        placingCoroutineRunning = false;
     }
 
     // Calculate the ellipse

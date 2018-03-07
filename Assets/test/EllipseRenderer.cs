@@ -24,7 +24,7 @@ public class EllipseRenderer : MonoBehaviour {
 	void CalculateEllipse(){
 		Vector3[] points = new Vector3[segments + 1];
 		for (int i = 0; i < segments; i++) {
-			float angle = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
+			//float angle = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
 
 			Vector2 postion2D = ellipse.Evaluate((float)i / (float)segments);
 			points [i] = new Vector3 (postion2D.x, postion2D.y, 0f);

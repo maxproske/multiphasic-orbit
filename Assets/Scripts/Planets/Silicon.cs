@@ -5,6 +5,7 @@ using UnityEngine;
 public class Silicon : Planet {
 
     public Silicon() {
+        tier = 2;
         addCarbon = 6;
         addNitrogen = 2;
         addHydrogen = 2;

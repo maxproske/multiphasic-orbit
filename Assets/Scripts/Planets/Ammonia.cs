@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ammonia : Planet {
 
     public Ammonia() {
+        tier = 2;
         addCarbon = 2;
         addNitrogen = 6;
         addHydrogen = 2;

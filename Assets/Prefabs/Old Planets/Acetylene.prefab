@@ -257,21 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec9a542a5d5f3043bc5cad18fe76ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbitingObject: {fileID: 4339871127361048}
-  segments: 36
-  orbitPath:
-    xAxis: 2
-    yAxis: 7
-  orbitProgress: 0
-  orbitPeriod: 3
-  orbitSpeedMultiplier: 1
-  orbitActive: 1
-  ifNext: 0
-  planetPlaced: 0
-  coroutineFlag: 0
-  carbon: 0
-  nitrogen: 0
-  hydrogen: 0
+  tier: 3
   addCarbon: 6
   addNitrogen: 6
   addHydrogen: 6
@@ -279,13 +265,25 @@ MonoBehaviour:
   defensePower: 10
   attackPower: 10
   turnsToDie: 4
+  segments: 36
+  orbitingObject: {fileID: 4339871127361048}
+  orbitPath:
+    xAxis: 2
+    yAxis: 7
+  orbitProgress: 0
+  orbitPeriod: 3
+  orbitSpeedMultiplier: 1
+  planetPlaced: 0
+  carbon: 0
+  nitrogen: 0
+  hydrogen: 0
   sc: {fileID: 0}
+  pos: {x: 0, y: 0, z: 0}
   maxResourceType: 0
   maxResource: 0
   linkedWith: []
   links: []
   lines: []
-  pos: {x: 0, y: 0, z: 0}
 --- !u!114 &114434164345388212
 MonoBehaviour:
   m_ObjectHideFlags: 1

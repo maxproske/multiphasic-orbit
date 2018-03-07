@@ -5,6 +5,7 @@ using UnityEngine;
 public class Germanium : Planet {
 
     public Germanium() {
+        tier = 3;
         addCarbon = 0;
         addNitrogen = 15;
         addHydrogen = 0;
