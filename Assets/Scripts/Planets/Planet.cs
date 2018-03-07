@@ -17,7 +17,12 @@ public class Planet : MonoBehaviour
     public int defensePower;
     public int attackPower;
     public int turnsToDie;
-
+	public int OriginaddCarbon;
+	public int OriginaddNitrogen;
+	public int OriginaddHydrogen;
+	public int halfaddCarbon;
+	public int halfaddNitrogen;
+	public int halfaddHydrogen;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
@@ -138,6 +143,23 @@ public class Planet : MonoBehaviour
         //	linkline = gameObject.AddComponent<LineRenderer> ();
         sc.radius = 0.5f;
         sc.center = new Vector3(0, 0, 0);
+
+		if (addCarbon == 4) {
+			planetname = "Carbon";
+
+		} else if (addCarbon == 6) {
+			planetname = "Silicon";
+		} else if (addNitrogen == 6) {
+			planetname = "Nitrogen";
+		} else if(addHydrogen==6){
+			planetname = "Hydrogen";
+		}
+		OriginaddCarbon = addCarbon;
+		OriginaddHydrogen = addHydrogen;
+		OriginaddNitrogen = addNitrogen;
+		halfaddCarbon = addCarbon / 2;
+		halfaddNitrogen = addNitrogen / 2;
+		halfaddHydrogen = addHydrogen / 2;
     }
 
     public void FixedUpdate()
