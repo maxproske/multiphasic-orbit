@@ -43,7 +43,7 @@ public class Planet : MonoBehaviour
     public float orbitProgress = 0f;
 
     // How long it will take in seconds to complete one orbit
-    public float orbitPeriod = 3f;
+    public float orbitPeriod;
 
     public float orbitSpeedMultiplier = 1f;
 
@@ -130,6 +130,8 @@ public class Planet : MonoBehaviour
 
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
 
+        orbitPeriod = 0.01f;
+
         // Set orbiting object position
         SetOrbitingObjectPosition();
 
@@ -139,10 +141,10 @@ public class Planet : MonoBehaviour
         }
 
         //add a collider for this planet
-        sc = gameObject.AddComponent<SphereCollider>();
+        sc = gameObject.GetComponent<SphereCollider>();
         //	linkline = gameObject.AddComponent<LineRenderer> ();
-        sc.radius = 0.5f;
-        sc.center = new Vector3(0, 0, 0);
+        //sc.radius = 0.5f;
+        //sc.center = new Vector3(0, 0, 0);
 
 		if (addCarbon == 4) {
 			planetname = "Carbon";
@@ -388,10 +390,10 @@ public class Planet : MonoBehaviour
         float starting = 0f;
         // Is the orbit really close to 0? We don't want it to move too fast.
         // Set it to a more reasonable minimum (every 1/10 of a second) so it won't divide by 0
-        if (orbitPeriod < 0.1f)
-        {
-            orbitPeriod = 0.1f;
-        }
+        //if (orbitPeriod < 0.1f)
+        //{
+        //    orbitPeriod = 0.1f;
+        //}
 
         while (starting < length) // https://answers.unity.com/questions/504843/c-make-something-happen-for-x-amount-of-seconds.html
         {

@@ -59,12 +59,12 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 				foreach (Transform target in prereqs) {
 					if (target != null) {
 
-						// M->ASD
-						//AddNewPoint (115f+10f, 115f-75f);
-						//AddNewPoint (45f+10f, 45f-75f);
+                        // M->ASD
+                        //AddNewPoint(115f + 10f, 115f - 75f);
+                        //AddNewPoint(45f + 10f, 45f - 75f);
 
 
-						num++;
+                        num++;
 					}
 				}
 			}

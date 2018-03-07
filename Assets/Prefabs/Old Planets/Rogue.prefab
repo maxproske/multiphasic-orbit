@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 96845862121695660}
   - component: {fileID: 108799601468792308}
   - component: {fileID: 114906765157303248}
+  - component: {fileID: 135480004993462062}
   m_Layer: 0
   m_Name: Rogue
   m_TagString: Rogue
@@ -265,6 +266,12 @@ MonoBehaviour:
   defensePower: 0
   attackPower: 0
   turnsToDie: 0
+  OriginaddCarbon: 0
+  OriginaddNitrogen: 0
+  OriginaddHydrogen: 0
+  halfaddCarbon: 0
+  halfaddNitrogen: 0
+  halfaddHydrogen: 0
   segments: 0
   orbitingObject: {fileID: 4339871127361048}
   orbitPath:
@@ -285,7 +292,6 @@ MonoBehaviour:
   linkedWith: []
   links: []
   lines: []
-  dominatedPlanets: []
 --- !u!114 &114906765157303248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -386,6 +392,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!135 &135480004993462062
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1302749218511646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.003125
+  m_Center: {x: 0, y: 0, z: -0.35625}
 --- !u!135 &135964164605889554
 SphereCollider:
   m_ObjectHideFlags: 1
