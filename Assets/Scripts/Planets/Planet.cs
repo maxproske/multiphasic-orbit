@@ -17,12 +17,12 @@ public class Planet : MonoBehaviour
     public int defensePower;
     public int attackPower;
     public int turnsToDie;
-	public int OriginaddCarbon;
-	public int OriginaddNitrogen;
-	public int OriginaddHydrogen;
-	public int halfaddCarbon;
-	public int halfaddNitrogen;
-	public int halfaddHydrogen;
+    public int OriginaddCarbon;
+    public int OriginaddNitrogen;
+    public int OriginaddHydrogen;
+    public int halfaddCarbon;
+    public int halfaddNitrogen;
+    public int halfaddHydrogen;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
@@ -48,7 +48,7 @@ public class Planet : MonoBehaviour
     public float orbitSpeedMultiplier = 1f;
 
     // Checks if in Fast or Slow Universe
-    bool fastUniverse;
+    public bool fastUniverse;
 
     // Was the planet placed?
     public bool planetPlaced;
@@ -75,6 +75,7 @@ public class Planet : MonoBehaviour
     // collecting
     private bool collecting = false;
     private int count = 0;
+    private int collectionMultiplier = 0;
 
     private bool ifHover = false;
 
@@ -146,22 +147,29 @@ public class Planet : MonoBehaviour
         //sc.radius = 0.5f;
         //sc.center = new Vector3(0, 0, 0);
 
-		if (addCarbon == 4) {
-			planetname = "Carbon";
+        if (addCarbon == 4)
+        {
+            planetname = "Carbon";
 
-		} else if (addCarbon == 6) {
-			planetname = "Silicon";
-		} else if (addNitrogen == 6) {
-			planetname = "Nitrogen";
-		} else if(addHydrogen==6){
-			planetname = "Hydrogen";
-		}
-		OriginaddCarbon = addCarbon;
-		OriginaddHydrogen = addHydrogen;
-		OriginaddNitrogen = addNitrogen;
-		halfaddCarbon = addCarbon / 2;
-		halfaddNitrogen = addNitrogen / 2;
-		halfaddHydrogen = addHydrogen / 2;
+        }
+        else if (addCarbon == 6)
+        {
+            planetname = "Silicon";
+        }
+        else if (addNitrogen == 6)
+        {
+            planetname = "Nitrogen";
+        }
+        else if (addHydrogen == 6)
+        {
+            planetname = "Hydrogen";
+        }
+        OriginaddCarbon = addCarbon;
+        OriginaddHydrogen = addHydrogen;
+        OriginaddNitrogen = addNitrogen;
+        halfaddCarbon = addCarbon / 2;
+        halfaddNitrogen = addNitrogen / 2;
+        halfaddHydrogen = addHydrogen / 2;
     }
 
     public void FixedUpdate()
@@ -328,9 +336,9 @@ public class Planet : MonoBehaviour
         // pop up of resources collected after simulation
         if (collecting == true && count > 30)
         {
-            int totalcarbon = addCarbon + tradecarbon;
-            int totalnit = addNitrogen + tradenitrogen;
-            int totalhyd = addHydrogen + tradehydrogen;
+            int totalcarbon = (addCarbon * collectionMultiplier) + tradecarbon;
+            int totalnit = (addNitrogen * collectionMultiplier) + tradenitrogen;
+            int totalhyd = (addHydrogen * collectionMultiplier) + tradehydrogen;
             int preCar = carbon - totalcarbon;
             int preNit = nitrogen - totalnit;
             int preHyd = hydrogen - totalhyd;
@@ -369,12 +377,23 @@ public class Planet : MonoBehaviour
                     Debug.Log(this.name + " traded with: " + planet.name);
                     trade(planet);
                 }
-                
+
             }
 
-            carbon += addCarbon;
-            nitrogen += addNitrogen;
-            hydrogen += addHydrogen;
+            
+
+            if (fastUniverse)
+            {
+                collectionMultiplier = 4;
+            }
+            else
+            {
+                collectionMultiplier = 1;
+            }
+
+            carbon += addCarbon * collectionMultiplier;
+            nitrogen += addNitrogen * collectionMultiplier;
+            hydrogen += addHydrogen * collectionMultiplier;
 
             gc.simulate = false;
             gc.nextTurn.interactable = true;
@@ -404,20 +423,22 @@ public class Planet : MonoBehaviour
 
             // Make orbit speed be affected by universe (disabled)
             Vector2 orbitPos = orbitPath.Evaluate(orbitProgress);
-            int universeMultiplier = orbitPos.x < 0 ? 1 : 1;
 
+            // when orbitPos.x is greater than 1, it is in the fast universe, else not
             fastUniverse = orbitPos.x < 0 ? false : true;
+            int universeMultiplier = orbitPos.x < 0 ? 2 : 1;
 
             // Make orbit faster closer to sun
             float linearMultiplier = 8f;
             int exponentialMultiplier = 3;
             float orbitSpeedMultiplier = universeMultiplier * Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis), Mathf.Abs(orbitPath.yAxis)) / linearMultiplier, exponentialMultiplier);
 
+
+            
             // Division is one of the least efficient thing in basic C#
             // So use time.deltatime to see how far we're moving every frame
             // We want the inverse of orbitPeriod to see how fast we need to catch up
             float orbitSpeed = 1f / (orbitPeriod * orbitSpeedMultiplier);
-            //Debug.Log (orbitSpeed);
 
             // (Amount of time frame has taken) * calculated orbit speed
             orbitProgress += Time.deltaTime * orbitSpeed;
