@@ -223,7 +223,7 @@ public class GameController : MonoBehaviour
             var mstName = selected.name + " Skill Tree";
 
             // Open Skill Tree only if it hasn't been created yet
-            if (!placing && Input.GetMouseButtonUp(0) && !microSkillTreeNames.Contains(mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE))
+			if (!linking && !placing && Input.GetMouseButtonUp(0) && !microSkillTreeNames.Contains(mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE))
             {
                 // Create a new micro skill tree
                 //Debug.Log("Creating micro skill tree for " + selected.name);
@@ -247,7 +247,7 @@ public class GameController : MonoBehaviour
                 mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
             }
             // Open if the panel has been created, but is disabled
-            else if (!placing && Input.GetMouseButtonUp(0))
+			else if (!linking && !placing && Input.GetMouseButtonUp(0))
             {
                 // Bad programming to enable nested inactive game object
                 Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
@@ -256,7 +256,9 @@ public class GameController : MonoBehaviour
                     //Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
                     if (t.gameObject.name == mstName)
                     {
-                        t.gameObject.SetActive(true);
+						// Toggle skill tree on and off by clicking the planet
+                        //t.gameObject.SetActive(true);
+						t.gameObject.SetActive(!t.gameObject.activeSelf);
                     }
                 }
             }
