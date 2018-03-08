@@ -661,7 +661,7 @@ MonoBehaviour:
   myString: Planetary Skill Tree
   myButton: {fileID: 362652964}
   myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
-  paddingLeft: 15
+  paddingLeft: 0
 --- !u!224 &406715373 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224895847720145094, guid: 00d99bf562329404aa1f07d1bb967a5e,
@@ -859,7 +859,7 @@ MonoBehaviour:
   microSkillTree: {fileID: 1050443543319092, guid: 09b7382369042e040a0adcd991cdf3bc,
     type: 2}
   microSkillTreeNames: []
-  notBuiltTooltip: {fileID: 1476775114}
+  notBuiltTooltip: {fileID: 0}
   linkingText: {fileID: 509125480}
   planetText: {fileID: 182444763}
   carbonText: {fileID: 1194646389}
@@ -1127,8 +1127,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 705387151}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -103.17772, y: 64.30299, z: 11.03338}
-  m_LocalScale: {x: 53.8, y: 1, z: 53.4}
+  m_LocalPosition: {x: -360, y: 64.30299, z: 11.03338}
+  m_LocalScale: {x: 53.8, y: 1, z: 140.06}
   m_Children: []
   m_Father: {fileID: 1662605528}
   m_RootOrder: 0
@@ -2502,11 +2502,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1476775114 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910,
-    type: 2}
-  m_PrefabInternal: {fileID: 1740194805}
 --- !u!224 &1476775115 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224962735723723774, guid: a05f759c5092601449b9abcad9713910,
@@ -4057,7 +4052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &2107265405
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4072,7 +4067,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b218dd4dda657b440a7d9158cb74f683, type: 2}
+  - {fileID: 2100000, guid: 0afe786e69d4ed3428e7e09a4ce411c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4120,8 +4115,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107265404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -83.17772, y: 64.30299, z: 11.03338}
-  m_LocalScale: {x: 53.8, y: 1, z: 53.4}
+  m_LocalPosition: {x: 180, y: 64.30299, z: 11.03338}
+  m_LocalScale: {x: 53.8, y: 1, z: 140.06}
   m_Children: []
   m_Father: {fileID: 1662605528}
   m_RootOrder: 1

@@ -75,7 +75,7 @@ Transform:
   m_GameObject: {fileID: 1998618062616172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2877516, y: 0.2877518, z: 0.2877518}
+  m_LocalScale: {x: 1.400722, y: 1.4007242, z: 1.4007242}
   m_Children: []
   m_Father: {fileID: 4339871127361048}
   m_RootOrder: 0
@@ -103,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 1758263286180492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.8571427, y: 2.8571427, z: 2.8571427}
+  m_LocalScale: {x: 23.219118, y: 23.219097, z: 23.219097}
   m_Children: []
   m_Father: {fileID: 4339871127361048}
   m_RootOrder: 1
@@ -311,6 +311,7 @@ MonoBehaviour:
   orbitProgress: 0
   orbitPeriod: 3
   orbitSpeedMultiplier: 1
+  fastUniverse: 0
   planetPlaced: 0
   carbon: 0
   nitrogen: 0
@@ -507,7 +508,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -179297089
+  randomSeed: -1085370325
   InitialModule:
     serializedVersion: 3
     enabled: 1
