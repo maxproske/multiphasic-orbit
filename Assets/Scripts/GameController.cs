@@ -172,7 +172,7 @@ public class GameController : MonoBehaviour
                                     {
                                         if (link == selected.GetComponent<Planet>())
                                         {
-                                            Debug.Log("Already linked");
+                                            //Debug.Log("Already linked");
                                             linkedAlready = true;
                                         }
                                     }
@@ -227,6 +227,8 @@ public class GameController : MonoBehaviour
 
             // Open Skill Tree only if it hasn't been created yet
 			if (planetScript.turnsToBuild < 1) { // check if is built 
+
+				notBuiltTooltip.SetActive (false);
 
 				if (!linking && !placing && Input.GetMouseButtonUp (0) && !microSkillTreeNames.Contains (mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE)) {
 					// Create a new micro skill tree
@@ -554,13 +556,14 @@ public class GameController : MonoBehaviour
                     }
                 }
             }
-        }
-        else
-        {
-            foreach (Button button in planetButtons)
-            {
-                button.interactable = false;
-            }
+			// Unlock technologies
+			Transform[] ts = GameObject.Find ("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform> (true); // bool includeInactive = true 
+			foreach (Transform t in ts) {
+				if (microSkillTreeNames.Contains(t.gameObject.name)) {
+					var tech = t.gameObject.GetComponent<TechnologySkillTree>();
+					tech.Unlock ();
+				}
+			}
         }
     }
 }

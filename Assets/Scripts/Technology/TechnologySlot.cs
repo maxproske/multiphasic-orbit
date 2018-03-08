@@ -16,6 +16,8 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 	public List<Transform> prereqs = new List<Transform>(); // Reference to the technology slots to draw lines to
 	public UnityEngine.UI.Extensions.UILineRenderer LineRenderer; // Assign Line Renderer in editor
 
+	private TechnologySkillTree tst;
+
 	public void OnPointerEnter (PointerEventData eventData) {
 		mouseHover = true;
 	}
@@ -34,6 +36,7 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 		pointlist.Add(point);
 		LineRenderer.Points = pointlist.ToArray();
 	}
+
 
 	// Use this for initialization
 	void Start () {
@@ -78,7 +81,7 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 		var currentSelectedGameObject = currentEventSystem.currentSelectedGameObject;
 		if(currentSelectedGameObject == null) { return; }
 
-		Debug.Log(currentSelectedGameObject.name);
+		//Debug.Log(currentSelectedGameObject.name);
 	}
 
 	// Update is called once per frame
@@ -88,6 +91,9 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 		if (Input.GetMouseButtonUp (0) && mouseHover) {
 			// Get tech tree slot clicked
 			var clicked = this.GetComponent<Button> ().transform.parent.name;
+
+			Debug.Log (microSkillTree);
+
 			// Get script
 			var tech = microSkillTree.GetComponent<TechnologySkillTree>();
 
