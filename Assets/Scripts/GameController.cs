@@ -47,6 +47,9 @@ public class GameController : MonoBehaviour
     private GameObject mst; // Null object for logic
     public List<string> microSkillTreeNames; // To check for duplicates
 
+	public GameObject notBuiltTooltip;
+	private int notBuiltTooltipTimer;
+
     // texts
     public Text linkingText;
     public Text planetText;
@@ -223,45 +226,47 @@ public class GameController : MonoBehaviour
             var mstName = selected.name + " Skill Tree";
 
             // Open Skill Tree only if it hasn't been created yet
-			if (!linking && !placing && Input.GetMouseButtonUp(0) && !microSkillTreeNames.Contains(mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE))
-            {
-                // Create a new micro skill tree
-                //Debug.Log("Creating micro skill tree for " + selected.name);
-                mst = Instantiate(microSkillTree) as GameObject;
+			if (planetScript.turnsToBuild < 1) { // check if is built 
 
-                // Upon creation, add it to the list of unique skill trees
-                microSkillTreeNames.Add(mstName);
+				if (!linking && !placing && Input.GetMouseButtonUp (0) && !microSkillTreeNames.Contains (mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE)) {
+					// Create a new micro skill tree
+					//Debug.Log("Creating micro skill tree for " + selected.name);
+					mst = Instantiate (microSkillTree) as GameObject;
 
-                // Name the panel
-                mst.name = mstName;
+					// Upon creation, add it to the list of unique skill trees
+					microSkillTreeNames.Add (mstName);
 
-                // Associate the game object with its skill tree
-                mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
+					// Name the panel
+					mst.name = mstName;
 
-                // Make micro skill tree a child object of parent
-                mst.transform.SetParent(microSkillTreeParent.transform);
-                mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
-                mst.SetActive(true);
-                // Access the planet's script and set title
-                mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
-            }
-            // Open if the panel has been created, but is disabled
-			else if (!linking && !placing && Input.GetMouseButtonUp(0))
-            {
-                // Bad programming to enable nested inactive game object
-                Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
-                foreach (Transform t in ts)
-                {
-                    //Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
-                    if (t.gameObject.name == mstName)
-                    {
-						// Toggle skill tree on and off by clicking the planet
-                        //t.gameObject.SetActive(true);
-						t.gameObject.SetActive(!t.gameObject.activeSelf);
-                    }
-                }
-            }
+					// Associate the game object with its skill tree
+					mst.GetComponent<TechnologySkillTree> ().planetScript = planetScript;
+
+					// Make micro skill tree a child object of parent
+					mst.transform.SetParent (microSkillTreeParent.transform);
+					mst.transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
+					mst.transform.localPosition = new Vector3 (350.0f, -50.0f, 0.0f);
+					mst.SetActive (true);
+					// Access the planet's script and set title
+					mst.transform.Find ("Title").Find ("Title Text").GetComponent<Text> ().text = mstName;
+				}
+            	// Open if the panel has been created, but is disabled
+				else if (!linking && !placing && Input.GetMouseButtonUp (0)) {
+					// Bad programming to enable nested inactive game object
+					Transform[] ts = GameObject.Find ("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform> (true); // bool includeInactive = true 
+					foreach (Transform t in ts) {
+						//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
+						if (t.gameObject.name == mstName) {
+							// Toggle skill tree on and off by clicking the planet
+							//t.gameObject.SetActive(true);
+							t.gameObject.SetActive (true);
+						}
+					}
+				}
+			} else {
+				notBuiltTooltip.SetActive (true);
+				notBuiltTooltipTimer++;
+			}
 
             // Change game state when selecting Carbon 1
             if (GAME_STATE == Constants.TURN_3_TECH_TREE && selected.name == "Carbon 1")
@@ -276,6 +281,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
+			notBuiltTooltip.SetActive (false);
+
             // update UI when no planet is selected
             planetText.text = "No Planet Selected";
             carbonText.text = 0.ToString();

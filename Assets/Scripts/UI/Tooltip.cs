@@ -11,6 +11,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public Button myButton; // Reference to button to check if intractable
 	private GameObject myParent; // Private because this can't be set in the editor
 	public GameObject myPrefab;
+	public int paddingLeft = 0; // Additional extra left padding
 
 	// Declare private variables
 	private bool mouseHover;
@@ -55,7 +56,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 		// Get width of button for margin
 		rt = (RectTransform)myButton.transform;
-		float marginLeft = (rt.rect.width/2) + 5;
+		float marginLeft = (rt.rect.width/2) + 5 + paddingLeft;
 
 		// Reset position and scale
 		go.transform.localPosition = new Vector3 (marginLeft, 0, 0);

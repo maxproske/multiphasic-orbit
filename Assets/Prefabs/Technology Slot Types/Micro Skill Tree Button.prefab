@@ -11,6 +11,24 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1268133399861412}
   m_IsPrefabParent: 1
+--- !u!1 &1068992678850088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224384737058680540}
+  - component: {fileID: 222147728875138570}
+  - component: {fileID: 114773088668979630}
+  - component: {fileID: 114456578481377412}
+  m_Layer: 5
+  m_Name: Hint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1268133399861412
 GameObject:
   m_ObjectHideFlags: 0
@@ -22,7 +40,9 @@ GameObject:
   - component: {fileID: 222862036583566834}
   - component: {fileID: 114130837436401080}
   - component: {fileID: 114139989687756182}
-  - component: {fileID: 114723909004911256}
+  - component: {fileID: 65550849368708318}
+  - component: {fileID: 114942914609185292}
+  - component: {fileID: 114101583468686472}
   m_Layer: 5
   m_Name: Micro Skill Tree Button
   m_TagString: Untagged
@@ -65,6 +85,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!65 &65550849368708318
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268133399861412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 51.260117, y: 50.692677, z: 1}
+  m_Center: {x: 11.138608, y: -0.34482023, z: 0}
+--- !u!114 &114101583468686472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268133399861412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969ec592a5b2bcf4c98c0e6e79497180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetsParent: {fileID: 0}
+  ifhover: 0
+  bc: {fileID: 0}
 --- !u!114 &114130837436401080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,7 +130,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2081f6014751b444c86dba69603ce7ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 80acd2e7febdd7e45ab4d3a5e92a9849, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -130,7 +176,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114130837436401080}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 114139989687756182}
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114318284740900496
@@ -145,18 +224,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
---- !u!114 &114723909004911256
+--- !u!114 &114456578481377412
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268133399861412}
+  m_GameObject: {fileID: 1068992678850088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ace466d5ecc1632468df688f121a878e, type: 3}
+  m_Script: {fileID: 11500000, guid: 85de71628c4320a4da08ee992fe76b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  microSkillTree: {fileID: 0}
+  rotated: 0
+--- !u!114 &114773088668979630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068992678850088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4f3c327e3b25b43ada09c6687512c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  fill: 1
+  thickness: 0
+  sides: 3
+  rotation: 0
+  VerticesDistances:
+  - 1
+  - 1
+  - 1
+  - 1
+  m_Texture: {fileID: 0}
 --- !u!114 &114842468085980378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +294,21 @@ MonoBehaviour:
   - 1
   - 1
   m_Texture: {fileID: 0}
+--- !u!114 &114942914609185292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268133399861412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80a734e64fd67249b1033e927533467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myString: End Turn
+  myButton: {fileID: 114139989687756182}
+  myPrefab: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910, type: 2}
+  paddingLeft: 15
 --- !u!114 &114961235881207178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,7 +341,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Technology Skill Tree
+  m_Text: Next Turn
+--- !u!222 &222147728875138570
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068992678850088}
 --- !u!222 &222369393078836466
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -255,6 +384,24 @@ RectTransform:
   m_AnchoredPosition: {x: 74, y: 0.00000046284}
   m_SizeDelta: {x: 82.5, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224384737058680540
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068992678850088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224854550692620328}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224854550692620328
 RectTransform:
   m_ObjectHideFlags: 1
@@ -263,9 +410,10 @@ RectTransform:
   m_GameObject: {fileID: 1268133399861412}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99999636, y: 0.99999636, z: 0.99999636}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224304912477482900}
+  - {fileID: 224384737058680540}
   - {fileID: 224940080321901796}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -286,7 +434,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224854550692620328}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

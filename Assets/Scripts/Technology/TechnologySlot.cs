@@ -69,30 +69,6 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 				}
 			}
 		}
-		/* FOR LINKING LATER
-		// Find prereqs
-		if (prereqs != null) {
-			var num = 0;
-			foreach (Transform target in prereqs) {
-				if (target != null) {
-					Debug.Log("childPos: (" + this.transform.position.x + ", " + this.transform.position.y + "), parentPos: (" + target.position.x + ", " + target.position.y + ")");
-
-					// Add a Line Renderer to the GameObject
-					lines.Add (this.gameObject.AddComponent<LineRenderer> ());
-					// Set the width of the Line Renderer
-					lines [num].widthMultiplier = 1f;
-					lines [num].sortingOrder = 1;
-					lines [num].material = new Material (Shader.Find ("Sprites/Default"));
-					lines [num].material.color = Color.red; 
-					lines [num].SetVertexCount (2);
-					// Increment counter
-					num++;
-				}
-			}
-		} else {
-			Debug.Log ("prereqs is null");
-		}
-		*/
 	}
 
 	void getButtonName() {
@@ -119,30 +95,16 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 			if (clicked == "Mathematics Technology Slot") {
 				tech.mathematics = 1;
 			}
+			if (clicked == "Interplanetary Networking Technology Slot") {
+				tech.interplanetaryNetworking = 1;
+			}
+			if (clicked == "Mass Particle Displacement Technology Slot") {
+				tech.massParticleDisplacement = 1;
+			}
 
 			if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
 				gc.GAME_STATE = Constants.TURN_3_TECH_TREE_2;
 			}
 		}
-
-
-		/* FOR LINKING LATER
-		// Avoid object reference not set to an isntance of an object
-		if (prereqs != null) {
-			var num = 0;
-			foreach (Transform target in prereqs) {
-				if (target != null) {
-					// Update position of the two vertex of the Line Renderer
-					//lines [num].SetPosition (0, new Vector3(0,0,0));
-					//lines [num].SetPosition (1, new Vector3(2,2,0));
-					lines [num].SetPosition (0, new Vector3(this.transform.position.x, this.transform.position.y, 0));
-					lines [num].SetPosition (1,  new Vector3(target.position.x, target.position.y, 0));
-
-					// Increment counter
-					num++;
-				}
-			}
-		}
-		*/
 	}
 }

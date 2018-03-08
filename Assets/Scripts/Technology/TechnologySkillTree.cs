@@ -13,7 +13,12 @@ public class TechnologySkillTree : MonoBehaviour {
 	public int interplanetaryNetworking = 0;
 	public int massParticleDisplacement = 0;
 
+	private Button[] buttons;
+
 	void Awake() {
+		// Get all buttons in children
+		buttons = gameObject.GetComponentsInChildren<Button>();
+
 		// Make reference to the Game Controller
 		gc = GameObject.Find ("Game Manager").GetComponent<GameController> ();
 	}
@@ -25,11 +30,29 @@ public class TechnologySkillTree : MonoBehaviour {
 	}
 
 	public void Update () {
-
+		Debug.Log (mathematics + ", " + interplanetaryNetworking + ", " + massParticleDisplacement);
 	}
 
 	void Unlock() {
 		Debug.Log ("Updating unlocks for " + title);
+		for (int i = 0; i < buttons.Length; i++)
+		{
+			if (buttons[i].interactable)
+			{
+				// Mathematics has been unlocked
+				if (mathematics > 0) {
+					if (buttons [i].name == "Mathematics Technology Slot") buttons[i].interactable = false;
+					if (buttons [i].name == "Interplanetary Networking Technology Slot") buttons[i].interactable = true;
+				}
+				if (interplanetaryNetworking > 0) {
+					if (buttons [i].name == "Interplanetary Networking Technology Slot") buttons[i].interactable = false;
+					if (buttons [i].name == "Mass Particle Displacement Technology Slot") buttons[i].interactable = true;
+				}
+				if (massParticleDisplacement > 0) {
+					if (buttons [i].name == "Mass Particle Displacement Technology Slot") buttons[i].interactable = false;
+				}
+			}
+		}
 	}
 
 	public void setTitle(string name) {
