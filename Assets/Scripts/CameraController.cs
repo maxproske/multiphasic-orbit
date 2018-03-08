@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour {
 
 	public float sizeMin = 100f;
 	public float sizeMax = 500f;
-	public float scrollAcceleration = 20f;
+	public float scrollAcceleration = 1000f;
 
 	float x = 0.0f;
 	float y = 0.0f;

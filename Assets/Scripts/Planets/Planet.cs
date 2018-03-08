@@ -116,6 +116,7 @@ public class Planet : MonoBehaviour
     {
         // Get reference when we start the game
         lr = GetComponent<LineRenderer>();
+		lr.startWidth = 1f;
 
         // Calculate ellipse right when we start the game
         if (orbitingObject.transform.parent != null)
