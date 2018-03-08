@@ -64,7 +64,10 @@ public class GameController : MonoBehaviour
     public int rogueIncrement = 0;
     public bool storm = false;
     private int count = 0;
-
+	private int failtime=0;
+	private GUIStyle guiStyle = new GUIStyle(); 
+	public bool linksuccessful=false;
+	private int linktime=0;
     // Use this for initialization
     void Start()
     {
@@ -102,6 +105,18 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (linksuccessful) {
+			linktime++;
+			if (linktime > 60) {
+				linksuccessful = false;
+			}
+		}
+		if (fail) {
+			failtime++;
+			if (failtime > 60) {
+				fail = false;
+			}
+		}
         if (storm)
         {
             count++;
@@ -335,6 +350,8 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
+					linksuccessful = true;
+					linktime = 0;
                     firstPlanetScript.linkedWith.Add(planet2.GetComponent<Planet>());
                     secondPlanetScript.linkedWith.Add(planet1.GetComponent<Planet>());
                 }
@@ -357,42 +374,46 @@ public class GameController : MonoBehaviour
     private void CalculateFail()
     {
         //chance to fail
-        int difftier = firstPlanetScript.tier - secondPlanetScript.tier;
-        //		Debug.Log(difftier);
+		int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier);
+//        		Debug.Log(difftier);
         if (difftier == 0)
         {
             int chance = Random.Range(0, 10);
-            //			Debug.Log (chance);
+//            			Debug.Log (chance);
             if (chance == 0)
             {
                 fail = true;
+				failtime = 0;
             }
         }
         else if (difftier == 1)
         {
             int chance = Random.Range(0, 10);
-            //			Debug.Log (chance);
+//            			Debug.Log (chance);
             if (chance < 2)
             {
                 fail = true;
+				failtime = 0;
             }
         }
         else if (difftier == 2)
         {
             int chance = Random.Range(0, 10);
-            //			Debug.Log (chance);
+//            			Debug.Log (chance);
             if (chance < 3)
             {
                 fail = true;
+				failtime = 0;
             }
         }
         else if (difftier > 2)
         {   //this one for test it work 
             int chance = Random.Range(0, 10);
-            //			Debug.Log (chance);
+//            			Debug.Log (chance);
             if (chance < 10)
             {
                 fail = true;
+				failtime = 0;
             }
         }
         else
@@ -420,11 +441,21 @@ public class GameController : MonoBehaviour
         //		Debug.Log (chance);
     }
     void OnGUI()
-    {
-
-        if (storm == true && count < 150)
+	{	guiStyle.fontSize = 30;
+		guiStyle.normal.textColor = Color.white;
+		guiStyle.alignment = TextAnchor.MiddleCenter;
+		if(storm){
+			guiStyle.normal.textColor = Color.cyan;
+		}		
+		if(linksuccessful==true&&linktime<60){
+			GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Linking succeed, \n Planets can trade with others",guiStyle);	
+		}
+		if(fail==true&&failtime<60){
+			GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Linking failed, \n Rogue planet will stole resource from other planet.",guiStyle);	
+		}
+        if (storm == true && count < 60)
         {
-            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 25, 300, 50), "Storm is coming, \n resource collecting effciency reduce by half");
+			GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Storm is coming, \n resource collecting effciency reduce by half.",guiStyle);
         }
     }
     void Simulate()

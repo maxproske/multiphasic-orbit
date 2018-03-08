@@ -35,7 +35,9 @@ public class Planet : MonoBehaviour
     public Transform orbitingObject;
 
     // Serialized ellipse object
-    public EllipseTester orbitPath;
+    
+
+	public EllipseTester orbitPath;
 
     // How far along the path of the ellipse we are
     // Clamp between 0-1
@@ -92,6 +94,11 @@ public class Planet : MonoBehaviour
     public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
     public LineRenderer[] links;
     public GameObject[] lines;
+	private int preCarbon = 0;
+	private int preHydrogen = 0;
+	private int preNitrogen = 0;
+	private GUIStyle guiStyle = new GUIStyle(); 
+
 
     public Planet()
     {
@@ -127,6 +134,8 @@ public class Planet : MonoBehaviour
             lines[i] = new GameObject();
             links[i] = lines[i].AddComponent<LineRenderer>();
             links[i].SetWidth(0.1f, 0.1f);
+
+		
         }
 
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
@@ -179,6 +188,11 @@ public class Planet : MonoBehaviour
         {
             for (int i = 0; i < linkedWith.Count; i++)
             {
+				//change the line renderer color here
+				if (linkedWith [i].CompareTag ("Rogue")) {
+
+					links [i].SetColors (Color.red, Color.red);
+				}
                 links[i].SetPosition(0, transform.position);
                 links[i].SetPosition(1, linkedWith[i].transform.position);
             }
@@ -210,6 +224,12 @@ public class Planet : MonoBehaviour
             }
             if (count > 60)
             {
+				tradecarbon = 0;
+				tradenitrogen = 0;
+				tradehydrogen = 0;
+				preCarbon = carbon;
+				preNitrogen = nitrogen;
+				preHydrogen = hydrogen;
                 count = 0;
                 collecting = false;
                 //gc.simulate = false;
@@ -269,27 +289,6 @@ public class Planet : MonoBehaviour
             temp.hydrogen += 1;
             temp.tradehydrogen += 1;
         }
-        if (temp.maxResourceType == 1)
-        {
-            temp.carbon -= 1;
-            temp.tradecarbon -= 1;
-            carbon += 1;
-            tradecarbon += 1;
-        }
-        if (temp.maxResourceType == 2)
-        {
-            temp.nitrogen -= 1;
-            temp.tradenitrogen -= 1;
-            nitrogen += 1;
-            tradenitrogen += 1;
-        }
-        if (temp.maxResourceType == 3)
-        {
-            temp.hydrogen -= 1;
-            temp.tradehydrogen -= 1;
-            hydrogen += 1;
-            tradehydrogen += 1;
-        }
 
     }
 
@@ -325,28 +324,64 @@ public class Planet : MonoBehaviour
     //Function that can show the resource of this object
     void OnGUI()
     {
-
+		guiStyle.fontSize = 20;
+		guiStyle.normal.textColor = Color.white;
+		if(gc.storm){
+			guiStyle.normal.textColor = Color.cyan;
+		}
 
         if (ifHover == true)
         {
-            GUI.Box(new Rect(rectx + 20, Screen.height - recty, 300, 50), planetname + ": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen + "\n This is a Tier " + tier + " Planet.");
+			GUI.Box(new Rect(rectx + 20, Screen.height - recty, 300, 50), planetname + ": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen + "\n This is a Tier " + tier + " Planet.",guiStyle);
 
         }
         //}
         // pop up of resources collected after simulation
         if (collecting == true && count > 30)
         {
-            int totalcarbon = (addCarbon * collectionMultiplier) + tradecarbon;
-            int totalnit = (addNitrogen * collectionMultiplier) + tradenitrogen;
-            int totalhyd = (addHydrogen * collectionMultiplier) + tradehydrogen;
-            int preCar = carbon - totalcarbon;
-            int preNit = nitrogen - totalnit;
-            int preHyd = hydrogen - totalhyd;
+			int totalcarbon = addCarbon *collectionMultiplier;
+			int totalnit = addNitrogen * collectionMultiplier;
+			int totalhyd = addHydrogen * collectionMultiplier;
+			if (linkedWith.Count == 0) {
+				GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + totalcarbon, guiStyle);
+				GUI.Label (new Rect (rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNitrogen + " + " + totalnit, guiStyle);
+				GUI.Label (new Rect (rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHydrogen + " + " + totalhyd, guiStyle);
+			}
+			if (linkedWith.Count > 0) {
+				if (this.CompareTag ("Rogue")) {
+					guiStyle.normal.textColor = Color.red;
 
-            GUI.Label(new Rect(rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCar + " + " + totalcarbon);
-            GUI.Label(new Rect(rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNit + " + " + totalnit);
-            GUI.Label(new Rect(rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHyd + " + " + totalhyd);
-        }
+					GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
+					GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
+					GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
+				} else {
+					string ac = " ";
+					string an = " ";
+					string ah = " ";
+					if (tradecarbon >= 0) {
+						ac = " + ";
+					} else if (tradecarbon < 0) {
+						ac = " - ";
+					}
+					if (tradenitrogen >= 0) {
+						an = " + ";
+					} else if (tradenitrogen < 0) {
+						an = " - ";
+					}
+					if (tradehydrogen >= 0) {
+						ah = " + ";
+					} else if (tradehydrogen < 0) {
+						ah = " - ";
+					}
+					GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + totalcarbon + ac + Mathf.Abs (tradecarbon), guiStyle);
+					GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + totalnit + an + Mathf.Abs (tradenitrogen), guiStyle);
+					GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + totalhyd + ah + Mathf.Abs (tradehydrogen), guiStyle);	
+				}
+			}
+
+		}
+
+        
     }
 
     public void CollectResources()
@@ -354,9 +389,7 @@ public class Planet : MonoBehaviour
         if (turnsToBuild < 1)
         {
             collecting = true;
-            tradecarbon = 0;
-            tradenitrogen = 0;
-            tradehydrogen = 0;
+
 
             // old trade code
             //for (int i = 0; i < linkedWith.Count; i++)
@@ -374,9 +407,23 @@ public class Planet : MonoBehaviour
             {
                 if (!planet.CompareTag("Rogue") && !this.CompareTag("Rogue"))
                 {
-                    Debug.Log(this.name + " traded with: " + planet.name);
+//                    Debug.Log(this.name + " traded with: " + planet.name);
                     trade(planet);
                 }
+				if (planet.CompareTag("Rogue"))
+				{
+//					Debug.Log(this.name + " was stole by  " + planet.name);
+					tradecarbon--;
+					tradenitrogen--;
+					tradehydrogen--;
+				}
+				if (this.CompareTag("Rogue"))
+				{
+//					Debug.Log(this.name + " stole from  " + planet.name);
+					tradecarbon++;
+					tradenitrogen++;
+					tradehydrogen++;
+				}
 
             }
 
