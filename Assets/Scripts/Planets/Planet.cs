@@ -141,7 +141,7 @@ public class Planet : MonoBehaviour
 
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
 
-        orbitPeriod = 0.01f;
+        orbitPeriod = 0.001f;
 
         // Set orbiting object position
         SetOrbitingObjectPosition();

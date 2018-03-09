@@ -47,8 +47,8 @@ public class GameController : MonoBehaviour
     private GameObject mst; // Null object for logic
     public List<string> microSkillTreeNames; // To check for duplicates
 
-	public GameObject notBuiltTooltip;
-	private int notBuiltTooltipTimer;
+    public GameObject notBuiltTooltip;
+    private int notBuiltTooltipTimer;
 
     // texts
     public Text linkingText;
@@ -67,10 +67,10 @@ public class GameController : MonoBehaviour
     public int rogueIncrement = 0;
     public bool storm = false;
     private int count = 0;
-	private int failtime=0;
-	private GUIStyle guiStyle = new GUIStyle(); 
-	public bool linksuccessful=false;
-	private int linktime=0;
+    private int failtime = 0;
+    private GUIStyle guiStyle = new GUIStyle();
+    public bool linksuccessful = false;
+    private int linktime = 0;
     // Use this for initialization
     void Start()
     {
@@ -103,23 +103,29 @@ public class GameController : MonoBehaviour
         // initialize flags
         simulate = false;
         canBuild = true;
+
+        ResetLinking();
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (linksuccessful) {
-			linktime++;
-			if (linktime > 60) {
-				linksuccessful = false;
-			}
-		}
-		if (fail) {
-			failtime++;
-			if (failtime > 60) {
-				fail = false;
-			}
-		}
+        if (linksuccessful)
+        {
+            linktime++;
+            if (linktime > 60)
+            {
+                linksuccessful = false;
+            }
+        }
+        if (fail)
+        {
+            failtime++;
+            if (failtime > 60)
+            {
+                fail = false;
+            }
+        }
         if (storm)
         {
             count++;
@@ -130,11 +136,14 @@ public class GameController : MonoBehaviour
         // Prevent null object exception
         if (linkingText != null)
         {
-            linkingText.text = "linking: " + linking + "\r\n" +
-            "firstPlanet: " + firstPlanet + "\r\n" +
-            "planet1: " + planet1 + "\r\n" +
-            "planet2: " + planet2 + "\r\n" +
-            "simulate: " + simulate;
+            //linkingText.text = "linking: " + linking + "\r\n" +
+            //"firstPlanet: " + firstPlanet + "\r\n" +
+            //"planet1: " + planet1 + "\r\n" +
+            //"planet2: " + planet2 + "\r\n" +
+            //"simulate: " + simulate;
+
+            linkingText.text = "planet1: " + planet1 + "\r\n" +
+            "planet2: " + planet2;
         }
 
         // This code enables player to click any object in the scene
@@ -226,49 +235,56 @@ public class GameController : MonoBehaviour
             var mstName = selected.name + " Skill Tree";
 
             // Open Skill Tree only if it hasn't been created yet
-			if (planetScript.turnsToBuild < 1) { // check if is built 
+            if (planetScript.turnsToBuild < 1)
+            { // check if is built 
 
-				notBuiltTooltip.SetActive (false);
+                notBuiltTooltip.SetActive(false);
 
-				if (!linking && !placing && Input.GetMouseButtonUp (0) && !microSkillTreeNames.Contains (mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE)) {
-					// Create a new micro skill tree
-					//Debug.Log("Creating micro skill tree for " + selected.name);
-					mst = Instantiate (microSkillTree) as GameObject;
+                if (!linking && !placing && Input.GetMouseButtonUp(0) && !microSkillTreeNames.Contains(mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE))
+                {
+                    // Create a new micro skill tree
+                    //Debug.Log("Creating micro skill tree for " + selected.name);
+                    mst = Instantiate(microSkillTree) as GameObject;
 
-					// Upon creation, add it to the list of unique skill trees
-					microSkillTreeNames.Add (mstName);
+                    // Upon creation, add it to the list of unique skill trees
+                    microSkillTreeNames.Add(mstName);
 
-					// Name the panel
-					mst.name = mstName;
+                    // Name the panel
+                    mst.name = mstName;
 
-					// Associate the game object with its skill tree
-					mst.GetComponent<TechnologySkillTree> ().planetScript = planetScript;
+                    // Associate the game object with its skill tree
+                    mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
 
-					// Make micro skill tree a child object of parent
-					mst.transform.SetParent (microSkillTreeParent.transform);
-					mst.transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
-					mst.transform.localPosition = new Vector3 (350.0f, -50.0f, 0.0f);
-					mst.SetActive (true);
-					// Access the planet's script and set title
-					mst.transform.Find ("Title").Find ("Title Text").GetComponent<Text> ().text = mstName;
-				}
-            	// Open if the panel has been created, but is disabled
-				else if (!linking && !placing && Input.GetMouseButtonUp (0)) {
-					// Bad programming to enable nested inactive game object
-					Transform[] ts = GameObject.Find ("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform> (true); // bool includeInactive = true 
-					foreach (Transform t in ts) {
-						//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
-						if (t.gameObject.name == mstName) {
-							// Toggle skill tree on and off by clicking the planet
-							//t.gameObject.SetActive(true);
-							t.gameObject.SetActive (true);
-						}
-					}
-				}
-			} else {
-				notBuiltTooltip.SetActive (true);
-				notBuiltTooltipTimer++;
-			}
+                    // Make micro skill tree a child object of parent
+                    mst.transform.SetParent(microSkillTreeParent.transform);
+                    mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
+                    mst.SetActive(true);
+                    // Access the planet's script and set title
+                    mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
+                }
+                // Open if the panel has been created, but is disabled
+                else if (!linking && !placing && Input.GetMouseButtonUp(0))
+                {
+                    // Bad programming to enable nested inactive game object
+                    Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+                    foreach (Transform t in ts)
+                    {
+                        //Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
+                        if (t.gameObject.name == mstName)
+                        {
+                            // Toggle skill tree on and off by clicking the planet
+                            //t.gameObject.SetActive(true);
+                            t.gameObject.SetActive(true);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                notBuiltTooltip.SetActive(true);
+                notBuiltTooltipTimer++;
+            }
 
             // Change game state when selecting Carbon 1
             if (GAME_STATE == Constants.TURN_3_TECH_TREE && selected.name == "Carbon 1")
@@ -283,7 +299,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-			notBuiltTooltip.SetActive (false);
+            notBuiltTooltip.SetActive(false);
 
             // update UI when no planet is selected
             planetText.text = "No Planet Selected";
@@ -345,7 +361,7 @@ public class GameController : MonoBehaviour
                     Rogue rogueScript = rogueObject.GetComponent<Rogue>(); // get Planet script to access attributes
                     rogueScript.planetPlaced = true;
                     rogueScript.orbitProgress = secondPlanetScript.orbitProgress; // restore original orbitProgress
-                                                                                  // restore segments
+                    // restore segments
                     rogueScript.segments = 36;
                     // restore original orbitPath
                     rogueScript.orbitPath.xAxis = secondPlanetScript.orbitPath.xAxis;
@@ -361,8 +377,8 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-					linksuccessful = true;
-					linktime = 0;
+                    linksuccessful = true;
+                    linktime = 0;
                     firstPlanetScript.linkedWith.Add(planet2.GetComponent<Planet>());
                     secondPlanetScript.linkedWith.Add(planet1.GetComponent<Planet>());
                 }
@@ -385,46 +401,46 @@ public class GameController : MonoBehaviour
     private void CalculateFail()
     {
         //chance to fail
-		int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier);
-//        		Debug.Log(difftier);
+        int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier);
+        //        		Debug.Log(difftier);
         if (difftier == 0)
         {
             int chance = Random.Range(0, 10);
-//            			Debug.Log (chance);
+            //            			Debug.Log (chance);
             if (chance == 0)
             {
                 fail = true;
-				failtime = 0;
+                failtime = 0;
             }
         }
         else if (difftier == 1)
         {
             int chance = Random.Range(0, 10);
-//            			Debug.Log (chance);
+            //            			Debug.Log (chance);
             if (chance < 2)
             {
                 fail = true;
-				failtime = 0;
+                failtime = 0;
             }
         }
         else if (difftier == 2)
         {
             int chance = Random.Range(0, 10);
-//            			Debug.Log (chance);
+            //            			Debug.Log (chance);
             if (chance < 3)
             {
                 fail = true;
-				failtime = 0;
+                failtime = 0;
             }
         }
         else if (difftier > 2)
         {   //this one for test it work 
             int chance = Random.Range(0, 10);
-//            			Debug.Log (chance);
+            //            			Debug.Log (chance);
             if (chance < 10)
             {
                 fail = true;
-				failtime = 0;
+                failtime = 0;
             }
         }
         else
@@ -452,21 +468,25 @@ public class GameController : MonoBehaviour
         //		Debug.Log (chance);
     }
     void OnGUI()
-	{	guiStyle.fontSize = 30;
-		guiStyle.normal.textColor = Color.white;
-		guiStyle.alignment = TextAnchor.MiddleCenter;
-		if(storm){
-			guiStyle.normal.textColor = Color.cyan;
-		}		
-		if(linksuccessful==true&&linktime<60){
-			GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Linking succeed, \n Planets can trade with others",guiStyle);	
-		}
-		if(fail==true&&failtime<60){
-			GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Linking failed, \n Rogue planet will stole resource from other planet.",guiStyle);	
-		}
-        if (storm == true && count < 60)
+    {
+        guiStyle.fontSize = 30;
+        guiStyle.normal.textColor = Color.white;
+        guiStyle.alignment = TextAnchor.MiddleCenter;
+        if (storm)
         {
-			GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Storm is coming, \n resource collecting effciency reduce by half.",guiStyle);
+            guiStyle.normal.textColor = Color.cyan;
+        }
+        if (linksuccessful == true && linktime < 120)
+        {
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Successfully linked. \n Linked planets will now trade resources among each other.", guiStyle);
+        }
+        if (fail == true && failtime < 120)
+        {
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Failed to link. \n Planet has gone rogue. It will now steal some resources.", guiStyle);
+        }
+        if (storm == true && count < 120)
+        {
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "There was a storm. \n Resource collection rate decreased by half.", guiStyle);
         }
     }
     void Simulate()
@@ -556,14 +576,16 @@ public class GameController : MonoBehaviour
                     }
                 }
             }
-			// Unlock technologies
-			Transform[] ts = GameObject.Find ("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform> (true); // bool includeInactive = true 
-			foreach (Transform t in ts) {
-				if (microSkillTreeNames.Contains(t.gameObject.name)) {
-					var tech = t.gameObject.GetComponent<TechnologySkillTree>();
-					tech.Unlock ();
-				}
-			}
+            // Unlock technologies
+            Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+            foreach (Transform t in ts)
+            {
+                if (microSkillTreeNames.Contains(t.gameObject.name))
+                {
+                    var tech = t.gameObject.GetComponent<TechnologySkillTree>();
+                    tech.Unlock();
+                }
+            }
         }
     }
 }

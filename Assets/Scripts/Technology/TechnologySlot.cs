@@ -103,6 +103,7 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 			}
 			if (clicked == "Interplanetary Networking Technology Slot") {
 				tech.interplanetaryNetworking = 1;
+                //GameObject.Find("Linking").SetActive(true);
 			}
 			if (clicked == "Mass Particle Displacement Technology Slot") {
 				tech.massParticleDisplacement = 1;
