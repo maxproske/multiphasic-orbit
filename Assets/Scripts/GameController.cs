@@ -401,9 +401,13 @@ public class GameController : MonoBehaviour
     private void CalculateFail()
     {
         //chance to fail
-        int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier);
+		int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier)-firstPlanetScript.addlinkchance-secondPlanetScript.addlinkchance;
         //        		Debug.Log(difftier);
-        if (difftier == 0)
+
+		if (difftier < 0) {
+			fail = false;
+		}
+        else if (difftier == 0)
         {
             int chance = Random.Range(0, 10);
             //            			Debug.Log (chance);
@@ -501,12 +505,19 @@ public class GameController : MonoBehaviour
 
         foreach (var planet in planets)
         {
-            if (storm)
+			if (storm)
             {
                 planetScript = planet.GetComponent<Planet>();
-                planetScript.addCarbon = planetScript.halfaddCarbon;
-                planetScript.addNitrogen = planetScript.halfaddNitrogen;
-                planetScript.addHydrogen = planetScript.halfaddHydrogen;
+				if (planetScript.stormsheid == false) {
+					planetScript.addCarbon = planetScript.halfaddCarbon;
+					planetScript.addNitrogen = planetScript.halfaddNitrogen;
+					planetScript.addHydrogen = planetScript.halfaddHydrogen;
+				}
+				if (planetScript.stormsheid == true) {
+					planetScript.addCarbon = planetScript.OriginaddCarbon;
+					planetScript.addNitrogen = planetScript.OriginaddNitrogen;
+					planetScript.addHydrogen = planetScript.OriginaddHydrogen;			
+				}
 
             }
             else if (!storm)

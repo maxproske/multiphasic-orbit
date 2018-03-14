@@ -23,6 +23,8 @@ public class Planet : MonoBehaviour
     public int halfaddCarbon;
     public int halfaddNitrogen;
     public int halfaddHydrogen;
+	public int addlinkchance;
+	public bool stormsheid = false;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
@@ -327,7 +329,7 @@ public class Planet : MonoBehaviour
     {
 		guiStyle.fontSize = 20;
 		guiStyle.normal.textColor = Color.white;
-		if(gc.storm){
+		if(gc.storm&&stormsheid==false){
 			guiStyle.normal.textColor = Color.cyan;
 		}
 
@@ -555,5 +557,24 @@ public class Planet : MonoBehaviour
         orbitingObject.localPosition = new Vector3(orbitPos.x, 0, orbitPos.y);
     }
 
+
+
+	//depends on the planets, we can adjust it.
+	public void addResourceTechnology(){
+		addCarbon++;
+
+//		addHydrogen++;
+//		addNitrogen++;
+	}
+
+	//set the addlinkchance and it will effect the CalculateFail() function in the gamecontroller
+	public void linkchanceTechnology(){
+		addlinkchance++;
+	}
+
+	//set the storm shied and it will effect the Simulate() function in the gamcontroller
+	public void StormShiedTechnology(){
+		stormsheid = true;
+	}
 
 }
