@@ -564,7 +564,15 @@ public class Planet : MonoBehaviour
 	public void addResourceTechnology(){
 		carbon -= 30;
 		moreResource = true;
+		if (moreResource == true) {
+			OriginaddCarbon += 2; 
+			OriginaddHydrogen += 2;
+			OriginaddNitrogen += 2;
+			halfaddCarbon += 1;
+			halfaddNitrogen += 1;
+			halfaddHydrogen += 1;
 
+		}
 //		addHydrogen++;
 //		addNitrogen++;
 	}
