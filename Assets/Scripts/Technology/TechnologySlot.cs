@@ -18,6 +18,12 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 	private TechnologySkillTree tst;
 
+	public Planet planetScript;
+	// Get script
+	public TechnologySkillTree tech; 
+
+	// Set all planet slot buttons as uninteractable
+	public Button[] buttons;
 	public void OnPointerEnter (PointerEventData eventData) {
 		mouseHover = true;
 	}
@@ -27,6 +33,8 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 	void Awake() {
 		gc = GameObject.Find ("Game Manager").GetComponent<GameController> ();
+
+
 	}
 
 	// Use this for initialization
@@ -40,8 +48,9 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 	// Use this for initialization
 	void Start () {
-		// Set all planet slot buttons as uninteractable
-		var buttons = technologyParent.GetComponentsInChildren<Button>();
+		tech = microSkillTree.GetComponent<TechnologySkillTree>();
+		planetScript=tech.planetScript;
+		buttons = technologyParent.GetComponentsInChildren<Button>();
 		for (int i = 0; i < buttons.Length; i++)
 		{
 			if (buttons[i].interactable)
@@ -49,8 +58,6 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 				buttons[i].interactable = false;
 			}
 		}
-		// Enable math at the start
-		buttons [0].interactable = true;
 
 		// NOTE: The LineRenderer component is not suitable for drawing lines in the new UI
 		//this.gameObject.AddComponent<UILineRenderer> ();
@@ -72,6 +79,7 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 				}
 			}
 		}
+
 	}
 
 	void getButtonName() {
@@ -86,27 +94,35 @@ public class TechnologySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 	// Update is called once per frame
 	void Update () {
-
+		if (planetScript.moreResource == true) {
+			buttons[0].interactable = false;
+		}
+		// Enable math at the start
+		if (planetScript.carbon > 30 && planetScript.moreResource==false) {
+			buttons [0].interactable = true;
+		}
 		// When player clicks on the icon
 		if (Input.GetMouseButtonUp (0) && mouseHover) {
 			// Get tech tree slot clicked
 			var clicked = this.GetComponent<Button> ().transform.parent.name;
 
-			Debug.Log (microSkillTree);
+//			Debug.Log (microSkillTree);
 
-			// Get script
-			var tech = microSkillTree.GetComponent<TechnologySkillTree>();
+
 
 			// Unlock the next one.
 			if (clicked == "Mathematics Technology Slot") {
 				tech.mathematics = 1;
+				planetScript.addResourceTechnology ();
 			}
 			if (clicked == "Interplanetary Networking Technology Slot") {
 				tech.interplanetaryNetworking = 1;
+				planetScript.linkchanceTechnology ();
                 //GameObject.Find("Linking").SetActive(true);
 			}
 			if (clicked == "Mass Particle Displacement Technology Slot") {
 				tech.massParticleDisplacement = 1;
+				planetScript.StormShiedTechnology ();
 			}
 
 			if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {

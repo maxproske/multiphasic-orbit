@@ -25,6 +25,7 @@ public class Planet : MonoBehaviour
     public int halfaddHydrogen;
 	public int addlinkchance;
 	public bool stormsheid = false;
+	public bool moreResource = false;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
@@ -561,7 +562,8 @@ public class Planet : MonoBehaviour
 
 	//depends on the planets, we can adjust it.
 	public void addResourceTechnology(){
-		addCarbon++;
+		carbon -= 30;
+		moreResource = true;
 
 //		addHydrogen++;
 //		addNitrogen++;
@@ -569,6 +571,7 @@ public class Planet : MonoBehaviour
 
 	//set the addlinkchance and it will effect the CalculateFail() function in the gamecontroller
 	public void linkchanceTechnology(){
+		hydrogen -= 13;
 		addlinkchance++;
 	}
 
