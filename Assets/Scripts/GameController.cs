@@ -268,15 +268,22 @@ public class GameController : MonoBehaviour
                 {
                     // Bad programming to enable nested inactive game object
                     Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
-                    foreach (Transform t in ts)
+//					Debug.Log(mstName);
+					foreach (Transform t in ts)
                     {
-                        //Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
-                        if (t.gameObject.name == mstName)
-                        {
-                            // Toggle skill tree on and off by clicking the planet
-                            //t.gameObject.SetActive(true);
-                            t.gameObject.SetActive(true);
-                        }
+						if (t.gameObject.name.Contains (" Skill Tree")) {
+//							Debug.Log (t.gameObject.name);
+							//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
+							if (t.gameObject.name == mstName) {
+								// Toggle skill tree on and off by clicking the planet
+								//t.gameObject.SetActive(true);
+								t.gameObject.SetActive (true);
+							} else if (t.gameObject.name == "Micro Skill Tree Parent") {
+							
+							} else {
+								t.gameObject.SetActive (false);
+							}
+						}
                     }
                 }
             }
@@ -588,15 +595,15 @@ public class GameController : MonoBehaviour
                 }
             }
             // Unlock technologies
-            Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
-            foreach (Transform t in ts)
-            {
-                if (microSkillTreeNames.Contains(t.gameObject.name))
-                {
-                    var tech = t.gameObject.GetComponent<TechnologySkillTree>();
-                    tech.Unlock();
-                }
-            }
+//            Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+//            foreach (Transform t in ts)
+//            {
+//                if (microSkillTreeNames.Contains(t.gameObject.name))
+//                {
+//                    var tech = t.gameObject.GetComponent<TechnologySkillTree>();
+//                    tech.Unlock();
+//                }
+//            }
         }
     }
 }
