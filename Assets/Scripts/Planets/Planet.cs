@@ -76,6 +76,10 @@ public class Planet : MonoBehaviour
     // GUI
     private float rectx, recty;
     public Vector3 pos;
+	public Sprite planetSprite;
+	public int population = 0;
+	public int health = 0;
+	public int maxHealth = 0;
 
     // collecting
     private bool collecting = false;
@@ -91,7 +95,7 @@ public class Planet : MonoBehaviour
     private int tradenitrogen = 0;
     private int tradehydrogen = 0;
 
-    private string planetname = " ";
+    public string planetname = " ";
 
     // linking
     public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
