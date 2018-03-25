@@ -66,7 +66,7 @@ Material:
     - _GridOffsetY: 2
     - _GridSpacingX: 40
     - _GridSpacingY: 40
-    - _GridThickness: 1
+    - _GridThickness: 4
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -80,4 +80,4 @@ Material:
     - _BaseColour: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GridColour: {r: 1, g: 1, b: 1, a: 0.09}
+    - _GridColour: {r: 1, g: 1, b: 1, a: 0.0627451}
