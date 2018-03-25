@@ -228,20 +228,20 @@ public class GameController : MonoBehaviour
             // Do not allow the player to click on the planet while it's rotating
             else if (!placing)
             {
-                planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
+                //planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
                 // Enable text
-                carbonText.enabled = true;
-                nitrogenText.enabled = true;
-                hydrogenText.enabled = true;
+                //carbonText.enabled = true;
+                //nitrogenText.enabled = true;
+                //hydrogenText.enabled = true;
                 // Enable parent text
-                carbonText.transform.parent.GetComponent<Text>().enabled = true;
-                nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
-                hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
+                //carbonText.transform.parent.GetComponent<Text>().enabled = true;
+                //nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
+                //hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
             }
 
-            carbonText.text = planetScript.carbon.ToString();
-            nitrogenText.text = planetScript.nitrogen.ToString();
-            hydrogenText.text = planetScript.hydrogen.ToString();
+            //carbonText.text = planetScript.carbon.ToString();
+            //nitrogenText.text = planetScript.nitrogen.ToString();
+            //hydrogenText.text = planetScript.hydrogen.ToString();
 
             // What is the name of the game object to create
             var mstName = selected.name + " Skill Tree";

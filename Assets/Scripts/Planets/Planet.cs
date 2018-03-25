@@ -512,6 +512,7 @@ public class Planet : MonoBehaviour
 
         CollectResources();
         placingCoroutineRunning = false;
+        gc.playButton.interactable = true;
     }
 
     // Calculate the ellipse

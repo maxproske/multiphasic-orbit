@@ -191,9 +191,9 @@ MonoBehaviour:
   storm: 0
   linksuccessful: 0
   sun: {fileID: 1694319099}
-  carbon: {fileID: 1553271096678006, guid: 939ad656ea80d844681b4a86b33cddfa, type: 2}
-  nitrogen: {fileID: 1752803248946812, guid: e0a20794860810f4b877240820940938, type: 2}
-  hydrogen: {fileID: 1761411132104420, guid: ede39c4527c030b4681d8a3c408daf28, type: 2}
+  carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
+  nitrogen: {fileID: 1302749218511646, guid: 68c908146202de54a9c5a6a0e8d632ad, type: 2}
+  hydrogen: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
   go: {fileID: 0}
   planetPlaced: 0
 --- !u!4 &519037294
@@ -336,7 +336,7 @@ MonoBehaviour:
   leftHealthText: {fileID: 1264513279}
   leftStatusPanel: {fileID: 1220379835}
   leftTechnologyPanel: {fileID: 902610363}
-  rightNextTurnButton: {fileID: 1184540797}
+  rightNextTurnButton: {fileID: 0}
 --- !u!114 &563436562 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114217019347635340, guid: 9a1898ba0128f9140aaa2fe21f603dc3,
