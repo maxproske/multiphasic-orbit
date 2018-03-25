@@ -80,8 +80,8 @@ public class Planet : MonoBehaviour
     public Vector3 pos;
 	public Sprite planetSprite;
 	public int population = 0;
-	public int health = 100;
-	public int maxHealth = 100;
+	public int health;
+	public int maxHealth;
 
     // collecting
     private bool collecting = false;
@@ -154,13 +154,15 @@ public class Planet : MonoBehaviour
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
 
         orbitPeriod = 0.001f;
+        health = 100;
+        maxHealth = 100;
 
         // Set orbiting object position
         SetOrbitingObjectPosition();
 
         if (!planetPlaced)
         {
-            Debug.Log("StartCoroutine (AnimateOrbit (1)); called from Planet.cs");
+           // Debug.Log("StartCoroutine (AnimateOrbit (1)); called from Planet.cs");
             placing = StartCoroutine(AnimateOrbit(1));
         }
 
@@ -399,9 +401,7 @@ public class Planet : MonoBehaviour
     {
         if (turnsToBuild < 1)
         {
-            population += population;
-            //population = (int)Mathf.Log(population, 2);
-            //Debug.Log(population);
+            population = (int)(population + 1);
             ui.UpdatePopulation();
         }
     }

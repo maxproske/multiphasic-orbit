@@ -88,10 +88,14 @@ public class GameController : MonoBehaviour
     private Planet p; // Access new planet script
     public bool planetPlaced; // Flag for drawing planet orbit in realtime
 
+    private UIController ui;
+
 	public GameObject shot;
     // Use this for initialization
     void Start()
     {
+        ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
+
         // states
         // Disable hints
         var hintsDisabled = true;
@@ -289,23 +293,25 @@ public class GameController : MonoBehaviour
             // Do not allow the player to click on the planet while it's rotating
             else if (!placing)
             {
-                planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
+                //planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
                 // Enable text
-                carbonText.enabled = true;
-                nitrogenText.enabled = true;
-                hydrogenText.enabled = true;
-                // Enable parent text
-                carbonText.transform.parent.GetComponent<Text>().enabled = true;
-                nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
-                hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
+                // carbonText.enabled = true;
+                // nitrogenText.enabled = true;
+                // hydrogenText.enabled = true;
+                // // Enable parent text
+                // carbonText.transform.parent.GetComponent<Text>().enabled = true;
+                // nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
+                // hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
             }
 
-            carbonText.text = planetScript.carbon.ToString();
-            nitrogenText.text = planetScript.nitrogen.ToString();
-            hydrogenText.text = planetScript.hydrogen.ToString();
+            // carbonText.text = planetScript.carbon.ToString();
+            // nitrogenText.text = planetScript.nitrogen.ToString();
+            // hydrogenText.text = planetScript.hydrogen.ToString();
 
             // What is the name of the game object to create
             var mstName = selected.name + " Skill Tree";
+
+            ui.SetSelectedPlanet(planetScript);
 
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
@@ -315,49 +321,49 @@ public class GameController : MonoBehaviour
 
                 if (!linking && !placing && Input.GetMouseButtonUp(0) && !microSkillTreeNames.Contains(mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE))
                 {
-                    // Create a new micro skill tree
-                    //Debug.Log("Creating micro skill tree for " + selected.name);
-                    mst = Instantiate(microSkillTree) as GameObject;
+                    // // Create a new micro skill tree
+                    // //Debug.Log("Creating micro skill tree for " + selected.name);
+                    // mst = Instantiate(microSkillTree) as GameObject;
 
-                    // Upon creation, add it to the list of unique skill trees
-                    microSkillTreeNames.Add(mstName);
+                    // // Upon creation, add it to the list of unique skill trees
+                    // microSkillTreeNames.Add(mstName);
 
-                    // Name the panel
-                    mst.name = mstName;
+                    // // Name the panel
+                    // mst.name = mstName;
 
-                    // Associate the game object with its skill tree
-                    mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
+                    // // Associate the game object with its skill tree
+                    // mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
 
-                    // Make micro skill tree a child object of parent
-                    mst.transform.SetParent(microSkillTreeParent.transform);
-                    mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                    mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
-                    mst.SetActive(true);
-                    // Access the planet's script and set title
-                    mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
+                    // // Make micro skill tree a child object of parent
+                    // mst.transform.SetParent(microSkillTreeParent.transform);
+                    // mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    // mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
+                    // mst.SetActive(true);
+                    // // Access the planet's script and set title
+                    // mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
                 }
                 // Open if the panel has been created, but is disabled
                 else if (!linking && !placing && Input.GetMouseButtonUp(0))
                 {
-                    // Bad programming to enable nested inactive game object
-                    Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
-//					Debug.Log(mstName);
-					foreach (Transform t in ts)
-                    {
-						if (t.gameObject.name.Contains (" Skill Tree")) {
-//							Debug.Log (t.gameObject.name);
-							//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
-							if (t.gameObject.name == mstName) {
-								// Toggle skill tree on and off by clicking the planet
-								//t.gameObject.SetActive(true);
-								t.gameObject.SetActive (true);
-							} else if (t.gameObject.name == "Micro Skill Tree Parent") {
+//                     // Bad programming to enable nested inactive game object
+//                     Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+// //					Debug.Log(mstName);
+// 					foreach (Transform t in ts)
+//                     {
+// 						if (t.gameObject.name.Contains (" Skill Tree")) {
+// //							Debug.Log (t.gameObject.name);
+// 							//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
+// 							if (t.gameObject.name == mstName) {
+// 								// Toggle skill tree on and off by clicking the planet
+// 								//t.gameObject.SetActive(true);
+// 								t.gameObject.SetActive (true);
+// 							} else if (t.gameObject.name == "Micro Skill Tree Parent") {
 							
-							} else {
-								t.gameObject.SetActive (false);
-							}
-						}
-                    }
+// 							} else {
+// 								t.gameObject.SetActive (false);
+// 							}
+// 						}
+//                     }
                 }
             }
             else
@@ -561,7 +567,7 @@ public class GameController : MonoBehaviour
 
     public void placeCarbonPlanet()
     {
-        Debug.Log("Placing Carbon planet!");
+        //Debug.Log("Placing Carbon planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -578,7 +584,7 @@ public class GameController : MonoBehaviour
     }
     public void placeNitrogenPlanet()
     {
-        Debug.Log("Placing Nitrogen planet!");
+        //Debug.Log("Placing Nitrogen planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -595,7 +601,7 @@ public class GameController : MonoBehaviour
     }
     public void placeHydrogenPlanet()
     {
-        Debug.Log("Placing Hydrogen planet!");
+        //Debug.Log("Placing Hydrogen planet!");
         SetBuildingActive(false);
 
         // Create a new planet
