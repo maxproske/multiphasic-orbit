@@ -25,17 +25,25 @@ public class UIController : MonoBehaviour
 	public Text rightCarbonText;
 	public Text rightNitrogenText;
 	public Text rightHydrogenText;
+    public RectTransform rightResourcePanel;
 	// Status Panel
 	public Text rightPopulationText;
 	public Text rightHealthText;
+    public RectTransform rightStatusPanel;
+    // Technology Panel
+    public RectTransform rightTechnologyPanel;
+    private Button[] _technologyButtons; // Keep private
+    private Text[] _technologyText; // Keep private
 
 	/* Declare Bottom Panel
 	   ========================================================================== */
+    public RectTransform bottomActionPanel;
+    private Button[] _actionButtons; // Keep private
 
 	/* Declare Left Panel
 	   ========================================================================== */
 
-	private void Awake()
+	private void Start()
 	{
 		/* Initialize Top Panel
 	       ====================================================================== */
@@ -44,10 +52,11 @@ public class UIController : MonoBehaviour
 
 		/* Initialize Right Panel
 	       ====================================================================== */
-		SetSelected (null);
+		SetSelectedPlanet (null);
 
 		/* Initialize Bottom Panel
 		   ====================================================================== */
+        SetActionPanel(false, false, false);
 
 		/* Initialize Left Panel
 		   ====================================================================== */
@@ -55,19 +64,19 @@ public class UIController : MonoBehaviour
 
 	/* Set Top Panel
 	   ========================================================================== */
-	public void SetTurn(int turn)
+	public void SetTurn (int turn = 1)
 	{
 		topTurnText.text = "Turn " + turn.ToString ();
 	}
 
-	public void SetDistance(int distance)
+	public void SetDistance (int distance = 20)
 	{
 		topDistanceText.text = distance.ToString() + " uu";
 	}
 
 	/* Set Right Panel
 	   ========================================================================== */
-	public void SetSelected(Planet p)
+	public void SetSelectedPlanet (Planet p = null)
 	{
 		// Planet selected
 		if (p != null) 
@@ -78,20 +87,33 @@ public class UIController : MonoBehaviour
 			SetSelectedResources (p.carbon, p.nitrogen, p.hydrogen);
 			SetSelectedPopulation (p.population);
 			SetSelectedHealth (p.health, p.maxHealth);
+            SetSelectedTechnology (p.technologyLevel);
+            // Enable last
+            SetSelectedPanelsActive(true);
 		}
 		// No planet selected
 		else 
 		{
+            // Disable First
+            SetSelectedPanelsActive();
 			// Replace placeholder values with default values
 			SetSelectedName ();
 			SetSelectedPreview ();
 			SetSelectedResources ();
 			SetSelectedPopulation ();
 			SetSelectedHealth ();
+            SetSelectedTechnology ();
 		}
 	}
 
-	private void SetSelectedName(string name = null)
+    private void SetSelectedPanelsActive (bool active = false) 
+    {
+        rightResourcePanel.gameObject.SetActive(active);
+        rightStatusPanel.gameObject.SetActive(active);
+        rightTechnologyPanel.gameObject.SetActive(active);
+    }
+
+	private void SetSelectedName (string name = null)
 	{
 		// Planet selected
 		if (name != null) 
@@ -109,7 +131,7 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	private void SetSelectedPreview(Sprite sprite = null)
+	private void SetSelectedPreview (Sprite sprite = null)
 	{
 		// Planet selected
 		if (sprite != null) 
@@ -125,7 +147,7 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	private void SetSelectedResources(int carbon = -1, int nitrogen = -1, int hydrogen = -1)
+	private void SetSelectedResources (int carbon = -1, int nitrogen = -1, int hydrogen = -1)
 	{
 		// Planet selected
 		if (carbon > -1 && nitrogen > -1 && hydrogen > -1) 
@@ -141,7 +163,7 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	private void SetSelectedPopulation(int population = -1)
+	private void SetSelectedPopulation (int population = -1)
 	{
 		// Planet selected
 		if (population > -1) 
@@ -162,7 +184,7 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	private void SetSelectedHealth(int health = -1, int maxHealth = -1)
+	private void SetSelectedHealth (int health = -1, int maxHealth = -1)
 	{
 		// Planet selected
 		if (health > -1 && maxHealth > -1) 
@@ -183,8 +205,70 @@ public class UIController : MonoBehaviour
 		}
 	}
 
+    private void SetSelectedTechnology (int technology = -1)
+	{
+		// Planet selected
+		if (technology > -1) 
+		{
+            _technologyButtons = rightTechnologyPanel.GetComponentsInChildren<Button>();
+            for (int i = 0; i < _technologyButtons.Length; i++)
+            {
+                if (_technologyButtons[i].interactable)
+                {
+                    _technologyButtons[i].interactable = false;
+                }
+            }
+		}
+		// No planet selected
+		else 
+		{
+            // Make uninteractive
+            _technologyButtons = rightTechnologyPanel.GetComponentsInChildren<Button>();
+            for (int i = 0; i < _technologyButtons.Length; i++)
+            {
+                if (_technologyButtons[i].interactable)
+                {
+                    _technologyButtons[i].interactable = false;
+                }
+            }
+		}
+	}
+
 	/* Set Bottom Panel
 	   ========================================================================== */
+    public void SetActionPanel (bool simulating = false, bool canSimulate = false, bool canLink = false)
+    {
+        // Get reference to buttons
+        _actionButtons = bottomActionPanel.GetComponentsInChildren<Button>();
+
+        if (simulating)
+        {
+            // Make uninteractive
+            for (int i = 0; i < _actionButtons.Length; i++)
+            {
+                _actionButtons[i].interactable = false;
+            }
+        }
+        else 
+        {
+            // Make interactive
+            for (int i = 0; i < _actionButtons.Length; i++)
+            {
+                if (i == 0)
+                {
+                    _actionButtons[i].interactable = true;
+                }
+                if (i == 1)
+                {
+                    _actionButtons[i].interactable = canSimulate;
+                }
+                if (i == 2)
+                {
+                    _actionButtons[i].interactable = canLink;
+                }
+            }
+        }
+    }
 
 	/* Set Left Panel
 	   ========================================================================== */

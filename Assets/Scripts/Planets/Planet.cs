@@ -26,6 +26,7 @@ public class Planet : MonoBehaviour
 	public int addlinkchance;
 	public bool stormsheid = false;
 	public bool moreResource = false;
+    public int technologyLevel = 0;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
