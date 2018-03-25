@@ -20,6 +20,11 @@ public class GameController : MonoBehaviour
 
     public RectTransform rightPlanetaryPanel; // New UI
 
+
+	public bool attacking;
+	public Button startAttackButton;
+	public Button AttackButton;
+
     // linking 
     public List<GameObject> planets;
     public Button startLinkButton;
@@ -83,16 +88,13 @@ public class GameController : MonoBehaviour
     private Planet p; // Access new planet script
     public bool planetPlaced; // Flag for drawing planet orbit in realtime
 
-    private UIController ui;
-
+	public GameObject shot;
     // Use this for initialization
     void Start()
     {
         // states
         // Disable hints
         var hintsDisabled = true;
-
-        ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
 
         // Pass state
         GAME_STATE = hintsDisabled ? -1 : 0;
@@ -104,11 +106,16 @@ public class GameController : MonoBehaviour
         //playButton = GameObject.Find("End Turn Button").GetComponent<Button>();
         //playButton.onClick.AddListener(Simulate);
 
-        //startLinkButton = GameObject.Find("Start Link Button").GetComponent<Button>();
-        //startLinkButton.onClick.AddListener(StartLink);
+        startLinkButton = GameObject.Find("Start Link Button").GetComponent<Button>();
+        startLinkButton.onClick.AddListener(StartLink);
 
-        //linkButton = GameObject.Find("Link Button").GetComponent<Button>();
-        //linkButton.onClick.AddListener(Link);
+        linkButton = GameObject.Find("Link Button").GetComponent<Button>();
+        linkButton.onClick.AddListener(Link);
+		startAttackButton = GameObject.Find("Start Attack Button").GetComponent<Button>();
+		startAttackButton.onClick.AddListener(StartAttack);
+
+		AttackButton = GameObject.Find("Attack Button").GetComponent<Button>();
+		AttackButton.onClick.AddListener(attack);
 
         //planetButtons = planetsParent.GetComponentsInChildren<Button>();
 
@@ -126,6 +133,18 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (shot != null) {
+			shot.transform.position = Vector3.MoveTowards (planet1.transform.position, planet2.transform.position, Time.deltaTime);
+			if (shot.transform.position == planet2.transform.position) {
+				secondPlanetScript.healthbar -= 25;
+				attacking = false;
+				firstPlanet = false;
+				simulate = false;
+				planet1 = null;
+				planet2 = null;
+				Destroy (shot);
+			}
+		}
         if (linksuccessful)
         {
             linktime++;
@@ -152,11 +171,11 @@ public class GameController : MonoBehaviour
         // Prevent null object exception
         if (linkingText != null)
         {
-            //linkingText.text = "linking: " + linking + "\r\n" +
-            //"firstPlanet: " + firstPlanet + "\r\n" +
-            //"planet1: " + planet1 + "\r\n" +
-            //"planet2: " + planet2 + "\r\n" +
-            //"simulate: " + simulate;
+            linkingText.text = "linking: " + linking + "\r\n" +
+            "firstPlanet: " + firstPlanet + "\r\n" +
+            "planet1: " + planet1 + "\r\n" +
+            "planet2: " + planet2 + "\r\n" +
+            "simulate: " + simulate;
 
             linkingText.text = "planet1: " + planet1 + "\r\n" +
             "planet2: " + planet2;
@@ -211,6 +230,35 @@ public class GameController : MonoBehaviour
                         }
                     }
                 }
+				if (attacking)
+				{
+					// can only select built non-rogue planets to link with other built non-rogue planets
+					// check if is non-rogue and has Planet script
+					if (selected.GetComponent("Planet"))
+					{
+						if (selected.GetComponent<Planet>().turnsToBuild < 1) // check if is built 
+						{
+							if (firstPlanet)
+							{
+								planet1 = hit.collider.gameObject;
+								firstPlanetScript = planet1.GetComponent<Planet>();
+								firstPlanet = false;
+							}
+							else
+							{
+								// if selected is not planet 1
+								if (selected != planet1)
+								{
+		
+						
+										planet2 = hit.collider.gameObject;
+										secondPlanetScript = planet2.GetComponent<Planet>();
+
+								}
+							}
+						}
+					}
+				}
             }
         }
 
@@ -219,6 +267,15 @@ public class GameController : MonoBehaviour
         {
             ResetLinking();
         }
+
+		if (attacking && Input.GetKeyDown(KeyCode.Escape))
+		{
+			attacking = false;
+			firstPlanet = false;
+			simulate = false;
+			planet1 = null;
+			planet2 = null;	
+		}
 
         if (planets.Contains(selected))
         {
@@ -232,26 +289,23 @@ public class GameController : MonoBehaviour
             // Do not allow the player to click on the planet while it's rotating
             else if (!placing)
             {
-                //planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
+                planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
                 // Enable text
-                //carbonText.enabled = true;
-                //nitrogenText.enabled = true;
-                //hydrogenText.enabled = true;
+                carbonText.enabled = true;
+                nitrogenText.enabled = true;
+                hydrogenText.enabled = true;
                 // Enable parent text
-                //carbonText.transform.parent.GetComponent<Text>().enabled = true;
-                //nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
-                //hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
+                carbonText.transform.parent.GetComponent<Text>().enabled = true;
+                nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
+                hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
             }
 
-            //carbonText.text = planetScript.carbon.ToString();
-            //nitrogenText.text = planetScript.nitrogen.ToString();
-            //hydrogenText.text = planetScript.hydrogen.ToString();
+            carbonText.text = planetScript.carbon.ToString();
+            nitrogenText.text = planetScript.nitrogen.ToString();
+            hydrogenText.text = planetScript.hydrogen.ToString();
 
             // What is the name of the game object to create
             var mstName = selected.name + " Skill Tree";
-
-            // Update selected planet in UI
-            ui.SetSelectedPlanet (planetScript);
 
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
@@ -507,6 +561,7 @@ public class GameController : MonoBehaviour
 
     public void placeCarbonPlanet()
     {
+        Debug.Log("Placing Carbon planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -523,6 +578,7 @@ public class GameController : MonoBehaviour
     }
     public void placeNitrogenPlanet()
     {
+        Debug.Log("Placing Nitrogen planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -539,6 +595,7 @@ public class GameController : MonoBehaviour
     }
     public void placeHydrogenPlanet()
     {
+        Debug.Log("Placing Hydrogen planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -646,6 +703,34 @@ public class GameController : MonoBehaviour
         planet1 = null;
         planet2 = null;
     }
+
+
+	void StartAttack()
+	{
+		if (!attacking)
+		{
+			attacking = true;
+			firstPlanet = true;
+		}
+		else
+		{
+			attacking = false;
+			firstPlanet = false;
+		}
+	}
+
+	void attack()
+	{
+		// if both variables are set
+		if (planet1 != null && planet2 != null)
+		{
+			shot = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+
+		
+		}
+	}
+
+
 
     private void CalculateFail()
     {
@@ -805,7 +890,6 @@ public class GameController : MonoBehaviour
                 {
                     canBuild = false;
                 }
-                Debug.Log("StartCoroutine (AnimateOrbit (1)); called from GameController.cs");
                 planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
 
             }

@@ -27,6 +27,7 @@ public class Planet : MonoBehaviour
 	public bool stormsheid = false;
 	public bool moreResource = false;
     public int technologyLevel = 0;
+	public int healthbar =100;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
@@ -525,7 +526,6 @@ public class Planet : MonoBehaviour
         CollectResources();
         IncreasePopulation();
         placingCoroutineRunning = false;
-        gc.playButton.interactable = true;
     }
 
     // Calculate the ellipse
