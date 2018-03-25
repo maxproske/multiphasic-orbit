@@ -79,8 +79,8 @@ public class Planet : MonoBehaviour
     public Vector3 pos;
 	public Sprite planetSprite;
 	public int population = 0;
-	public int health = 0;
-	public int maxHealth = 0;
+	public int health = 100;
+	public int maxHealth = 100;
 
     // collecting
     private bool collecting = false;
@@ -107,6 +107,7 @@ public class Planet : MonoBehaviour
 	private int preNitrogen = 0;
 	private GUIStyle guiStyle = new GUIStyle(); 
 
+    private UIController ui;
 
     public Planet()
     {
@@ -136,6 +137,8 @@ public class Planet : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
+        ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
+
         lines = new GameObject[10];
         links = new LineRenderer[10];
         for (int i = 0; i < 10; i++)
@@ -156,6 +159,7 @@ public class Planet : MonoBehaviour
 
         if (!planetPlaced)
         {
+            Debug.Log("StartCoroutine (AnimateOrbit (1)); called from Planet.cs");
             placing = StartCoroutine(AnimateOrbit(1));
         }
 
@@ -387,10 +391,18 @@ public class Planet : MonoBehaviour
 					GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + totalhyd + ah + Mathf.Abs (tradehydrogen), guiStyle);	
 				}
 			}
-
 		}
+    }
 
-        
+    public void IncreasePopulation()
+    {
+        if (turnsToBuild < 1)
+        {
+            population += population;
+            //population = (int)Mathf.Log(population, 2);
+            //Debug.Log(population);
+            ui.UpdatePopulation();
+        }
     }
 
     public void CollectResources()
@@ -511,6 +523,7 @@ public class Planet : MonoBehaviour
         }
 
         CollectResources();
+        IncreasePopulation();
         placingCoroutineRunning = false;
         gc.playButton.interactable = true;
     }

@@ -507,7 +507,6 @@ public class GameController : MonoBehaviour
 
     public void placeCarbonPlanet()
     {
-        Debug.Log("Placing Carbon planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -521,11 +520,9 @@ public class GameController : MonoBehaviour
         planets.Add(go);
         // Access the planet's script
         p = go.GetComponent<Carbon>();
-        Debug.Log("placeCarbonPlanet");
     }
     public void placeNitrogenPlanet()
     {
-        Debug.Log("Placing Nitrogen planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -542,7 +539,6 @@ public class GameController : MonoBehaviour
     }
     public void placeHydrogenPlanet()
     {
-        Debug.Log("Placing Hydrogen planet!");
         SetBuildingActive(false);
 
         // Create a new planet
@@ -809,6 +805,7 @@ public class GameController : MonoBehaviour
                 {
                     canBuild = false;
                 }
+                Debug.Log("StartCoroutine (AnimateOrbit (1)); called from GameController.cs");
                 planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
 
             }

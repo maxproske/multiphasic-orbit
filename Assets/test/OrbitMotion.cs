@@ -41,6 +41,7 @@ public class OrbitMotion : MonoBehaviour {
 			
 			if (ifNext == true ) {
 				orbitActive = true;
+                Debug.Log("StartCoroutine (AnimateOrbit ()); called from OrbitMotion.cs");
 				StartCoroutine (AnimateOrbit ());
 
 

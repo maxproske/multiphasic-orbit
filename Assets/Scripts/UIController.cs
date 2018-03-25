@@ -113,13 +113,17 @@ public class UIController : MonoBehaviour
             SetSelectedTechnology (p.technologyLevel);
 
             // Enable last
-            SetSelectedPanelsActive(true);
+            SetResourcePanelActive(true);
+            SetStatusPanelActive(true);
+            SetTechnologyPanelActive(p.population > 0);
 		}
 		// No planet selected
 		else 
 		{
             // Disable First
-            SetSelectedPanelsActive();
+            SetResourcePanelActive();
+            SetStatusPanelActive();
+            SetTechnologyPanelActive();
 
 			// Replace placeholder values with default values
 			SetSelectedName ();
@@ -131,10 +135,18 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-    private void SetSelectedPanelsActive (bool active = false) 
+    private void SetResourcePanelActive (bool active = false) 
     {
         leftResourcePanel.gameObject.SetActive(active);
+    }
+
+    private void SetStatusPanelActive (bool active = false) 
+    {
         leftStatusPanel.gameObject.SetActive(active);
+    }
+
+    private void SetTechnologyPanelActive (bool active = false) 
+    {
         leftTechnologyPanel.gameObject.SetActive(active);
     }
 
