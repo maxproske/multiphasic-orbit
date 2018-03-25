@@ -631,10 +631,14 @@ public class GameController : MonoBehaviour
         Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
         for (int i = 0; i < _planetaryButtons.Length; i++)
         {
-            //if (_planetaryButtons[i].interactable)
-            //{
-                _planetaryButtons[i].interactable = active;
-            //}
+            // Make all planet buttons interactable
+            _planetaryButtons[i].interactable = active;
+        }
+
+        // Increase turn counter
+        if (active && _planetaryButtons[0].IsInteractable())
+        {
+            AddTurn();
         }
     }
 
