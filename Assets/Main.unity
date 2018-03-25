@@ -336,7 +336,7 @@ MonoBehaviour:
   leftHealthText: {fileID: 1264513279}
   leftStatusPanel: {fileID: 1220379835}
   leftTechnologyPanel: {fileID: 902610363}
-  rightNextTurnButton: {fileID: 0}
+  rightNextTurnButton: {fileID: 1184540797}
 --- !u!114 &563436562 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114217019347635340, guid: 9a1898ba0128f9140aaa2fe21f603dc3,

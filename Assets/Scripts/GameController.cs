@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour
 
         // planetButtons
         //playButton = GameObject.Find("End Turn Button").GetComponent<Button>();
-        playButton.onClick.AddListener(Simulate);
+        //playButton.onClick.AddListener(Simulate);
 
         //startLinkButton = GameObject.Find("Start Link Button").GetComponent<Button>();
         //startLinkButton.onClick.AddListener(StartLink);
@@ -227,7 +227,7 @@ public class GameController : MonoBehaviour
             // update UI
             if (planetScript.turnsToBuild < 1)
             {
-                planetText.text = planetScript.name;
+                //planetText.text = planetScript.name;
             }
             // Do not allow the player to click on the planet while it's rotating
             else if (!placing)
