@@ -138,7 +138,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
 		if (shot != null) {
-			shot.transform.position = Vector3.MoveTowards (planet1.transform.position, planet2.transform.position, Time.deltaTime);
+			shot.transform.position = Vector3.MoveTowards (shot.transform.position, planet2.transform.position, 80*Time.deltaTime);
 			if (shot.transform.position == planet2.transform.position) {
 				secondPlanetScript.healthbar -= 25;
 				attacking = false;
@@ -731,6 +731,8 @@ public class GameController : MonoBehaviour
 		if (planet1 != null && planet2 != null)
 		{
 			shot = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+			shot.transform.localScale = new Vector3 (8f, 8f, 8f);
+			shot.transform.position = planet1.transform.position;
 
 		
 		}
