@@ -4,6 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+// -- Create UI Controller
+// UIController ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
+
+// -- Update the right panel
+// ui.SetSelectedPlanet (Planet planet);
+
+// -- Update the bottom panel
+// ui.SetActionPanel (bool simulating, bool canSimulate, bool canLink);
+
+// -- Update the turn counter (Turn 1)
+// ui.SetTurn (int turn);
+
+// -- Update the distance counter (20 uu)
+// ui.SetDistance (int distance);
+
 public class UIController : MonoBehaviour 
 {
 	/* Declare Top Panel
