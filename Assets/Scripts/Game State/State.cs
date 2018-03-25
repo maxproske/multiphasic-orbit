@@ -67,12 +67,12 @@ public class State : MonoBehaviour {
 				break;
 			case Constants.TURN_3_TECH_TREE_2:
 				enablePlanetGlow(1);
-				gc.nextTurn.interactable = true;
+				gc.playButton.interactable = true;
 				break;
 			case Constants.TURN_3_TECH_SLOT_2:
 				enableHint("Mathematics Technology Slot");
 				disablePlanetGlow(1);
-				gc.nextTurn.interactable = true;
+				gc.playButton.interactable = true;
 
 				break;
 			default:

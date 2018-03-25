@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     public int PREVIOUS_GAME_STATE; // Done to improve performance
 
     // turn
-    public Button nextTurn;
+    public Button playButton;
     public bool simulate;
     public bool canBuild;
     public Transform planetsParent; // Reference to skill tree slots parent
@@ -73,6 +73,16 @@ public class GameController : MonoBehaviour
     private GUIStyle guiStyle = new GUIStyle();
     public bool linksuccessful = false;
     private int linktime = 0;
+
+    // planet placing variables
+    public Transform sun; // Reference to planet objects parent
+    public GameObject carbon; // Reference to prefab carbon to generate
+    public GameObject nitrogen; // Reference to prefab carbon to generate
+    public GameObject hydrogen; // Reference to prefab carbon to generate
+    public GameObject go; // New planet game object
+    private Planet p; // Access new planet script
+    public bool planetPlaced; // Flag for drawing planet orbit in realtime
+
     // Use this for initialization
     void Start()
     {
@@ -87,16 +97,16 @@ public class GameController : MonoBehaviour
         state.SetupState();
 
         // planetButtons
-        nextTurn = GameObject.Find("End Turn Button").GetComponent<Button>();
-        nextTurn.onClick.AddListener(Simulate);
+        //playButton = GameObject.Find("End Turn Button").GetComponent<Button>();
+        playButton.onClick.AddListener(Simulate);
 
-        startLinkButton = GameObject.Find("Start Link Button").GetComponent<Button>();
-        startLinkButton.onClick.AddListener(StartLink);
+        //startLinkButton = GameObject.Find("Start Link Button").GetComponent<Button>();
+        //startLinkButton.onClick.AddListener(StartLink);
 
-        linkButton = GameObject.Find("Link Button").GetComponent<Button>();
-        linkButton.onClick.AddListener(Link);
+        //linkButton = GameObject.Find("Link Button").GetComponent<Button>();
+        //linkButton.onClick.AddListener(Link);
 
-        planetButtons = planetsParent.GetComponentsInChildren<Button>();
+        //planetButtons = planetsParent.GetComponentsInChildren<Button>();
 
         // initialize lists
         planets = new List<GameObject>();
@@ -311,18 +321,180 @@ public class GameController : MonoBehaviour
             notBuiltTooltip.SetActive(false);
 
             // update UI when no planet is selected
-            planetText.text = "No Planet Selected";
-            carbonText.text = 0.ToString();
-            nitrogenText.text = 0.ToString();
-            hydrogenText.text = 0.ToString();
+            //planetText.text = "No Planet Selected";
+            //carbonText.text = 0.ToString();
+            //nitrogenText.text = 0.ToString();
+            //hydrogenText.text = 0.ToString();
             // Disable text
-            carbonText.enabled = false;
-            nitrogenText.enabled = false;
-            hydrogenText.enabled = false;
+            //carbonText.enabled = false;
+            //nitrogenText.enabled = false;
+            //hydrogenText.enabled = false;
             // Disable parent text
-            carbonText.transform.parent.GetComponent<Text>().enabled = false;
-            nitrogenText.transform.parent.GetComponent<Text>().enabled = false;
-            hydrogenText.transform.parent.GetComponent<Text>().enabled = false;
+            //carbonText.transform.parent.GetComponent<Text>().enabled = false;
+            //nitrogenText.transform.parent.GetComponent<Text>().enabled = false;
+            //hydrogenText.transform.parent.GetComponent<Text>().enabled = false;
+        }
+
+        // When player is placing planet
+        if (go != null && !planetPlaced)
+        {
+            // Update the global placing variable
+            placing = true;
+            playButton.interactable = false;
+
+            // Update the game state
+            if (GAME_STATE == Constants.TURN_1_PLANET_SLOT)
+            {
+                GAME_STATE = Constants.TURN_1_PLACE_PLANET;
+            }
+
+            // Calculate 3D mouse coordinates
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // if over UI element, cannot place planet
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                // Set final orbit position on mouse up
+                if (!planetPlaced && Input.GetMouseButtonDown(0))
+                {
+                    RaycastHit hit = new RaycastHit();
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        // Only set orbit if clicking in-bounds
+                        if (hit.collider.gameObject.name == "Orbit Plane")
+                        {
+                            // Allow player to end turn
+                            //GameObject.Find("End Turn Button").GetComponent<Button>().interactable = true;
+
+                            // Update the game state
+                            if (GAME_STATE == Constants.TURN_1_PLACE_PLANET)
+                            {
+                                GAME_STATE = Constants.TURN_1_END_TURN;
+                            }
+
+                            // Update the game state
+                            if (GAME_STATE == Constants.TURN_2_PLACE_PLANET)
+                            {
+                                GAME_STATE = Constants.TURN_2_END_TURN;
+                            }
+
+                            // only stops coroutine if it is running
+                            if (p.placingCoroutineRunning)
+                            {
+                                p.StopCoroutine(p.placing);
+                            }
+
+                            playButton.interactable = true;
+                            planetPlaced = true;
+                            canBuild = false;
+                            ToggleInteractability(false);
+                            //clickedSlot = null;
+
+                            // Update the global placing variable
+                            placing = false; // Must be false to let skill tree open
+                                             //p.planetPlaced = true;
+                                             //p.orbitActive = false;
+                                             //this.GetComponent<Button>().interactable = false;
+                                             //go = null;
+                        }
+                    }
+                }
+
+                // Update planet location with the mouse in realtime
+                if (!planetPlaced)
+                {
+                    Plane hPlane = new Plane(Vector3.up, Vector3.zero);
+                    float distance = 0;
+                    if (hPlane.Raycast(ray, out distance))
+                    {
+                        RaycastHit hit = new RaycastHit();
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            // Only set orbit if clicking in-bounds
+                            if (hit.collider.gameObject.name == "Orbit Plane")
+                            {
+                                Vector3 location = ray.GetPoint(distance);
+
+                                // Commented to prevent planet being placed under mouse
+                                //go.transform.position = location;
+
+                                // Simulate orbit path (absolute so the orbit direction doesn't change)
+                                p.enabled = true;
+                                p.orbitPath.xAxis = (Mathf.Abs(location.x));
+                                p.orbitPath.yAxis = (Mathf.Abs(location.z));
+                                //float scale = 1.0f;
+                                //p.transform.localScale = new Vector3(scale, scale, scale);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // if placing, press esc to reset everything
+        if (placing && Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            if (go != null)
+            {
+
+                Debug.Log(go.name);
+                // if button's name is Carbon
+                if (go.name.Contains("Carbon"))
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    carbonIncrement--;
+                    Debug.Log("2");
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+
+                // if button's name is Silicon
+                if (go.name.Contains("Hydrogen"))
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    siliconIncrement--;
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+
+                // if button's name is Methane
+                if (go.name.Contains("Nitrogen"))
+                {
+                    // Create a new planet
+                    //go = Instantiate(carbon) as GameObject;
+                    // increment planet name
+                    methaneIncrement--;
+                    //go.name = "Carbon " + gc.carbonIncrement;
+                    // Make planet a child object of the Sun
+                    //go.transform.parent = sun.transform;
+                    // Add planet to array of planets
+                    planets.Remove(go);
+                    Destroy(go);
+                    ResetPlacing();
+                    // Access the planet's script
+                    //p = go.GetComponent<Carbon>();
+                }
+            }
+
         }
     }
 
@@ -330,27 +502,63 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Placing Carbon planet!");
         SetBuildingActive(false);
+
+        // Create a new planet
+        go = Instantiate(carbon) as GameObject;
+        // increment planet name
+        carbonIncrement++;
+        go.name = "Carbon " + carbonIncrement;
+        // Make planet a child object of the Sun
+        go.transform.parent = sun.transform;
+        // Add planet to array of planets
+        planets.Add(go);
+        // Access the planet's script
+        p = go.GetComponent<Carbon>();
     }
     public void placeNitrogenPlanet()
     {
         Debug.Log("Placing Nitrogen planet!");
         SetBuildingActive(false);
+
+        // Create a new planet
+        go = Instantiate(nitrogen) as GameObject;
+        // increment planet name
+        methaneIncrement++;
+        go.name = "Nitrogen " + methaneIncrement;
+        // Make planet a child object of the Sun
+        go.transform.parent = sun.transform;
+        // Add planet to array of planets
+        planets.Add(go);
+        // Access the planet's script
+        p = go.GetComponent<Methane>();
     }
     public void placeHydrogenPlanet()
     {
-        Debug.Log("Placing Hyrogen planet!");
+        Debug.Log("Placing Hydrogen planet!");
         SetBuildingActive(false);
+
+        // Create a new planet
+        go = Instantiate(hydrogen) as GameObject;
+        // increment planet name
+        siliconIncrement++;
+        go.name = "Hydrogen " + siliconIncrement;
+        // Make planet a child object of the Sun
+        go.transform.parent = sun.transform;
+        // Add planet to array of planets
+        planets.Add(go);
+        // Access the planet's script
+        p = go.GetComponent<Silicon>();
     }
 
-    private void SetBuildingActive(bool active)
+    public void SetBuildingActive(bool active)
     {
         Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
         for (int i = 0; i < _planetaryButtons.Length; i++)
         {
-            if (_planetaryButtons[i].interactable)
-            {
+            //if (_planetaryButtons[i].interactable)
+            //{
                 _planetaryButtons[i].interactable = active;
-            }
+            //}
         }
     }
 
@@ -530,11 +738,32 @@ public class GameController : MonoBehaviour
             GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "There was a storm. \n Resource collection rate decreased by half.", guiStyle);
         }
     }
+
+    void ResetPlacing()
+    {
+        placing = false;
+        //go = null;
+        planetPlaced = false;
+        ToggleInteractability(true);
+        SetBuildingActive(true);
+        //clickedSlot = null;
+    }
+
     public void Simulate()
     {
         ResetLinking();
         simulate = true;
         canBuild = true;
+
+
+        // reset place planet
+        if (go != null && planetPlaced)
+        {
+            go = null;
+            planetPlaced = false;
+        }
+
+        playButton.interactable = false;
 
         ToggleInteractability(false);
 
@@ -590,43 +819,43 @@ public class GameController : MonoBehaviour
         if (canInteract && canBuild)
         {
             // New UI
-            SetBuildingActive(canInteract);
+            //SetBuildingActive(canInteract);
 
-            foreach (Button button in planetButtons)
-            {
+            //foreach (Button button in planetButtons)
+            //{
                 //--Unlock Tier 1 planets
                 // Carbon is always unlocked
-                if (button.name == "Carbon")
-                {
-                    button.interactable = true;
-                }
+                //if (button.name == "Carbon")
+                //{
+                //    button.interactable = true;
+                //}
                 // -- Unlock Tier 2 planets
                 // Silicon, Ammonia, Methane require Carbon to unlock
-                if (carbonIncrement > 0)
-                {
-                    if (button.name == "Silicon" || button.name == "Ammonia" || button.name == "Methane")
-                    {
-                        button.interactable = true;
-                    }
-                }
+                //if (carbonIncrement > 0)
+                //{
+                //    if (button.name == "Silicon" || button.name == "Ammonia" || button.name == "Methane")
+                //    {
+                //        button.interactable = true;
+                //    }
+                //}
                 // -- Unlock Tier 3 planets
                 // Germanium requires Silicon to unlock
-                if (siliconIncrement > 0)
-                {
-                    if (button.name == "Germanium")
-                    {
-                        button.interactable = true;
-                    }
-                }
+                //if (siliconIncrement > 0)
+                //{
+                //    if (button.name == "Germanium")
+                //    {
+                //        button.interactable = true;
+                //    }
+                //}
                 // Acetylene requires Ammonia or Germanium to unlock
-                if (ammoniaIncrement > 0 || germaniumIncrement > 0)
-                {
-                    if (button.name == "Acetylene")
-                    {
-                        button.interactable = true;
-                    }
-                }
-            }
+            //    if (ammoniaIncrement > 0 || germaniumIncrement > 0)
+            //    {
+            //        if (button.name == "Acetylene")
+            //        {
+            //            button.interactable = true;
+            //        }
+            //    }
+            //}
             // Unlock technologies
 //            Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
 //            foreach (Transform t in ts)

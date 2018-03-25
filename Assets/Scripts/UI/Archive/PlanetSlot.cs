@@ -183,7 +183,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             // Update the global placing variable
             gc.placing = true;
-            gc.nextTurn.interactable = false;
+            gc.playButton.interactable = false;
 
             // Update the game state
             if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT)
@@ -227,7 +227,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                                 p.StopCoroutine(p.placing);
                             }
 
-                            gc.nextTurn.interactable = true;
+                            gc.playButton.interactable = true;
                             planetPlaced = true;
                             gc.canBuild = false;
                             gc.ToggleInteractability(false);

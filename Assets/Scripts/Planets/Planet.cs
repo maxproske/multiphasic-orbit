@@ -452,8 +452,9 @@ public class Planet : MonoBehaviour
             hydrogen += addHydrogen * collectionMultiplier;
 
             gc.simulate = false;
-            gc.nextTurn.interactable = true;
-            gc.ToggleInteractability(true);
+            gc.playButton.interactable = true;
+            //gc.ToggleInteractability(true);
+            gc.SetBuildingActive(true);
         }
     }
 

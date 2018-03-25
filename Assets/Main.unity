@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GAME_STATE: 0
   PREVIOUS_GAME_STATE: 0
-  nextTurn: {fileID: 0}
+  playButton: {fileID: 1184540797}
   simulate: 0
   canBuild: 0
   planetsParent: {fileID: 0}
@@ -190,6 +190,12 @@ MonoBehaviour:
   rogueIncrement: 0
   storm: 0
   linksuccessful: 0
+  sun: {fileID: 1694319099}
+  carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
+  nitrogen: {fileID: 1302749218511646, guid: 68c908146202de54a9c5a6a0e8d632ad, type: 2}
+  hydrogen: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
+  go: {fileID: 0}
+  planetPlaced: 0
 --- !u!4 &519037294
 Transform:
   m_ObjectHideFlags: 0
@@ -614,7 +620,7 @@ Prefab:
     - target: {fileID: 224975783022222584, guid: 4fae5d09e2100f540b77e9f316f2e036,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 224750561415902576, guid: 4fae5d09e2100f540b77e9f316f2e036,
         type: 2}
@@ -1095,6 +1101,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1404209861}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1184540797 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114135157180620244, guid: 4fae5d09e2100f540b77e9f316f2e036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1137079175}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!224 &1220379835 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224392716814759474, guid: 9a1898ba0128f9140aaa2fe21f603dc3,
