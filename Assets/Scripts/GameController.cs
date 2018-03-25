@@ -514,6 +514,7 @@ public class GameController : MonoBehaviour
         planets.Add(go);
         // Access the planet's script
         p = go.GetComponent<Carbon>();
+        Debug.Log("placeCarbonPlanet");
     }
     public void placeNitrogenPlanet()
     {

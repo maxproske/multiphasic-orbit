@@ -5,19 +5,29 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 // -- Create UI Controller
-// UIController ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
+// private UIController ui;
+// ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
 
 // -- Update the left panel
 // ui.SetSelectedPlanet (Planet planet);
 
-// -- Update the bottom panel
-// ui.SetActionPanel (bool simulating, bool canSimulate, bool canLink);
+// -- Set play button
+// ui.SetPlayInteractive (true/false)
 
-// -- Update the turn counter (eg. Turn 1)
-// ui.SetTurn (int turn);
+// -- Set turn count (eg. Turn 1)
+// ui.SetTurn (1);
 
-// -- Update the distance counter (eg. 20 uu)
-// ui.SetDistance (int distance);
+// -- Set distance(eg. 20 uu)
+// ui.SetDistance (20);
+
+// -- Update resources
+// ui.UpdateResources();
+
+// -- Update population
+// ui.UpdatePopulation();
+
+// -- Update health
+// ui.UpdateHealth();
 
 public class UIController : MonoBehaviour 
 {
@@ -49,19 +59,19 @@ public class UIController : MonoBehaviour
     public RectTransform leftTechnologyPanel;
     private Button[] _technologyButtons; // Keep private
     private Text[] _technologyText; // Keep private
+    private Planet _selectedPlanet; // Keep private
 
 	/* Declare Right Panel
 	   ========================================================================== */
     // Action Panel
-    public RectTransform rightActionPanel;
-    private Button[] _actionButtons; // Keep private
+    public Button rightNextTurnButton;
 
 	private void Start()
 	{
 		/* Initialize Top Panel
 	       ====================================================================== */
 		SetTurn (1);
-		SetDistance (20);
+		SetDistance (0);
 
 		/* Initialize Left Panel
 	       ====================================================================== */
@@ -69,7 +79,7 @@ public class UIController : MonoBehaviour
 
 		/* Initialize Right Panel
 		   ====================================================================== */
-        SetActionPanel(false);
+        SetPlayInteractive(false);
 	}
 
 	/* Set Top Panel
@@ -91,6 +101,9 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (p != null) 
 		{
+            // Set global variable
+            this._selectedPlanet = p;
+
 			// Replace placeholder values with planet data
 			SetSelectedName (p.planetname);
 			SetSelectedPreview (p.planetSprite);
@@ -98,6 +111,7 @@ public class UIController : MonoBehaviour
 			SetSelectedPopulation (p.population);
 			SetSelectedHealth (p.health, p.maxHealth);
             SetSelectedTechnology (p.technologyLevel);
+
             // Enable last
             SetSelectedPanelsActive(true);
 		}
@@ -106,6 +120,7 @@ public class UIController : MonoBehaviour
 		{
             // Disable First
             SetSelectedPanelsActive();
+
 			// Replace placeholder values with default values
 			SetSelectedName ();
 			SetSelectedPreview ();
@@ -244,34 +259,54 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	/* Set Bottom Panel
+	/* Set Right Panel
 	   ========================================================================== */
-    public void SetActionPanel (bool canSimulate = false)
+    public void SetPlayInteractive (bool canSimulate = false)
     {
-        // Get reference to buttons
-        _actionButtons = rightActionPanel.GetComponentsInChildren<Button>();
+        rightNextTurnButton.interactable = canSimulate;
+    }
 
-        if (!canSimulate)
+   	/* Update Left Panel
+	   ========================================================================== */ 
+    public void UpdateResources ()
+    {
+        // Planet selected
+        if (_selectedPlanet != null)
         {
-            // Make uninteractive
-            for (int i = 0; i < _actionButtons.Length; i++)
-            {
-                _actionButtons[i].interactable = false;
-            }
+            SetSelectedResources(_selectedPlanet.carbon, _selectedPlanet.nitrogen, _selectedPlanet.hydrogen);
         }
-        else 
+        // No planet selected
+        else
         {
-            // Make interactive
-            for (int i = 0; i < _actionButtons.Length; i++)
-            {
-                if (i == 0)
-                {
-                    _actionButtons[i].interactable = canSimulate;
-                }
-            }
+            SetSelectedResources();
         }
     }
 
-	/* Set Left Panel
-	   ========================================================================== */
+    public void UpdatePopulation ()
+    {
+        // Planet selected
+        if (_selectedPlanet != null)
+        {
+            SetSelectedPopulation(_selectedPlanet.population);
+        }
+        // No planet selected
+        else
+        {
+            SetSelectedPopulation();
+        }
+    }
+
+    public void UpdateHealth ()
+    {
+        // Planet selected
+        if (_selectedPlanet != null)
+        {
+            SetSelectedHealth(_selectedPlanet.health, _selectedPlanet.maxHealth);
+        }
+        // No planet selected
+        else
+        {
+            SetSelectedHealth();
+        }
+    }
 }

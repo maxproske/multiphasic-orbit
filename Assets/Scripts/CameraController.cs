@@ -5,6 +5,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
 	public Transform target;
+    private Camera camera;
 	public float distance = 0.0f;
 	public float xSpeed = 120.0f;
 	public float ySpeed = 120.0f;
@@ -17,17 +18,25 @@ public class CameraController : MonoBehaviour {
 
 	public float sizeMin = 100f;
 	public float sizeMax = 500f;
-	public float scrollAcceleration = 1000f;
+	private int scrollDistance = 60;
 
 	float x = 0.0f;
 	float y = 0.0f;
 
+    private UIController ui;
+
 	// Use this for initialization
 	void Start () 
 	{
+        camera = Camera.main;
+        ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
+
 		Vector3 angles = transform.eulerAngles;
 		x = angles.y;
 		y = angles.x;
+
+        // Initialize distance UI
+        ui.SetDistance((int)camera.orthographicSize);
 	}
 
 	void LateUpdate () 
@@ -62,23 +71,25 @@ public class CameraController : MonoBehaviour {
 		// Scroll in and out with the mouse scroll wheel
 		var scroll = Input.GetAxis ("Mouse ScrollWheel");
 		if (scroll != 0) {
-			// Clamp values if camera is too close or too far away
-
 			// Change the orthographic camera size
-			Camera.main.orthographicSize -= (scroll * scrollAcceleration);
+			Camera.main.orthographicSize -= (scroll > 0) ? scrollDistance : -scrollDistance;
+
+            // Clamp values if camera is too close or too far away
 			if (Camera.main.orthographicSize < sizeMin) {
 				Camera.main.orthographicSize = sizeMin;
 			} else if (Camera.main.orthographicSize > sizeMax) {
 				Camera.main.orthographicSize = sizeMax;
 			}
+           // Update distance UI last
+            ui.SetDistance((int)camera.orthographicSize);
 		}
 	}
 
 	public static float ClampAngle(float angle, float min, float max)
 	{
 		// Prevent camera view from crossing y=0
-		if (angle < 10) {
-			angle = 10f;
+		if (angle < 5) {
+			angle = 5f;
 		}
 
 		if (angle < -360F)
