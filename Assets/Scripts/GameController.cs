@@ -461,6 +461,12 @@ public class GameController : MonoBehaviour
                             }
 
                             playButton.interactable = true;
+                            
+                            if (ui.selectedPlanet == null)
+                            {
+                                ui.SetNoPlanetSelected();
+                            }
+
                             planetPlaced = true;
                             canBuild = false;
                             ToggleInteractability(false);

@@ -41,10 +41,12 @@ public class UIController : MonoBehaviour
 	/* Declare Left Panel
 	   ========================================================================== */
 	// Selection Panel
+    public RectTransform leftSelectionPanel;
 	public Text leftLeftText;
 	public Text leftNameText;
 	public Text leftRightText;
 	// Preview Panel
+    public RectTransform leftPreviewPanel;
 	public Image leftPreviewImage;
 	// Resource Panel
 	public Text leftCarbonText;
@@ -59,7 +61,7 @@ public class UIController : MonoBehaviour
     public RectTransform leftTechnologyPanel;
     private Button[] _technologyButtons; // Keep private
     private Text[] _technologyText; // Keep private
-    private Planet _selectedPlanet; // Keep private
+    public Planet selectedPlanet; // Keep private
 
 	/* Declare Right Panel
 	   ========================================================================== */
@@ -95,14 +97,14 @@ public class UIController : MonoBehaviour
 	}
 
 	/* Set Left Panel
-	   ========================================================================== */
+    ========================================================================== */
 	public void SetSelectedPlanet (Planet p = null)
 	{
 		// Planet selected
 		if (p != null) 
 		{
             // Set global variable
-            this._selectedPlanet = p;
+            this.selectedPlanet = p;
 
 			// Replace placeholder values with planet data
 			SetSelectedName (p.planetname);
@@ -113,6 +115,8 @@ public class UIController : MonoBehaviour
             SetSelectedTechnology (p.technologyLevel);
 
             // Enable last
+            SetSelectionPanelActive(true);
+            SetPreviewPanelActive(true);
             SetResourcePanelActive(true);
             SetStatusPanelActive(true);
             SetTechnologyPanelActive(p.population > 0);
@@ -121,6 +125,8 @@ public class UIController : MonoBehaviour
 		else 
 		{
             // Disable First
+            SetSelectionPanelActive();
+            SetPreviewPanelActive();
             SetResourcePanelActive();
             SetStatusPanelActive();
             SetTechnologyPanelActive();
@@ -131,9 +137,24 @@ public class UIController : MonoBehaviour
 			SetSelectedResources ();
 			SetSelectedPopulation ();
 			SetSelectedHealth ();
-            SetSelectedTechnology ();
 		}
 	}
+
+    public void SetNoPlanetSelected()
+    {
+        SetSelectionPanelActive(true);
+        SetPreviewPanelActive(true);
+    }
+
+    private void SetSelectionPanelActive (bool active = false) 
+    {
+        leftSelectionPanel.gameObject.SetActive(active);
+    }
+
+    private void SetPreviewPanelActive (bool active = false) 
+    {
+        leftPreviewPanel.gameObject.SetActive(active);
+    }
 
     private void SetResourcePanelActive (bool active = false) 
     {
@@ -283,9 +304,9 @@ public class UIController : MonoBehaviour
     public void UpdateResources ()
     {
         // Planet selected
-        if (_selectedPlanet != null)
+        if (selectedPlanet != null)
         {
-            SetSelectedResources(_selectedPlanet.carbon, _selectedPlanet.nitrogen, _selectedPlanet.hydrogen);
+            SetSelectedResources(selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
         }
         // No planet selected
         else
@@ -297,9 +318,9 @@ public class UIController : MonoBehaviour
     public void UpdatePopulation ()
     {
         // Planet selected
-        if (_selectedPlanet != null)
+        if (selectedPlanet != null)
         {
-            SetSelectedPopulation(_selectedPlanet.population);
+            SetSelectedPopulation(selectedPlanet.population);
         }
         // No planet selected
         else
@@ -311,9 +332,9 @@ public class UIController : MonoBehaviour
     public void UpdateHealth ()
     {
         // Planet selected
-        if (_selectedPlanet != null)
+        if (selectedPlanet != null)
         {
-            SetSelectedHealth(_selectedPlanet.health, _selectedPlanet.maxHealth);
+            SetSelectedHealth(selectedPlanet.health, selectedPlanet.maxHealth);
         }
         // No planet selected
         else
