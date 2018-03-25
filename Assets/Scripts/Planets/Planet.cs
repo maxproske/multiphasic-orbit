@@ -468,6 +468,7 @@ public class Planet : MonoBehaviour
             gc.playButton.interactable = true;
             //gc.ToggleInteractability(true);
             gc.SetBuildingActive(true);
+            gc.AddTurn();
         }
     }
 

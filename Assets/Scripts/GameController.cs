@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
     private GameObject selected; // hold selected GameObject
                                  // fail
     public bool fail;
+    private int turn;
     public GameObject roguePrefab;
     private List<GameObject> roguePlanets;
 
@@ -96,6 +97,8 @@ public class GameController : MonoBehaviour
     {
         ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
 
+        turn = 1;
+
         // states
         // Disable hints
         var hintsDisabled = true;
@@ -132,6 +135,12 @@ public class GameController : MonoBehaviour
         canBuild = true;
 
         ResetLinking();
+    }
+
+    public void AddTurn()
+    {
+        turn++;
+        ui.SetTurn(turn);
     }
 
     // Update is called once per frame
