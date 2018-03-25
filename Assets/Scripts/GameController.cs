@@ -83,12 +83,16 @@ public class GameController : MonoBehaviour
     private Planet p; // Access new planet script
     public bool planetPlaced; // Flag for drawing planet orbit in realtime
 
+    private UIController ui;
+
     // Use this for initialization
     void Start()
     {
         // states
         // Disable hints
         var hintsDisabled = true;
+
+        ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
 
         // Pass state
         GAME_STATE = hintsDisabled ? -1 : 0;
@@ -245,6 +249,9 @@ public class GameController : MonoBehaviour
 
             // What is the name of the game object to create
             var mstName = selected.name + " Skill Tree";
+
+            // Update selected planet in UI
+            ui.SetSelectedPlanet (planetScript);
 
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
