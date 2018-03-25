@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     public Transform planetsParent; // Reference to skill tree slots parent
     private Button[] planetButtons;
 
+    public RectTransform rightPlanetaryPanel; // New UI
+
     // linking 
     public List<GameObject> planets;
     public Button startLinkButton;
@@ -324,6 +326,34 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void placeCarbonPlanet()
+    {
+        Debug.Log("Placing Carbon planet!");
+        SetBuildingActive(false);
+    }
+    public void placeNitrogenPlanet()
+    {
+        Debug.Log("Placing Nitrogen planet!");
+        SetBuildingActive(false);
+    }
+    public void placeHydrogenPlanet()
+    {
+        Debug.Log("Placing Hyrogen planet!");
+        SetBuildingActive(false);
+    }
+
+    private void SetBuildingActive(bool active)
+    {
+        Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
+        for (int i = 0; i < _planetaryButtons.Length; i++)
+        {
+            if (_planetaryButtons[i].interactable)
+            {
+                _planetaryButtons[i].interactable = active;
+            }
+        }
+    }
+
     void StartLink()
     {
         if (!linking)
@@ -500,7 +530,7 @@ public class GameController : MonoBehaviour
             GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "There was a storm. \n Resource collection rate decreased by half.", guiStyle);
         }
     }
-    void Simulate()
+    public void Simulate()
     {
         ResetLinking();
         simulate = true;
@@ -559,6 +589,9 @@ public class GameController : MonoBehaviour
     {
         if (canInteract && canBuild)
         {
+            // New UI
+            SetBuildingActive(canInteract);
+
             foreach (Button button in planetButtons)
             {
                 //--Unlock Tier 1 planets
