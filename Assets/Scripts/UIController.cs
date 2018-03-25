@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 // -- Create UI Controller
 // UIController ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
 
-// -- Update the right panel
+// -- Update the left panel
 // ui.SetSelectedPlanet (Planet planet);
 
 // -- Update the bottom panel
@@ -28,35 +28,33 @@ public class UIController : MonoBehaviour
 	// Distance Panel
 	public Text topDistanceText;
 
-	/* Declare Right Panel
+	/* Declare Left Panel
 	   ========================================================================== */
 	// Selection Panel
-	public Text rightLeftText;
-	public Text rightNameText;
-	public Text rightRightText;
+	public Text leftLeftText;
+	public Text leftNameText;
+	public Text leftRightText;
 	// Preview Panel
-	public Image rightPreviewImage;
+	public Image leftPreviewImage;
 	// Resource Panel
-	public Text rightCarbonText;
-	public Text rightNitrogenText;
-	public Text rightHydrogenText;
-    public RectTransform rightResourcePanel;
+	public Text leftCarbonText;
+	public Text leftNitrogenText;
+	public Text leftHydrogenText;
+    public RectTransform leftResourcePanel;
 	// Status Panel
-	public Text rightPopulationText;
-	public Text rightHealthText;
-    public RectTransform rightStatusPanel;
+	public Text leftPopulationText;
+	public Text leftHealthText;
+    public RectTransform leftStatusPanel;
     // Technology Panel
-    public RectTransform rightTechnologyPanel;
+    public RectTransform leftTechnologyPanel;
     private Button[] _technologyButtons; // Keep private
     private Text[] _technologyText; // Keep private
 
-	/* Declare Bottom Panel
+	/* Declare Right Panel
 	   ========================================================================== */
-    public RectTransform bottomActionPanel;
+    // Action Panel
+    public RectTransform rightActionPanel;
     private Button[] _actionButtons; // Keep private
-
-	/* Declare Left Panel
-	   ========================================================================== */
 
 	private void Start()
 	{
@@ -65,16 +63,13 @@ public class UIController : MonoBehaviour
 		SetTurn (1);
 		SetDistance (20);
 
-		/* Initialize Right Panel
+		/* Initialize Left Panel
 	       ====================================================================== */
 		SetSelectedPlanet (null);
 
-		/* Initialize Bottom Panel
+		/* Initialize Right Panel
 		   ====================================================================== */
-        SetActionPanel(false, false, false);
-
-		/* Initialize Left Panel
-		   ====================================================================== */
+        SetActionPanel(false);
 	}
 
 	/* Set Top Panel
@@ -89,7 +84,7 @@ public class UIController : MonoBehaviour
 		topDistanceText.text = distance.ToString() + " uu";
 	}
 
-	/* Set Right Panel
+	/* Set Left Panel
 	   ========================================================================== */
 	public void SetSelectedPlanet (Planet p = null)
 	{
@@ -123,9 +118,9 @@ public class UIController : MonoBehaviour
 
     private void SetSelectedPanelsActive (bool active = false) 
     {
-        rightResourcePanel.gameObject.SetActive(active);
-        rightStatusPanel.gameObject.SetActive(active);
-        rightTechnologyPanel.gameObject.SetActive(active);
+        leftResourcePanel.gameObject.SetActive(active);
+        leftStatusPanel.gameObject.SetActive(active);
+        leftTechnologyPanel.gameObject.SetActive(active);
     }
 
 	private void SetSelectedName (string name = null)
@@ -133,16 +128,16 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (name != null) 
 		{
-			rightLeftText.text = "«";
-			rightNameText.text = name;
-			rightRightText.text = "»";
+			leftLeftText.text = "«";
+			leftNameText.text = name;
+			leftRightText.text = "»";
 		}
 		// No planet selected
 		else 
 		{
-			rightLeftText.text = "";
-			rightNameText.text = "No Planet Selected";
-			rightRightText.text = "";
+			leftLeftText.text = "";
+			leftNameText.text = "No Planet Selected";
+			leftRightText.text = "";
 		}
 	}
 
@@ -151,14 +146,14 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (sprite != null) 
 		{
-			rightPreviewImage.GetComponent<Image>().sprite = sprite;
+			leftPreviewImage.GetComponent<Image>().sprite = sprite;
 		}
 		// No planet selected
 		else 
 		{
 			// Resources.Load searches in the directory "Assets/Resources"
 			sprite = (Sprite)Resources.Load<Sprite>("Default");
-			rightPreviewImage.GetComponent<Image>().sprite = sprite;
+			leftPreviewImage.GetComponent<Image>().sprite = sprite;
 		}
 	}
 
@@ -167,14 +162,14 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (carbon > -1 && nitrogen > -1 && hydrogen > -1) 
 		{
-			rightCarbonText.text = carbon.ToString();
-			rightNitrogenText.text = nitrogen.ToString();
-			rightHydrogenText.text = hydrogen.ToString();
+			leftCarbonText.text = carbon.ToString();
+			leftNitrogenText.text = nitrogen.ToString();
+			leftHydrogenText.text = hydrogen.ToString();
 		}
 		// No planet selected
 		else 
 		{
-			rightCarbonText.text = rightNitrogenText.text = rightHydrogenText.text = "-";
+			leftCarbonText.text = leftNitrogenText.text = leftHydrogenText.text = "-";
 		}
 	}
 
@@ -185,17 +180,17 @@ public class UIController : MonoBehaviour
 		{
 			if (population > 0) 
 			{
-				rightPopulationText.text = population.ToString () + " Billion";
+				leftPopulationText.text = population.ToString () + " Billion";
 			} 
 			else 
 			{
-				rightPopulationText.text = "Uninhabited";
+				leftPopulationText.text = "Uninhabited";
 			}
 		}
 		// No planet selected
 		else 
 		{
-			rightPopulationText.text = "-";
+			leftPopulationText.text = "-";
 		}
 	}
 
@@ -206,17 +201,17 @@ public class UIController : MonoBehaviour
 		{
 			if (health <= maxHealth) 
 			{
-				rightHealthText.text = health.ToString () + "/" + maxHealth.ToString () + " HP";
+				leftHealthText.text = health.ToString () + "/" + maxHealth.ToString () + " HP";
 			} 
 			else 
 			{
-				rightHealthText.text = "ERROR: health > max health";
+				leftHealthText.text = "ERROR: health > max health";
 			}
 		}
 		// No planet selected
 		else 
 		{
-			rightHealthText.text = "-";
+			leftHealthText.text = "-";
 		}
 	}
 
@@ -225,7 +220,7 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (technology > -1) 
 		{
-            _technologyButtons = rightTechnologyPanel.GetComponentsInChildren<Button>();
+            _technologyButtons = leftTechnologyPanel.GetComponentsInChildren<Button>();
             for (int i = 0; i < _technologyButtons.Length; i++)
             {
                 if (_technologyButtons[i].interactable)
@@ -238,7 +233,7 @@ public class UIController : MonoBehaviour
 		else 
 		{
             // Make uninteractive
-            _technologyButtons = rightTechnologyPanel.GetComponentsInChildren<Button>();
+            _technologyButtons = leftTechnologyPanel.GetComponentsInChildren<Button>();
             for (int i = 0; i < _technologyButtons.Length; i++)
             {
                 if (_technologyButtons[i].interactable)
@@ -251,12 +246,12 @@ public class UIController : MonoBehaviour
 
 	/* Set Bottom Panel
 	   ========================================================================== */
-    public void SetActionPanel (bool simulating = false, bool canSimulate = false, bool canLink = false)
+    public void SetActionPanel (bool canSimulate = false)
     {
         // Get reference to buttons
-        _actionButtons = bottomActionPanel.GetComponentsInChildren<Button>();
+        _actionButtons = rightActionPanel.GetComponentsInChildren<Button>();
 
-        if (simulating)
+        if (!canSimulate)
         {
             // Make uninteractive
             for (int i = 0; i < _actionButtons.Length; i++)
@@ -271,15 +266,7 @@ public class UIController : MonoBehaviour
             {
                 if (i == 0)
                 {
-                    _actionButtons[i].interactable = true;
-                }
-                if (i == 1)
-                {
                     _actionButtons[i].interactable = canSimulate;
-                }
-                if (i == 2)
-                {
-                    _actionButtons[i].interactable = canLink;
                 }
             }
         }
