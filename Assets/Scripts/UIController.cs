@@ -13,10 +13,10 @@ using UnityEngine.EventSystems;
 // -- Update the bottom panel
 // ui.SetActionPanel (bool simulating, bool canSimulate, bool canLink);
 
-// -- Update the turn counter (Turn 1)
+// -- Update the turn counter (eg. Turn 1)
 // ui.SetTurn (int turn);
 
-// -- Update the distance counter (20 uu)
+// -- Update the distance counter (eg. 20 uu)
 // ui.SetDistance (int distance);
 
 public class UIController : MonoBehaviour 
