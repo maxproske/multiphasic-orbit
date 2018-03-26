@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UninteractiveChildren : MonoBehaviour {
+public class BuildButtons : MonoBehaviour {
 
     private Button myButton;
     private bool last;
@@ -24,7 +24,6 @@ public class UninteractiveChildren : MonoBehaviour {
         // If interactable set alpha to normal
         if (last != current)
         {
-            Debug.Log("Button state changed!");
             Clicked();
         }
 
@@ -39,7 +38,6 @@ public class UninteractiveChildren : MonoBehaviour {
         Text myText = myButton.GetComponentInChildren<Text>();
         if (myText != null) {
             // Button contains text
-            Debug.Log("Button contains text.");
             Color color = myText.color;
             color.a = myButton.IsInteractable() ? 1f : 0.09f;
             myText.color = color;

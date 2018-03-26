@@ -420,7 +420,7 @@ public class GameController : MonoBehaviour
         {
             // Update the global placing variable
             placing = true;
-            playButton.interactable = false;
+            //playButton.interactable = false;
 
             // Update the game state
             if (GAME_STATE == Constants.TURN_1_PLANET_SLOT)
