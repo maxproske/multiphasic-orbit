@@ -414,6 +414,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 218989588}
+--- !u!114 &257195207 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114248132683032596, guid: 4fae5d09e2100f540b77e9f316f2e036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1137079175}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &398021933 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114674470334361420, guid: 4fae5d09e2100f540b77e9f316f2e036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1137079175}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &440985769 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114668094856496740, guid: 9a1898ba0128f9140aaa2fe21f603dc3,
@@ -495,6 +507,9 @@ MonoBehaviour:
   hydrogen: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
   go: {fileID: 0}
   planetPlaced: 0
+  stone: {fileID: 1575614112}
+  water: {fileID: 398021933}
+  gas: {fileID: 257195207}
   shot: {fileID: 0}
 --- !u!4 &519037294
 Transform:
@@ -2476,6 +2491,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1573202887}
+--- !u!114 &1575614112 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114306604599507220, guid: 4fae5d09e2100f540b77e9f316f2e036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1137079175}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &1642176585 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114837328921603636, guid: 9a1898ba0128f9140aaa2fe21f603dc3,
