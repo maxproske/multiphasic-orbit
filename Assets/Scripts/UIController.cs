@@ -299,9 +299,9 @@ public class UIController : MonoBehaviour
             _technologyButtons = leftTechnologyPanel.GetComponentsInChildren<Button>();
             for (int i = 0; i < _technologyButtons.Length; i++)
             {
-                if (_technologyButtons[i].interactable)
+                if (!_technologyButtons[i].interactable)
                 {
-                    _technologyButtons[i].interactable = false;
+                    _technologyButtons[i].interactable = true;
                 }
             }
 		}
