@@ -522,6 +522,7 @@ GameObject:
   - component: {fileID: 222209264584849750}
   - component: {fileID: 114609274998590630}
   - component: {fileID: 114164010260041694}
+  - component: {fileID: 95811308278446858}
   m_Layer: 5
   m_Name: Right Panel
   m_TagString: Untagged
@@ -824,6 +825,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95811308278446858
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1584464098354378}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c16624a3a23f894fb7e1da7ec160df9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114001775427478212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3312,7 +3330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -15}
+  m_AnchoredPosition: {x: -240, y: -15}
   m_SizeDelta: {x: 240, y: -30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224513276860177116

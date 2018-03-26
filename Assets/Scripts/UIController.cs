@@ -40,6 +40,7 @@ public class UIController : MonoBehaviour
 
 	/* Declare Left Panel
 	   ========================================================================== */
+    public RectTransform leftPanel;
 	// Selection Panel
     public RectTransform leftSelectionPanel;
 	public Text leftLeftText;
@@ -144,6 +145,8 @@ public class UIController : MonoBehaviour
     {
         SetSelectionPanelActive(true);
         SetPreviewPanelActive(true);
+        // Play animation
+        OpenLeftPanel();
     }
 
     private void SetSelectionPanelActive (bool active = false) 
@@ -341,5 +344,21 @@ public class UIController : MonoBehaviour
         {
             SetSelectedHealth();
         }
+    }
+
+    /* Animations
+    ========================================================================== */ 
+    public void OpenLeftPanel() 
+    {
+        Animator anim = leftPanel.GetComponent<Animator>();
+        anim.enabled = true;
+        anim.Play("LeftPanelSlideIn");
+    }
+
+    public void CloseLeftPanel() 
+    {
+        Animator anim = leftPanel.GetComponent<Animator>();
+        anim.enabled = true;
+        anim.Play("LeftPanelSlideOut");
     }
 }
