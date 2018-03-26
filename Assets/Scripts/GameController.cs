@@ -320,7 +320,11 @@ public class GameController : MonoBehaviour
             // What is the name of the game object to create
             var mstName = selected.name + " Skill Tree";
 
+            // Make play button green after clicking planet for the first time
+            if (ui.selectedPlanet == null) playButton.interactable = true;
+
             ui.SetSelectedPlanet(planetScript);
+
 
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
@@ -328,7 +332,7 @@ public class GameController : MonoBehaviour
 
                 notBuiltTooltip.SetActive(false);
 
-                if (!linking && !placing && Input.GetMouseButtonUp(0) && !microSkillTreeNames.Contains(mstName) && GAME_STATE == -1 || (GAME_STATE >= Constants.TURN_3_TECH_TREE))
+                if (!linking && !placing && Input.GetMouseButtonUp(0))
                 {
                     // // Create a new micro skill tree
                     // //Debug.Log("Creating micro skill tree for " + selected.name);
@@ -460,11 +464,14 @@ public class GameController : MonoBehaviour
                                 p.StopCoroutine(p.placing);
                             }
 
-                            playButton.interactable = true;
+                            //playButton.interactable = true;
                             
                             if (ui.selectedPlanet == null)
                             {
                                 ui.SetNoPlanetSelected();
+                            } 
+                            else {
+                                playButton.interactable = true;
                             }
 
                             planetPlaced = true;
