@@ -31,4 +31,7 @@
     public const int CARBON_ATTACK_POWER = 3;
     public const int CARBON_TURNS_TO_DIE = 2;
 
+    // Constants for missions
+    public const int MISSION_1 = 31;
+
 }

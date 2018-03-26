@@ -102,14 +102,24 @@ public class GameController : MonoBehaviour
     public bool planetPlaced; // Flag for drawing planet orbit in realtime
 
     private UIController ui;
-	public Button stone;
-	public Button water;
-	public Button gas;
-	public GameObject shot;
+
+    // planetary ui buttons
+    public Button stone;
+    public Button water;
+    public Button gas;
+
+    // missions
+    private Missions m;
+    public List<int> missions;
+    public List<int> missionsInProgress;
+    public List<int> missionsCompleted;
+
+    public GameObject shot;
     // Use this for initialization
     void Start()
     {
-        ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
+        ui = GameObject.Find("Canvas").GetComponent<UIController>();
+        m = GameObject.Find("Missions").GetComponent<Missions>();
 
         turn = 1;
 
@@ -163,10 +173,26 @@ public class GameController : MonoBehaviour
         simulate = false;
         canBuild = true;
 
-		stone.interactable = true;
-		water.interactable = true;
-		gas.interactable = true;
+        stone.interactable = true;
+        water.interactable = false;
+        gas.interactable = false;
+
         ResetLinking();
+
+        missions.Add(Constants.MISSION_1);
+
+        foreach (var mission in missions)
+        {
+            missionsInProgress.Add(mission);
+        }
+    }
+
+    public void CheckMissions(List<int> missionsList)
+    {
+        for (int i = 0; i < missionsInProgress.Count; i++)
+        {
+            m.OnNotify(missionsInProgress[i]);
+        }
     }
 
 	private void settech1(){
@@ -716,11 +742,25 @@ public class GameController : MonoBehaviour
     public void SetBuildingActive(bool active)
     {
         Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
-        for (int i = 0; i < _planetaryButtons.Length; i++)
+        //for (int i = 0; i < _planetaryButtons.Length; i++)
+        //{
+        if (canBuild)
         {
-            // Make all planet buttons interactable
-            _planetaryButtons[i].interactable = active;
+            stone.interactable = active;
+
+            if (carbonIncrement > 0)
+            {
+                water.interactable = active;
+            }
+            if (methaneIncrement > 0)
+            {
+                gas.interactable = active;
+            }
         }
+        
+        // Make all planet buttons interactable
+        //_planetaryButtons[i].interactable = active;
+        //}
 
         // Increase turn counter
         if (active && _planetaryButtons[0].IsInteractable())
@@ -949,6 +989,7 @@ public class GameController : MonoBehaviour
 
     public void Simulate()
     {
+        CheckMissions(missions);
         ResetLinking();
         simulate = true;
         canBuild = true;
