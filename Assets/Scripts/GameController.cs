@@ -110,9 +110,7 @@ public class GameController : MonoBehaviour
 
     // missions
     private Missions m;
-    public List<int> missions;
-    public List<int> missionsInProgress;
-    public List<int> missionsCompleted;
+    public List<GameObject> missions;
 
     public GameObject shot;
     // Use this for initialization
@@ -179,19 +177,22 @@ public class GameController : MonoBehaviour
 
         ResetLinking();
 
-        missions.Add(Constants.MISSION_1);
-
+        // reset all missions to incompleted
         foreach (var mission in missions)
         {
-            missionsInProgress.Add(mission);
+            mission.GetComponent<Mission>().completed = false;
         }
+
     }
 
-    public void CheckMissions(List<int> missionsList)
+    public void CheckMissions(List<GameObject> missionsList)
     {
-        for (int i = 0; i < missionsInProgress.Count; i++)
+        foreach (var mission in missionsList)
         {
-            m.OnNotify(missionsInProgress[i]);
+            if (!mission.GetComponent<Mission>().completed)
+            {
+                m.OnNotify(mission);
+            }
         }
     }
 
