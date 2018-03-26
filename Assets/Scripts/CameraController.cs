@@ -16,9 +16,9 @@ public class CameraController : MonoBehaviour {
 	public float distanceMin = .5f;
 	public float distanceMax = 15f;
 
-	public float sizeMin = 100f;
-	public float sizeMax = 500f;
-	private int scrollDistance = 60;
+	public float sizeMin = 40f;
+	public float sizeMax = 600f;
+	private int scrollDistance = 70;
 
 	float x = 0.0f;
 	float y = 0.0f;
