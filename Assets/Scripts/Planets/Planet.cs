@@ -27,7 +27,7 @@ public class Planet : MonoBehaviour
 	public bool stormsheid = false;
 	public bool moreResource = false;
     public int technologyLevel = 0;
-	public int healthbar =100;
+
     // Get a reference to the LineRenderer
     LineRenderer lr;
 

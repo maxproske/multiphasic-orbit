@@ -149,7 +149,10 @@ public class GameController : MonoBehaviour
 		if (shot != null) {
 			shot.transform.position = Vector3.MoveTowards (shot.transform.position, planet2.transform.position, 80*Time.deltaTime);
 			if (shot.transform.position == planet2.transform.position) {
-				secondPlanetScript.healthbar -= 25;
+				secondPlanetScript.health -= 25;
+				if (secondPlanetScript.health <= 0) {
+//					planets.Remove (planet2);
+				}
 				attacking = false;
 				firstPlanet = false;
 				simulate = false;
@@ -260,14 +263,14 @@ public class GameController : MonoBehaviour
 							else
 							{
 								// if selected is not planet 1
-								if (selected != planet1)
-								{
-		
+//								if (selected != planet1&&selected.CompareTag ("Rogue"))
+//								{
+//		
 						
 										planet2 = hit.collider.gameObject;
 										secondPlanetScript = planet2.GetComponent<Planet>();
 
-								}
+//								}
 							}
 						}
 					}
@@ -754,13 +757,14 @@ public class GameController : MonoBehaviour
 	void attack()
 	{
 		// if both variables are set
-		if (planet1 != null && planet2 != null)
-		{
-			shot = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-			shot.transform.localScale = new Vector3 (8f, 8f, 8f);
-			shot.transform.position = planet1.transform.position;
+		if (shot == null) {
+			if (planet1 != null && planet2 != null) {
+				shot = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+				shot.transform.localScale = new Vector3 (8f, 8f, 8f);
+				shot.transform.position = planet1.transform.position;
 
-		
+			
+			}
 		}
 	}
 
