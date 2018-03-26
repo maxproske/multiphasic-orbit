@@ -203,7 +203,7 @@ public class UIController : MonoBehaviour
 		else 
 		{
 			// Resources.Load searches in the directory "Assets/Resources"
-			sprite = (Sprite)Resources.Load<Sprite>("Default");
+			sprite = (Sprite)Resources.Load<Sprite>("Icons/delete-material-white");
 			leftPreviewImage.GetComponent<Image>().sprite = sprite;
 		}
 	}
