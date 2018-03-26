@@ -63,6 +63,8 @@ public class UIController : MonoBehaviour
     private Button[] _technologyButtons; // Keep private
     private Text[] _technologyText; // Keep private
     public Planet selectedPlanet; // Keep private
+    // Helper variables
+    private Planet previousPlanet; // Keep private
 
 	/* Declare Right Panel
 	   ========================================================================== */
@@ -104,7 +106,8 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (p != null) 
 		{
-            // Set global variable
+            // Set global variables
+            this.previousPlanet = this.selectedPlanet;
             this.selectedPlanet = p;
 
 			// Replace placeholder values with planet data
@@ -121,6 +124,9 @@ public class UIController : MonoBehaviour
             SetResourcePanelActive(true);
             SetStatusPanelActive(true);
             SetTechnologyPanelActive(p.population > 0);
+
+            // GFX
+            SetSelectedOrbit();
 		}
 		// No planet selected
 		else 
@@ -138,6 +144,9 @@ public class UIController : MonoBehaviour
 			SetSelectedResources ();
 			SetSelectedPopulation ();
 			SetSelectedHealth ();
+
+            // GFX
+            SetSelectedOrbit();
 		}
 	}
 
@@ -147,6 +156,22 @@ public class UIController : MonoBehaviour
         SetPreviewPanelActive(true);
         // Play animation
         OpenLeftPanel();
+    }
+
+    public void SetSelectedOrbit() 
+    {
+        if (previousPlanet != null) 
+        {
+            // Hide orbit of previous planet
+            Color previousColor = Color.white;
+            previousColor.a = 0.04f;
+            previousPlanet.SetLineRendererTint(previousColor);
+
+            // Highlight orbit of selected planet
+            Color selectedColor = Color.white;
+            selectedColor.a = 1f;
+            selectedPlanet.SetLineRendererTint(selectedColor);
+        }
     }
 
     private void SetSelectionPanelActive (bool active = false) 

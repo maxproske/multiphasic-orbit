@@ -122,11 +122,19 @@ public class Planet : MonoBehaviour
         turnsToDie = 0;
     }
 
+    public void SetLineRendererTint(Color c){
+        lr.material.SetColor("_TintColor", c);
+    }
+
     public void Awake()
     {
         // Get reference when we start the game
         lr = GetComponent<LineRenderer>();
-		lr.startWidth = 1f;
+		lr.startWidth = 2f;
+
+        Color color = Color.white;
+        color.a = 0.04f;
+        lr.material.SetColor("_TintColor", color);
 
         // Calculate ellipse right when we start the game
         if (orbitingObject.transform.parent != null)

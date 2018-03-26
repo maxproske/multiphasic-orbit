@@ -13,6 +13,7 @@ public class PlayButton : MonoBehaviour {
     {
         myButton = this.GetComponent<Button>();
         last = current = myButton.IsInteractable();
+        Clicked();
     }
 
     void Update()
