@@ -28,6 +28,8 @@ public class Planet : MonoBehaviour
 	public bool stormsheid = false;
 	public bool moreResource = false;
     public int technologyLevel = 0;
+	public bool iflinkactive=false;
+	public bool ifattackactive=false;
 
     // Get a reference to the LineRenderer
     LineRenderer lr;

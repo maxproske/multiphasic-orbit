@@ -326,9 +326,16 @@ public class UIController : MonoBehaviour
 
     private void SetSelectedTechnology (int technology = -1)
 	{
+		_technologyButtons = leftTechnologyPanel.GetComponentsInChildren<Button>();
 		// Planet selected
 		if (technology > -1) {
-
+			for (int i = 0; i < _technologyButtons.Length; i++)
+			{
+				if (_technologyButtons[i].interactable)
+				{
+					_technologyButtons[i].interactable = false;
+				}
+			}
 		}
 
 		// No planet selected
