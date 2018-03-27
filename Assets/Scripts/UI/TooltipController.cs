@@ -27,9 +27,18 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
     // Reference to UI
 	private UIController ui;
 
+    private bool tooltipHasWidth = false;
+
+    private RectTransform tooltipPanel;
+
 	// Starts when TooltipController is instantiated in UIController
     void Start()
     {
+        // Set flag
+        tooltipHasWidth = false;
+        tooltipPanel = null;
+
+        // Set resources
         ui = GameObject.Find("Canvas").GetComponent<UIController>();
         myPrefab = (GameObject)Resources.Load<GameObject>("Prefabs/Tooltip");
 
@@ -68,6 +77,13 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
 		myHiddenParentText2 = go2.GetComponent<Text> ();
 		myVisualChildText2 = go2.GetComponentsInChildren<Text> ()[1].GetComponent<Text>();
 		myHiddenParentText2.text = myVisualChildText2.text = myString;
+
+        // Make children invisible last
+        RectTransform[] children = go2.GetComponentsInChildren<RectTransform>();
+        foreach (var child in children)
+        {
+            child.gameObject.SetActive(false);
+        }
 	}
 
 	public void OnPointerEnter (PointerEventData eventData)
@@ -82,6 +98,30 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
         UpdateTooltip();
 	}
 
+    void Update ()
+    {
+        if (!tooltipHasWidth) 
+        {
+            tooltipPanel = (RectTransform)go2.transform;
+            float tooltipPanelWidth = tooltipPanel.rect.width;
+            if (tooltipPanelWidth > 0) 
+            {
+                // Make children visible
+				RectTransform[] children = go2.GetComponentsInChildren<RectTransform>(true);
+                foreach (var child in children)
+                {
+                    child.gameObject.SetActive(true);
+                }
+
+                // Update the tooltip location now that we have the width
+                UpdateTooltip();
+
+                // Set flag true
+                tooltipHasWidth = true;
+            }
+        }
+    }
+
 	void UpdateTooltip ()
 	{
 		go2.transform.position = go.transform.position;
@@ -89,8 +129,9 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
         // Set the tooltip to the right side before making active
 		RectTransform buttonPanel = (RectTransform)myTarget.transform;
         float buttonPanelWidth = buttonPanel.rect.width;
-        RectTransform tooltipPanel = (RectTransform)go2.transform;
+        tooltipPanel = (RectTransform)go2.transform;
         float tooltipPanelWidth = tooltipPanel.rect.width;
+
         // Set base margin, or else tooltip will be on very edge of button
         float margin = 20;
 
@@ -103,9 +144,13 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
         else
         {
             // Show tooltip on the right side of target
-            float offset = go2.transform.localPosition.x + (buttonPanelWidth/2) + tooltipPanelWidth + margin;
+            float offset = go2.transform.localPosition.x + (buttonPanelWidth/2) + margin;
             go2.transform.localPosition = new Vector3 (offset, go2.transform.localPosition.y, 0);
         }
+
+        // Prevent stuttering
+        // tooltipPanel.rect.width is 0 until SetActive, causing stuttering when opening
+        // the tooltip for the first time. To get around this, we need to quickly make it active but transparent.
 
 		if (mouseHover/*&& myButton.interactable*/) 
 		{
@@ -121,6 +166,7 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 	void tooltipSetActive(bool state) 
 	{
-		go2.SetActive (state);
+        // If tooltip is already properly positioned
+        go2.SetActive (state);
 	}
 }
