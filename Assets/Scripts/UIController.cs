@@ -58,11 +58,15 @@ public class UIController : MonoBehaviour
 	public Text leftPopulationText;
 	public Text leftHealthText;
     public RectTransform leftStatusPanel;
+
     // Technology Panel
     public RectTransform leftTechnologyPanel;
     private Button[] _technologyButtons; // Keep private
     private Text[] _technologyText; // Keep private
     public Planet selectedPlanet; // Keep private
+    // Building Panel
+    public RectTransform leftBuildingPanel;
+    public Text leftBuildingText;
     // Helper variables
     private Planet previousPlanet; // Keep private
     public Button leftTechnology1Button;
@@ -137,6 +141,7 @@ public class UIController : MonoBehaviour
 			SetSelectedPopulation (p.population);
 			SetSelectedHealth (p.health, p.maxHealth);
             SetSelectedTechnology (p.technologyLevel);
+            SetSelectedBuilding(p.turnsToBuild);
 
             // Enable last
             SetSelectionPanelActive(true);
@@ -144,6 +149,7 @@ public class UIController : MonoBehaviour
             SetResourcePanelActive(true);
             SetStatusPanelActive(true);
             SetTechnologyPanelActive(p.population > 0);
+            SetBuildingPanelActive(p.population <= 0);
 
             // GFX
             SetSelectedOrbit();
@@ -157,6 +163,7 @@ public class UIController : MonoBehaviour
             SetResourcePanelActive();
             SetStatusPanelActive();
             SetTechnologyPanelActive();
+            SetBuildingPanelActive();
 
 			// Replace placeholder values with default values
 			SetSelectedName ();
@@ -164,6 +171,7 @@ public class UIController : MonoBehaviour
 			SetSelectedResources ();
 			SetSelectedPopulation ();
 			SetSelectedHealth ();
+            SetSelectedBuilding();
 
             // GFX
             SetSelectedOrbit();
@@ -217,6 +225,11 @@ public class UIController : MonoBehaviour
     private void SetTechnologyPanelActive (bool active = false) 
     {
         leftTechnologyPanel.gameObject.SetActive(active);
+    }
+
+    private void SetBuildingPanelActive (bool active = false) 
+    {
+        leftBuildingPanel.gameObject.SetActive(active);
     }
 
 	private void SetSelectedName (string name = null)
@@ -332,6 +345,23 @@ public class UIController : MonoBehaviour
 //                    _technologyButtons[i].interactable = false;
 //                }
 //            }
+		}
+	}
+
+    private void SetSelectedBuilding (int population = 0)
+	{
+		// Planet selected
+		if (population > -1) 
+        {
+            if (population > 0) 
+            {
+                leftBuildingText.text = selectedPlanet.turnsToBuild.ToString() + " turn" + ((selectedPlanet.turnsToBuild>1) ? "s" : "") + " left to build.";
+            }
+            else 
+            {
+                // When Play is pressed, let the text hang until the next turn begins
+                leftBuildingText.text = "1 turn left to build.";
+            }
 		}
 	}
 

@@ -85,7 +85,7 @@ public class Planet : MonoBehaviour
 	public int maxHealth;
 
     // collecting
-    private bool collecting = false;
+    public bool collecting = false;
     private int count = 0;
     private int collectionMultiplier = 0;
 
