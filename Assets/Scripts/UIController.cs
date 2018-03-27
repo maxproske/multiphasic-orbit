@@ -65,6 +65,11 @@ public class UIController : MonoBehaviour
     public Planet selectedPlanet; // Keep private
     // Helper variables
     private Planet previousPlanet; // Keep private
+    public Button leftTechnology1Button;
+    public Button leftTechnology2Button;
+    public Button leftTechnology3Button;
+    public Button leftTechnology4Button;
+    public Button leftTechnology5Button;
 
 	/* Declare Right Panel
 	   ========================================================================== */
@@ -73,6 +78,9 @@ public class UIController : MonoBehaviour
     public Button rightStoneButton;
     public Button rightWaterButton;
     public Button rightGasButton;
+    public Button rightMission1Button;
+    public Button rightMission2Button;
+    public Button rightMission3Button;
 
 	/* Declare Tooltips
 	   ========================================================================== */
@@ -338,8 +346,25 @@ public class UIController : MonoBehaviour
 	   ========================================================================== */
     private void SetupTooltipController ()
     {
-        SetTooltip((RectTransform)rightNextTurnButton.transform, Constants.RIGHT_NEXT_TURN_BUTTON);
-        SetTooltip((RectTransform)rightStoneButton.transform, Constants.RIGHT_STONE_BUTTON);
+        // Right Panel
+        SetTooltip((RectTransform)rightStoneButton.transform, Constants.TOOLTIP_RIGHT_STONE_BUTTON);
+        SetTooltip((RectTransform)rightWaterButton.transform, Constants.TOOLTIP_RIGHT_WATER_BUTTON);
+        SetTooltip((RectTransform)rightGasButton.transform, Constants.TOOLTIP_RIGHT_GAS_BUTTON);
+        SetTooltip((RectTransform)rightNextTurnButton.transform, Constants.TOOLTIP_RIGHT_NEXT_TURN_BUTTON);
+        SetTooltip((RectTransform)rightMission1Button.transform, Constants.TOOLTIP_RIGHT_MISSION_1);
+        SetTooltip((RectTransform)rightMission2Button.transform, Constants.TOOLTIP_RIGHT_MISSION_2);
+        SetTooltip((RectTransform)rightMission3Button.transform, Constants.TOOLTIP_RIGHT_MISSION_3);
+        // Left Panel
+        SetTooltip((RectTransform)leftTechnology1Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON);
+        SetTooltip((RectTransform)leftTechnology2Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON);
+        SetTooltip((RectTransform)leftTechnology3Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON);
+        SetTooltip((RectTransform)leftTechnology4Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON);
+        SetTooltip((RectTransform)leftTechnology5Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON);
+    }
+
+    public void SetMission1()
+    {
+
     }
 
     private void SetTooltip(RectTransform rt, string myString) {

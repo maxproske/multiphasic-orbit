@@ -40,6 +40,17 @@
     // ;                        for new line 
     // <b></b>                  for bold
     // <color=yellow></color>   for color
-    public const string RIGHT_NEXT_TURN_BUTTON = "Play Simulation";
-    public const string RIGHT_STONE_BUTTON = "Build Stone Planet;+1 whatever";
+    public const string TOOLTIP_RIGHT_STONE_BUTTON = "TOOLTIP_RIGHT_STONE_BUTTON;Edit me in Constants.cs";
+
+    public const string TOOLTIP_RIGHT_WATER_BUTTON = "TOOLTIP_RIGHT_WATER_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_GAS_BUTTON = "TOOLTIP_RIGHT_GAS_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_NEXT_TURN_BUTTON = "TOOLTIP_RIGHT_NEXT_TURN_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_MISSION_1 = "TOOLTIP_RIGHT_MISSION_1;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_MISSION_2 = "TOOLTIP_RIGHT_MISSION_2;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_MISSION_3 = "TOOLTIP_RIGHT_MISSION_3;Edit me in Constants.cs";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON;Edit me in Constants.cs";
 }
