@@ -8,6 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(LineRenderer))]
 public class Planet : MonoBehaviour
 {
+	public bool die=false;
     // class fields
     public int tier;
     public int addCarbon;
@@ -207,20 +208,23 @@ public class Planet : MonoBehaviour
 
     public void FixedUpdate()
     {
+		if (die == false) {
+			if (linkedWith.Count > 0) {
+				
+				for (int i = 0; i < linkedWith.Count; i++) {
 
-        if (linkedWith.Count > 0)
-        {
-            for (int i = 0; i < linkedWith.Count; i++)
-            {
-				//change the line renderer color here
-				if (linkedWith [i].CompareTag ("Rogue")) {
+					if (linkedWith [i].die == false) {
+						//change the line renderer color here
+						if (linkedWith [i].CompareTag ("Rogue")) {
 
-					links [i].SetColors (Color.red, Color.red);
+							links [i].SetColors (Color.red, Color.red);
+						}
+						links [i].SetPosition (0, transform.position);
+						links [i].SetPosition (1, linkedWith [i].transform.position);
+					}
 				}
-                links[i].SetPosition(0, transform.position);
-                links[i].SetPosition(1, linkedWith[i].transform.position);
-            }
-        }
+			}
+		}
         if (Application.isPlaying && lr != null)
         {
             CalculateEllipse();
@@ -373,11 +377,13 @@ public class Planet : MonoBehaviour
 			}
 			if (linkedWith.Count > 0) {
 				if (this.CompareTag ("Rogue")) {
-					guiStyle.normal.textColor = Color.red;
+					if (this.die == false) {
+						guiStyle.normal.textColor = Color.red;
 
-					GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
-					GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
-					GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
+						GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
+						GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
+						GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
+					}
 				} else {
 					string ac = " ";
 					string an = " ";
@@ -440,14 +446,14 @@ public class Planet : MonoBehaviour
 //                    Debug.Log(this.name + " traded with: " + planet.name);
                     trade(planet);
                 }
-				if (planet.CompareTag("Rogue"))
+				if (planet.CompareTag("Rogue")&&planet.die==false)
 				{
 //					Debug.Log(this.name + " was stole by  " + planet.name);
 					tradecarbon--;
 					tradenitrogen--;
 					tradehydrogen--;
 				}
-				if (this.CompareTag("Rogue"))
+				if (this.CompareTag("Rogue")&&this.die==false)
 				{
 //					Debug.Log(this.name + " stole from  " + planet.name);
 					tradecarbon++;

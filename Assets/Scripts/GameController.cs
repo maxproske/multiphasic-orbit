@@ -235,7 +235,8 @@ public class GameController : MonoBehaviour
 			if (shot.transform.position == planet2.transform.position) {
 				secondPlanetScript.health -= 25;
 				if (secondPlanetScript.health <= 0) {
-//					planets.Remove (planet2);
+					secondPlanetScript.die = true;
+
 				}
 				attacking = false;
 				firstPlanet = false;
@@ -291,8 +292,8 @@ public class GameController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 selected = hit.collider.gameObject; // put GameObject hit by ray in variable
-
-
+			
+				Debug.Log (selected.name);
                 // get first and second planets to link
                 if (linking)
                 {
@@ -335,30 +336,25 @@ public class GameController : MonoBehaviour
 				{
 					// can only select built non-rogue planets to link with other built non-rogue planets
 					// check if is non-rogue and has Planet script
-					if (selected.GetComponent("Planet"))
-					{
-						if (selected.GetComponent<Planet>().turnsToBuild < 1) // check if is built 
-						{
-							if (firstPlanet)
-							{
-								planet1 = hit.collider.gameObject;
-								firstPlanetScript = planet1.GetComponent<Planet>();
-								firstPlanet = false;
-							}
-							else
-							{
-								// if selected is not planet 1
-//								if (selected != planet1&&selected.CompareTag ("Rogue"))
-//								{
-//		
-						
-										planet2 = hit.collider.gameObject;
-										secondPlanetScript = planet2.GetComponent<Planet>();
+			
+					if (selected.GetComponent ("Planet")) {
+						if (firstPlanet) {
+							planet1 = hit.collider.gameObject;
+							firstPlanetScript = planet1.GetComponent<Planet> ();
+							firstPlanet = false;
+						} else {
+							// if selected is not planet 1
+							
+							if (selected != planet1 && selected.CompareTag("Rogue")) {
+//									
 
-//								}
+								planet2 = hit.collider.gameObject;
+								secondPlanetScript = planet2.GetComponent<Planet> ();
+
 							}
 						}
 					}
+
 				}
             }
         }
@@ -809,6 +805,7 @@ public class GameController : MonoBehaviour
                     GameObject rogueObject = Instantiate(roguePrefab, planet2.transform.position, planet2.transform.localRotation, GameObject.Find("Sun").transform);
                     rogueIncrement++;
                     rogueObject.name = "Rogue " + rogueIncrement;
+					rogueObject.tag = "Rogue";
                     planets.Add(rogueObject); // add to Planets List
                     roguePlanets.Add(rogueObject); // add to roguePlanets list
                     Rogue rogueScript = rogueObject.GetComponent<Rogue>(); // get Planet script to access attributes
