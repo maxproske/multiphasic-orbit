@@ -50,10 +50,13 @@ public class UIController : MonoBehaviour
     public RectTransform leftPreviewPanel;
 	public Image leftPreviewImage;
 	// Resource Panel
-	public Text leftCarbonText;
-	public Text leftNitrogenText;
-	public Text leftHydrogenText;
+	public Text leftStoneText;
+	public Text leftWaterText;
+	public Text leftGasText;
     public RectTransform leftResourcePanel;
+    public Text leftStoneCollectedText;
+    public Text leftWaterCollectedText;
+    public Text leftGasCollectedText;
 	// Status Panel
 	public Text leftPopulationText;
 	public Text leftHealthText;
@@ -274,14 +277,14 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (carbon > -1 && nitrogen > -1 && hydrogen > -1) 
 		{
-			leftCarbonText.text = carbon.ToString();
-			leftNitrogenText.text = nitrogen.ToString();
-			leftHydrogenText.text = hydrogen.ToString();
+			leftStoneText.text = carbon.ToString();
+			leftWaterText.text = nitrogen.ToString();
+			leftGasText.text = hydrogen.ToString();
 		}
 		// No planet selected
 		else 
 		{
-			leftCarbonText.text = leftNitrogenText.text = leftHydrogenText.text = "-";
+			leftStoneText.text = leftWaterText.text = leftGasText.text = "-";
 		}
 	}
 
