@@ -112,6 +112,8 @@ public class GameController : MonoBehaviour
     private Missions m;
     public List<GameObject> missions;
 
+    bool buildingActive;
+
     public GameObject shot;
     // Use this for initialization
     void Start()
@@ -226,6 +228,8 @@ public class GameController : MonoBehaviour
     public void AddTurn()
     {
         turn++;
+        Debug.Log(planets.Count);
+        //Debug.Log("Turn " + turn);
         ui.SetTurn(turn);
     }
 
@@ -770,8 +774,6 @@ public class GameController : MonoBehaviour
     public void SetBuildingActive(bool active)
     {
         Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
-        //for (int i = 0; i < _planetaryButtons.Length; i++)
-        //{
         if (canBuild)
         {
             stone.interactable = active;
@@ -785,15 +787,11 @@ public class GameController : MonoBehaviour
                 gas.interactable = active;
             }
         }
-        
-        // Make all planet buttons interactable
-        //_planetaryButtons[i].interactable = active;
-        //}
-
-        // Increase turn counter
-        if (active && _planetaryButtons[0].IsInteractable())
+        // Only call once per planet per turn
+        if(active && !buildingActive) 
         {
             AddTurn();
+            buildingActive = true;
         }
     }
 
@@ -1022,7 +1020,7 @@ public class GameController : MonoBehaviour
         ResetLinking();
         simulate = true;
         canBuild = true;
-
+        buildingActive = false;
 
         // reset place planet
         if (go != null && planetPlaced)

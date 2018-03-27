@@ -537,6 +537,9 @@ public class Planet : MonoBehaviour
             yield return null;
         }
 
+        // Add turn if a planet is building
+        gc.SetBuildingActive(true);
+
         CollectResources();
         IncreasePopulation();
         placingCoroutineRunning = false;
