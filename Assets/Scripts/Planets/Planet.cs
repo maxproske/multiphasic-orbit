@@ -340,21 +340,25 @@ public class Planet : MonoBehaviour
     void OnMouseOver()
     {
         ifHover = true;
-
-        // Hover planet orbit on highlight
-        Color color = Color.white;
-        color.a = 0.2f;
-        lr.material.SetColor("_TintColor", color);
+        if (ui.selectedPlanet != this)
+        {
+            // Hover planet orbit on highlight
+            Color color = Color.white;
+            color.a = 0.2f;
+            lr.material.SetColor("_TintColor", color);
+        }
     }
     void OnMouseExit()
     {
 
         ifHover = false;
-
-        // Return to regular color on mouse exit
-        Color color = Color.white;
-        color.a = 0.04f;
-        lr.material.SetColor("_TintColor", color);
+        if (ui.selectedPlanet != this)
+        {
+            // Return to regular color on mouse exit
+            Color color = Color.white;
+            color.a = 0.04f;
+            lr.material.SetColor("_TintColor", color);
+        }
     }
 
     //Function that can show the resource of this object
@@ -368,7 +372,7 @@ public class Planet : MonoBehaviour
 
         if (ifHover == true)
         {
-			GUI.Box(new Rect(rectx + 20, Screen.height - recty, 300, 50), planetname + ": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen + "\n This is a Tier " + tier + " Planet.",guiStyle);
+			//GUI.Box(new Rect(rectx + 20, Screen.height - recty, 300, 50), planetname + ": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen + "\n This is a Tier " + tier + " Planet.",guiStyle);
 
         }
         //}
