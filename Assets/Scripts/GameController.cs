@@ -337,7 +337,7 @@ public class GameController : MonoBehaviour
 					// can only select built non-rogue planets to link with other built non-rogue planets
 					// check if is non-rogue and has Planet script
 			
-					if (selected.GetComponent ("Planet")) {
+					if (selected.GetComponent ("Planet")&&!selected.CompareTag("Rogue")) {
 						if (firstPlanet) {
 							planet1 = hit.collider.gameObject;
 							firstPlanetScript = planet1.GetComponent<Planet> ();
