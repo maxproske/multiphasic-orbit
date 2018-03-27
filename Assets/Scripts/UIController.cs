@@ -70,6 +70,9 @@ public class UIController : MonoBehaviour
 	   ========================================================================== */
     // Action Panel
     public Button rightNextTurnButton;
+    public Button rightStoneButton;
+    public Button rightWaterButton;
+    public Button rightGasButton;
 
 	/* Declare Tooltips
 	   ========================================================================== */
@@ -335,8 +338,13 @@ public class UIController : MonoBehaviour
 	   ========================================================================== */
     private void SetupTooltipController ()
     {
-        TooltipController tc = rightNextTurnButton.gameObject.AddComponent<TooltipController>();
-        tc.myString = "Test!";
+        SetTooltip((RectTransform)rightNextTurnButton.transform, "Play Simulation");
+        SetTooltip((RectTransform)rightStoneButton.transform, "Build Stone Planet;+1 whatever");
+    }
+
+    private void SetTooltip(RectTransform rt, string myString) {
+        TooltipController tc = rt.gameObject.AddComponent<TooltipController>();
+        tc.myString = myString;
     }
 
 

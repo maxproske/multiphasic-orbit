@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114801924447305508}
   - component: {fileID: 114135157180620244}
   - component: {fileID: 114451114047828182}
+  - component: {fileID: 114569425280797614}
   m_Layer: 5
   m_Name: Next Turn Button
   m_TagString: Untagged
@@ -1138,6 +1139,17 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Missions
+--- !u!114 &114569425280797614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1026120926694058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975f365da8278574a9446da8f73a0a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114612391980502390
 MonoBehaviour:
   m_ObjectHideFlags: 1
