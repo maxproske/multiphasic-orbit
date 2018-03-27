@@ -294,29 +294,24 @@ public class UIController : MonoBehaviour
     private void SetSelectedTechnology (int technology = -1)
 	{
 		// Planet selected
-		if (technology > -1) 
-		{
-            _technologyButtons = leftTechnologyPanel.GetComponentsInChildren<Button>();
-            for (int i = 0; i < _technologyButtons.Length; i++)
-            {
-                if (!_technologyButtons[i].interactable)
-                {
-                    _technologyButtons[i].interactable = true;
-                }
-            }
+		if (technology > -1) {
+
 		}
+
 		// No planet selected
 		else 
 		{
+			SetTechnologyPanelActive(false);
+
             // Make uninteractive
-            _technologyButtons = leftTechnologyPanel.GetComponentsInChildren<Button>();
-            for (int i = 0; i < _technologyButtons.Length; i++)
-            {
-                if (_technologyButtons[i].interactable)
-                {
-                    _technologyButtons[i].interactable = false;
-                }
-            }
+//            _technologyButtons = leftTechnologyPanel.GetComponentsInChildren<Button>();
+//            for (int i = 0; i < _technologyButtons.Length; i++)
+//            {
+//                if (_technologyButtons[i].interactable)
+//                {
+//                    _technologyButtons[i].interactable = false;
+//                }
+//            }
 		}
 	}
 

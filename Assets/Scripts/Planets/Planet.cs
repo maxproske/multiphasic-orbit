@@ -613,12 +613,15 @@ public class Planet : MonoBehaviour
 
 	//set the addlinkchance and it will effect the CalculateFail() function in the gamecontroller
 	public void linkchanceTechnology(){
-		hydrogen -= 13;
+		hydrogen -= 20;
 		addlinkchance++;
 	}
 
 	//set the storm shied and it will effect the Simulate() function in the gamcontroller
 	public void StormShiedTechnology(){
+		hydrogen -= 20;
+		carbon -= 20;
+		nitrogen -= 20;
 		stormsheid = true;
 	}
 

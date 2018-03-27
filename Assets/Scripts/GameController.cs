@@ -161,6 +161,8 @@ public class GameController : MonoBehaviour
 		tech5 = GameObject.Find ("Tech 5").GetComponent<Button> ();
 		tech5.onClick.AddListener (settech5);
 
+
+
         //planetButtons = planetsParent.GetComponentsInChildren<Button>();
 
         // initialize lists
@@ -230,6 +232,9 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
 		if (shot != null) {
 			shot.transform.position = Vector3.MoveTowards (shot.transform.position, planet2.transform.position, 80*Time.deltaTime);
 			if (shot.transform.position == planet2.transform.position) {
@@ -293,7 +298,7 @@ public class GameController : MonoBehaviour
             {
                 selected = hit.collider.gameObject; // put GameObject hit by ray in variable
 			
-				Debug.Log (selected.name);
+	
                 // get first and second planets to link
                 if (linking)
                 {
@@ -410,6 +415,32 @@ public class GameController : MonoBehaviour
 
             ui.SetSelectedPlanet(planetScript);
 
+			Button[] _technologyButtons = ui.leftTechnologyPanel.GetComponentsInChildren<Button> ();
+
+
+			if (planetScript.carbon >= 30 && !planetScript.moreResource) {
+				if (!_technologyButtons [0].interactable) {
+			
+					_technologyButtons [0].interactable = true;
+				}
+			}else if (planetScript.hydrogen >= 20 && planetScript.moreResource&&planetScript.addlinkchance==0) {
+				if (!_technologyButtons [1].interactable) {
+					_technologyButtons [1].interactable = true;
+				}
+			}else if (planetScript.hydrogen >= 20 &&planetScript.nitrogen>=20&&planetScript.carbon>=20&& planetScript.addlinkchance > 0 &&!planetScript.stormsheid) {
+					if (!_technologyButtons [2].interactable) {
+						_technologyButtons [2].interactable = true;
+					}
+			}else{
+				         
+				            for (int i = 0; i < _technologyButtons.Length; i++)
+				           	{
+				                if (_technologyButtons[i].interactable)
+				                {
+				                    _technologyButtons[i].interactable = false;
+				                }
+				            }
+			}
 
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
