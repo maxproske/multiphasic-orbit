@@ -6,7 +6,7 @@ public class Rogue : Planet
 {
 
     private Planet dominatedPlanetScript;
-	public bool die=false;
+
 
     public Rogue()
     {
