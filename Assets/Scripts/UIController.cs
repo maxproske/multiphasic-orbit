@@ -63,9 +63,12 @@ public class UIController : MonoBehaviour
     public RectTransform leftTechnologyPanel;
     private Button[] _technologyButtons; // Keep private
     private Text[] _technologyText; // Keep private
+
+    [HideInInspector]
     public Planet selectedPlanet; // Keep private
     // Building Panel
     public RectTransform leftBuildingPanel;
+    public Button leftBuildingButton;
     public Text leftBuildingText;
     // Helper variables
     private Planet previousPlanet; // Keep private
@@ -392,6 +395,7 @@ public class UIController : MonoBehaviour
         SetTooltip((RectTransform)rightMission2Button.transform, Constants.TOOLTIP_RIGHT_MISSION_2);
         SetTooltip((RectTransform)rightMission3Button.transform, Constants.TOOLTIP_RIGHT_MISSION_3);
         // Left Panel
+        SetTooltip((RectTransform)leftBuildingButton.transform, Constants.TOOLTIP_LEFT_BUILDING_BUTTON);
         SetTooltip((RectTransform)leftTechnology1Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON);
         SetTooltip((RectTransform)leftTechnology2Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON);
         SetTooltip((RectTransform)leftTechnology3Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON);
