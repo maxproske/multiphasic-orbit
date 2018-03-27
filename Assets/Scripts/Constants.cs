@@ -40,17 +40,16 @@
     // ;                        for new line 
     // <b></b>                  for bold
     // <color=yellow></color>   for color
-    public const string TOOLTIP_RIGHT_STONE_BUTTON = "TOOLTIP_RIGHT_STONE_BUTTON;Edit me in Constants.cs";
-
-    public const string TOOLTIP_RIGHT_WATER_BUTTON = "TOOLTIP_RIGHT_WATER_BUTTON;Edit me in Constants.cs";
-    public const string TOOLTIP_RIGHT_GAS_BUTTON = "TOOLTIP_RIGHT_GAS_BUTTON;Edit me in Constants.cs";
-    public const string TOOLTIP_RIGHT_NEXT_TURN_BUTTON = "TOOLTIP_RIGHT_NEXT_TURN_BUTTON;Edit me in Constants.cs";
-    public const string TOOLTIP_RIGHT_MISSION_1 = "TOOLTIP_RIGHT_MISSION_1;Edit me in Constants.cs";
-    public const string TOOLTIP_RIGHT_MISSION_2 = "TOOLTIP_RIGHT_MISSION_2;Edit me in Constants.cs";
-    public const string TOOLTIP_RIGHT_MISSION_3 = "TOOLTIP_RIGHT_MISSION_3;Edit me in Constants.cs";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON;Edit me in Constants.cs";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON;Edit me in Constants.cs";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON;Edit me in Constants.cs";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON;Edit me in Constants.cs";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON = "TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_STONE_BUTTON = "Build a <b><color=#616161FF>Stone Planet</color></b>.;;- Generates <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b> per turn.;- Takes 1 turn to build.";
+    public const string TOOLTIP_RIGHT_WATER_BUTTON = "Build a <b><color=#2196F3FF>Water Planet</color></b>.;;- Generates <b><color=#616161FF>2 stone</color></b>, <b><color=#2196F3FF>2 water</color></b>, <b><color=#795548FF>6 gas</color></b> per turn.;- Takes 3 turns to build.";
+    public const string TOOLTIP_RIGHT_GAS_BUTTON = "Build a <b><color=#795548FF>Gas Planet</color></b>.;;- Generates <b><color=#616161FF>24 stone</color></b>, <b><color=#2196F3FF>8 water</color></b>, <b><color=#795548FF>8 gas</color></b> per turn.;- Takes 3 turns to build.";
+    public const string TOOLTIP_RIGHT_NEXT_TURN_BUTTON = "Play End Turn Simulation.";
+    public const string TOOLTIP_RIGHT_MISSION_1 = "Details about Mission 1;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_MISSION_2 = "Details about Mission 2;Edit me in Constants.cs";
+    public const string TOOLTIP_RIGHT_MISSION_3 = "Details about Mission 3;Edit me in Constants.cs";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON = "Learn <b>High Energy Magnetics</b>.;;- Resources Protected from Solar Storms.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON = "Learn <b>Interplanetary Networking</b>.;;- Link with other planets.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON = "Learn <b>Advanced Economics</b>.;;- Increases Chance to Link by 50%.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON = "Learn <b>Extraplanetary Ballistics</b>.;;- Can Attack Rogue Planets.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON = "Learn <b>Negative Mass Mechanics</b>.;;- Increases Attack Power by 50%.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
 }
