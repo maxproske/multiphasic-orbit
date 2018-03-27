@@ -228,7 +228,7 @@ public class GameController : MonoBehaviour
     public void AddTurn()
     {
         turn++;
-        Debug.Log(planets.Count);
+        //Debug.Log(planets.Count);
         //Debug.Log("Turn " + turn);
         ui.SetTurn(turn);
     }
