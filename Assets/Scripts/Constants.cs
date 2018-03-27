@@ -35,7 +35,11 @@
     public const int MISSION_1 = 31;
 
     // Strings for tooltips
-    // Semicolons (;) will make a new line
+    // https://docs.unity3d.com/Manual/StyledText.html
+    //
+    // ;                        for new line 
+    // <b></b>                  for bold
+    // <color=yellow></color>   for color
     public const string RIGHT_NEXT_TURN_BUTTON = "Play Simulation";
     public const string RIGHT_STONE_BUTTON = "Build Stone Planet;+1 whatever";
 }
