@@ -71,6 +71,11 @@ public class UIController : MonoBehaviour
     // Action Panel
     public Button rightNextTurnButton;
 
+	/* Declare Tooltips
+	   ========================================================================== */
+    public GameObject tooltipPrefab;
+    public GameObject tooltipContainer;
+
 	private void Start()
 	{
 		/* Initialize Top Panel
@@ -85,6 +90,10 @@ public class UIController : MonoBehaviour
 		/* Initialize Right Panel
 		   ====================================================================== */
         SetPlayInteractive(false);
+
+        /* Initialize External Scripts
+           ====================================================================== */
+        SetupTooltipController();
 	}
 
 	/* Set Top Panel
@@ -321,6 +330,15 @@ public class UIController : MonoBehaviour
     {
         rightNextTurnButton.interactable = canSimulate;
     }
+
+	/* Set External Scripts
+	   ========================================================================== */
+    private void SetupTooltipController ()
+    {
+        TooltipController tc = rightNextTurnButton.gameObject.AddComponent<TooltipController>();
+        tc.myString = "Test!";
+    }
+
 
    	/* Update Left Panel
 	   ========================================================================== */ 

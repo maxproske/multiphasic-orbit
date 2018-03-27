@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI; // For <Button>
 using UnityEngine.EventSystems; // For <IPointerEnterHandler> and <IPointerExitHandler>
 
-public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 	// Declare public variables
 	public string myString; // Message to display
-	public Button myButton; // Reference to button to check if intractable
 	private GameObject myParent; // Private because this can't be set in the editor
-	public GameObject myPrefab;
-	public int paddingLeft = 0; // Additional extra left padding
+	private GameObject myPrefab;
+    private RectTransform myTarget;
+	private int paddingLeft = 0; // Additional extra left padding
 
 	// Declare private variables
 	private bool mouseHover;
@@ -24,23 +24,23 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	private RectTransform rt;
 
-	void Start()
-	{
-		setupTooltip ();
-	}
+    // Reference to UI
+	private UIController ui;
 
-	void Update() 
-	{
-		updateTooltip ();
-	}
+	// Starts when TooltipController is instantiated in UIController
+    void Start()
+    {
+        ui = GameObject.Find("Canvas").GetComponent<UIController>();
+        myPrefab = (GameObject)Resources.Load<GameObject>("Prefabs/Tooltip");
 
-	void setupTooltip ()
-	{
+        // Self
+        myTarget = (RectTransform)gameObject.transform;
+
 		// Format string
 		myString = myString.Replace(";", "\n");
 
 		// Script cannot find Tooltips empty game object when set in editor
-		myParent = GameObject.Find ("Tooltips");
+		myParent = ui.tooltipContainer;
 
 		// Instantiate a new tooltip prefab
 		go = Instantiate(myPrefab, new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;
@@ -51,17 +51,13 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		tooltipSetActive (false);
 
 		// Make it a child of the button
-		go.transform.SetParent(myButton.transform);
+		go.transform.SetParent(myTarget.transform);
 		go2.transform.SetParent(myParent.transform);
 
-		// Get width of button for margin
-		rt = (RectTransform)myButton.transform;
-		float marginLeft = (rt.rect.width/2) + 5 + paddingLeft;
-
 		// Reset position and scale
-		go.transform.localPosition = new Vector3 (marginLeft, 0, 0);
+		go.transform.localPosition = new Vector3 (0, 0, 0);
 		go.transform.localScale = new Vector3 (1, 1, 1);
-		go2.transform.localPosition = new Vector3 (marginLeft, 0, 0);
+		go2.transform.localPosition = new Vector3 (0, 0, 0);
 		go2.transform.localScale = new Vector3 (1, 1, 1);
 
 		// Initialize text with user supplied message
@@ -77,16 +73,39 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public void OnPointerEnter (PointerEventData eventData)
 	{
 		mouseHover = true;
+        UpdateTooltip();
 	}
 
 	public void OnPointerExit (PointerEventData eventData)
 	{
 		mouseHover = false;
+        UpdateTooltip();
 	}
 
-	void updateTooltip ()
+	void UpdateTooltip ()
 	{
 		go2.transform.position = go.transform.position;
+
+        // Set the tooltip to the right side before making active
+		RectTransform buttonPanel = (RectTransform)myTarget.transform;
+        float buttonPanelWidth = buttonPanel.rect.width;
+        RectTransform tooltipPanel = (RectTransform)go2.transform;
+        float tooltipPanelWidth = tooltipPanel.rect.width;
+        // Set base margin, or else tooltip will be on very edge of button
+        float margin = 20;
+
+        if (tooltipPanel.position.x > Screen.width / 2)
+        {
+            // Show tooltip on the left side of target
+            float offset = go2.transform.localPosition.x - (buttonPanelWidth/2) - tooltipPanelWidth - margin;
+            go2.transform.localPosition = new Vector3 (offset, go2.transform.localPosition.y, 0);
+        }
+        else
+        {
+            // Show tooltip on the right side of target
+            float offset = go2.transform.localPosition.x + (buttonPanelWidth/2) + tooltipPanelWidth + margin;
+            go2.transform.localPosition = new Vector3 (offset, go2.transform.localPosition.y, 0);
+        }
 
 		if (mouseHover/*&& myButton.interactable*/) 
 		{
