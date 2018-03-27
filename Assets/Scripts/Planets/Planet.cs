@@ -340,13 +340,21 @@ public class Planet : MonoBehaviour
     void OnMouseOver()
     {
         ifHover = true;
+
+        // Hover planet orbit on highlight
+        Color color = Color.white;
+        color.a = 0.2f;
+        lr.material.SetColor("_TintColor", color);
     }
     void OnMouseExit()
     {
 
         ifHover = false;
 
-
+        // Return to regular color on mouse exit
+        Color color = Color.white;
+        color.a = 0.04f;
+        lr.material.SetColor("_TintColor", color);
     }
 
     //Function that can show the resource of this object
