@@ -338,8 +338,8 @@ public class UIController : MonoBehaviour
 	   ========================================================================== */
     private void SetupTooltipController ()
     {
-        SetTooltip((RectTransform)rightNextTurnButton.transform, "Play Simulation");
-        SetTooltip((RectTransform)rightStoneButton.transform, "Build Stone Planet;+1 whatever");
+        SetTooltip((RectTransform)rightNextTurnButton.transform, Constants.RIGHT_NEXT_TURN_BUTTON);
+        SetTooltip((RectTransform)rightStoneButton.transform, Constants.RIGHT_STONE_BUTTON);
     }
 
     private void SetTooltip(RectTransform rt, string myString) {

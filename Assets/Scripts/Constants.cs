@@ -34,4 +34,8 @@
     // Constants for missions
     public const int MISSION_1 = 31;
 
+    // Strings for tooltips
+    // Semicolons (;) will make a new line
+    public const string RIGHT_NEXT_TURN_BUTTON = "Play Simulation";
+    public const string RIGHT_STONE_BUTTON = "Build Stone Planet;+1 whatever";
 }
