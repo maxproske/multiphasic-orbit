@@ -676,6 +676,7 @@ MonoBehaviour:
   LogText: {fileID: 114784158516478550}
   textToLog: 
   myScrollRect: {fileID: 114985106818874598}
+  scrollBar: {fileID: 114173727934632724}
 --- !u!114 &114784158516478550
 MonoBehaviour:
   m_ObjectHideFlags: 1

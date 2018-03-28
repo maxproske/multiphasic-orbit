@@ -404,10 +404,12 @@ public class GameController : MonoBehaviour
 							if (!linkedAlready) {
 								planet2 = hit.collider.gameObject;
 								secondPlanetScript = planet2.GetComponent<Planet> ();
-								// if both variables are set
+                                // if both variables are set
+
+                                cp.ShowPanel("Link Assigned", "You have chosen " + planet1.name + " and " + planet2.name + " to be linked during the simulation. \r\n" + "Hit the Play Button to see if it goes through!");
 
 
-							}
+                            }
 						}
 					}
 				}

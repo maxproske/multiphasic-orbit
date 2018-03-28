@@ -69,7 +69,7 @@ public class Log : MonoBehaviour
 
         ToLog(AddNewLine());
         ToLog(AddTurnToLog());
-        ToLog("Planet ");
+        //ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" " + message);
     }
@@ -101,7 +101,7 @@ public class Log : MonoBehaviour
 
         ToLog(AddNewLine());
         ToLog(AddTurnToLog());
-        ToLog("Planet ");
+        //ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" has collected: ");
         ToLog(ChangeColor(stoneColor, stone.ToString() + " Stone ")) ;
@@ -146,7 +146,7 @@ public class Log : MonoBehaviour
         // backlog text first and then log
         ToLog(AddNewLine());
         ToLog(AddTurnToLog());
-        ToLog("Planet ");
+        //ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" has learned ");
         ToLog(ChangeColor(color, tech) + "!");
