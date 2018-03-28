@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rogue
+  - Carbon
+  - Silicon
+  - Planet
   layers:
   - Default
   - TransparentFX

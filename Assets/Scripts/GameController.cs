@@ -21,9 +21,9 @@ public class GameController : MonoBehaviour
     public RectTransform rightPlanetaryPanel; // New UI
 
 
-	public bool attacking;
-	public Button startAttackButton;
-	public Button AttackButton;
+    public bool attacking;
+    public Button startAttackButton;
+    public Button AttackButton;
 
     // linking 
     public List<GameObject> planets;
@@ -42,8 +42,8 @@ public class GameController : MonoBehaviour
     // GameObjects
     public GameObject planet1;
     public GameObject planet2;
-    private GameObject selected; // hold selected GameObject
-                                 // fail
+    public GameObject selected; // hold selected GameObject
+                                // fail
     public bool fail;
     private int turn;
     public GameObject roguePrefab;
@@ -55,17 +55,17 @@ public class GameController : MonoBehaviour
     private GameObject mst; // Null object for logic
     public List<string> microSkillTreeNames; // To check for duplicates
 
-	public Button tech1;
-	public Button tech2;
-	public Button tech3;
-	public Button tech4;
-	public Button tech5;
+    public Button tech1;
+    public Button tech2;
+    public Button tech3;
+    public Button tech4;
+    public Button tech5;
 
-	public int iftech1;
-	public int iftech2;
-	public int iftech3;
-	public int iftech4;
-	public int iftech5;
+    public int iftech1;
+    public int iftech2;
+    public int iftech3;
+    public int iftech4;
+    public int iftech5;
 
     public GameObject notBuiltTooltip;
     private int notBuiltTooltipTimer;
@@ -153,26 +153,26 @@ public class GameController : MonoBehaviour
 
         linkButton = GameObject.Find("Link To Button").GetComponent<Button>();
         linkButton.onClick.AddListener(Link);
-		startAttackButton = GameObject.Find("Attack From Button").GetComponent<Button>();
-		startAttackButton.onClick.AddListener(StartAttack);
+        startAttackButton = GameObject.Find("Attack From Button").GetComponent<Button>();
+        startAttackButton.onClick.AddListener(StartAttack);
 
-		AttackButton = GameObject.Find("Attack To Button").GetComponent<Button>();
-		AttackButton.onClick.AddListener(attack);
+        AttackButton = GameObject.Find("Attack To Button").GetComponent<Button>();
+        AttackButton.onClick.AddListener(attack);
 
-		tech1 = GameObject.Find ("Tech 1").GetComponent<Button> ();
-		tech1.onClick.AddListener (settech1);
+        tech1 = GameObject.Find("Tech 1").GetComponent<Button>();
+        tech1.onClick.AddListener(settech1);
 
-		tech2 = GameObject.Find ("Tech 2").GetComponent<Button> ();
-		tech2.onClick.AddListener (settech2);
+        tech2 = GameObject.Find("Tech 2").GetComponent<Button>();
+        tech2.onClick.AddListener(settech2);
 
-		tech3 = GameObject.Find ("Tech 3").GetComponent<Button> ();
-		tech3.onClick.AddListener (settech3);
+        tech3 = GameObject.Find("Tech 3").GetComponent<Button>();
+        tech3.onClick.AddListener(settech3);
 
-		tech4 = GameObject.Find ("Tech 4").GetComponent<Button> ();
-		tech4.onClick.AddListener (settech4);
+        tech4 = GameObject.Find("Tech 4").GetComponent<Button>();
+        tech4.onClick.AddListener(settech4);
 
-		tech5 = GameObject.Find ("Tech 5").GetComponent<Button> ();
-		tech5.onClick.AddListener (settech5);
+        tech5 = GameObject.Find("Tech 5").GetComponent<Button>();
+        tech5.onClick.AddListener(settech5);
 
 
 
@@ -199,11 +199,18 @@ public class GameController : MonoBehaviour
                 // add missions from Test1Missions to missions to play with list called missions
                 foreach (var mission in m.Test1Missions)
                 {
-                    
+
                     m.missions.Add(mission);
-                    GameObject go = Instantiate(genericMissionPanel); // create Mission Panel for mission
+                    GameObject go = Instantiate(genericMissionPanel, missionPanel.transform); // create Mission Panel for mission
+                    GameObject ms = Instantiate(mission, go.transform); // used for Missions.cs to find the button to update appearance
+
+                    // set all buttons to incomplete red 
+                    Button button = go.transform.GetChild(0).GetComponent<Button>(); // get the particular mission button
+                    ColorBlock cb = button.GetComponent<Button>().colors;
+                    cb.normalColor = new Color(0.894f, 0.266f, 0.266f); // set the button color to same green as play button
+                    button.colors = cb;
+
                     Text panelText = go.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>(); // get Text of Mission Panel
-                    go.transform.SetParent(missionPanel.transform); // set parent of new Mission Panel
 
                     //panelText.text = mission.GetComponent<Mission>().missionName; // change text of Mission Panel to missionName
                     panelText.text = "Mission " + missionIncrement;
@@ -213,8 +220,12 @@ public class GameController : MonoBehaviour
                     GameObject goButton = go.transform.GetChild(0).gameObject; // get Mission Panel button
                     string tooltipText = "";
                     tooltipText += "<b>" + mission.GetComponent<Mission>().missionName + "</b>"; // add mission name to tooltip text
-                    tooltipText += ";;"; // add 2 new lines
-                    tooltipText += mission.GetComponent<Mission>().missionDescription; // add mission description to tooltip text
+
+                    if (mission.GetComponent<Mission>().missionDescription != "") // if there is a reward, add onto tooltip
+                    {
+                        tooltipText += ";;" +  mission.GetComponent<Mission>().missionDescription;
+                    }
+
                     if (mission.GetComponent<Mission>().missionReward != "") // if there is a reward, add onto tooltip
                     {
                         tooltipText += ";;" + "<b>Reward:</b> " + mission.GetComponent<Mission>().missionReward;
@@ -234,31 +245,41 @@ public class GameController : MonoBehaviour
         }
     }
 
-	private void settech1(){
-		if (iftech1 == 0) {
-			iftech1 = 1;
-		}
-	}
-	private void settech2(){
-		if (iftech2 == 0) {
-			iftech2 = 1;
-		}
-	}
-	private void settech3(){
-		if (iftech3 == 0) {
-			iftech3 = 1;
-		}
-	}
-	private void settech4(){
-		if (iftech4 == 0) {
-			iftech4 = 1;
-		}
-	}
-	private void settech5(){
-		if (iftech5 == 0) {
-			iftech5 = 1;
-		}
-	}
+    private void settech1()
+    {
+        if (iftech1 == 0)
+        {
+            iftech1 = 1;
+        }
+    }
+    private void settech2()
+    {
+        if (iftech2 == 0)
+        {
+            iftech2 = 1;
+        }
+    }
+    private void settech3()
+    {
+        if (iftech3 == 0)
+        {
+            iftech3 = 1;
+        }
+    }
+    private void settech4()
+    {
+        if (iftech4 == 0)
+        {
+            iftech4 = 1;
+        }
+    }
+    private void settech5()
+    {
+        if (iftech5 == 0)
+        {
+            iftech5 = 1;
+        }
+    }
     public void AddTurn()
     {
         turn++;
@@ -273,22 +294,25 @@ public class GameController : MonoBehaviour
 
 
 
-		if (shot != null) {
-			shot.transform.position = Vector3.MoveTowards (shot.transform.position, planet2.transform.position, 80*Time.deltaTime);
-			if (shot.transform.position == planet2.transform.position) {
-				secondPlanetScript.health -= 25;
-				if (secondPlanetScript.health <= 0) {
-					secondPlanetScript.die = true;
+        if (shot != null)
+        {
+            shot.transform.position = Vector3.MoveTowards(shot.transform.position, planet2.transform.position, 80 * Time.deltaTime);
+            if (shot.transform.position == planet2.transform.position)
+            {
+                secondPlanetScript.health -= 25;
+                if (secondPlanetScript.health <= 0)
+                {
+                    secondPlanetScript.die = true;
 
-				}
-				attacking = false;
-				firstPlanet = false;
-				simulate = false;
-				planet1 = null;
-				planet2 = null;
-				Destroy (shot);
-			}
-		}
+                }
+                attacking = false;
+                firstPlanet = false;
+                simulate = false;
+                planet1 = null;
+                planet2 = null;
+                Destroy(shot);
+            }
+        }
         if (linksuccessful)
         {
             linktime++;
@@ -335,8 +359,9 @@ public class GameController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 selected = hit.collider.gameObject; // put GameObject hit by ray in variable
-			
-	
+
+                m.CheckMissions(m.missions);
+
                 // get first and second planets to link
                 if (linking)
                 {
@@ -375,30 +400,35 @@ public class GameController : MonoBehaviour
                         }
                     }
                 }
-				if (attacking)
-				{
-					// can only select built non-rogue planets to link with other built non-rogue planets
-					// check if is non-rogue and has Planet script
-			
-					if (selected.GetComponent ("Planet")&&!selected.CompareTag("Rogue")) {
-						if (firstPlanet) {
-							planet1 = hit.collider.gameObject;
-							firstPlanetScript = planet1.GetComponent<Planet> ();
-							firstPlanet = false;
-						} else {
-							// if selected is not planet 1
-							
-							if (selected != planet1 && selected.CompareTag("Rogue")) {
-//									
+                if (attacking)
+                {
+                    // can only select built non-rogue planets to link with other built non-rogue planets
+                    // check if is non-rogue and has Planet script
 
-								planet2 = hit.collider.gameObject;
-								secondPlanetScript = planet2.GetComponent<Planet> ();
+                    if (selected.GetComponent("Planet") && !selected.CompareTag("Rogue"))
+                    {
+                        if (firstPlanet)
+                        {
+                            planet1 = hit.collider.gameObject;
+                            firstPlanetScript = planet1.GetComponent<Planet>();
+                            firstPlanet = false;
+                        }
+                        else
+                        {
+                            // if selected is not planet 1
 
-							}
-						}
-					}
+                            if (selected != planet1 && selected.CompareTag("Rogue"))
+                            {
+                                //									
 
-				}
+                                planet2 = hit.collider.gameObject;
+                                secondPlanetScript = planet2.GetComponent<Planet>();
+
+                            }
+                        }
+                    }
+
+                }
             }
         }
 
@@ -408,14 +438,14 @@ public class GameController : MonoBehaviour
             ResetLinking();
         }
 
-		if (attacking && Input.GetKeyDown(KeyCode.Escape))
-		{
-			attacking = false;
-			firstPlanet = false;
-			simulate = false;
-			planet1 = null;
-			planet2 = null;	
-		}
+        if (attacking && Input.GetKeyDown(KeyCode.Escape))
+        {
+            attacking = false;
+            firstPlanet = false;
+            simulate = false;
+            planet1 = null;
+            planet2 = null;
+        }
 
         if (planets.Contains(selected))
         {
@@ -448,44 +478,54 @@ public class GameController : MonoBehaviour
             var mstName = selected.name + " Skill Tree";
 
             // Make play button green after clicking planet for the first time
-            if (ui.selectedPlanet == null) 
+            if (ui.selectedPlanet == null)
             {
                 playButton.interactable = true;
             }
 
             // Prevent SetSelectedPlanet from being called 60 times/second,
             // Only on new selection
-            if (ui.selectedPlanet != planetScript) 
+            if (ui.selectedPlanet != planetScript)
             {
                 ui.SetSelectedPlanet(planetScript);
             }
 
-			Button[] _technologyButtons = ui.leftTechnologyPanel.GetComponentsInChildren<Button> ();
+            Button[] _technologyButtons = ui.leftTechnologyPanel.GetComponentsInChildren<Button>();
 
 
-			if (planetScript.carbon >= 30 && !planetScript.moreResource) {
-				if (!_technologyButtons [0].interactable) {
-			
-					_technologyButtons [0].interactable = true;
-				}
-			}else if (planetScript.hydrogen >= 20 && planetScript.moreResource&&planetScript.addlinkchance==0) {
-				if (!_technologyButtons [1].interactable) {
-					_technologyButtons [1].interactable = true;
-				}
-			}else if (planetScript.hydrogen >= 20 &&planetScript.nitrogen>=20&&planetScript.carbon>=20&& planetScript.addlinkchance > 0 &&!planetScript.stormsheid) {
-					if (!_technologyButtons [2].interactable) {
-						_technologyButtons [2].interactable = true;
-					}
-			}else{
-				         
-				            for (int i = 0; i < _technologyButtons.Length; i++)
-				           	{
-				                if (_technologyButtons[i].interactable)
-				                {
-				                    _technologyButtons[i].interactable = false;
-				                }
-				            }
-			}
+            if (planetScript.carbon >= 30 && !planetScript.moreResource)
+            {
+                if (!_technologyButtons[0].interactable)
+                {
+
+                    _technologyButtons[0].interactable = true;
+                }
+            }
+            else if (planetScript.hydrogen >= 20 && planetScript.moreResource && planetScript.addlinkchance == 0)
+            {
+                if (!_technologyButtons[1].interactable)
+                {
+                    _technologyButtons[1].interactable = true;
+                }
+            }
+            else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.addlinkchance > 0 && !planetScript.stormsheid)
+            {
+                if (!_technologyButtons[2].interactable)
+                {
+                    _technologyButtons[2].interactable = true;
+                }
+            }
+            else
+            {
+
+                for (int i = 0; i < _technologyButtons.Length; i++)
+                {
+                    if (_technologyButtons[i].interactable)
+                    {
+                        _technologyButtons[i].interactable = false;
+                    }
+                }
+            }
 
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
@@ -495,62 +535,65 @@ public class GameController : MonoBehaviour
 
                 if (!linking && !placing && Input.GetMouseButtonUp(0))
                 {
-					if (iftech1==1) {
-						planetScript.addResourceTechnology ();
-						iftech1 = 2;
-					}
-					if (iftech2==1) {
-						planetScript.linkchanceTechnology ();
-						iftech2 = 2;
-					}
-					if (iftech3==1) {
-						planetScript.StormShiedTechnology ();
-						iftech3 = 2;
-					}
-                     // Create a new micro skill tree
-                     //Debug.Log("Creating micro skill tree for " + selected.name);
-//                     mst = Instantiate(microSkillTree) as GameObject;
-//
-//                     // Upon creation, add it to the list of unique skill trees
-//                     microSkillTreeNames.Add(mstName);
-//
-//                     // Name the panel
-//                     mst.name = mstName;
-//
-//                     // Associate the game object with its skill tree
-//                     mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
-//
-//                     // Make micro skill tree a child object of parent
-//                     mst.transform.SetParent(microSkillTreeParent.transform);
-//                     mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-//                     mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
-//                     mst.SetActive(true);
-//                     // Access the planet's script and set title
-//                     mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
+                    if (iftech1 == 1)
+                    {
+                        planetScript.addResourceTechnology();
+                        iftech1 = 2;
+                    }
+                    if (iftech2 == 1)
+                    {
+                        planetScript.linkchanceTechnology();
+                        iftech2 = 2;
+                    }
+                    if (iftech3 == 1)
+                    {
+                        planetScript.StormShiedTechnology();
+                        iftech3 = 2;
+                    }
+                    // Create a new micro skill tree
+                    //Debug.Log("Creating micro skill tree for " + selected.name);
+                    //                     mst = Instantiate(microSkillTree) as GameObject;
+                    //
+                    //                     // Upon creation, add it to the list of unique skill trees
+                    //                     microSkillTreeNames.Add(mstName);
+                    //
+                    //                     // Name the panel
+                    //                     mst.name = mstName;
+                    //
+                    //                     // Associate the game object with its skill tree
+                    //                     mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
+                    //
+                    //                     // Make micro skill tree a child object of parent
+                    //                     mst.transform.SetParent(microSkillTreeParent.transform);
+                    //                     mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    //                     mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
+                    //                     mst.SetActive(true);
+                    //                     // Access the planet's script and set title
+                    //                     mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
                 }
                 // Open if the panel has been created, but is disabled
-//                else if (!linking && !placing && Input.GetMouseButtonUp(0))
-//                {
-//                     // Bad programming to enable nested inactive game object
-//					Transform[] ts = GameObject.Find("Technology 1 Panel").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
-// //					Debug.Log(mstName);
-// 					foreach (Transform t in ts)
-//                     {
-// 						if (t.gameObject.name.Contains (" Skill Tree")) {
-// //							Debug.Log (t.gameObject.name);
-// 							//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
-// 							if (t.gameObject.name == mstName) {
-// 								// Toggle skill tree on and off by clicking the planet
-// 								//t.gameObject.SetActive(true);
-// 								t.gameObject.SetActive (true);
-//							} else if (t.gameObject.name == "Technology 1 Panel") {
-//							
-// 							} else {
-// 								t.gameObject.SetActive (false);
-// 							}
-// 						}
-//                     }
-//                }
+                //                else if (!linking && !placing && Input.GetMouseButtonUp(0))
+                //                {
+                //                     // Bad programming to enable nested inactive game object
+                //					Transform[] ts = GameObject.Find("Technology 1 Panel").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+                // //					Debug.Log(mstName);
+                // 					foreach (Transform t in ts)
+                //                     {
+                // 						if (t.gameObject.name.Contains (" Skill Tree")) {
+                // //							Debug.Log (t.gameObject.name);
+                // 							//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
+                // 							if (t.gameObject.name == mstName) {
+                // 								// Toggle skill tree on and off by clicking the planet
+                // 								//t.gameObject.SetActive(true);
+                // 								t.gameObject.SetActive (true);
+                //							} else if (t.gameObject.name == "Technology 1 Panel") {
+                //							
+                // 							} else {
+                // 								t.gameObject.SetActive (false);
+                // 							}
+                // 						}
+                //                     }
+                //                }
             }
             else
             {
@@ -638,12 +681,13 @@ public class GameController : MonoBehaviour
                             }
 
                             //playButton.interactable = true;
-                            
+
                             if (ui.selectedPlanet == null)
                             {
                                 ui.SetNoPlanetSelected();
-                            } 
-                            else {
+                            }
+                            else
+                            {
                                 playButton.interactable = true;
                                 //ui.UpdateSelectedPlanet();
                             }
@@ -830,7 +874,7 @@ public class GameController : MonoBehaviour
             }
         }
         // Only call once per planet per turn
-        if(active && !buildingActive) 
+        if (active && !buildingActive)
         {
             AddTurn();
             buildingActive = true;
@@ -876,7 +920,7 @@ public class GameController : MonoBehaviour
                     GameObject rogueObject = Instantiate(roguePrefab, planet2.transform.position, planet2.transform.localRotation, GameObject.Find("Sun").transform);
                     rogueIncrement++;
                     rogueObject.name = "Rogue " + rogueIncrement;
-					rogueObject.tag = "Rogue";
+                    rogueObject.tag = "Rogue";
                     planets.Add(rogueObject); // add to Planets List
                     roguePlanets.Add(rogueObject); // add to roguePlanets list
                     Rogue rogueScript = rogueObject.GetComponent<Rogue>(); // get Planet script to access attributes
@@ -920,45 +964,48 @@ public class GameController : MonoBehaviour
     }
 
 
-	void StartAttack()
-	{
-		if (!attacking)
-		{
-			attacking = true;
-			firstPlanet = true;
-		}
-		else
-		{
-			attacking = false;
-			firstPlanet = false;
-		}
-	}
+    void StartAttack()
+    {
+        if (!attacking)
+        {
+            attacking = true;
+            firstPlanet = true;
+        }
+        else
+        {
+            attacking = false;
+            firstPlanet = false;
+        }
+    }
 
-	void attack()
-	{
-		// if both variables are set
-		if (shot == null) {
-			if (planet1 != null && planet2 != null) {
-				shot = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-				shot.transform.localScale = new Vector3 (8f, 8f, 8f);
-				shot.transform.position = planet1.transform.position;
+    void attack()
+    {
+        // if both variables are set
+        if (shot == null)
+        {
+            if (planet1 != null && planet2 != null)
+            {
+                shot = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                shot.transform.localScale = new Vector3(8f, 8f, 8f);
+                shot.transform.position = planet1.transform.position;
 
-			
-			}
-		}
-	}
+
+            }
+        }
+    }
 
 
 
     private void CalculateFail()
     {
         //chance to fail
-		int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier)-firstPlanetScript.addlinkchance-secondPlanetScript.addlinkchance;
+        int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier) - firstPlanetScript.addlinkchance - secondPlanetScript.addlinkchance;
         //        		Debug.Log(difftier);
 
-		if (difftier < 0) {
-			fail = false;
-		}
+        if (difftier < 0)
+        {
+            fail = false;
+        }
         else if (difftier == 0)
         {
             int chance = Random.Range(0, 10);
@@ -1058,11 +1105,13 @@ public class GameController : MonoBehaviour
 
     public void Simulate()
     {
-        m.CheckMissions(m.missions);
+        
         ResetLinking();
         simulate = true;
         canBuild = true;
         buildingActive = false;
+
+        m.CheckMissions(m.missions);
 
         // reset place planet
         if (go != null && planetPlaced)
@@ -1079,19 +1128,21 @@ public class GameController : MonoBehaviour
 
         foreach (var planet in planets)
         {
-			if (storm)
+            if (storm)
             {
                 planetScript = planet.GetComponent<Planet>();
-				if (planetScript.stormsheid == false) {
-					planetScript.addCarbon = planetScript.halfaddCarbon;
-					planetScript.addNitrogen = planetScript.halfaddNitrogen;
-					planetScript.addHydrogen = planetScript.halfaddHydrogen;
-				}
-				if (planetScript.stormsheid == true) {
-					planetScript.addCarbon = planetScript.OriginaddCarbon;
-					planetScript.addNitrogen = planetScript.OriginaddNitrogen;
-					planetScript.addHydrogen = planetScript.OriginaddHydrogen;			
-				}
+                if (planetScript.stormsheid == false)
+                {
+                    planetScript.addCarbon = planetScript.halfaddCarbon;
+                    planetScript.addNitrogen = planetScript.halfaddNitrogen;
+                    planetScript.addHydrogen = planetScript.halfaddHydrogen;
+                }
+                if (planetScript.stormsheid == true)
+                {
+                    planetScript.addCarbon = planetScript.OriginaddCarbon;
+                    planetScript.addNitrogen = planetScript.OriginaddNitrogen;
+                    planetScript.addHydrogen = planetScript.OriginaddHydrogen;
+                }
 
             }
             else if (!storm)
@@ -1131,31 +1182,31 @@ public class GameController : MonoBehaviour
 
             //foreach (Button button in planetButtons)
             //{
-                //--Unlock Tier 1 planets
-                // Carbon is always unlocked
-                //if (button.name == "Carbon")
-                //{
-                //    button.interactable = true;
-                //}
-                // -- Unlock Tier 2 planets
-                // Silicon, Ammonia, Methane require Carbon to unlock
-                //if (carbonIncrement > 0)
-                //{
-                //    if (button.name == "Silicon" || button.name == "Ammonia" || button.name == "Methane")
-                //    {
-                //        button.interactable = true;
-                //    }
-                //}
-                // -- Unlock Tier 3 planets
-                // Germanium requires Silicon to unlock
-                //if (siliconIncrement > 0)
-                //{
-                //    if (button.name == "Germanium")
-                //    {
-                //        button.interactable = true;
-                //    }
-                //}
-                // Acetylene requires Ammonia or Germanium to unlock
+            //--Unlock Tier 1 planets
+            // Carbon is always unlocked
+            //if (button.name == "Carbon")
+            //{
+            //    button.interactable = true;
+            //}
+            // -- Unlock Tier 2 planets
+            // Silicon, Ammonia, Methane require Carbon to unlock
+            //if (carbonIncrement > 0)
+            //{
+            //    if (button.name == "Silicon" || button.name == "Ammonia" || button.name == "Methane")
+            //    {
+            //        button.interactable = true;
+            //    }
+            //}
+            // -- Unlock Tier 3 planets
+            // Germanium requires Silicon to unlock
+            //if (siliconIncrement > 0)
+            //{
+            //    if (button.name == "Germanium")
+            //    {
+            //        button.interactable = true;
+            //    }
+            //}
+            // Acetylene requires Ammonia or Germanium to unlock
             //    if (ammoniaIncrement > 0 || germaniumIncrement > 0)
             //    {
             //        if (button.name == "Acetylene")
@@ -1165,15 +1216,15 @@ public class GameController : MonoBehaviour
             //    }
             //}
             // Unlock technologies
-//            Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
-//            foreach (Transform t in ts)
-//            {
-//                if (microSkillTreeNames.Contains(t.gameObject.name))
-//                {
-//                    var tech = t.gameObject.GetComponent<TechnologySkillTree>();
-//                    tech.Unlock();
-//                }
-//            }
+            //            Transform[] ts = GameObject.Find("Micro Skill Tree Parent").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+            //            foreach (Transform t in ts)
+            //            {
+            //                if (microSkillTreeNames.Contains(t.gameObject.name))
+            //                {
+            //                    var tech = t.gameObject.GetComponent<TechnologySkillTree>();
+            //                    tech.Unlock();
+            //                }
+            //            }
         }
     }
 }

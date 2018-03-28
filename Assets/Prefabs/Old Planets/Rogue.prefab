@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 135480004993462062}
   m_Layer: 0
   m_Name: Rogue
-  m_TagString: Rogue
+  m_TagString: Carbon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,6 +277,8 @@ MonoBehaviour:
   stormsheid: 0
   moreResource: 0
   technologyLevel: 0
+  iflinkactive: 0
+  ifattackactive: 0
   segments: 0
   orbitingObject: {fileID: 4339871127361048}
   orbitPath:
@@ -297,13 +299,16 @@ MonoBehaviour:
   population: 0
   health: 0
   maxHealth: 0
+  collecting: 0
   maxResourceType: 0
   maxResource: 0
   planetname: ' '
   linkedWith: []
   links: []
   lines: []
-  die: 0
+  stoneCollected: 0
+  waterCollected: 0
+  gasCollected: 0
 --- !u!114 &114906765157303248
 MonoBehaviour:
   m_ObjectHideFlags: 1

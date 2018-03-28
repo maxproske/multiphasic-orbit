@@ -1255,6 +1255,7 @@ MonoBehaviour:
   linkedAlready: 0
   planet1: {fileID: 0}
   planet2: {fileID: 0}
+  selected: {fileID: 0}
   fail: 0
   roguePrefab: {fileID: 1302749218511646, guid: 2163a4daf871d214c9c7c4b3b5355776,
     type: 2}
@@ -1299,8 +1300,9 @@ MonoBehaviour:
   gas: {fileID: 836281958}
   level: 0
   shot: {fileID: 0}
-  missionPanel: {fileID: 0}
-  genericMissionPanel: {fileID: 0}
+  missionPanel: {fileID: 798841061}
+  genericMissionPanel: {fileID: 1393508523193676, guid: 49460af36aac4834c9618a4e178cf13b,
+    type: 2}
 --- !u!4 &519037294
 Transform:
   m_ObjectHideFlags: 0
@@ -1624,6 +1626,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 473215668}
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &798841061 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1151894095453380, guid: 4fae5d09e2100f540b77e9f316f2e036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1035688646}
 --- !u!224 &810687786 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224511596987241022, guid: 9a1898ba0128f9140aaa2fe21f603dc3,

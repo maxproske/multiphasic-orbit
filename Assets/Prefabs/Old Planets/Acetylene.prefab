@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 135062162331914242}
   m_Layer: 0
   m_Name: Acetylene
-  m_TagString: Silicon
+  m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec9a542a5d5f3043bc5cad18fe76ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  die: 0
   tier: 3
   addCarbon: 6
   addNitrogen: 6
@@ -303,6 +304,12 @@ MonoBehaviour:
   halfaddCarbon: 0
   halfaddNitrogen: 0
   halfaddHydrogen: 0
+  addlinkchance: 0
+  stormsheid: 0
+  moreResource: 0
+  technologyLevel: 0
+  iflinkactive: 0
+  ifattackactive: 0
   segments: 36
   orbitingObject: {fileID: 4339871127361048}
   orbitPath:
@@ -311,6 +318,7 @@ MonoBehaviour:
   orbitProgress: 0
   orbitPeriod: 3
   orbitSpeedMultiplier: 1
+  fastUniverse: 0
   planetPlaced: 0
   carbon: 0
   nitrogen: 0
@@ -318,11 +326,20 @@ MonoBehaviour:
   placingCoroutineRunning: 0
   sc: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
+  planetSprite: {fileID: 0}
+  population: 0
+  health: 0
+  maxHealth: 0
+  collecting: 0
   maxResourceType: 0
   maxResource: 0
+  planetname: ' '
   linkedWith: []
   links: []
   lines: []
+  stoneCollected: 0
+  waterCollected: 0
+  gasCollected: 0
 --- !u!114 &114434164345388212
 MonoBehaviour:
   m_ObjectHideFlags: 1

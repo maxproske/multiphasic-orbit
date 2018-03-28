@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Assign a Planet to Learn a Technology X
-  missionDescription: Place at least 1 planet.
+  missionName: Assign a Planet to Learn a Negative Mass Mechanics
+  missionDescription: 
   missionReward: Advance to next test
   completed: 0

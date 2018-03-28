@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Missions : MonoBehaviour
 {
     // used to access gc
     private GameController gc;
     private Mission m;
+    private Planet p; 
 
     public List<GameObject> missions; // list of missions that will be played with
     public List<GameObject> Test1Missions; // add these missions into the missions
@@ -18,6 +20,7 @@ public class Missions : MonoBehaviour
     {
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         m = GameObject.Find("Missions").GetComponent<Mission>();
+        m = GameObject.Find("Missions").GetComponent<Mission>();
     }
 
     // use this to check if mission requirements have been fulfilled
@@ -27,12 +30,78 @@ public class Missions : MonoBehaviour
         switch (m.missionName)
         {
             case "Place Planet":
-                Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
                 if (gc.planets.Count > 0)
                 {
                     Complete(mission);
                     Reward(mission);
                 } else
+                {
+                    //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                }
+                break;
+            case "Open Planet Properties Panel":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                if (gc.selected != null && gc.selected.CompareTag("Planet"))
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                else
+                {
+                    //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                }
+                break;
+            case "Simulate":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                if (gc.simulate)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                else
+                {
+                    //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                }
+                break;
+            case "Assign a Planet to Learn High Energy Magnetics":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+
+                    if (p.moreResource)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                    else
+                    {
+                        //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                    }
+                }
+                break;
+            case "Assign a Planet to Learn a Negative Mass Mechanics":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                //if (gc.planets.Count > 0)
+                //{
+                //    Complete(mission);
+                //    Reward(mission);
+                //}
+                //else
+                //{
+                //    Debug.Log("Mission: " + m.missionName + " incomplete.");
+                //}
+                break;
+            case "Unknown Mission":
+                Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                if (gc.linksuccessful)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                else
                 {
                     Debug.Log("Mission: " + m.missionName + " incomplete.");
                 }
@@ -58,6 +127,13 @@ public class Missions : MonoBehaviour
         m = mission.GetComponent<Mission>();
         Debug.Log("Mission: " + m.missionName + " completed!");
         m.completed = true;
+
+        // update respective button colour
+        GameObject ms = GameObject.Find(mission.name + "(Clone)"); // find the instantiated game object of the same name that is set as a child to one of the mission buttons
+        Button button = ms.transform.parent.transform.Find("Mission Button").GetComponent<Button>(); // get the particular mission button
+        ColorBlock cb = button.GetComponent<Button>().colors; 
+        cb.normalColor = new Color(0.298f, 0.686f, 0.313f); // set the button color to same green as play button
+        button.colors = cb;
     }
 
     public void CheckMissions(List<GameObject> missionsList)

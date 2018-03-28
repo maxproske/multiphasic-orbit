@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionName: Simulate
-  missionDescription: Place at least 1 planet.
-  reward: 
+  missionDescription: 
+  missionReward: 
   completed: 1

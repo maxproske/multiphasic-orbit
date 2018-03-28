@@ -54,4 +54,4 @@ MonoBehaviour:
   missionName: Place Planet
   missionDescription: Place at least <b>1</b> Planet.
   missionReward: 
-  completed: 0
+  completed: 1
