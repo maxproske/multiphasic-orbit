@@ -144,6 +144,7 @@ public class UIController : MonoBehaviour
 			SetSelectedName (p.planetname);
 			SetSelectedPreview (p.planetSprite);
 			SetSelectedResources (p.carbon, p.nitrogen, p.hydrogen);
+            SetSelectedResourcesCollected(p.stoneCollected, p.waterCollected, p.gasCollected);
 			SetSelectedPopulation (p.population);
 			SetSelectedHealth (p.health, p.maxHealth);
             SetSelectedTechnology (p.technologyLevel);
@@ -175,6 +176,7 @@ public class UIController : MonoBehaviour
 			SetSelectedName ();
 			SetSelectedPreview ();
 			SetSelectedResources ();
+            SetSelectedResourcesCollected();
 			SetSelectedPopulation ();
 			SetSelectedHealth ();
             SetSelectedBuilding();
@@ -272,14 +274,14 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	private void SetSelectedResources (int carbon = -1, int nitrogen = -1, int hydrogen = -1)
+	private void SetSelectedResources (int stone = -1, int water = -1, int gas = -1)
 	{
 		// Planet selected
-		if (carbon > -1 && nitrogen > -1 && hydrogen > -1) 
+		if (stone > -1 && water > -1 && gas > -1) 
 		{
-			leftStoneText.text = carbon.ToString();
-			leftWaterText.text = nitrogen.ToString();
-			leftGasText.text = hydrogen.ToString();
+			leftStoneText.text = stone.ToString();
+			leftWaterText.text = water.ToString();
+			leftGasText.text = gas.ToString();
 		}
 		// No planet selected
 		else 
@@ -288,6 +290,43 @@ public class UIController : MonoBehaviour
 		}
 	}
 
+	private void SetSelectedResourcesCollected (int stoneCollected = -999, int waterCollected = -999, int gasCollected = -999)
+	{
+		// Planet selected
+		if (stoneCollected > -999 && waterCollected > -999 && gasCollected > -999) 
+		{
+            string positive = "<color=#4CAF50FF>+ ";
+            string negative = "<color=#F44336FF>- ";
+            string neutral = "<color=#FFFFFF00>";
+            string stoneColorTag = "";
+            string waterColorTag = "";
+            string gasColorTag = "";
+            string closingTag = "</color>";
+
+            // Determine if resources collected was negative/neutral/positive
+            if (stoneCollected < 0) stoneColorTag = negative;
+            else if (stoneCollected == 0) stoneColorTag = neutral;
+            else if (stoneCollected > 0) stoneColorTag = positive;
+
+            if (waterCollected < 0) stoneColorTag = negative;
+            else if (waterCollected == 0) waterColorTag = neutral;
+            else if (waterCollected > 0) waterColorTag = positive;
+
+            if (gasCollected < 0) gasColorTag = negative;
+            else if (gasCollected == 0) gasColorTag = neutral;
+            else if (gasCollected > 0) gasColorTag = positive;
+
+            // Assign text appropriate colour
+			leftStoneCollectedText.text = stoneColorTag + stoneCollected.ToString() + closingTag;
+			leftWaterCollectedText.text = waterColorTag + waterCollected.ToString() + closingTag;
+			leftGasCollectedText.text = gasColorTag + gasCollected.ToString() + closingTag;
+		}
+		// No planet selected
+		else 
+		{
+			leftStoneText.text = leftWaterText.text = leftGasText.text = "-";
+		}
+	}
 	private void SetSelectedPopulation (int population = -1)
 	{
 		// Planet selected
@@ -425,11 +464,13 @@ public class UIController : MonoBehaviour
         if (selectedPlanet != null)
         {
             SetSelectedResources(selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
+            SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
         }
         // No planet selected
         else
         {
             SetSelectedResources();
+            SetSelectedResourcesCollected();
         }
     }
 
@@ -475,5 +516,25 @@ public class UIController : MonoBehaviour
         Animator anim = leftPanel.GetComponent<Animator>();
         anim.enabled = true;
         anim.Play("LeftPanelSlideOut");
+    }
+
+    private IEnumerator FadeTextToFullAlpha(float t, Text i)
+    {
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
+        while (i.color.a < 1.0f)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
+            yield return null;
+        }
+    }
+ 
+    private IEnumerator FadeTextToZeroAlpha(float t, Text i)
+    {
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
+        while (i.color.a > 0.0f)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+            yield return null;
+        }
     }
 }

@@ -112,6 +112,10 @@ public class Planet : MonoBehaviour
 	private GUIStyle guiStyle = new GUIStyle(); 
 
     private UIController ui;
+    // Move here so it is referencable by the UI script
+    public int stoneCollected;
+    public int waterCollected;
+    public int gasCollected;
 
     public Planet()
     {
@@ -381,22 +385,26 @@ public class Planet : MonoBehaviour
         // pop up of resources collected after simulation
         if (collecting == true && count > 30)
         {
-			int totalcarbon = addCarbon *collectionMultiplier;
-			int totalnit = addNitrogen * collectionMultiplier;
-			int totalhyd = addHydrogen * collectionMultiplier;
+			stoneCollected = addCarbon * collectionMultiplier;
+			waterCollected = addNitrogen * collectionMultiplier;
+			gasCollected = addHydrogen * collectionMultiplier;
+
+            // Update the UI
+            ui.UpdateResources();
+
 			if (linkedWith.Count == 0) {
-				GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + totalcarbon, guiStyle);
-				GUI.Label (new Rect (rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNitrogen + " + " + totalnit, guiStyle);
-				GUI.Label (new Rect (rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHydrogen + " + " + totalhyd, guiStyle);
+				// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + stoneCollected, guiStyle);
+				// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected, guiStyle);
+				// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected, guiStyle);
 			}
 			if (linkedWith.Count > 0) {
 				if (this.CompareTag ("Rogue")) {
 					if (this.die == false) {
 						guiStyle.normal.textColor = Color.red;
 
-						GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
-						GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
-						GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
+						// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
+						// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
+						// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
 					}
 				} else {
 					string ac = " ";
@@ -417,9 +425,9 @@ public class Planet : MonoBehaviour
 					} else if (tradehydrogen < 0) {
 						ah = " - ";
 					}
-					GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + totalcarbon + ac + Mathf.Abs (tradecarbon), guiStyle);
-					GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + totalnit + an + Mathf.Abs (tradenitrogen), guiStyle);
-					GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + totalhyd + ah + Mathf.Abs (tradehydrogen), guiStyle);	
+					// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + stoneCollected + ac + Mathf.Abs (tradecarbon), guiStyle);
+					// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected + an + Mathf.Abs (tradenitrogen), guiStyle);
+					// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected + ah + Mathf.Abs (tradehydrogen), guiStyle);	
 				}
 			}
 		}
