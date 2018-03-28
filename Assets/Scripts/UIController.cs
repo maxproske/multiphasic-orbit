@@ -8,25 +8,10 @@ using UnityEngine.EventSystems;
 // private UIController ui;
 // ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
 
-// -- Update the left panel
-// ui.SetSelectedPlanet (Planet planet);
+// -- Update the UI when needed.
+// ui.UpdateSelectedPlanet();
 
-// -- Set play button
-// ui.SetPlayInteractive (true/false)
-
-// -- Set turn count (eg. Turn 1)
-// ui.SetTurn (1);
-
-// -- Set distance(eg. 20 uu)
-// ui.SetDistance (20);
-
-// -- Update resources
-// ui.UpdateResources();
-
-// -- Update population
-// ui.UpdatePopulation();
-
-// -- Update health
+// -- Update just the health.
 // ui.UpdateHealth();
 
 public class UIController : MonoBehaviour 
