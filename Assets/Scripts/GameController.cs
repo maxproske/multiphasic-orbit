@@ -646,7 +646,7 @@ public class GameController : MonoBehaviour
                             } 
                             else {
                                 playButton.interactable = true;
-                                ui.UpdateSelectedPlanet();
+                                //ui.UpdateSelectedPlanet();
                             }
 
                             planetPlaced = true;

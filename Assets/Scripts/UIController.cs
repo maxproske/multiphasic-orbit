@@ -65,6 +65,7 @@ public class UIController : MonoBehaviour
     public Button leftTechnology3Button;
     public Button leftTechnology4Button;
     public Button leftTechnology5Button;
+    private bool fadeCoroutineRunning;
 
 	/* Declare Right Panel
 	   ========================================================================== */
@@ -140,7 +141,7 @@ public class UIController : MonoBehaviour
 			SetSelectedName (selectedPlanet.planetname);
 			SetSelectedPreview (selectedPlanet.planetSprite);
 			SetSelectedResources (selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
-            SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
+            // SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
 			SetSelectedPopulation (selectedPlanet.population);
 			SetSelectedHealth (selectedPlanet.health, selectedPlanet.maxHealth);
             SetSelectedTechnology (selectedPlanet.technologyLevel);
@@ -152,7 +153,7 @@ public class UIController : MonoBehaviour
             SetResourcePanelActive(true);
             SetStatusPanelActive(true);
             SetTechnologyPanelActive(selectedPlanet.population > 0);
-            SetBuildingPanelActive(selectedPlanet.population > 0);
+            SetBuildingPanelActive(selectedPlanet.population <= 0);
         }
         else 
         {
@@ -315,16 +316,19 @@ public class UIController : MonoBehaviour
             Color myColor = new Color();
             ColorUtility.TryParseHtmlString (stoneColor, out myColor);
             leftStoneCollectedText.color = myColor;
+            if (stoneCollected != 0) StartCoroutine(FadeTextToFullAlpha(0.5f, leftStoneCollectedText));
 
 			leftWaterCollectedText.text = waterPrefix + waterCollected.ToString();
             myColor = new Color();
             ColorUtility.TryParseHtmlString (waterColor, out myColor);
             leftWaterCollectedText.color = myColor;
+            if (waterCollected != 0) StartCoroutine(FadeTextToFullAlpha(0.5f, leftWaterCollectedText));
 
 			leftGasCollectedText.text = gasPrefix + gasCollected.ToString();
             myColor = new Color();
             ColorUtility.TryParseHtmlString (gasColor, out myColor);
             leftGasCollectedText.color = myColor;
+            if (gasCollected != 0) StartCoroutine(FadeTextToFullAlpha(0.5f, leftGasCollectedText));
 		}
 		// No planet selected
 		else 
@@ -411,7 +415,7 @@ public class UIController : MonoBehaviour
 		// Planet selected
 		if (population > -1) 
         {
-            if (population > 0) 
+            if (population >= 0) 
             {
                 leftBuildingText.text = selectedPlanet.turnsToBuild.ToString() + " turn" + ((selectedPlanet.turnsToBuild>1) ? "s" : "") + " left to build.";
             }
@@ -526,16 +530,19 @@ public class UIController : MonoBehaviour
 
     private IEnumerator FadeTextToFullAlpha(float t, Text i)
     {
+        fadeCoroutineRunning = true;
         i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
         while (i.color.a < 1.0f)
         {
             i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
             yield return null;
         }
+        fadeCoroutineRunning = false;
     }
  
     private IEnumerator FadeTextToZeroAlpha(float t, Text i)
     {
+        fadeCoroutineRunning = true;
         i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
         while (i.color.a > 0.0f)
         {
@@ -543,5 +550,6 @@ public class UIController : MonoBehaviour
             i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
             yield return null;
         }
+        fadeCoroutineRunning = false;
     }
 }
