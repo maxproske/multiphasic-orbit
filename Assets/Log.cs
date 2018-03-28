@@ -23,7 +23,7 @@ public class Log : MonoBehaviour
 
     public void ToggleLog()
     {
-        myScrollRect.verticalNormalizedPosition = 0f;
+        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
 
         if (gc.log.activeSelf)
         {
@@ -181,6 +181,7 @@ public class Log : MonoBehaviour
 
     public void LogBackLog()
     {
+        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
         LogText.text += textToLog;
         textToLog = ""; // reset textToLog
     }
