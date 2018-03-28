@@ -462,11 +462,11 @@ public class GameController : MonoBehaviour
 				startAttackButton.gameObject.SetActive (true);
 				AttackButton.gameObject.SetActive (true);
 			} else if (attacking && !firstPlanet) {
-				startLinkButton.gameObject.SetActive (true);
-				linkButton.gameObject.SetActive (true);
+				startAttackButton.gameObject.SetActive (true);
+				AttackButton.gameObject.SetActive (true);
 			} else {
-				startLinkButton.gameObject.SetActive (false);
-				linkButton.gameObject.SetActive (false);
+				startAttackButton.gameObject.SetActive (false);
+				AttackButton.gameObject.SetActive (false);
 			}
             // update UI
             if (planetScript.turnsToBuild < 1)
