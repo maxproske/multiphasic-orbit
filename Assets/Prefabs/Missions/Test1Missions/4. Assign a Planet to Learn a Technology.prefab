@@ -54,4 +54,7 @@ MonoBehaviour:
   missionName: Assign a Planet to Learn High Energy Magnetics
   missionDescription: 
   missionReward: 
-  completed: 1
+  postMissionMessage: Once a planet has enough resources, you can assign them to learn
+    a new technology. Be aware, some technologies have prerequisites!
+  postMissionHint: 
+  completed: 0

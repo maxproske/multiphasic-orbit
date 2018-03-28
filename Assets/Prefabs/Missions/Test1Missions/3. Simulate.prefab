@@ -54,4 +54,7 @@ MonoBehaviour:
   missionName: Simulate
   missionDescription: 
   missionReward: 
-  completed: 1
+  postMissionMessage: 'Once there are no more actions to be completed or when you
+    feel that you want to go straight to simulating, you may hit the Play button.  '
+  postMissionHint: 
+  completed: 0

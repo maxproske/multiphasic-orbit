@@ -54,4 +54,8 @@ MonoBehaviour:
   missionName: Place Planet
   missionDescription: Place at least <b>1</b> Planet.
   missionReward: 
-  completed: 1
+  postMissionMessage: "Good job! You\u2019ve placed your first planet. Keep placing
+    planets at your own discretion to achieve a thriving solar system! "
+  postMissionHint: Each planet has a certain of properties for you to manage and explore.
+    Click around to figure out how to access it.
+  completed: 0

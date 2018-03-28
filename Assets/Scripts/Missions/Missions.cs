@@ -8,7 +8,9 @@ public class Missions : MonoBehaviour
     // used to access gc
     private GameController gc;
     private Mission m;
-    private Planet p; 
+    private Planet p;
+    public GameObject confirmationPanel;
+    private ConfirmationPanel cp;
 
     public List<GameObject> missions; // list of missions that will be played with
     public List<GameObject> Test1Missions; // add these missions into the missions
@@ -20,7 +22,8 @@ public class Missions : MonoBehaviour
     {
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         m = GameObject.Find("Missions").GetComponent<Mission>();
-        m = GameObject.Find("Missions").GetComponent<Mission>();
+        cp = confirmationPanel.GetComponent<ConfirmationPanel>();
+        cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
     }
 
     // use this to check if mission requirements have been fulfilled
@@ -134,6 +137,15 @@ public class Missions : MonoBehaviour
         ColorBlock cb = button.GetComponent<Button>().colors; 
         cb.normalColor = new Color(0.298f, 0.686f, 0.313f); // set the button color to same green as play button
         button.colors = cb;
+
+        if (m.postMissionHint != "") // if there is post mission hint, show confirmation panel with message and hint - assumes when there is a hint, there is a message
+        {
+            cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.postMissionHint);
+        } else if (m.postMissionMessage != "")// else just show confirmation panel with just message
+        {
+            cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage);
+        }
+        
     }
 
     public void CheckMissions(List<GameObject> missionsList)

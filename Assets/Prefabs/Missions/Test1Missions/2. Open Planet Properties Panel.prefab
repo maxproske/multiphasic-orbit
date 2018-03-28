@@ -54,4 +54,8 @@ MonoBehaviour:
   missionName: Open Planet Properties Panel
   missionDescription: 
   missionReward: 
+  postMissionMessage: Nice work! You figured out how to access the Properties Panel.
+    Here you will find information about how many resources the planet has, population,
+    health, and access to the technology tree.
+  postMissionHint: 
   completed: 1
