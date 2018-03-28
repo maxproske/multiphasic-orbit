@@ -417,7 +417,10 @@ public class UIController : MonoBehaviour
         {
             if (population >= 0) 
             {
-                leftBuildingText.text = selectedPlanet.turnsToBuild.ToString() + " turn" + ((selectedPlanet.turnsToBuild>1) ? "s" : "") + " left to build.";
+                if (selectedPlanet != null)
+                {
+                    leftBuildingText.text = selectedPlanet.turnsToBuild.ToString() + " turn" + ((selectedPlanet.turnsToBuild>1) ? "s" : "") + " left to build.";
+                }
             }
             else 
             {
