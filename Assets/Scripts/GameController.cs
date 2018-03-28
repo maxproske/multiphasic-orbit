@@ -493,10 +493,11 @@ public class GameController : MonoBehaviour
 			planet2 = null;
 		}
 
-	
-		if (planets.Contains (selected)) {
+
+
+		if (planets.Contains (selected) ||planetScript!=null) {
 			
-			if (!linking) {
+			if (!linking && !placing && selected.GetComponent ("Planet")) {
 				planetScript = selected.GetComponent<Planet> (); // get Planet script to access attributes
 			}
 			if (ui.selectedPlanet == null) {
