@@ -208,6 +208,8 @@ public class Missions : MonoBehaviour
             cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage);
         }
 
+        gc.l.UpdateLogMission(m.missionName, m.missionReward);
+
     }
 
     public void CheckMissions(List<GameObject> missionsList)

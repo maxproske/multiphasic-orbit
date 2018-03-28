@@ -22,6 +22,12 @@
     public const int DEFENSE = 30;
     public const int ATTACK = 31;
 
+    // log types
+    public const int PLANET = 41;
+    public const int TRADE = 42;
+    public const int TECHNOLOGY = 43;
+    public const int MISSION = 44;
+
     // Constants for starting values for planets
     public const int CARBON_ADD_CARBON = 4;
     public const int CARBON_ADD_NITROGEN = 1;

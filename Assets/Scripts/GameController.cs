@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
     public GameObject selected; // hold selected GameObject
                                 // fail
     public bool fail;
-    private int turn;
+    public int turn;
     public GameObject roguePrefab;
     private List<GameObject> roguePlanets;
 
@@ -117,11 +117,18 @@ public class GameController : MonoBehaviour
     public GameObject genericMissionPanel;
     private int missionIncrement;
 
+
+    // log
+    public GameObject log;
+    public Log l;
+
     // Use this for initialization
     void Start()
     {
         ui = GameObject.Find("Canvas").GetComponent<UIController>();
         m = GameObject.Find("Missions").GetComponent<Missions>();
+        l = log.GetComponent<Log>();
+        log.SetActive(false);
 
         turn = 1;
         
@@ -307,8 +314,16 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // toggle log
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            l.ToggleLog();
+        }
 
-
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            l.ToggleLog();
+        }
 
         if (shot != null)
         {
@@ -631,7 +646,6 @@ public class GameController : MonoBehaviour
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
             { // check if is built 
-
                 notBuiltTooltip.SetActive(false);
 
                 if (!linking && !placing && Input.GetMouseButtonUp(0))
@@ -871,7 +885,6 @@ public class GameController : MonoBehaviour
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
                     carbonIncrement--;
-                    Debug.Log("2");
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
                     //go.transform.parent = sun.transform;
@@ -948,7 +961,7 @@ public class GameController : MonoBehaviour
         // Create a new planet
         go = Instantiate(nitrogen) as GameObject;
         // increment planet name
-        methaneIncrement++;
+        ammoniaIncrement++;
         go.name = "Nitrogen " + ammoniaIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
@@ -994,7 +1007,7 @@ public class GameController : MonoBehaviour
         // Only call once per planet per turn
         if (active && !buildingActive)
         {
-            AddTurn();
+            //AddTurn();
             buildingActive = true;
         }
     }
@@ -1168,7 +1181,7 @@ public class GameController : MonoBehaviour
 
     public void Simulate()
     {
-
+        AddTurn();
         ResetLinking();
         simulate = true;
         canBuild = true;
@@ -1222,6 +1235,10 @@ public class GameController : MonoBehaviour
                 if (planetScript.turnsToBuild > 0)
                 {
                     canBuild = false;
+                }
+                if (planetScript.turnsToBuild == 0)
+                {
+                    l.UpdateLogPlanet(planet.name, "has finished building");
                 }
                 planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
 
