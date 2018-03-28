@@ -1107,7 +1107,7 @@ public class GameController : MonoBehaviour
 
         ToggleInteractability(false);
 
-        culculateStorm();
+//        culculateStorm();
 
 
 		if (planet1 != null && planet2 != null) {
