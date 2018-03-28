@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114135157180620244}
   - component: {fileID: 114451114047828182}
   - component: {fileID: 114569425280797614}
+  - component: {fileID: 114974161956706396}
   m_Layer: 5
   m_Name: Next Turn Button
   m_TagString: Untagged
@@ -166,6 +167,7 @@ GameObject:
   - component: {fileID: 114504149458450038}
   - component: {fileID: 114674470334361420}
   - component: {fileID: 114452410240457300}
+  - component: {fileID: 114561374736865352}
   m_Layer: 5
   m_Name: Water Button
   m_TagString: Untagged
@@ -339,6 +341,7 @@ GameObject:
   - component: {fileID: 114685236675762788}
   - component: {fileID: 114306604599507220}
   - component: {fileID: 114823158782810114}
+  - component: {fileID: 114385250571636666}
   m_Layer: 5
   m_Name: Stone Button
   m_TagString: Untagged
@@ -358,6 +361,7 @@ GameObject:
   - component: {fileID: 114521129562984822}
   - component: {fileID: 114248132683032596}
   - component: {fileID: 114989056339788218}
+  - component: {fileID: 114544783118580162}
   m_Layer: 5
   m_Name: Gas Button
   m_TagString: Untagged
@@ -673,6 +677,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114385250571636666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950515617318054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe86949f5bfc104f9d777e65beb732c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: bfaa8e2c962941648b49568d97b5f54d, type: 3}
 --- !u!114 &114398491421883404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -911,6 +927,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114544783118580162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964437463279746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe86949f5bfc104f9d777e65beb732c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: bfaa8e2c962941648b49568d97b5f54d, type: 3}
 --- !u!114 &114551700385525314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -944,6 +972,18 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Missions
+--- !u!114 &114561374736865352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345501872731430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe86949f5bfc104f9d777e65beb732c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: bfaa8e2c962941648b49568d97b5f54d, type: 3}
 --- !u!114 &114569425280797614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1279,6 +1319,18 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Build
+--- !u!114 &114974161956706396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1026120926694058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe86949f5bfc104f9d777e65beb732c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 3c81f7e4cd6714343bc327ca72202c98, type: 3}
 --- !u!114 &114989056339788218
 MonoBehaviour:
   m_ObjectHideFlags: 1
