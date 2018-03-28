@@ -950,7 +950,7 @@ public class GameController : MonoBehaviour
             {
                 water.interactable = active;
             }
-            if (methaneIncrement > 0)
+            if (ammoniaIncrement > 0)
             {
                 gas.interactable = active;
             }
