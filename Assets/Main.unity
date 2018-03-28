@@ -1268,11 +1268,6 @@ MonoBehaviour:
   tech3: {fileID: 0}
   tech4: {fileID: 0}
   tech5: {fileID: 0}
-  iftech1: 0
-  iftech2: 0
-  iftech3: 0
-  iftech4: 0
-  iftech5: 0
   notBuiltTooltip: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910,
     type: 2}
   linkingText: {fileID: 0}

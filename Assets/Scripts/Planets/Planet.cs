@@ -31,6 +31,12 @@ public class Planet : MonoBehaviour
 	public bool iflinkactive=false;
 	public bool ifattackactive=false;
 
+
+	public int iftech1;
+	public int iftech2;
+	public int iftech3;
+	public int iftech4;
+	public int iftech5;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
@@ -623,7 +629,7 @@ public class Planet : MonoBehaviour
 
 	//depends on the planets, we can adjust it.
 	public void addResourceTechnology(){
-		carbon -= 30;
+		carbon -= 10;
 		moreResource = true;
 		if (moreResource == true) {
 			OriginaddCarbon += 2; 
@@ -640,15 +646,16 @@ public class Planet : MonoBehaviour
 
 	//set the addlinkchance and it will effect the CalculateFail() function in the gamecontroller
 	public void linkchanceTechnology(){
-		hydrogen -= 20;
+		hydrogen -= 15;
+		nitrogen -= 10;
 		addlinkchance++;
 	}
 
 	//set the storm shied and it will effect the Simulate() function in the gamcontroller
 	public void StormShiedTechnology(){
-		hydrogen -= 20;
-		carbon -= 20;
-		nitrogen -= 20;
+
+		carbon -= 15;
+		nitrogen -= 15;
 		stormsheid = true;
 	}
 

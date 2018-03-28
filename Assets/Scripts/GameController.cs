@@ -61,11 +61,6 @@ public class GameController : MonoBehaviour
     public Button tech4;
     public Button tech5;
 
-    public int iftech1;
-    public int iftech2;
-    public int iftech3;
-    public int iftech4;
-    public int iftech5;
 
     public GameObject notBuiltTooltip;
     private int notBuiltTooltipTimer;
@@ -247,38 +242,43 @@ public class GameController : MonoBehaviour
 
     private void settech1()
     {
-        if (iftech1 == 0)
-        {
-            iftech1 = 1;
-        }
+		if (planetScript != null) {
+			if (planetScript.iftech1 == 0) {
+				planetScript.iftech1 = 1;
+			}
+		}
     }
     private void settech2()
     {
-        if (iftech2 == 0)
-        {
-            iftech2 = 1;
-        }
+		if (planetScript != null) {
+			if (planetScript.iftech2 == 0) {
+				planetScript.iftech2 = 1;
+			}
+		}
     }
     private void settech3()
     {
-        if (iftech3 == 0)
-        {
-            iftech3 = 1;
-        }
+		if (planetScript != null) {
+			if (planetScript.iftech3 == 0) {
+				planetScript.iftech3 = 1;
+			}
+		}
     }
     private void settech4()
     {
-        if (iftech4 == 0)
-        {
-            iftech4 = 1;
-        }
+		if (planetScript != null) {
+			if (planetScript.iftech4 == 0) {
+				planetScript.iftech4 = 1;
+			}
+		}
     }
     private void settech5()
     {
-        if (iftech5 == 0)
-        {
-            iftech5 = 1;
-        }
+		if (planetScript != null) {
+			if (planetScript.iftech5 == 0) {
+				planetScript.iftech5 = 1;
+			}
+		}
     }
     public void AddTurn()
     {
@@ -451,6 +451,23 @@ public class GameController : MonoBehaviour
         {
             planetScript = selected.GetComponent<Planet>(); // get Planet script to access attributes
 
+			if (planetScript.iflinkactive) {
+				startLinkButton.gameObject.SetActive (true);
+				linkButton.gameObject.SetActive (true);
+			} else {
+				startLinkButton.gameObject.SetActive (false);
+				linkButton.gameObject.SetActive (false);
+			}
+			if (planetScript.ifattackactive) {
+				startAttackButton.gameObject.SetActive (true);
+				AttackButton.gameObject.SetActive (true);
+			} else if (attacking && !firstPlanet) {
+				startLinkButton.gameObject.SetActive (true);
+				linkButton.gameObject.SetActive (true);
+			} else {
+				startLinkButton.gameObject.SetActive (false);
+				linkButton.gameObject.SetActive (false);
+			}
             // update UI
             if (planetScript.turnsToBuild < 1)
             {
@@ -493,7 +510,7 @@ public class GameController : MonoBehaviour
             Button[] _technologyButtons = ui.leftTechnologyPanel.GetComponentsInChildren<Button>();
 
 
-            if (planetScript.carbon >= 30 && !planetScript.moreResource)
+			if (planetScript.carbon >= 10 && planetScript.iftech1==0)
             {
                 if (!_technologyButtons[0].interactable)
                 {
@@ -501,20 +518,32 @@ public class GameController : MonoBehaviour
                     _technologyButtons[0].interactable = true;
                 }
             }
-            else if (planetScript.hydrogen >= 20 && planetScript.moreResource && planetScript.addlinkchance == 0)
+			else if (planetScript.hydrogen >= 5 && planetScript.nitrogen >= 5 && planetScript.carbon >= 5 && planetScript.iftech1==2 && planetScript.iftech2==0)
             {
                 if (!_technologyButtons[1].interactable)
                 {
                     _technologyButtons[1].interactable = true;
                 }
             }
-            else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.addlinkchance > 0 && !planetScript.stormsheid)
+			else if (planetScript.hydrogen >= 15 && planetScript.nitrogen >= 10 && planetScript.iftech1==2 && planetScript.iftech2==2 && planetScript.iftech3==0)
             {
                 if (!_technologyButtons[2].interactable)
                 {
                     _technologyButtons[2].interactable = true;
                 }
-            }
+			}else if ( planetScript.nitrogen >= 15 && planetScript.carbon >= 15 && planetScript.iftech1==2 && planetScript.iftech2==2 && planetScript.iftech3==2 && planetScript.iftech4==0)
+			{
+				if (!_technologyButtons[3].interactable)
+				{
+					_technologyButtons[3].interactable = true;
+				}
+			}else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.iftech1==2 && planetScript.iftech2==2 && planetScript.iftech3==2 && planetScript.iftech4==2 && planetScript.iftech5==0)
+			{
+				if (!_technologyButtons[4].interactable)
+				{
+					_technologyButtons[4].interactable = true;
+				}
+			}
             else
             {
 
@@ -535,21 +564,37 @@ public class GameController : MonoBehaviour
 
                 if (!linking && !placing && Input.GetMouseButtonUp(0))
                 {
-                    if (iftech1 == 1)
+					if (planetScript.iftech1 == 1)
                     {
                         planetScript.addResourceTechnology();
-                        iftech1 = 2;
+						planetScript.iftech1 = 2;
                     }
-                    if (iftech2 == 1)
+					if (planetScript.iftech2 == 1)
                     {
-                        planetScript.linkchanceTechnology();
-                        iftech2 = 2;
+						planetScript.carbon -= 5;
+						planetScript.nitrogen -= 5;
+						planetScript.hydrogen -= 5;
+						planetScript.iflinkactive = true;
+						planetScript.iftech2 = 2;
                     }
-                    if (iftech3 == 1)
+					if (planetScript.iftech3 == 1)
                     {
-                        planetScript.StormShiedTechnology();
-                        iftech3 = 2;
+						planetScript.linkchanceTechnology();
+						planetScript.iftech3 = 2;
                     }
+					if (planetScript.iftech4 == 1)
+					{
+						planetScript.StormShiedTechnology();
+						planetScript.iftech4 = 2;
+					}
+					if (planetScript.iftech5 == 1)
+					{
+						planetScript.carbon -= 20;
+						planetScript.nitrogen -= 20;
+						planetScript.hydrogen -= 20;
+						planetScript.ifattackactive = true;
+						planetScript.iftech5 = 2;
+					}
                     // Create a new micro skill tree
                     //Debug.Log("Creating micro skill tree for " + selected.name);
                     //                     mst = Instantiate(microSkillTree) as GameObject;
