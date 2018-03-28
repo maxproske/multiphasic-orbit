@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour
 
 
     public bool attacking;
-    public Button startAttackButton;
     public Button AttackButton;
 
     // linking 
@@ -147,11 +146,10 @@ public class GameController : MonoBehaviour
 
         linkButton = GameObject.Find("Link To Button").GetComponent<Button>();
 		linkButton.onClick.AddListener(StartLink);
-        startAttackButton = GameObject.Find("Attack From Button").GetComponent<Button>();
-        startAttackButton.onClick.AddListener(StartAttack);
+
 
         AttackButton = GameObject.Find("Attack To Button").GetComponent<Button>();
-        AttackButton.onClick.AddListener(attack);
+		AttackButton.onClick.AddListener(StartAttack);
 
         tech1 = GameObject.Find("Tech 1").GetComponent<Button>();
         tech1.onClick.AddListener(settech1);
@@ -424,23 +422,29 @@ public class GameController : MonoBehaviour
 					// can only select built non-rogue planets to link with other built non-rogue planets
 					// check if is non-rogue and has Planet script
 
-					if (selected.GetComponent ("Planet") && !selected.CompareTag ("Rogue")) {
-						if (firstPlanet) {
-							planet1 = hit.collider.gameObject;
-							firstPlanetScript = planet1.GetComponent<Planet> ();
-							firstPlanet = false;
-						} else {
-							// if selected is not planet 1
+				// if selected is not planet 1
 
-							if (selected != planet1 && selected.CompareTag ("Rogue")) {
+						if (selected != planet1 && selected.CompareTag ("Rogue")) {
 								//									
 
-								planet2 = hit.collider.gameObject;
-								secondPlanetScript = planet2.GetComponent<Planet> ();
+							planet2 = hit.collider.gameObject;
+							secondPlanetScript = planet2.GetComponent<Planet> ();
+							// if both variables are set
+							if (shot == null)
+							{
+								if (planet1 != null && planet2 != null)
+								{
+									shot = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+									shot.transform.localScale = new Vector3(8f, 8f, 8f);
+									shot.transform.position = planet1.transform.position;
 
+
+								}
 							}
+
 						}
-					}
+
+
 
 				}
 			}
@@ -473,14 +477,13 @@ public class GameController : MonoBehaviour
 					
 				linkButton.gameObject.SetActive (false);
 			}
+
 			if (planetScript.ifattackactive) {
-				startAttackButton.gameObject.SetActive (true);
+		
 				AttackButton.gameObject.SetActive (true);
-			} else if (attacking && !firstPlanet) {
-				startAttackButton.gameObject.SetActive (true);
-				AttackButton.gameObject.SetActive (true);
+				AttackButton.interactable = true;
 			} else {
-				startAttackButton.gameObject.SetActive (false);
+		
 				AttackButton.gameObject.SetActive (false);
 			}
 			// update UI
@@ -947,8 +950,14 @@ public class GameController : MonoBehaviour
     {
         if (!attacking)
         {
-            attacking = true;
+           
             firstPlanet = true;
+			if (firstPlanet) {
+
+				firstPlanetScript = planetScript;
+				planet1 = firstPlanetScript.gameObject;
+			}
+			attacking = true;
         }
         else
         {
@@ -957,21 +966,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void attack()
-    {
-        // if both variables are set
-        if (shot == null)
-        {
-            if (planet1 != null && planet2 != null)
-            {
-                shot = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                shot.transform.localScale = new Vector3(8f, 8f, 8f);
-                shot.transform.position = planet1.transform.position;
 
-
-            }
-        }
-    }
 
 
 
