@@ -282,41 +282,55 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	private void SetSelectedResourcesCollected (int stoneCollected = -999, int waterCollected = -999, int gasCollected = -999)
+	public void SetSelectedResourcesCollected (int stoneCollected = -999, int waterCollected = -999, int gasCollected = -999)
 	{
 		// Planet selected
 		if (stoneCollected > -999 && waterCollected > -999 && gasCollected > -999) 
 		{
-            string positive = "<color=#4CAF50FF>+ ";
-            string negative = "<color=#F44336FF>- ";
-            string neutral = "<color=#FFFFFF00>";
-            string stoneColorTag = "";
-            string waterColorTag = "";
-            string gasColorTag = "";
-            string closingTag = "</color>";
+            string positive = "#4CAF50FF";
+            string negative = "#F44336FF";
+            string neutral = "#FFFFFF00";
+            string stoneColor = "";
+            string waterColor = "";
+            string gasColor = "";
+            string stonePrefix = "";
+            string waterPrefix = "";
+            string gasPrefix = "";
 
             // Determine if resources collected was negative/neutral/positive
-            if (stoneCollected < 0) stoneColorTag = negative;
-            else if (stoneCollected == 0) stoneColorTag = neutral;
-            else if (stoneCollected > 0) stoneColorTag = positive;
+            if (stoneCollected < 0) {stoneColor = negative; stonePrefix = "-";}
+            else if (stoneCollected == 0) {stoneColor = neutral; stonePrefix = "";}
+            else if (stoneCollected > 0) {stoneColor = positive; stonePrefix = "+";}
 
-            if (waterCollected < 0) stoneColorTag = negative;
-            else if (waterCollected == 0) waterColorTag = neutral;
-            else if (waterCollected > 0) waterColorTag = positive;
+            if (waterCollected < 0) {stoneColor = negative; waterPrefix = "-";}
+            else if (waterCollected == 0) {waterColor = neutral; waterPrefix = "";}
+            else if (waterCollected > 0) {waterColor = positive; waterPrefix = "+";}
 
-            if (gasCollected < 0) gasColorTag = negative;
-            else if (gasCollected == 0) gasColorTag = neutral;
-            else if (gasCollected > 0) gasColorTag = positive;
+            if (gasCollected < 0) {gasColor = negative; gasPrefix = "-";}
+            else if (gasCollected == 0) {gasColor = neutral; gasPrefix = "";}
+            else if (gasCollected > 0) {gasColor = positive; gasPrefix = "+";}
 
             // Assign text appropriate colour
-			leftStoneCollectedText.text = stoneColorTag + stoneCollected.ToString() + closingTag;
-			leftWaterCollectedText.text = waterColorTag + waterCollected.ToString() + closingTag;
-			leftGasCollectedText.text = gasColorTag + gasCollected.ToString() + closingTag;
+			leftStoneCollectedText.text = stonePrefix + stoneCollected.ToString();
+            Color myColor = new Color();
+            ColorUtility.TryParseHtmlString (stoneColor, out myColor);
+            leftStoneCollectedText.color = myColor;
+
+			leftWaterCollectedText.text = waterPrefix + waterCollected.ToString();
+            myColor = new Color();
+            ColorUtility.TryParseHtmlString (waterColor, out myColor);
+            leftWaterCollectedText.color = myColor;
+
+			leftGasCollectedText.text = gasPrefix + gasCollected.ToString();
+            myColor = new Color();
+            ColorUtility.TryParseHtmlString (gasColor, out myColor);
+            leftGasCollectedText.color = myColor;
 		}
 		// No planet selected
 		else 
 		{
-			leftStoneText.text = leftWaterText.text = leftGasText.text = "-";
+            //StartCoroutine(FadeTextToZeroAlpha(1f, leftStoneCollectedText));
+			leftStoneCollectedText.text = leftWaterCollectedText.text = leftGasCollectedText.text = "<color=#FFFFFF00></color>";
 		}
 	}
 	private void SetSelectedPopulation (int population = -1)
@@ -510,30 +524,24 @@ public class UIController : MonoBehaviour
         anim.Play("LeftPanelSlideOut");
     }
 
-    // private void FlickerTest(Text i)
-    // {
-    //     FadeTextToZeroAlpha(1f, i);
-    //     Debug.Log("flicker test");
-    // }
-
-    // private IEnumerator FadeTextToFullAlpha(float t, Text i)
-    // {
-    //     i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
-    //     while (i.color.a < 1.0f)
-    //     {
-    //         i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
-    //         yield return null;
-    //     }
-    // }
+    private IEnumerator FadeTextToFullAlpha(float t, Text i)
+    {
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
+        while (i.color.a < 1.0f)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
+            yield return null;
+        }
+    }
  
-    // private IEnumerator FadeTextToZeroAlpha(float t, Text i)
-    // {
-    //     i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
-    //     while (i.color.a > 0.0f)
-    //     {
-    //         i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
-    //         yield return null;
-    //     }
-    //     FadeTextToFullAlpha(t, i);
-    // }
+    private IEnumerator FadeTextToZeroAlpha(float t, Text i)
+    {
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
+        while (i.color.a > 0.0f)
+        {
+            Debug.Log(i.color.a + "");
+            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+            yield return null;
+        }
+    }
 }
