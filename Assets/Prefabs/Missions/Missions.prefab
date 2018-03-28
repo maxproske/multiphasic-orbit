@@ -52,8 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missions: []
-  missionPanel: {fileID: 1393508523193676, guid: 49460af36aac4834c9618a4e178cf13b,
-    type: 2}
   Test1Missions:
   - {fileID: 1959671137344680, guid: 3c0fe4a3d2d4c2c43bd2c5f668729488, type: 2}
   - {fileID: 1959671137344680, guid: 08bd3067812703944bfbc29cc69ccb77, type: 2}
