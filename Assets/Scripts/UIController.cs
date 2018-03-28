@@ -134,6 +134,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateSelectedPlanet ()
     {
+
         //Debug.Log("UpdateSelectedPlanet() called.");
         if (selectedPlanet != null) 
 		{
@@ -141,7 +142,7 @@ public class UIController : MonoBehaviour
 			SetSelectedName (selectedPlanet.planetname);
 			SetSelectedPreview (selectedPlanet.planetSprite);
 			SetSelectedResources (selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
-            // SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
+            SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
 			SetSelectedPopulation (selectedPlanet.population);
 			SetSelectedHealth (selectedPlanet.health, selectedPlanet.maxHealth);
             SetSelectedTechnology (selectedPlanet.technologyLevel);

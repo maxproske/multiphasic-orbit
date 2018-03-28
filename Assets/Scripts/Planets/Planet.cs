@@ -368,7 +368,7 @@ public class Planet : MonoBehaviour
     }
 
     //Function that can show the resource of this object
-    void OnGUI()
+    void CollectNow()
     {
 		guiStyle.fontSize = 20;
 		guiStyle.normal.textColor = Color.white;
@@ -383,14 +383,13 @@ public class Planet : MonoBehaviour
         }
         //}
         // pop up of resources collected after simulation
-        if (collecting == true && count > 30)
+        if (collecting == true/* && count > 30*/)
         {
 			stoneCollected = addCarbon * collectionMultiplier;
 			waterCollected = addNitrogen * collectionMultiplier;
 			gasCollected = addHydrogen * collectionMultiplier;
 
-            // Update the UI late
-            ui.UpdateResources();
+            Debug.Log("addCarbon: " + addCarbon + ", collectionMultiplier:" + collectionMultiplier);
 
 			if (linkedWith.Count == 0) {
 				// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + stoneCollected, guiStyle);
@@ -443,10 +442,20 @@ public class Planet : MonoBehaviour
 
     public void CollectResources()
     {
-        if (turnsToBuild < 1)
+        // Run before collecting universes, so collectionMultiplier is never 0.
+        if (fastUniverse)
+        {
+            collectionMultiplier = 4;
+        }
+        else
+        {
+            collectionMultiplier = 1;
+        }
+
+        if (population > 0)
         {
             collecting = true;
-
+            CollectNow();
 
             // old trade code
             //for (int i = 0; i < linkedWith.Count; i++)
@@ -482,17 +491,6 @@ public class Planet : MonoBehaviour
 					tradehydrogen++;
 				}
 
-            }
-
-            
-
-            if (fastUniverse)
-            {
-                collectionMultiplier = 4;
-            }
-            else
-            {
-                collectionMultiplier = 1;
             }
 
             carbon += addCarbon * collectionMultiplier;
@@ -561,8 +559,9 @@ public class Planet : MonoBehaviour
         // Add turn if a planet is building
         gc.SetBuildingActive(true);
 
-        CollectResources();
         IncreasePopulation();
+        CollectResources();
+        
         placingCoroutineRunning = false;
 
         // Update UI last

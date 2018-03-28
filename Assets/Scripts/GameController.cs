@@ -1059,9 +1059,6 @@ public class GameController : MonoBehaviour
 
     public void Simulate()
     {
-        // Hide resources collected during simulation
-        ui.SetSelectedResourcesCollected();
-
         m.CheckMissions(m.missions);
         ResetLinking();
         simulate = true;
