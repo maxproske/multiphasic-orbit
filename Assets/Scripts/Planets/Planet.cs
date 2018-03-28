@@ -220,6 +220,16 @@ public class Planet : MonoBehaviour
 
     public void FixedUpdate()
     {
+        // Constant rotation
+        if (fastUniverse) 
+        {
+            transform.Rotate (9*Time.deltaTime, 40*Time.deltaTime, 9*Time.deltaTime);
+        } 
+        else {
+            transform.Rotate (3*Time.deltaTime, 18*Time.deltaTime, 4*Time.deltaTime);
+        }
+        
+
 		if (die == false) {
 			if (linkedWith.Count > 0) {
 				
