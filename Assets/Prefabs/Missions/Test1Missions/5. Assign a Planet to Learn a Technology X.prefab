@@ -53,5 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionName: Assign a Planet to Learn a Negative Mass Mechanics
   missionDescription: 
-  missionReward: Advance to next test
+  missionReward: 
+  postMissionMessage: 
+  postMissionHint: 
   completed: 0

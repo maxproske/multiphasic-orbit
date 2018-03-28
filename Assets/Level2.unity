@@ -240,7 +240,7 @@ MonoBehaviour:
   stone: {fileID: 1793624853}
   water: {fileID: 574017225}
   gas: {fileID: 836281958}
-  level: 1
+  level: 2
   shot: {fileID: 0}
   missionPanel: {fileID: 798841061}
   genericMissionPanel: {fileID: 1393508523193676, guid: 49460af36aac4834c9618a4e178cf13b,

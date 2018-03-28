@@ -23,7 +23,19 @@ public class Missions : MonoBehaviour
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         m = GameObject.Find("Missions").GetComponent<Mission>();
         cp = confirmationPanel.GetComponent<ConfirmationPanel>();
-        cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
+        switch (gc.level)
+        {
+            case 1:
+                cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
+                break;
+            case 2:
+                cp.ShowPanel("N Test", "Currently not available...");
+                break;
+            default:
+                cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
+                break;
+        }
+
     }
 
     // use this to check if mission requirements have been fulfilled
@@ -38,7 +50,8 @@ public class Missions : MonoBehaviour
                 {
                     Complete(mission);
                     Reward(mission);
-                } else
+                }
+                else
                 {
                     //Debug.Log("Mission: " + m.missionName + " incomplete.");
                 }
@@ -85,6 +98,24 @@ public class Missions : MonoBehaviour
                     }
                 }
                 break;
+            case "Assign a planet to learn Interplanetary Networking":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+
+                    if (p.iflinkactive)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                    else
+                    {
+                        //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                    }
+                }
+                break;
             case "Assign a Planet to Learn a Negative Mass Mechanics":
                 //Debug.Log("Checking Mission: " + m.missionName + " progress...");
                 //if (gc.planets.Count > 0)
@@ -97,16 +128,46 @@ public class Missions : MonoBehaviour
                 //    Debug.Log("Mission: " + m.missionName + " incomplete.");
                 //}
                 break;
-            case "Unknown Mission":
-                Debug.Log("Checking Mission: " + m.missionName + " progress...");
-                if (gc.linksuccessful)
+            case "Assign another planet to learn Interplanetary Networking":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                int planetsLearnIP = 0;
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+
+                    if (p.iflinkactive)
+                    {
+                        planetsLearnIP++;
+
+                    }
+                }
+                if (planetsLearnIP > 1)
                 {
                     Complete(mission);
                     Reward(mission);
                 }
                 else
                 {
-                    Debug.Log("Mission: " + m.missionName + " incomplete.");
+                    //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                }
+                break;
+            case "Successfully Link Two Planets":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+
+                    if (p.linkedWith.Count > 0)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                        cp.ShowPanel("Learner's Test Complete!", "You're ready for the next test. Click OK to advance. Good luck...");
+                        cp.confirmButton.onClick.AddListener(cp.NextLevel); // change function of button to change level/scene
+                    }
+                    else
+                    {
+                        //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                    }
                 }
                 break;
         }
@@ -118,9 +179,9 @@ public class Missions : MonoBehaviour
         m = mission.GetComponent<Mission>();
         switch (m.missionName)
         {
-            case "Place Planet":
-                Debug.Log("Place Planet Reward: Here's a pat on the back.");
-                break;
+            //case "Place Planet":
+            //    Debug.Log("Place Planet Reward: Here's a pat on the back.");
+            //    break;
         }
     }
 
@@ -128,24 +189,25 @@ public class Missions : MonoBehaviour
     private void Complete(GameObject mission)
     {
         m = mission.GetComponent<Mission>();
-        Debug.Log("Mission: " + m.missionName + " completed!");
+        //Debug.Log("Mission: " + m.missionName + " completed!");
         m.completed = true;
 
         // update respective button colour
         GameObject ms = GameObject.Find(mission.name + "(Clone)"); // find the instantiated game object of the same name that is set as a child to one of the mission buttons
         Button button = ms.transform.parent.transform.Find("Mission Button").GetComponent<Button>(); // get the particular mission button
-        ColorBlock cb = button.GetComponent<Button>().colors; 
+        ColorBlock cb = button.GetComponent<Button>().colors;
         cb.normalColor = new Color(0.298f, 0.686f, 0.313f); // set the button color to same green as play button
         button.colors = cb;
 
         if (m.postMissionHint != "") // if there is post mission hint, show confirmation panel with message and hint - assumes when there is a hint, there is a message
         {
             cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.postMissionHint);
-        } else if (m.postMissionMessage != "")// else just show confirmation panel with just message
+        }
+        else if (m.postMissionMessage != "")// else just show confirmation panel with just message
         {
             cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage);
         }
-        
+
     }
 
     public void CheckMissions(List<GameObject> missionsList)

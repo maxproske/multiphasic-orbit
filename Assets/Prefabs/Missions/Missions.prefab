@@ -57,8 +57,9 @@ MonoBehaviour:
   - {fileID: 1959671137344680, guid: 3c0fe4a3d2d4c2c43bd2c5f668729488, type: 2}
   - {fileID: 1959671137344680, guid: 08bd3067812703944bfbc29cc69ccb77, type: 2}
   - {fileID: 1959671137344680, guid: ad87ec48aecc0d24ba71c681b60ccf22, type: 2}
-  - {fileID: 1959671137344680, guid: 8e29fbd5e8f566f449cab1a6acc42182, type: 2}
-  - {fileID: 1959671137344680, guid: 1087a24f54abf4145a42e2ffcc0ad92f, type: 2}
+  - {fileID: 1959671137344680, guid: 3adab7b79ab72d2489c5e4da54375445, type: 2}
+  - {fileID: 1959671137344680, guid: 77dc1aeb5d954e0429d59c57b24cc801, type: 2}
   - {fileID: 1959671137344680, guid: 96195e93f5fd9d041a4be1434786c046, type: 2}
-  Test2Missions: []
+  Test2Missions:
+  - {fileID: 1959671137344680, guid: defb2116e9ddcc046ad9c9723729b6b2, type: 2}
   Test3Missions: []

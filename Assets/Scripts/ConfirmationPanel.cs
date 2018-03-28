@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ConfirmationPanel : MonoBehaviour
@@ -41,5 +42,10 @@ public class ConfirmationPanel : MonoBehaviour
     private void ClosePanel()
     {
         panel.SetActive(false);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("Level2");
     }
 }

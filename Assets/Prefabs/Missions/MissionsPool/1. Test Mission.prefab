@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: 6. Successfully Link Two Planets
+  m_Name: 1. Test Mission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Successfully Link Two Planets
-  missionDescription: 
-  missionReward: Advance to next test
-  postMissionMessage: 
-  postMissionHint: 
+  missionName: Test Mission
+  missionDescription: Test Mission Description
+  missionReward: Test Mission Reward
+  postMissionMessage: Test Mission Post Mission Message
+  postMissionHint: Test Mission Post Mission Hint
   completed: 0
