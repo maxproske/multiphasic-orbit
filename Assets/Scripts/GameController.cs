@@ -521,8 +521,6 @@ public class GameController : MonoBehaviour
 				ui.SetSelectedPlanet (planetScript);
 			}
 
-			Button[] _technologyButtons = ui.leftTechnologyPanel.GetComponentsInChildren<Button> ();
-
 			
 			if (planetScript.carbon >= 10 && planetScript.iftech1 == 0) {
 				if (!tech1.interactable) {
