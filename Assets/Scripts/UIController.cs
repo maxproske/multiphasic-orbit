@@ -131,7 +131,8 @@ public class UIController : MonoBehaviour
 
 	/* Set Left Panel
     ========================================================================== */
-	public void SetSelectedPlanet (Planet p = null)
+
+    public void SetSelectedPlanet (Planet p = null)
 	{
 		// Planet selected
 		if (p != null) 
@@ -139,31 +140,37 @@ public class UIController : MonoBehaviour
             // Set global variables
             this.previousPlanet = this.selectedPlanet;
             this.selectedPlanet = p;
+		}
 
+        // Update the planet
+        UpdateSelectedPlanet();
+	}
+
+    public void UpdateSelectedPlanet ()
+    {
+        //Debug.Log("UpdateSelectedPlanet() called.");
+        if (selectedPlanet != null) 
+		{
 			// Replace placeholder values with planet data
-			SetSelectedName (p.planetname);
-			SetSelectedPreview (p.planetSprite);
-			SetSelectedResources (p.carbon, p.nitrogen, p.hydrogen);
-            SetSelectedResourcesCollected(p.stoneCollected, p.waterCollected, p.gasCollected);
-			SetSelectedPopulation (p.population);
-			SetSelectedHealth (p.health, p.maxHealth);
-            SetSelectedTechnology (p.technologyLevel);
-            SetSelectedBuilding(p.turnsToBuild);
+			SetSelectedName (selectedPlanet.planetname);
+			SetSelectedPreview (selectedPlanet.planetSprite);
+			SetSelectedResources (selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
+            SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
+			SetSelectedPopulation (selectedPlanet.population);
+			SetSelectedHealth (selectedPlanet.health, selectedPlanet.maxHealth);
+            SetSelectedTechnology (selectedPlanet.technologyLevel);
+            SetSelectedBuilding(selectedPlanet.population);
 
             // Enable last
             SetSelectionPanelActive(true);
             SetPreviewPanelActive(true);
             SetResourcePanelActive(true);
             SetStatusPanelActive(true);
-            SetTechnologyPanelActive(p.population > 0);
-            SetBuildingPanelActive(p.population <= 0);
-
-            // GFX
-            SetSelectedOrbit();
-		}
-		// No planet selected
-		else 
-		{
+            SetTechnologyPanelActive(selectedPlanet.population > 0);
+            SetBuildingPanelActive(selectedPlanet.population > 0);
+        }
+        else 
+        {
             // Disable First
             SetSelectionPanelActive();
             SetPreviewPanelActive();
@@ -183,8 +190,8 @@ public class UIController : MonoBehaviour
 
             // GFX
             SetSelectedOrbit();
-		}
-	}
+        }
+    }
 
     public void SetNoPlanetSelected()
     {
@@ -518,23 +525,30 @@ public class UIController : MonoBehaviour
         anim.Play("LeftPanelSlideOut");
     }
 
-    private IEnumerator FadeTextToFullAlpha(float t, Text i)
-    {
-        i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
-        while (i.color.a < 1.0f)
-        {
-            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
-            yield return null;
-        }
-    }
+    // private void FlickerTest(Text i)
+    // {
+    //     FadeTextToZeroAlpha(1f, i);
+    //     Debug.Log("flicker test");
+    // }
+
+    // private IEnumerator FadeTextToFullAlpha(float t, Text i)
+    // {
+    //     i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
+    //     while (i.color.a < 1.0f)
+    //     {
+    //         i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
+    //         yield return null;
+    //     }
+    // }
  
-    private IEnumerator FadeTextToZeroAlpha(float t, Text i)
-    {
-        i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
-        while (i.color.a > 0.0f)
-        {
-            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
-            yield return null;
-        }
-    }
+    // private IEnumerator FadeTextToZeroAlpha(float t, Text i)
+    // {
+    //     i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
+    //     while (i.color.a > 0.0f)
+    //     {
+    //         i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+    //         yield return null;
+    //     }
+    //     FadeTextToFullAlpha(t, i);
+    // }
 }

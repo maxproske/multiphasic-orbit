@@ -449,9 +449,17 @@ public class GameController : MonoBehaviour
             var mstName = selected.name + " Skill Tree";
 
             // Make play button green after clicking planet for the first time
-            if (ui.selectedPlanet == null) playButton.interactable = true;
+            if (ui.selectedPlanet == null) 
+            {
+                playButton.interactable = true;
+            }
 
-            ui.SetSelectedPlanet(planetScript);
+            // Prevent SetSelectedPlanet from being called 60 times/second,
+            // Only on new selection
+            if (ui.selectedPlanet != planetScript) 
+            {
+                ui.SetSelectedPlanet(planetScript);
+            }
 
 			Button[] _technologyButtons = ui.leftTechnologyPanel.GetComponentsInChildren<Button> ();
 
@@ -638,6 +646,7 @@ public class GameController : MonoBehaviour
                             } 
                             else {
                                 playButton.interactable = true;
+                                ui.UpdateSelectedPlanet();
                             }
 
                             planetPlaced = true;

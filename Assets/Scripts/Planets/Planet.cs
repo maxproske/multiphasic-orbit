@@ -389,7 +389,7 @@ public class Planet : MonoBehaviour
 			waterCollected = addNitrogen * collectionMultiplier;
 			gasCollected = addHydrogen * collectionMultiplier;
 
-            // Update the UI
+            // Update the UI late
             ui.UpdateResources();
 
 			if (linkedWith.Count == 0) {
@@ -438,7 +438,6 @@ public class Planet : MonoBehaviour
         if (turnsToBuild < 1)
         {
             population = (int)(population + 1);
-            ui.UpdatePopulation();
         }
     }
 
@@ -565,6 +564,9 @@ public class Planet : MonoBehaviour
         CollectResources();
         IncreasePopulation();
         placingCoroutineRunning = false;
+
+        // Update UI last
+        ui.UpdateSelectedPlanet();
     }
 
     // Calculate the ellipse
