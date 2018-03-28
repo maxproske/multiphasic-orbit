@@ -1094,7 +1094,7 @@ public class GameController : MonoBehaviour
         canBuild = true;
         buildingActive = false;
 
-        m.CheckMissions(m.missions);
+        
 
         // reset place planet
         if (go != null && planetPlaced)
@@ -1248,6 +1248,8 @@ public class GameController : MonoBehaviour
             Rogue rogueScript = roguePlanet.GetComponent<Rogue>();
             rogueScript.Steal(1, 1, 1);
         }
+
+        m.CheckMissions(m.missions);
     }
 
     public void ToggleInteractability(bool canInteract)
