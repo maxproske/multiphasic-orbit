@@ -290,11 +290,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   die: 0
-  tier: 2
-  addCarbon: 6
+  tier: 3
+  addCarbon: 2
   addNitrogen: 2
-  addHydrogen: 2
-  turnsToBuild: 3
+  addHydrogen: 6
+  turnsToBuild: 5
   defensePower: 5
   attackPower: 5
   turnsToDie: 3

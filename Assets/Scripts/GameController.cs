@@ -784,12 +784,12 @@ public class GameController : MonoBehaviour
                 }
 
                 // if button's name is Methane
-                if (go.name.Contains("Nitrogen"))
+                if (go.name.Contains("Ammonia"))
                 {
                     // Create a new planet
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
-                    methaneIncrement--;
+                    ammoniaIncrement--;
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
                     //go.transform.parent = sun.transform;
@@ -831,13 +831,13 @@ public class GameController : MonoBehaviour
         go = Instantiate(nitrogen) as GameObject;
         // increment planet name
         methaneIncrement++;
-        go.name = "Nitrogen " + methaneIncrement;
+        go.name = "Nitrogen " + ammoniaIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
         planets.Add(go);
         // Access the planet's script
-        p = go.GetComponent<Methane>();
+        p = go.GetComponent<Ammonia>();
     }
     public void placeHydrogenPlanet()
     {

@@ -1291,7 +1291,7 @@ MonoBehaviour:
   linksuccessful: 0
   sun: {fileID: 1694319099}
   carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
-  nitrogen: {fileID: 1302749218511646, guid: 68c908146202de54a9c5a6a0e8d632ad, type: 2}
+  nitrogen: {fileID: 1302749218511646, guid: aa091a671b56bb34e83ecaf777d71379, type: 2}
   hydrogen: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
   go: {fileID: 0}
   planetPlaced: 0
