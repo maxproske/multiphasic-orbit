@@ -209,6 +209,7 @@ public class Missions : MonoBehaviour
         }
 
         gc.l.UpdateLogMission(m.missionName, m.missionReward);
+        gc.l.LogBackLog();
 
     }
 

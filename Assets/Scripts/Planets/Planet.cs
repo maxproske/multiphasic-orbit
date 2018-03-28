@@ -583,6 +583,8 @@ public class Planet : MonoBehaviour
 
         // Update UI last
         ui.UpdateSelectedPlanet();
+
+        gc.l.LogBackLog();
     }
 
     // Calculate the ellipse

@@ -128,7 +128,9 @@ public class GameController : MonoBehaviour
         ui = GameObject.Find("Canvas").GetComponent<UIController>();
         m = GameObject.Find("Missions").GetComponent<Missions>();
         l = log.GetComponent<Log>();
-        log.SetActive(false);
+
+
+        l.ToggleLog();
 
         turn = 1;
         
@@ -1164,14 +1166,21 @@ public class GameController : MonoBehaviour
 			{
 				planetScript.addResourceTechnology();
 				planetScript.iftech1 = 3;
-			}
+
+                // log when increased resource collection learned
+                l.UpdateLogTech(planet.name, "Increased Resource Collection", "Resource collection increased by 2");
+            }
+
 			if (planetScript.iftech2 == 2) {
 				planetScript.carbon -= 5;
 				planetScript.nitrogen -= 5;
 				planetScript.hydrogen -= 5;
 				planetScript.iflinkactive = true;
 				planetScript.iftech2 = 3;
-			}
+
+                // log when Interplanetary Networking learned
+                l.UpdateLogTech(planet.name, "Interplanetary Networking", "Linking with other planets Interplanetary Networking knowledge now available");
+            }
 			if (planetScript.iftech3 == 2) {
 				planetScript.linkchanceTechnology ();
 				planetScript.iftech3 = 3;
@@ -1203,6 +1212,8 @@ public class GameController : MonoBehaviour
                     planetScript.addCarbon = planetScript.OriginaddCarbon;
                     planetScript.addNitrogen = planetScript.OriginaddNitrogen;
                     planetScript.addHydrogen = planetScript.OriginaddHydrogen;
+
+                    // log about storm affecting resource collection
                 }
 
             }
@@ -1224,6 +1235,7 @@ public class GameController : MonoBehaviour
                 if (planetScript.turnsToBuild == 0)
                 {
                     l.UpdateLogPlanet(planet.name, "has finished building");
+                    l.LogBackLog();
                 }
                 planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
 
@@ -1236,8 +1248,6 @@ public class GameController : MonoBehaviour
             Rogue rogueScript = roguePlanet.GetComponent<Rogue>();
             rogueScript.Steal(1, 1, 1);
         }
-
-
     }
 
     public void ToggleInteractability(bool canInteract)
