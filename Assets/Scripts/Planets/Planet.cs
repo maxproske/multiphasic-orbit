@@ -584,6 +584,9 @@ public class Planet : MonoBehaviour
         // Update UI last
         ui.UpdateSelectedPlanet();
 
+        // update how many resources collected per planet
+        gc.l.UpdateLogPlanetRes(this.gameObject.name, stoneCollected, waterCollected, gasCollected);
+
         gc.l.LogBackLog();
     }
 

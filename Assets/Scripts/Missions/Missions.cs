@@ -161,8 +161,8 @@ public class Missions : MonoBehaviour
                     {
                         Complete(mission);
                         Reward(mission);
-                        cp.ShowPanel("Learner's Test Complete!", "You're ready for the next test. Click OK to advance. Good luck...");
-                        //cp.confirmButton.onClick.AddListener(cp.NextLevel); // change function of button to change level/scene
+                        cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
+                        cp.confirmButton.onClick.AddListener(cp.NextLevel); // change function of button to change level/scene
                     }
                     else
                     {

@@ -9,6 +9,9 @@ public class Log : MonoBehaviour
     public Text LogText;
     string color;
     string planetColor;
+    string stoneColor;
+    string waterColor;
+    string gasColor;
     public string textToLog;
     public ScrollRect myScrollRect;
 
@@ -18,6 +21,9 @@ public class Log : MonoBehaviour
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         LogText.text = "";
         color = "#fff";
+        stoneColor = "#616161FF";
+        waterColor = "#2196F3FF";
+        gasColor = "#795548FF";
         textToLog = "";
     }
 
@@ -41,17 +47,17 @@ public class Log : MonoBehaviour
 
         if (planetName.Contains("Carbon"))
         {
-            planetColor = "#616161FF";
+            planetColor = stoneColor;
         }
 
         if (planetName.Contains("Nitrogen"))
         {
-            planetColor = "#2196F3FF";
+            planetColor = waterColor;
         }
 
         if (planetName.Contains("Hydrogen"))
         {
-            planetColor = "#795548FF";
+            planetColor = gasColor;
         }
 
         // backlog text first and then log
@@ -68,6 +74,42 @@ public class Log : MonoBehaviour
         ToLog(" " + message);
     }
 
+    public void UpdateLogPlanetRes(string planetName, int stone, int water, int gas)
+    {
+        //AddNewLine();
+
+        if (planetName.Contains("Carbon"))
+        {
+            planetColor = stoneColor;
+        }
+
+        if (planetName.Contains("Nitrogen"))
+        {
+            planetColor = waterColor;
+        }
+
+        if (planetName.Contains("Hydrogen"))
+        {
+            planetColor = gasColor;
+        }
+        // backlog text first and then log
+
+        //AddTurnToLog();
+        //LogText.text += "Planet ";
+        //LogText.text += ChangeColor(planetColor, planetName);
+        //LogText.text += " " + message;
+
+        ToLog(AddNewLine());
+        ToLog(AddTurnToLog());
+        ToLog("Planet ");
+        ToLog(ChangeColor(planetColor, planetName));
+        ToLog(" has collected: ");
+        ToLog(ChangeColor(stoneColor, stone.ToString() + " Stone ")) ;
+        ToLog(ChangeColor(waterColor, water.ToString() + " Water "));
+        ToLog(ChangeColor(gasColor, gas.ToString() + " Gas "));
+        //ToLog(" " + message);
+    }
+
     public void UpdateLogTrade(string planetName1, string planetName2, string message)
     {
 
@@ -79,17 +121,17 @@ public class Log : MonoBehaviour
 
         if (planetName.Contains("Carbon"))
         {
-            planetColor = "#616161FF";
+            planetColor = stoneColor;
         }
 
         if (planetName.Contains("Nitrogen"))
         {
-            planetColor = "#2196F3FF";
+            planetColor = waterColor;
         }
 
         if (planetName.Contains("Hydrogen"))
         {
-            planetColor = "#795548FF";
+            planetColor = gasColor;
         }
 
         color = "#2fbf18";

@@ -122,11 +122,16 @@ public class GameController : MonoBehaviour
     public GameObject log;
     public Log l;
 
+    
+    private ConfirmationPanel cp;
+
+
     // Use this for initialization
     void Start()
     {
         ui = GameObject.Find("Canvas").GetComponent<UIController>();
         m = GameObject.Find("Missions").GetComponent<Missions>();
+        cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
         l = log.GetComponent<Log>();
 
 
@@ -1150,9 +1155,17 @@ public class GameController : MonoBehaviour
 					linktime = 0;
 					firstPlanetScript.linkedWith.Add (planet2.GetComponent<Planet> ());
 					secondPlanetScript.linkedWith.Add (planet1.GetComponent<Planet> ());
-				}
 
-			}
+                    // show confirmation box successful link
+                    if (level != 1)
+                    {
+                        cp.ShowPanel("Link Successful!", planet1.name + " and " + planet2.name + " have successfully linked!");
+                    }
+
+                    // also update log
+                }
+
+            }
 			ResetLinking ();
 
 		} else {
@@ -1238,7 +1251,8 @@ public class GameController : MonoBehaviour
                     l.LogBackLog();
                 }
                 planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
-
+                
+                
             }
         }
 
@@ -1250,6 +1264,7 @@ public class GameController : MonoBehaviour
         }
 
         m.CheckMissions(m.missions);
+        
     }
 
     public void ToggleInteractability(bool canInteract)
