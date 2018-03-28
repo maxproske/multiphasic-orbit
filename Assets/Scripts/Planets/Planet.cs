@@ -345,6 +345,7 @@ public class Planet : MonoBehaviour
 
     void OnMouseOver()
     {
+        //Debug.Log("ui.selectedPlanet != this:" + (ui.selectedPlanet != this).ToString());
         ifHover = true;
         if (ui.selectedPlanet != this)
         {
@@ -356,7 +357,7 @@ public class Planet : MonoBehaviour
     }
     void OnMouseExit()
     {
-
+        //Debug.Log("ui.selectedPlanet != this:" + (ui.selectedPlanet != this).ToString());
         ifHover = false;
         if (ui.selectedPlanet != this)
         {

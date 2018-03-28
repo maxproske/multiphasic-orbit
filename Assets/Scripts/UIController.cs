@@ -59,7 +59,8 @@ public class UIController : MonoBehaviour
     public Button leftBuildingButton;
     public Text leftBuildingText;
     // Helper variables
-    private Planet previousPlanet; // Keep private
+    [HideInInspector]
+    public Planet previousPlanet;
     public Button leftTechnology1Button;
     public Button leftTechnology2Button;
     public Button leftTechnology3Button;
@@ -155,6 +156,9 @@ public class UIController : MonoBehaviour
             SetStatusPanelActive(true);
             SetTechnologyPanelActive(selectedPlanet.population > 0);
             SetBuildingPanelActive(selectedPlanet.population <= 0);
+
+            // GFX
+            SetSelectedOrbit();
         }
         else 
         {

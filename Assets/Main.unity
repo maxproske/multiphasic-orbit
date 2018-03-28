@@ -1456,6 +1456,7 @@ MonoBehaviour:
   leftBuildingPanel: {fileID: 1745047023}
   leftBuildingButton: {fileID: 1037927302}
   leftBuildingText: {fileID: 1689168077}
+  previousPlanet: {fileID: 0}
   leftTechnology1Button: {fileID: 1119920539}
   leftTechnology2Button: {fileID: 1941839305}
   leftTechnology3Button: {fileID: 748453127}

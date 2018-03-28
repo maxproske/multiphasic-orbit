@@ -421,7 +421,6 @@ public class GameController : MonoBehaviour
         {
             planetScript = selected.GetComponent<Planet>(); // get Planet script to access attributes
 
-
             // update UI
             if (planetScript.turnsToBuild < 1)
             {
