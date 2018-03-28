@@ -167,8 +167,8 @@ public class Planet : MonoBehaviour
         {
             lines[i] = new GameObject();
             links[i] = lines[i].AddComponent<LineRenderer>();
-            links[i].SetWidth(0.1f, 0.1f);
-
+            links[i].SetWidth(0.8f, 0.8f);
+			links [i].SetColors (Color.red, Color.red);
 		
         }
 
