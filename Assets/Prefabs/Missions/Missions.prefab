@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1206294030369086}
+  m_IsPrefabParent: 1
+--- !u!1 &1206294030369086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4836587787598128}
+  - component: {fileID: 114331825952315072}
+  m_Layer: 0
+  m_Name: Missions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4836587787598128
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206294030369086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -306.1862, y: 250, z: -306.1862}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114331825952315072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206294030369086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a48189b46cd5d948842065360d1fedc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missions: []
+  missionPanel: {fileID: 1393508523193676, guid: 49460af36aac4834c9618a4e178cf13b,
+    type: 2}
+  Test1Missions:
+  - {fileID: 1959671137344680, guid: 3c0fe4a3d2d4c2c43bd2c5f668729488, type: 2}
+  - {fileID: 1959671137344680, guid: 08bd3067812703944bfbc29cc69ccb77, type: 2}
+  - {fileID: 1959671137344680, guid: ad87ec48aecc0d24ba71c681b60ccf22, type: 2}
+  - {fileID: 1959671137344680, guid: 8e29fbd5e8f566f449cab1a6acc42182, type: 2}
+  - {fileID: 1959671137344680, guid: 1087a24f54abf4145a42e2ffcc0ad92f, type: 2}
+  - {fileID: 1959671137344680, guid: 96195e93f5fd9d041a4be1434786c046, type: 2}
+  Test2Missions: []
+  Test3Missions: []

@@ -8,6 +8,11 @@ public class Missions : MonoBehaviour
     private GameController gc;
     private Mission m;
 
+    public List<GameObject> missions; // list of missions that will be played with
+    public List<GameObject> Test1Missions; // add these missions into the missions
+    public List<GameObject> Test2Missions;
+    public List<GameObject> Test3Missions;
+
     // Use this for initialization
     void Start()
     {
@@ -53,5 +58,16 @@ public class Missions : MonoBehaviour
         m = mission.GetComponent<Mission>();
         Debug.Log("Mission: " + m.missionName + " completed!");
         m.completed = true;
+    }
+
+    public void CheckMissions(List<GameObject> missionsList)
+    {
+        foreach (var mission in missionsList)
+        {
+            if (!mission.GetComponent<Mission>().completed)
+            {
+                OnNotify(mission);
+            }
+        }
     }
 }

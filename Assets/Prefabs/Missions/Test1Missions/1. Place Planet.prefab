@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: Place Planet
+  m_Name: 1. Place Planet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,5 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionName: Place Planet
-  missionDescription: Place at least 1 planet.
-  completed: 1
+  missionDescription: Place at least <b>1</b> Planet.
+  missionReward: 
+  completed: 0

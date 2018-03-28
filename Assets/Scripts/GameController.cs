@@ -108,13 +108,21 @@ public class GameController : MonoBehaviour
     public Button water;
     public Button gas;
 
+    public int level;
+
     // missions
     private Missions m;
-    public List<GameObject> missions;
 
     bool buildingActive;
 
     public GameObject shot;
+
+
+    // missions
+    public GameObject missionPanel;
+    public GameObject genericMissionPanel;
+    private int missionIncrement;
+
     // Use this for initialization
     void Start()
     {
@@ -122,6 +130,9 @@ public class GameController : MonoBehaviour
         m = GameObject.Find("Missions").GetComponent<Missions>();
 
         turn = 1;
+
+        level = 1;
+        missionIncrement = 1;
 
         // states
         // Disable hints
@@ -147,11 +158,6 @@ public class GameController : MonoBehaviour
 
 		AttackButton = GameObject.Find("Attack Button").GetComponent<Button>();
 		AttackButton.onClick.AddListener(attack);
-
-		startLinkButton.gameObject.SetActive (false);
-		linkButton.gameObject.SetActive (false);
-		startAttackButton.gameObject.SetActive (false);
-		AttackButton.gameObject.SetActive (false);
 
 		tech1 = GameObject.Find ("Tech 1").GetComponent<Button> ();
 		tech1.onClick.AddListener (settech1);
@@ -186,22 +192,45 @@ public class GameController : MonoBehaviour
 
         ResetLinking();
 
-        // reset all missions to incompleted
-        foreach (var mission in missions)
+        switch (level)
         {
-            mission.GetComponent<Mission>().completed = false;
+            case 1:
+                Debug.Log("Playing Level 1");
+                // add missions from Test1Missions to missions to play with list called missions
+                foreach (var mission in m.Test1Missions)
+                {
+                    
+                    m.missions.Add(mission);
+                    GameObject go = Instantiate(genericMissionPanel); // create Mission Panel for mission
+                    Text panelText = go.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>(); // get Text of Mission Panel
+                    go.transform.SetParent(missionPanel.transform); // set parent of new Mission Panel
+
+                    //panelText.text = mission.GetComponent<Mission>().missionName; // change text of Mission Panel to missionName
+                    panelText.text = "Mission " + missionIncrement;
+                    missionIncrement++;
+
+                    // Set tooltip for Mission Panel
+                    GameObject goButton = go.transform.GetChild(0).gameObject; // get Mission Panel button
+                    string tooltipText = "";
+                    tooltipText += "<b>" + mission.GetComponent<Mission>().missionName + "</b>"; // add mission name to tooltip text
+                    tooltipText += ";;"; // add 2 new lines
+                    tooltipText += mission.GetComponent<Mission>().missionDescription; // add mission description to tooltip text
+                    if (mission.GetComponent<Mission>().missionReward != "") // if there is a reward, add onto tooltip
+                    {
+                        tooltipText += ";;" + "<b>Reward:</b> " + mission.GetComponent<Mission>().missionReward;
+                    }
+                    ui.SetTooltip((RectTransform)goButton.transform, tooltipText); // set tooltip with final text 
+
+                }
+                missionIncrement = 1; // reset missionIncrement
+                break;
+
         }
 
-    }
-
-    public void CheckMissions(List<GameObject> missionsList)
-    {
-        foreach (var mission in missionsList)
+        // reset all missions to incompleted
+        foreach (var mission in m.missions)
         {
-            if (!mission.GetComponent<Mission>().completed)
-            {
-                m.OnNotify(mission);
-            }
+            mission.GetComponent<Mission>().completed = false;
         }
     }
 
@@ -392,25 +421,6 @@ public class GameController : MonoBehaviour
         {
             planetScript = selected.GetComponent<Planet>(); // get Planet script to access attributes
 
-			if (planetScript.iflinkactive) {
-				startLinkButton.gameObject.SetActive (true);
-				linkButton.gameObject.SetActive (true);
-		
-			} else {
-				startLinkButton.gameObject.SetActive (false);
-				linkButton.gameObject.SetActive (false);	
-			}
-			if (planetScript.ifattackactive) {
-				startAttackButton.gameObject.SetActive (true);
-				AttackButton.gameObject.SetActive (true);
-			} else if (attacking) {
-				startAttackButton.gameObject.SetActive (true);
-				AttackButton.gameObject.SetActive (true);
-			}else {
-				
-				startAttackButton.gameObject.SetActive (false);
-				AttackButton.gameObject.SetActive (false);
-			}
 
             // update UI
             if (planetScript.turnsToBuild < 1)
@@ -451,37 +461,24 @@ public class GameController : MonoBehaviour
 			
 					_technologyButtons [0].interactable = true;
 				}
-			}
-			if(planetScript.carbon>5 && planetScript.nitrogen >5 && planetScript.hydrogen>5 && planetScript.moreResource && planetScript.iflinkactive==false){
+			}else if (planetScript.hydrogen >= 20 && planetScript.moreResource&&planetScript.addlinkchance==0) {
 				if (!_technologyButtons [1].interactable) {
 					_technologyButtons [1].interactable = true;
 				}
-			}
-			if(planetScript.carbon>10 && planetScript.nitrogen >5 && planetScript.hydrogen>10 && planetScript.moreResource && planetScript.iflinkactive && planetScript.addlinkchance==0){
-				if (!_technologyButtons [2].interactable) {
-					_technologyButtons [2].interactable = true;
-				}
-			}
-			if (planetScript.hydrogen >= 10 && planetScript.nitrogen>=20 && planetScript.moreResource && planetScript.iflinkactive && planetScript.addlinkchance>0 && planetScript.stormsheid==false) {
-				if (!_technologyButtons [3].interactable) {
-					_technologyButtons [3].interactable = true;
-				}
-			}
-			if (planetScript.hydrogen >= 20 &&planetScript.nitrogen>=20&&planetScript.carbon>=20 && planetScript.moreResource && planetScript.iflinkactive && planetScript.addlinkchance>0 && planetScript.stormsheid && planetScript.ifattackactive==false) {
-					if (!_technologyButtons [4].interactable) {
-						_technologyButtons [4].interactable = true;
+			}else if (planetScript.hydrogen >= 20 &&planetScript.nitrogen>=20&&planetScript.carbon>=20&& planetScript.addlinkchance > 0 &&!planetScript.stormsheid) {
+					if (!_technologyButtons [2].interactable) {
+						_technologyButtons [2].interactable = true;
 					}
+			}else{
+				         
+				            for (int i = 0; i < _technologyButtons.Length; i++)
+				           	{
+				                if (_technologyButtons[i].interactable)
+				                {
+				                    _technologyButtons[i].interactable = false;
+				                }
+				            }
 			}
-//			{
-//				         
-//				            for (int i = 0; i < _technologyButtons.Length; i++)
-//				           	{
-//				                if (_technologyButtons[i].interactable)
-//				                {
-//				                    _technologyButtons[i].interactable = false;
-//				                }
-//				            }
-//			}
 
             // Open Skill Tree only if it hasn't been created yet
             if (planetScript.turnsToBuild < 1)
@@ -496,28 +493,12 @@ public class GameController : MonoBehaviour
 						iftech1 = 2;
 					}
 					if (iftech2==1) {
-
-						planetScript.carbon -= 5;
-						planetScript.nitrogen -= 5;
-						planetScript.hydrogen -= 5;
-						planetScript.iflinkactive = true;
+						planetScript.linkchanceTechnology ();
 						iftech2 = 2;
 					}
 					if (iftech3==1) {
-						
-						planetScript.linkchanceTechnology ();
-						iftech3 = 2;
-					}
-					if (iftech4==1) {
 						planetScript.StormShiedTechnology ();
-						iftech4 = 2;
-					}
-					if (iftech5==1) {
-						planetScript.carbon -= 20;
-						planetScript.nitrogen -= 20;
-						planetScript.hydrogen -= 20;
-						planetScript.ifattackactive = true;
-						iftech5 = 2;
+						iftech3 = 2;
 					}
                      // Create a new micro skill tree
                      //Debug.Log("Creating micro skill tree for " + selected.name);
@@ -1045,15 +1026,15 @@ public class GameController : MonoBehaviour
         }
         if (linksuccessful == true && linktime < 120)
         {
-            //GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Successfully linked. \n Linked planets will now trade resources among each other.", guiStyle);
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Successfully linked. \n Linked planets will now trade resources among each other.", guiStyle);
         }
         if (fail == true && failtime < 120)
         {
-            //GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Failed to link. \n Planet has gone rogue. It will now steal some resources.", guiStyle);
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "Failed to link. \n Planet has gone rogue. It will now steal some resources.", guiStyle);
         }
         if (storm == true && count < 120)
         {
-            //GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "There was a storm. \n Resource collection rate decreased by half.", guiStyle);
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 300, 300, 50), "There was a storm. \n Resource collection rate decreased by half.", guiStyle);
         }
     }
 
@@ -1069,7 +1050,7 @@ public class GameController : MonoBehaviour
 
     public void Simulate()
     {
-        CheckMissions(missions);
+        m.CheckMissions(m.missions);
         ResetLinking();
         simulate = true;
         canBuild = true;

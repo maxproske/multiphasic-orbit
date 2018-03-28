@@ -433,9 +433,9 @@ public class UIController : MonoBehaviour
         SetTooltip((RectTransform)rightWaterButton.transform, Constants.TOOLTIP_RIGHT_WATER_BUTTON);
         SetTooltip((RectTransform)rightGasButton.transform, Constants.TOOLTIP_RIGHT_GAS_BUTTON);
         SetTooltip((RectTransform)rightNextTurnButton.transform, Constants.TOOLTIP_RIGHT_NEXT_TURN_BUTTON);
-        SetTooltip((RectTransform)rightMission1Button.transform, Constants.TOOLTIP_RIGHT_MISSION_1);
-        SetTooltip((RectTransform)rightMission2Button.transform, Constants.TOOLTIP_RIGHT_MISSION_2);
-        SetTooltip((RectTransform)rightMission3Button.transform, Constants.TOOLTIP_RIGHT_MISSION_3);
+        //SetTooltip((RectTransform)rightMission1Button.transform, Constants.TOOLTIP_RIGHT_MISSION_1);
+        //SetTooltip((RectTransform)rightMission2Button.transform, Constants.TOOLTIP_RIGHT_MISSION_2);
+        //SetTooltip((RectTransform)rightMission3Button.transform, Constants.TOOLTIP_RIGHT_MISSION_3);
         // Left Panel
         SetTooltip((RectTransform)leftBuildingButton.transform, Constants.TOOLTIP_LEFT_BUILDING_BUTTON);
         SetTooltip((RectTransform)leftTechnology1Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON);
@@ -450,7 +450,7 @@ public class UIController : MonoBehaviour
 
     }
 
-    private void SetTooltip(RectTransform rt, string myString) {
+    public void SetTooltip(RectTransform rt, string myString) {
         TooltipController tc = rt.gameObject.AddComponent<TooltipController>();
         tc.myString = myString;
     }

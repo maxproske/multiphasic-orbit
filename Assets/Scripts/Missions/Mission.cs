@@ -6,6 +6,7 @@ public class Mission : MonoBehaviour {
 
     public string missionName;
     public string missionDescription;
+    public string missionReward;
     public bool completed;
 
 	// Use this for initialization
