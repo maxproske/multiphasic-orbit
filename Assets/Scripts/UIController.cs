@@ -42,10 +42,6 @@ public class UIController : MonoBehaviour
     public Text leftStoneCollectedText;
     public Text leftWaterCollectedText;
     public Text leftGasCollectedText;
-	public Text leftStoneTradeText;
-	public Text leftWaterTradeText;
-	public Text leftGasTradeText;
-
 	// Status Panel
 	public Text leftPopulationText;
 	public Text leftHealthText;
@@ -147,8 +143,7 @@ public class UIController : MonoBehaviour
 			SetSelectedName (selectedPlanet.planetname);
 			SetSelectedPreview (selectedPlanet.planetSprite);
 			SetSelectedResources (selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
-			SetSelectedResourcesCollected(selectedPlanet.addCarbon, selectedPlanet.addNitrogen, selectedPlanet.addHydrogen);
-			SetSelectedResourceTrade(selectedPlanet.tradecarbon, selectedPlanet.tradenitrogen, selectedPlanet.tradehydrogen);
+            SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
 			SetSelectedPopulation (selectedPlanet.population);
 			SetSelectedHealth (selectedPlanet.health, selectedPlanet.maxHealth);
             SetSelectedTechnology (selectedPlanet.technologyLevel);
@@ -347,64 +342,6 @@ public class UIController : MonoBehaviour
 			leftStoneCollectedText.text = leftWaterCollectedText.text = leftGasCollectedText.text = "<color=#FFFFFF00></color>";
 		}
 	}
-
-
-	public void SetSelectedResourceTrade(int stoneCollected = -999, int waterCollected = -999, int gasCollected = -999)
-	{
-		// Planet selected
-		if (stoneCollected > -999 && waterCollected > -999 && gasCollected > -999) 
-		{
-			string positive = "#4CAF50FF";
-			string negative = "#F44336FF";
-			string neutral = "#FFFFFF00";
-			string stoneColor = "";
-			string waterColor = "";
-			string gasColor = "";
-			string stonePrefix = "";
-			string waterPrefix = "";
-			string gasPrefix = "";
-
-			// Determine if resources collected was negative/neutral/positive
-			if (stoneCollected < 0) {stoneColor = negative; stonePrefix = "-";}
-			else if (stoneCollected == 0) {stoneColor = neutral; stonePrefix = "";}
-			else if (stoneCollected > 0) {stoneColor = positive; stonePrefix = "+";}
-
-			if (waterCollected < 0) {stoneColor = negative; waterPrefix = "-";}
-			else if (waterCollected == 0) {waterColor = neutral; waterPrefix = "";}
-			else if (waterCollected > 0) {waterColor = positive; waterPrefix = "+";}
-
-			if (gasCollected < 0) {gasColor = negative; gasPrefix = "-";}
-			else if (gasCollected == 0) {gasColor = neutral; gasPrefix = "";}
-			else if (gasCollected > 0) {gasColor = positive; gasPrefix = "+";}
-
-			// Assign text appropriate colour
-			leftStoneTradeText.text = stonePrefix + stoneCollected.ToString();
-			Color myColor = new Color();
-			ColorUtility.TryParseHtmlString (stoneColor, out myColor);
-			leftStoneTradeText.color = myColor;
-			if (stoneCollected != 0) StartCoroutine(FadeTextToFullAlpha(0.5f, leftStoneTradeText));
-
-			leftWaterTradeText.text = waterPrefix + waterCollected.ToString();
-			myColor = new Color();
-			ColorUtility.TryParseHtmlString (waterColor, out myColor);
-			leftWaterTradeText.color = myColor;
-			if (waterCollected != 0) StartCoroutine(FadeTextToFullAlpha(0.5f, leftWaterTradeText));
-
-			leftGasTradeText.text = gasPrefix + gasCollected.ToString();
-			myColor = new Color();
-			ColorUtility.TryParseHtmlString (gasColor, out myColor);
-			leftGasTradeText.color = myColor;
-			if (gasCollected != 0) StartCoroutine(FadeTextToFullAlpha(0.5f, leftGasTradeText));
-		}
-		// No planet selected
-		else 
-		{
-			//StartCoroutine(FadeTextToZeroAlpha(1f, leftStoneCollectedText));
-			leftStoneTradeText.text = leftWaterTradeText.text = leftGasTradeText.text = "<color=#FFFFFF00></color>";
-		}
-	}
-
-
 	private void SetSelectedPopulation (int population = -1)
 	{
 		// Planet selected
@@ -546,15 +483,12 @@ public class UIController : MonoBehaviour
         {
             SetSelectedResources(selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
 			SetSelectedResourcesCollected(selectedPlanet.addCarbon, selectedPlanet.addNitrogen, selectedPlanet.addHydrogen);
-			SetSelectedResourceTrade(selectedPlanet.tradecarbon, selectedPlanet.tradenitrogen, selectedPlanet.tradehydrogen);
-			Debug.Log (selectedPlanet.tradecarbon);
         }
         // No planet selected
         else
         {
             SetSelectedResources();
             SetSelectedResourcesCollected();
-			SetSelectedResourceTrade ();
         }
     }
 

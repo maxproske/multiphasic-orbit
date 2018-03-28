@@ -102,9 +102,9 @@ public class Planet : MonoBehaviour
     // trading
     public int maxResourceType = 0;
     public int maxResource = 0;
-    public int tradecarbon = 0;
-    public int tradenitrogen = 0;
-    public int tradehydrogen = 0;
+    private int tradecarbon = 0;
+    private int tradenitrogen = 0;
+    private int tradehydrogen = 0;
 
     public string planetname = " ";
 
