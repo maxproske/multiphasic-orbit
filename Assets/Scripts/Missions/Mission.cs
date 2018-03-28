@@ -11,7 +11,6 @@ public class Mission : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-        Debug.Log("Started");
         completed = false;
 	}
 }
