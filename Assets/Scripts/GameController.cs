@@ -563,7 +563,6 @@ public class GameController : MonoBehaviour
 					if (planetScript.iftech1 == 1) {
 						planetScript.addResourceTechnology ();
 						planetScript.iftech1 = 2;
-						tech1.interactable = false;
 					}
 					if (planetScript.iftech2 == 1) {
 						planetScript.carbon -= 5;
@@ -571,17 +570,14 @@ public class GameController : MonoBehaviour
 						planetScript.hydrogen -= 5;
 						planetScript.iflinkactive = true;
 						planetScript.iftech2 = 2;
-						tech2.interactable = false;
 					}
 					if (planetScript.iftech3 == 1) {
 						planetScript.linkchanceTechnology ();
 						planetScript.iftech3 = 2;
-						tech3.interactable = false;
 					}
 					if (planetScript.iftech4 == 1) {
 						planetScript.StormShiedTechnology ();
 						planetScript.iftech4 = 2;
-						tech4.interactable = false;
 					}
 					if (planetScript.iftech5 == 1) {
 						planetScript.carbon -= 20;
@@ -589,7 +585,6 @@ public class GameController : MonoBehaviour
 						planetScript.hydrogen -= 20;
 						planetScript.ifattackactive = true;
 						planetScript.iftech5 = 2;
-						tech5.interactable = false;
 					}
 					// Create a new micro skill tree
 					//Debug.Log("Creating micro skill tree for " + selected.name);

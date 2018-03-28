@@ -15,6 +15,14 @@ public class ConfirmationPanel : MonoBehaviour
         confirmButton.onClick.AddListener(ClosePanel);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClosePanel();
+        }
+    }
+
     public void ShowPanel(string title, string message)
     {
         panel.SetActive(true);
