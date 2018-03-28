@@ -148,15 +148,15 @@ public class GameController : MonoBehaviour
         //playButton = GameObject.Find("End Turn Button").GetComponent<Button>();
         //playButton.onClick.AddListener(Simulate);
 
-        startLinkButton = GameObject.Find("Start Link Button").GetComponent<Button>();
+        startLinkButton = GameObject.Find("Link From Button").GetComponent<Button>();
         startLinkButton.onClick.AddListener(StartLink);
 
-        linkButton = GameObject.Find("Link Button").GetComponent<Button>();
+        linkButton = GameObject.Find("Link To Button").GetComponent<Button>();
         linkButton.onClick.AddListener(Link);
-		startAttackButton = GameObject.Find("Start Attack Button").GetComponent<Button>();
+		startAttackButton = GameObject.Find("Attack From Button").GetComponent<Button>();
 		startAttackButton.onClick.AddListener(StartAttack);
 
-		AttackButton = GameObject.Find("Attack Button").GetComponent<Button>();
+		AttackButton = GameObject.Find("Attack To Button").GetComponent<Button>();
 		AttackButton.onClick.AddListener(attack);
 
 		tech1 = GameObject.Find ("Tech 1").GetComponent<Button> ();
