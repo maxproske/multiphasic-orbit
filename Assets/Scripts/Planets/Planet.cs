@@ -390,7 +390,7 @@ public class Planet : MonoBehaviour
 			waterCollected = addNitrogen * collectionMultiplier;
 			gasCollected = addHydrogen * collectionMultiplier;
 
-            Debug.Log("addCarbon: " + addCarbon + ", collectionMultiplier:" + collectionMultiplier);
+            //Debug.Log("addCarbon: " + addCarbon + ", collectionMultiplier:" + collectionMultiplier);
 
 			if (linkedWith.Count == 0) {
 				// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + stoneCollected, guiStyle);
