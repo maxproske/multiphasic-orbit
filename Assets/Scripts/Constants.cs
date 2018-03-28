@@ -54,9 +54,9 @@
     public const string TOOLTIP_RIGHT_MISSION_2 = "Details about Mission 2;Edit me in Constants.cs";
     public const string TOOLTIP_RIGHT_MISSION_3 = "Details about Mission 3;Edit me in Constants.cs";
     public const string TOOLTIP_LEFT_BUILDING_BUTTON = "Press Play Button to end turn.";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON = "Learn <b>High Energy Magnetics</b>.;;- Resources Protected from Solar Storms.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON = "Learn <b>Interplanetary Networking</b>.;;- Link with other planets.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON = "Learn <b>Advanced Economics</b>.;;- Increases Chance to Link by 50%.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON = "Learn <b>Extraplanetary Ballistics</b>.;;- Can Attack Rogue Planets.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
-    public const string TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON = "Learn <b>Negative Mass Mechanics</b>.;;- Increases Attack Power by 50%.;- Costs <b><color=#616161FF>4 stone</color></b>, <b><color=#2196F3FF>1 water</color></b>, <b><color=#795548FF>1 gas</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON = "Learn <b>High Energy Magnetics</b>.;;- Resources Protected from Solar Storms.;- Costs <b><color=#616161FF>10 stone</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON = "Learn <b>Interplanetary Networking</b>.;;- Link with other planets.;- Costs <b><color=#616161FF>5 stone</color></b>, <b><color=#2196F3FF>5 water</color></b>, <b><color=#795548FF>5 gas</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON = "Learn <b>Advanced Economics</b>.;;- Increases Chance to Link by 50%.;- Costs <b><color=#2196F3FF>10 water</color></b>, <b><color=#795548FF>15 gas</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON = "Learn <b>Extraplanetary Ballistics</b>.;;- Can Attack Rogue Planets.;- Costs <b><color=#616161FF>15 stone</color></b>, <b><color=#2196F3FF>15 water</color></b>.";
+    public const string TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON = "Learn <b>Negative Mass Mechanics</b>.;;- Increases Attack Power by 50%.;- Costs <b><color=#616161FF>20 stone</color></b>, <b><color=#2196F3FF>20 water</color></b>, <b><color=#795548FF>20 gas</color></b>.";
 }

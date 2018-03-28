@@ -482,7 +482,7 @@ public class UIController : MonoBehaviour
         if (selectedPlanet != null)
         {
             SetSelectedResources(selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
-            SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
+			SetSelectedResourcesCollected(selectedPlanet.addCarbon, selectedPlanet.addNitrogen, selectedPlanet.addHydrogen);
         }
         // No planet selected
         else

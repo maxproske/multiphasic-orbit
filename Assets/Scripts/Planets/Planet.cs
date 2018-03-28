@@ -416,31 +416,31 @@ public class Planet : MonoBehaviour
 			if (linkedWith.Count > 0) {
 				if (this.CompareTag ("Rogue")) {
 					if (this.die == false) {
-						guiStyle.normal.textColor = Color.red;
-
+//						guiStyle.normal.textColor = Color.red;
+					
 						// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
 						// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
 						// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
 					}
 				} else {
-					string ac = " ";
-					string an = " ";
-					string ah = " ";
-					if (tradecarbon >= 0) {
-						ac = " + ";
-					} else if (tradecarbon < 0) {
-						ac = " - ";
-					}
-					if (tradenitrogen >= 0) {
-						an = " + ";
-					} else if (tradenitrogen < 0) {
-						an = " - ";
-					}
-					if (tradehydrogen >= 0) {
-						ah = " + ";
-					} else if (tradehydrogen < 0) {
-						ah = " - ";
-					}
+//					string ac = " ";
+//					string an = " ";
+//					string ah = " ";
+//					if (tradecarbon >= 0) {
+//						ac = " + ";
+//					} else if (tradecarbon < 0) {
+//						ac = " - ";
+//					}
+//					if (tradenitrogen >= 0) {
+//						an = " + ";
+//					} else if (tradenitrogen < 0) {
+//						an = " - ";
+//					}
+//					if (tradehydrogen >= 0) {
+//						ah = " + ";
+//					} else if (tradehydrogen < 0) {
+//						ah = " - ";
+//					}
 					// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + stoneCollected + ac + Mathf.Abs (tradecarbon), guiStyle);
 					// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected + an + Mathf.Abs (tradenitrogen), guiStyle);
 					// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected + ah + Mathf.Abs (tradehydrogen), guiStyle);	
