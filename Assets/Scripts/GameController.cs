@@ -493,11 +493,25 @@ public class GameController : MonoBehaviour
 			planet2 = null;
 		}
 
-
+	
 		if (planets.Contains (selected)) {
+			
 			if (!linking) {
 				planetScript = selected.GetComponent<Planet> (); // get Planet script to access attributes
 			}
+			if (ui.selectedPlanet == null) {
+				playButton.interactable = true;
+			}
+
+			Debug.Log (planetScript);
+
+			// Prevent SetSelectedPlanet from being called 60 times/second,
+			// Only on new selection
+			if (ui.selectedPlanet != planetScript) {
+				ui.SetSelectedPlanet (planetScript);
+			}
+			ui.leftTechnologyPanel.ForceUpdateRectTransforms ();
+
 			if (planetScript.iflinkactive) {
 
 				linkButton.gameObject.SetActive (true);
@@ -516,6 +530,38 @@ public class GameController : MonoBehaviour
 
 				AttackButton.gameObject.SetActive (false);
 			}
+
+
+			if (!linking && !placing && Input.GetMouseButtonUp(0))
+			{
+
+				if (planetScript.iftech1 == 1)
+				{
+
+					planetScript.iftech1 = 2;
+				}
+				if (planetScript.iftech2 == 1) {
+
+					planetScript.iftech2 = 2;
+				}
+				if (planetScript.iftech3 == 1) {
+
+					planetScript.iftech3 = 2;
+				}
+				if (planetScript.iftech4 == 1) {
+
+					planetScript.iftech4 = 2;
+				}
+				if (planetScript.iftech5 == 1) {
+
+					planetScript.iftech5 = 2;
+				}
+			} else
+			{
+				notBuiltTooltip.SetActive(true);
+				notBuiltTooltipTimer++;
+			}
+
 			// update UI
 			if (planetScript.turnsToBuild < 1) {
 				//planetText.text = planetScript.name;
@@ -541,93 +587,55 @@ public class GameController : MonoBehaviour
 			var mstName = selected.name + " Skill Tree";
 
 			// Make play button green after clicking planet for the first time
-			if (ui.selectedPlanet == null) {
-				playButton.interactable = true;
-			}
 
-			// Prevent SetSelectedPlanet from being called 60 times/second,
-			// Only on new selection
-			if (ui.selectedPlanet != planetScript) {
-				ui.SetSelectedPlanet (planetScript);
-			}
+		
+				tech1.interactable = false;
+				tech2.interactable = false;
+				tech3.interactable = false;
+				tech4.interactable = false;
+				tech5.interactable = false;
+
 
 
             if (planetScript.carbon >= 10 && planetScript.iftech1 == 0)
             {
-                if (!tech1.interactable)
-                {
+               
 
                     tech1.interactable = true;
-                }
+                
             }
             else if (planetScript.hydrogen >= 5 && planetScript.nitrogen >= 5 && planetScript.carbon >= 5 && planetScript.iftech1 == 3 && planetScript.iftech2 == 0)
             {
-                if (!tech2.interactable)
-                {
+              
                     tech2.interactable = true;
-                }
+                
             }
             else if (planetScript.hydrogen >= 15 && planetScript.nitrogen >= 10 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 0)
             {
-                if (!tech3.interactable)
-                {
+             
                     tech3.interactable = true;
-                }
+            
             }
             else if (planetScript.nitrogen >= 15 && planetScript.carbon >= 15 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 0)
             {
-                if (!tech4.interactable)
-                {
+               
                     tech4.interactable = true;
-                }
+              
             }
             else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 3 && planetScript.iftech5 == 0)
             {
-                if (!tech5.interactable)
-                {
+               
                     tech5.interactable = true;
-                }
+                
             }
-            else
-            {
-                tech1.interactable = false;
-                tech2.interactable = false;
-                tech3.interactable = false;
-                tech4.interactable = false;
-                tech5.interactable = false;
-
-            }
+       
 
             // Open Skill Tree only if it hasn't been created yet
-            if (planetScript.turnsToBuild < 1)
-            { // check if is built 
-                notBuiltTooltip.SetActive(false);
+             // check if is built 
+//                notBuiltTooltip.SetActive(false);
 
-                if (!linking && !placing && Input.GetMouseButtonUp(0))
-                {
-                    if (planetScript.iftech1 == 1)
-                    {
-                       
-						planetScript.iftech1 = 2;
-					}
-					if (planetScript.iftech2 == 1) {
-			
-						planetScript.iftech2 = 2;
-					}
-					if (planetScript.iftech3 == 1) {
+        
 
-						planetScript.iftech3 = 2;
-					}
-					if (planetScript.iftech4 == 1) {
-
-						planetScript.iftech4 = 2;
-					}
-					if (planetScript.iftech5 == 1) {
-			
-						planetScript.iftech5 = 2;
-					}
-				}
-			}
                     // Create a new micro skill tree
                     //Debug.Log("Creating micro skill tree for " + selected.name);
                     //                     mst = Instantiate(microSkillTree) as GameObject;
@@ -673,12 +681,7 @@ public class GameController : MonoBehaviour
                 //                     }
                 //                }
 //            }
-            else
-            {
-                notBuiltTooltip.SetActive(true);
-                notBuiltTooltipTimer++;
-            }
-
+         
             // Change game state when selecting Carbon 1
             if (GAME_STATE == Constants.TURN_3_TECH_TREE && selected.name == "Carbon 1")
             {
