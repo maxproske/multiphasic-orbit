@@ -132,10 +132,11 @@ public class GameController : MonoBehaviour
         ui = GameObject.Find("Canvas").GetComponent<UIController>();
         m = GameObject.Find("Missions").GetComponent<Missions>();
         cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
-        l = log.GetComponent<Log>();
 
+        //l = GameObject.Find("Log").GetComponent<Log>();
 
-        l.ToggleLog();
+        ToggleLog();
+
 
         turn = 1;
         
@@ -222,6 +223,20 @@ public class GameController : MonoBehaviour
         foreach (var mission in m.missions)
         {
             mission.GetComponent<Mission>().completed = false;
+        }
+    }
+
+    public void ToggleLog()
+    {
+        l.myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
+
+        if (log.activeSelf)
+        {
+            log.SetActive(false);
+        }
+        else
+        {
+            log.SetActive(true);
         }
     }
 
@@ -323,11 +338,11 @@ public class GameController : MonoBehaviour
 	{
 		// toggle log
 		if (Input.GetKeyDown (KeyCode.Tab)) {
-			l.ToggleLog ();
+			ToggleLog ();
 		}
 
 		if (Input.GetKeyUp (KeyCode.Tab)) {
-			l.ToggleLog ();
+			ToggleLog ();
 		}
 
 		if (shot != null) {

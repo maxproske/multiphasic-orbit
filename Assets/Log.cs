@@ -27,20 +27,6 @@ public class Log : MonoBehaviour
         textToLog = "";
     }
 
-    public void ToggleLog()
-    {
-        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
-
-        if (gc.log.activeSelf)
-        {
-            gc.log.SetActive(false);
-        }
-        else
-        {
-            gc.log.SetActive(true);
-        }
-    }
-
     public void UpdateLogPlanet(string planetName, string message)
     {
         //AddNewLine();
