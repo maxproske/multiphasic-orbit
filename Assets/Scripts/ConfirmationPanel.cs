@@ -6,10 +6,18 @@ using UnityEngine.UI;
 
 public class ConfirmationPanel : MonoBehaviour
 {
+    private GameController gc;
     public GameObject panel;
     public Text titleText;
     public Text messageText;
     public Button confirmButton;
+
+    private void Awake()
+    {
+        // GameController
+        gc = GameObject.Find("Game Manager").GetComponent<GameController>();
+        gc.cp = this;
+    }
 
     private void Start()
     {
@@ -47,5 +55,10 @@ public class ConfirmationPanel : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene("Level2");
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Main");
     }
 }

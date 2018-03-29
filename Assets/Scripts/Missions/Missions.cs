@@ -32,7 +32,8 @@ public class Missions : MonoBehaviour
                 cp.ShowPanel("Learner's Test Begins", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\n Build a planet to start!");
                 break;
             case 2:
-                cp.ShowPanel("N Test", "Currently not available...");
+                cp.ShowPanel("N Test", "Sorry, N Test is currently not available...\r\n\r\nClick OK to replay!");
+                cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
                 break;
             default:
                 cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
