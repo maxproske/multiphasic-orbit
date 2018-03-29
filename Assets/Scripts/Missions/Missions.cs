@@ -23,6 +23,9 @@ public class Missions : MonoBehaviour
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         m = GameObject.Find("Missions").GetComponent<Mission>();
         cp = confirmationPanel.GetComponent<ConfirmationPanel>();
+
+        gc.m = this;
+
         switch (gc.level)
         {
             case 1:
@@ -34,6 +37,33 @@ public class Missions : MonoBehaviour
             default:
                 cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
                 break;
+        }
+
+        switch (gc.level)
+        {
+            case 1:
+                Debug.Log("Playing Level 1");
+                // add missions from Test1Missions to missions to play with list called missions
+                foreach (var mission in Test1Missions)
+                {
+                    gc.AddMissionsToUI(mission);
+                }
+                break;
+            case 2:
+                Debug.Log("Playing Level 2");
+                // add missions from Test1Missions to missions to play with list called missions
+                foreach (var mission in Test2Missions)
+                {
+                    gc.AddMissionsToUI(mission);
+                }
+                break;
+
+        }
+
+        // reset all missions to incompleted
+        foreach (var mission in missions)
+        {
+            mission.GetComponent<Mission>().completed = false;
         }
 
     }

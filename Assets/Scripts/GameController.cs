@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour
     private Planet p; // Access new planet script
     public bool planetPlaced; // Flag for drawing planet orbit in realtime
 
-    private UIController ui;
+    public UIController ui;
 
     // planetary ui buttons
     public Button stone;
@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
     public int level;
 
     // missions
-    private Missions m;
+    public Missions m;
 
     bool buildingActive;
 
@@ -119,23 +119,24 @@ public class GameController : MonoBehaviour
 
 
     // log
-    public GameObject log;
+    //public GameObject log;
     public Log l;
 
     
-    private ConfirmationPanel cp;
+    public ConfirmationPanel cp;
 
 
     // Use this for initialization
     void Start()
     {
-        ui = GameObject.Find("Canvas").GetComponent<UIController>();
-        m = GameObject.Find("Missions").GetComponent<Missions>();
-        cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
-        l = log.GetComponent<Log>();
+        // when the script has started, then assign these scripts
+        //ui = GameObject.Find("Canvas").GetComponent<UIController>();
+        //m = GameObject.Find("Missions").GetComponent<Missions>();
+        //cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
+        //l = log.GetComponent<Log>();
 
 
-        l.ToggleLog();
+        //l.ToggleLog();
 
         turn = 1;
         
@@ -197,35 +198,10 @@ public class GameController : MonoBehaviour
 
         ResetLinking();
 
-        switch (level)
-        {
-            case 1:
-                Debug.Log("Playing Level 1");
-                // add missions from Test1Missions to missions to play with list called missions
-                foreach (var mission in m.Test1Missions)
-                {
-                    AddMissionsToUI(mission);
-                }
-                break;
-            case 2:
-                Debug.Log("Playing Level 2");
-                // add missions from Test1Missions to missions to play with list called missions
-                foreach (var mission in m.Test2Missions)
-                {
-                    AddMissionsToUI(mission);
-                }
-                break;
-
-        }
-
-        // reset all missions to incompleted
-        foreach (var mission in m.missions)
-        {
-            mission.GetComponent<Mission>().completed = false;
-        }
+        
     }
 
-    private void AddMissionsToUI(GameObject mission)
+    public void AddMissionsToUI(GameObject mission)
     {
         m.missions.Add(mission);
         GameObject go = Instantiate(genericMissionPanel, missionPanel.transform); // create Mission Panel for mission

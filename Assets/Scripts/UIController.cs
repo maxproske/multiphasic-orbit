@@ -85,6 +85,9 @@ public class UIController : MonoBehaviour
     public GameObject tooltipPrefab;
     public GameObject tooltipContainer;
 
+    // GameController
+    private GameController gc;
+
 	private void Start()
 	{
 		/* Initialize Top Panel
@@ -103,6 +106,10 @@ public class UIController : MonoBehaviour
         /* Initialize External Scripts
            ====================================================================== */
         SetupTooltipController();
+
+        // GameController
+        gc = GameObject.Find("Game Manager").GetComponent<GameController>();
+        gc.ui = this;
 	}
 
 	/* Set Top Panel

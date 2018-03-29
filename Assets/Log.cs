@@ -14,30 +14,33 @@ public class Log : MonoBehaviour
     string gasColor;
     public string textToLog;
     public ScrollRect myScrollRect;
+    public GameObject log;
 
     // Use this for initialization
     void Start()
     {
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
+        gc.l = this;
         LogText.text = "";
         color = "#fff";
         stoneColor = "#616161FF";
         waterColor = "#2196F3FF";
         gasColor = "#795548FF";
         textToLog = "";
+        ToggleLog();
     }
 
     public void ToggleLog()
     {
         myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
 
-        if (gc.log.activeSelf)
+        if (log.activeSelf)
         {
-            gc.log.SetActive(false);
+            log.SetActive(false);
         }
         else
         {
-            gc.log.SetActive(true);
+            log.SetActive(true);
         }
     }
 
