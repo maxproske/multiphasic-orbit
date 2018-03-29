@@ -88,7 +88,14 @@ public class UIController : MonoBehaviour
     // GameController
     private GameController gc;
 
-	private void Start()
+    private void Awake()
+    {
+        // GameController
+        gc = GameObject.Find("Game Manager").GetComponent<GameController>();
+        gc.ui = this;
+    }
+
+    private void Start()
 	{
 		/* Initialize Top Panel
 	       ====================================================================== */
@@ -106,10 +113,6 @@ public class UIController : MonoBehaviour
         /* Initialize External Scripts
            ====================================================================== */
         SetupTooltipController();
-
-        // GameController
-        gc = GameObject.Find("Game Manager").GetComponent<GameController>();
-        gc.ui = this;
 	}
 
 	/* Set Top Panel
