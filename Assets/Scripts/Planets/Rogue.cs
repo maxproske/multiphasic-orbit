@@ -6,7 +6,7 @@ public class Rogue : Planet
 {
 
     private Planet dominatedPlanetScript;
-
+	private GameController gc2; 
 
     public Rogue()
     {
@@ -21,6 +21,7 @@ public class Rogue : Planet
 
     public override void Start()
     {
+		gc2 = GameObject.Find("Game Manager").GetComponent<GameController>();
         base.Start();
         //dominatedPlanets = new List<Planet>();
     }
@@ -29,7 +30,7 @@ public class Rogue : Planet
     // parameters are how many resources stolen per turn
     public void Steal(int sCarbon, int sNitrogen, int sHydrogen)
 	{
-		if (die == true){
+		if (die != true){
 			foreach (var dominatedPlanet in linkedWith) {
 				dominatedPlanetScript = dominatedPlanet.GetComponent<Planet> ();
 				// take away and add to this rogue planet's resources only if dominatedPlanet has more than 0 of that resource
@@ -49,10 +50,30 @@ public class Rogue : Planet
 		}
     }
 
+
     // function used to attack another planet anywhere that has been built
     public void Attack()
     {
-        dominatedPlanetScript.turnsToDie--;
+		if (die != true) {
+			if (linkedWith != null) {
+				foreach (var dominatedPlanet in linkedWith) {
+					dominatedPlanetScript = dominatedPlanet.GetComponent<Planet> ();
+					dominatedPlanetScript.health -= 25;
+					if (dominatedPlanetScript.health <= 0) {
+						dominatedPlanetScript.die = true;
+
+					}
+				}
+			} else {
+				dominatedPlanetScript = gc2.planets [0].GetComponent<Planet>();
+				dominatedPlanetScript.health -= 25;
+				if (dominatedPlanetScript.health <= 0) {
+					dominatedPlanetScript.die = true;
+				
+
+				}
+			}
+		}
     }
 
     // function used to increase attribute value

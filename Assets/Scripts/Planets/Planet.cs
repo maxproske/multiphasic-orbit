@@ -223,6 +223,13 @@ public class Planet : MonoBehaviour
 
     public void FixedUpdate()
     {
+		if (die == true) {
+			this.gameObject.SetActive (false);
+
+			foreach (var line in lines) {
+				line.SetActive (false);
+			}
+		}
         // Constant rotation
         if (fastUniverse) 
         {
@@ -246,6 +253,8 @@ public class Planet : MonoBehaviour
 						}
 						links [i].SetPosition (0, transform.position);
 						links [i].SetPosition (1, linkedWith [i].transform.position);
+					} else {
+						lines [i].SetActive (false);
 					}
 				}
 			}

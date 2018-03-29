@@ -1121,7 +1121,15 @@ public class GameController : MonoBehaviour
         canBuild = true;
         buildingActive = false;
 
-
+		if (level == 3) {
+			foreach (var planet in planets) {
+				if (planet.GetComponent ("Rogue")) {
+					var rogueScript = planet.GetComponent<Rogue> ();
+					rogueScript.Attack();
+				}
+			}
+			culculateStorm();
+		}
 
         // reset place planet
         if (go != null && planetPlaced)
@@ -1134,7 +1142,7 @@ public class GameController : MonoBehaviour
 
         ToggleInteractability(false);
 
-        //        culculateStorm();
+       
 
 
 		if (attacking) {
