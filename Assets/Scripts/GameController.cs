@@ -317,6 +317,7 @@ public class GameController : MonoBehaviour
                 if (secondPlanetScript.health <= 0)
                 {
                     secondPlanetScript.die = true;
+					m.CheckMissions(m.missions);
 
                 }
                 attacking = false;
