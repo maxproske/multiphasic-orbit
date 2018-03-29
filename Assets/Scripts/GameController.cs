@@ -140,7 +140,7 @@ public class GameController : MonoBehaviour
 
         turn = 1;
 
-        missionIncrement = 1;
+        missionIncrement = 0;
 
         // states
         // Disable hints
@@ -216,8 +216,9 @@ public class GameController : MonoBehaviour
         Text panelText = go.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>(); // get Text of Mission Panel
 
         //panelText.text = mission.GetComponent<Mission>().missionName; // change text of Mission Panel to missionName
-        panelText.text = "Mission " + missionIncrement;
         missionIncrement++;
+        panelText.text = "Mission " + missionIncrement;
+        
 
         // Set tooltip for Mission Panel
         GameObject goButton = go.transform.GetChild(0).gameObject; // get Mission Panel button

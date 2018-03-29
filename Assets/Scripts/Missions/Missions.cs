@@ -13,6 +13,7 @@ public class Missions : MonoBehaviour
     public GameObject confirmationPanel;
     private ConfirmationPanel cp;
     public bool reward;
+    private int rogueDieIncrement;
 
     public List<GameObject> missions; // list of missions that will be played with
     public List<GameObject> Test1Missions; // add these missions into the missions
@@ -28,6 +29,7 @@ public class Missions : MonoBehaviour
 
         gc.m = this;
         reward = false;
+        rogueDieIncrement = 0;
 
         switch (gc.level)
         {
@@ -37,10 +39,10 @@ public class Missions : MonoBehaviour
             case 2:
                 //cp.ShowPanel("N Test", "Sorry, N Test is currently not available...\r\n\r\nClick OK to replay!");
                 //cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
-                cp.ShowPanel("N Test", "It's going to be a bit more difficult now. Rogue planets may appear and attack and steal from your planets.");
+                cp.ShowPanel("Novice Test", "It's going to be a bit more difficult now. Rogue planets may appear and attack and steal from your planets.");
                 break;
             default:
-                cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
+                cp.ShowPanel("Full License Test", "An unknown amount of Rogue planets will appear. Eliminate them all to prove that you are worthy of a full license.");
                 break;
         }
 
@@ -58,6 +60,14 @@ public class Missions : MonoBehaviour
                 Debug.Log("Playing Level 2");
                 // add missions from Test1Missions to missions to play with list called missions
                 foreach (var mission in Test2Missions)
+                {
+                    gc.AddMissionsToUI(mission);
+                }
+                break;
+            case 3:
+                Debug.Log("Playing Level 3");
+                // add missions from Test1Missions to missions to play with list called missions
+                foreach (var mission in Test3Missions)
                 {
                     gc.AddMissionsToUI(mission);
                 }
@@ -248,6 +258,26 @@ public class Missions : MonoBehaviour
 
                 }
                 break;
+            case "Defeat 3 Rogue Planets Before Turn 100":
+                foreach (var rogue in gc.roguePlanets)
+                {
+                    r = rogue.GetComponent<Rogue>();
+                    if (r.die)
+                    {
+                        rogueDieIncrement++;
+                        
+                    }
+                    if (rogueDieIncrement > 2)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                        cp.ShowPanel("Congratulations!", "You now have a full license to go on and build solar systems. Be safe!\r\n\r\nClick OK to replay!");
+                        cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
+                        return;
+                    }
+
+                }
+                break;
         }
     }
 
@@ -269,6 +299,7 @@ public class Missions : MonoBehaviour
                         p.carbon += 100;
                         p.hydrogen += 100;
                         p.nitrogen += 100;
+                        gc.l.UpdateLogPlanetRes(planet.name, 100, 100, 100);
                     }
                 }
                 reward = false;

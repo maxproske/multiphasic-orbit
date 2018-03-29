@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: 4b. Assign a planet to learn Interplanetary Networking
+  m_Name: 1. Defeat 3 Rogue Planets Before Turn 100
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,10 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Assign a planet to learn Interplanetary Networking
+  missionName: Defeat 3 Rogue Planets Before Turn 100
   missionDescription: 
   missionReward: 
-  postMissionMessage: "You\u2019re getting the hang of it! Just need one more planet
-    to learn Interplanetary Networking."
+  postMissionMessage: 
   postMissionHint: 
-  completed: 0
+  completed: 1
