@@ -9,6 +9,7 @@ public class Missions : MonoBehaviour
     private GameController gc;
     private Mission m;
     private Planet p;
+    private Rogue r;
     public GameObject confirmationPanel;
     private ConfirmationPanel cp;
 
@@ -32,8 +33,9 @@ public class Missions : MonoBehaviour
                 cp.ShowPanel("Learner's Test Begins", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\nBuild a planet to start!");
                 break;
             case 2:
-                cp.ShowPanel("N Test", "Sorry, N Test is currently not available...\r\n\r\nClick OK to replay!");
-                cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
+                //cp.ShowPanel("N Test", "Sorry, N Test is currently not available...\r\n\r\nClick OK to replay!");
+                //cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
+                cp.ShowPanel("N Test", "It's going to be a bit more difficult now. Rogue planets may appear and attack and steal from your planets.");
                 break;
             default:
                 cp.ShowPanel("Learner's Test Begins", "Build one planet to get started!");
@@ -201,18 +203,69 @@ public class Missions : MonoBehaviour
                     }
                 }
                 break;
+
+            // level 2
+            case "Link With One Planet":
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+
+                    if (p.linkedWith.Count > 0)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                }
+                break;
+            case "Learn Attack Tech":
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+                    if (p.ifattackactive)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                }
+                break;
+            case "Defeat One Rogue Planet":
+                foreach (var rogue in gc.roguePlanets)
+                {
+                    r = rogue.GetComponent<Rogue>();
+                    if (r.die)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                        cp.ShowPanel("Rogue Planet Defeated", "Get ready for your final test!");
+                        cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
+                    }
+                }
+                break;
         }
     }
 
     // used to reward
     public void Reward(GameObject mission)
     {
+        
         m = mission.GetComponent<Mission>();
         switch (m.missionName)
         {
-            //case "Place Planet":
-            //    Debug.Log("Place Planet Reward: Here's a pat on the back.");
-            //    break;
+            case "Link With One Planet":
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+
+                    if (p.linkedWith.Count > 0 && !p.CompareTag("Rogue"))
+                    {
+                        Debug.Log("Reward");
+                        p.carbon += 100;
+                        p.hydrogen += 100;
+                        p.nitrogen += 100;
+                        gc.l.UpdateLogPlanetRes(p.name, 100, 100, 100);
+                    }
+                }
+                break;
         }
     }
 
@@ -221,27 +274,29 @@ public class Missions : MonoBehaviour
     {
         m = mission.GetComponent<Mission>();
         //Debug.Log("Mission: " + m.missionName + " completed!");
-        m.completed = true;
-
-        // update respective button colour
-        GameObject ms = GameObject.Find(mission.name + "(Clone)"); // find the instantiated game object of the same name that is set as a child to one of the mission buttons
-        Button button = ms.transform.parent.transform.Find("Mission Button").GetComponent<Button>(); // get the particular mission button
-        ColorBlock cb = button.GetComponent<Button>().colors;
-        cb.normalColor = new Color(0.298f, 0.686f, 0.313f); // set the button color to same green as play button
-        button.colors = cb;
-
-        if (m.postMissionHint != "") // if there is post mission hint, show confirmation panel with message and hint - assumes when there is a hint, there is a message
+        if (!m.completed)
         {
-            cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.postMissionHint);
-        }
-        else if (m.postMissionMessage != "")// else just show confirmation panel with just message
-        {
-            cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage);
-        }
+            m.completed = true;
 
-        gc.l.UpdateLogMission(m.missionName, m.missionReward);
-        gc.l.LogBackLog();
+            // update respective button colour
+            GameObject ms = GameObject.Find(mission.name + "(Clone)"); // find the instantiated game object of the same name that is set as a child to one of the mission buttons
+            Button button = ms.transform.parent.transform.Find("Mission Button").GetComponent<Button>(); // get the particular mission button
+            ColorBlock cb = button.GetComponent<Button>().colors;
+            cb.normalColor = new Color(0.298f, 0.686f, 0.313f); // set the button color to same green as play button
+            button.colors = cb;
 
+            if (m.postMissionHint != "") // if there is post mission hint, show confirmation panel with message and hint - assumes when there is a hint, there is a message
+            {
+                cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.postMissionHint);
+            }
+            else if (m.postMissionMessage != "")// else just show confirmation panel with just message
+            {
+                cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage);
+            }
+
+            gc.l.UpdateLogMission(m.missionName, m.missionReward);
+            gc.l.LogBackLog();
+        }
     }
 
     public void CheckMissions(List<GameObject> missionsList)

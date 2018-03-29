@@ -21,8 +21,11 @@ EditorBuildSettings:
     path: Assets/Main.unity
     guid: f5927344133cbf34584e1243fca626d7
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/5c8858ac816417c42a42f48992b4b766
+    path: 
     guid: 5c8858ac816417c42a42f48992b4b766
   - enabled: 1
     path: Assets/Level2.unity
     guid: da01dc83d056cea4ea393bc84199e0e4
+  - enabled: 1
+    path: Assets/Final.unity
+    guid: f8e2e7bb328483c458d399639d1e7e1c

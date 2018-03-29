@@ -61,4 +61,9 @@ public class ConfirmationPanel : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
     }
+
+    public void Final()
+    {
+        SceneManager.LoadScene("Final");
+    }
 }

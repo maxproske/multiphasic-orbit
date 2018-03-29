@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
     public bool fail;
     public int turn;
     public GameObject roguePrefab;
-    private List<GameObject> roguePlanets;
+    public List<GameObject> roguePlanets;
 
     // micro skill tree
     public GameObject microSkillTreeParent; // Reference to macro skill tree
@@ -1067,6 +1067,8 @@ public class GameController : MonoBehaviour
         {
             fail = false;
         }
+
+        fail = true;
     }
 
 

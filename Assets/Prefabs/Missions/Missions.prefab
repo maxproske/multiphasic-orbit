@@ -61,5 +61,7 @@ MonoBehaviour:
   - {fileID: 1959671137344680, guid: 77dc1aeb5d954e0429d59c57b24cc801, type: 2}
   - {fileID: 1959671137344680, guid: 96195e93f5fd9d041a4be1434786c046, type: 2}
   Test2Missions:
-  - {fileID: 1959671137344680, guid: defb2116e9ddcc046ad9c9723729b6b2, type: 2}
+  - {fileID: 1959671137344680, guid: 02034db316776b941b3d5df761bc79ec, type: 2}
+  - {fileID: 1959671137344680, guid: 31f5bb4603abef5458053c84d768cf76, type: 2}
+  - {fileID: 1959671137344680, guid: bbc425cc340e9854aa006f1845c4fbfa, type: 2}
   Test3Missions: []
