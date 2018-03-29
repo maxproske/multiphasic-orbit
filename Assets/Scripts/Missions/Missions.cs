@@ -26,7 +26,7 @@ public class Missions : MonoBehaviour
         switch (gc.level)
         {
             case 1:
-                cp.ShowPanel("Learner's Test Begins", "Left Click - Navigation \r\nRight Click - Rotate Camera \r\nScroll Wheel - Zoom in and out \r\nTAB - Open Log \r\n\r\nBuild one planet to get started!");
+                cp.ShowPanel("Learner's Test Begins", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\n Build a planet to start!");
                 break;
             case 2:
                 cp.ShowPanel("N Test", "Currently not available...");

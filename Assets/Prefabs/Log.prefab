@@ -455,7 +455,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224122808251716036}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.20315541
+  m_Size: 0.1788849
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -634,7 +634,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Log
+  m_Text: Mission Log
 --- !u!114 &114635465547255004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -676,7 +676,6 @@ MonoBehaviour:
   LogText: {fileID: 114784158516478550}
   textToLog: 
   myScrollRect: {fileID: 114985106818874598}
-  scrollBar: {fileID: 114173727934632724}
 --- !u!114 &114784158516478550
 MonoBehaviour:
   m_ObjectHideFlags: 1

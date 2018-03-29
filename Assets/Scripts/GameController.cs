@@ -132,11 +132,10 @@ public class GameController : MonoBehaviour
         ui = GameObject.Find("Canvas").GetComponent<UIController>();
         m = GameObject.Find("Missions").GetComponent<Missions>();
         cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
+        l = log.GetComponent<Log>();
 
-        //l = GameObject.Find("Log").GetComponent<Log>();
 
-        ToggleLog();
-
+        l.ToggleLog();
 
         turn = 1;
         
@@ -223,20 +222,6 @@ public class GameController : MonoBehaviour
         foreach (var mission in m.missions)
         {
             mission.GetComponent<Mission>().completed = false;
-        }
-    }
-
-    public void ToggleLog()
-    {
-        l.myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
-
-        if (log.activeSelf)
-        {
-            log.SetActive(false);
-        }
-        else
-        {
-            log.SetActive(true);
         }
     }
 
@@ -338,11 +323,11 @@ public class GameController : MonoBehaviour
 	{
 		// toggle log
 		if (Input.GetKeyDown (KeyCode.Tab)) {
-			ToggleLog ();
+			l.ToggleLog ();
 		}
 
 		if (Input.GetKeyUp (KeyCode.Tab)) {
-			ToggleLog ();
+			l.ToggleLog ();
 		}
 
 		if (shot != null) {
@@ -407,7 +392,14 @@ public class GameController : MonoBehaviour
 					// can only select built non-rogue planets to link with other built non-rogue planets
 					// check if is non-rogue and has Planet script
 					if (selected!= planet1 && !selected.CompareTag ("Rogue") && selected.GetComponent ("Planet") as Planet != null) {
-						if (selected.GetComponent<Planet> ().turnsToBuild < 1 && selected.GetComponent<Planet> ().iflinkactive) { // check if is built 
+
+                        // show box saying 
+                        if (selected.GetComponent<Planet>().turnsToBuild < 1 && !selected.GetComponent<Planet>().iflinkactive)
+                        {
+                            cp.ShowPanel("Link Cannot Be Assigned", selected.name + " must also have Interplanetary Linking learned");
+                        }
+
+                            if (selected.GetComponent<Planet> ().turnsToBuild < 1 && selected.GetComponent<Planet> ().iflinkactive) { // check if is built 
 
 
 							foreach (var link in firstPlanetScript.linkedWith) {
@@ -421,10 +413,8 @@ public class GameController : MonoBehaviour
 								secondPlanetScript = planet2.GetComponent<Planet> ();
                                 // if both variables are set
 
-                                cp.ShowPanel("Link Assigned", "You have chosen " + planet1.name + " and " + planet2.name + " to be linked during the simulation. \r\n" + "Hit the Play Button to see if it goes through!");
-
-
-                            }
+                                cp.ShowPanel("Link Assigned", planet1.name + " and " + planet2.name + " have been assigned to link during simulation.");
+							}
 						}
 					}
 				}

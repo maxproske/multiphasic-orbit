@@ -27,6 +27,20 @@ public class Log : MonoBehaviour
         textToLog = "";
     }
 
+    public void ToggleLog()
+    {
+        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
+
+        if (gc.log.activeSelf)
+        {
+            gc.log.SetActive(false);
+        }
+        else
+        {
+            gc.log.SetActive(true);
+        }
+    }
+
     public void UpdateLogPlanet(string planetName, string message)
     {
         //AddNewLine();
@@ -55,7 +69,7 @@ public class Log : MonoBehaviour
 
         ToLog(AddNewLine());
         ToLog(AddTurnToLog());
-        //ToLog("Planet ");
+        ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" " + message);
     }
@@ -87,7 +101,7 @@ public class Log : MonoBehaviour
 
         ToLog(AddNewLine());
         ToLog(AddTurnToLog());
-        //ToLog("Planet ");
+        ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" has collected: ");
         ToLog(ChangeColor(stoneColor, stone.ToString() + " Stone ")) ;
@@ -132,7 +146,7 @@ public class Log : MonoBehaviour
         // backlog text first and then log
         ToLog(AddNewLine());
         ToLog(AddTurnToLog());
-        //ToLog("Planet ");
+        ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" has learned ");
         ToLog(ChangeColor(color, tech) + "!");
