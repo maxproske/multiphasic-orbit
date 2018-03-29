@@ -12,6 +12,7 @@ public class Missions : MonoBehaviour
     private Rogue r;
     public GameObject confirmationPanel;
     private ConfirmationPanel cp;
+    public bool reward;
 
     public List<GameObject> missions; // list of missions that will be played with
     public List<GameObject> Test1Missions; // add these missions into the missions
@@ -26,6 +27,7 @@ public class Missions : MonoBehaviour
         cp = confirmationPanel.GetComponent<ConfirmationPanel>();
 
         gc.m = this;
+        reward = false;
 
         switch (gc.level)
         {
@@ -68,7 +70,6 @@ public class Missions : MonoBehaviour
         {
             mission.GetComponent<Mission>().completed = false;
         }
-
     }
 
     // use this to check if mission requirements have been fulfilled
@@ -213,8 +214,12 @@ public class Missions : MonoBehaviour
                     if (p.linkedWith.Count > 0)
                     {
                         Complete(mission);
-                        Reward(mission);
+                        reward = true;
                     }
+                }
+                if (reward)
+                {
+                    Reward(mission);
                 }
                 break;
             case "Learn Attack Tech":
@@ -238,7 +243,9 @@ public class Missions : MonoBehaviour
                         Reward(mission);
                         cp.ShowPanel("Rogue Planet Defeated", "Get ready for your final test!");
                         cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
+                        return;
                     }
+
                 }
                 break;
         }
@@ -247,8 +254,9 @@ public class Missions : MonoBehaviour
     // used to reward
     public void Reward(GameObject mission)
     {
-        
+
         m = mission.GetComponent<Mission>();
+
         switch (m.missionName)
         {
             case "Link With One Planet":
@@ -256,17 +264,17 @@ public class Missions : MonoBehaviour
                 {
                     p = planet.GetComponent<Planet>();
 
-                    if (p.linkedWith.Count > 0 && !p.CompareTag("Rogue"))
+                    if (!planet.name.Contains("Rogue"))
                     {
-                        Debug.Log("Reward");
                         p.carbon += 100;
                         p.hydrogen += 100;
                         p.nitrogen += 100;
-                        gc.l.UpdateLogPlanetRes(p.name, 100, 100, 100);
                     }
                 }
+                reward = false;
                 break;
         }
+
     }
 
     // used to remove mission from in-progress list and add to completed list

@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 135480004993462062}
   m_Layer: 0
   m_Name: Rogue
-  m_TagString: Carbon
+  m_TagString: Rogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,6 +279,11 @@ MonoBehaviour:
   technologyLevel: 0
   iflinkactive: 0
   ifattackactive: 0
+  iftech1: 0
+  iftech2: 0
+  iftech3: 0
+  iftech4: 0
+  iftech5: 0
   segments: 0
   orbitingObject: {fileID: 4339871127361048}
   orbitPath:

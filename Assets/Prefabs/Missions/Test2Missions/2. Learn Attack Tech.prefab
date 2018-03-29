@@ -56,4 +56,4 @@ MonoBehaviour:
   missionReward: 
   postMissionMessage: 
   postMissionHint: 
-  completed: 1
+  completed: 0
