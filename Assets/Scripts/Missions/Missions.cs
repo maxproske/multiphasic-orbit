@@ -259,23 +259,26 @@ public class Missions : MonoBehaviour
                 }
                 break;
             case "Defeat 3 Rogue Planets Before Turn 100":
-                foreach (var rogue in gc.roguePlanets)
+                if (gc.turn < 100)
                 {
-                    r = rogue.GetComponent<Rogue>();
-                    if (r.die)
+                    foreach (var rogue in gc.roguePlanets)
                     {
-                        rogueDieIncrement++;
-                        
-                    }
-                    if (rogueDieIncrement > 2)
-                    {
-                        Complete(mission);
-                        Reward(mission);
-                        cp.ShowPanel("Congratulations!", "You now have a full license to go on and build solar systems. Be safe!\r\n\r\nClick OK to replay!");
-                        cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
-                        return;
-                    }
+                        r = rogue.GetComponent<Rogue>();
+                        if (r.die)
+                        {
+                            rogueDieIncrement++;
 
+                        }
+                        if (rogueDieIncrement > 2)
+                        {
+                            Complete(mission);
+                            Reward(mission);
+                            cp.ShowPanel("Congratulations!", "You now have a full license to go on and build solar systems. Be safe!\r\n\r\nClick OK to replay!");
+                            cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
+                            return;
+                        }
+
+                    }
                 }
                 break;
         }
