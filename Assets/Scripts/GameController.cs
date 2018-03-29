@@ -297,6 +297,24 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+		if (shot != null) {
+			shot.transform.position = Vector3.MoveTowards (shot.transform.position, planet2.transform.position, 120 * Time.deltaTime);
+			if (shot.transform.position == planet2.transform.position) {
+				secondPlanetScript.health -= 50;
+				if (secondPlanetScript.health <= 0) {
+					secondPlanetScript.die = true;
+					m.CheckMissions (m.missions);
+
+				}
+				attacking = false;
+				firstPlanet = false;
+
+				planet1 = null;
+				planet2 = null;
+				Destroy (shot);
+			}
+		}
         // toggle log
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -308,26 +326,7 @@ public class GameController : MonoBehaviour
             l.ToggleLog();
         }
 
-        if (shot != null)
-        {
-            shot.transform.position = Vector3.MoveTowards(shot.transform.position, planet2.transform.position, 80 * Time.deltaTime);
-            if (shot.transform.position == planet2.transform.position)
-            {
-                secondPlanetScript.health -= 25;
-                if (secondPlanetScript.health <= 0)
-                {
-                    secondPlanetScript.die = true;
-					m.CheckMissions(m.missions);
 
-                }
-                attacking = false;
-                firstPlanet = false;
-                simulate = false;
-                planet1 = null;
-                planet2 = null;
-                Destroy(shot);
-            }
-        }
         if (linksuccessful)
         {
             linktime++;
@@ -432,17 +431,7 @@ public class GameController : MonoBehaviour
                         planet2 = hit.collider.gameObject;
                         secondPlanetScript = planet2.GetComponent<Planet>();
                         // if both variables are set
-                        if (shot == null)
-                        {
-                            if (planet1 != null && planet2 != null)
-                            {
-                                shot = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                                shot.transform.localScale = new Vector3(8f, 8f, 8f);
-                                shot.transform.position = planet1.transform.position;
 
-
-                            }
-                        }
 
                     }
 
@@ -1147,72 +1136,76 @@ public class GameController : MonoBehaviour
         //        culculateStorm();
 
 
-        if (planet1 != null && planet2 != null)
-        {
-            // if the other planet is already been linked, no chance to fail the link
-            if (secondPlanetScript.linkedWith.Count > 0)
-            {
-                fail = false;
-            }
-            else
-            { // otherwise chance to fail
-                CalculateFail();
-            }
+		if (attacking) {
+			if (planet1 != null && planet2 != null) {
+				shot = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+				shot.transform.localScale = new Vector3 (8f, 8f, 8f);
+				shot.transform.position = planet1.transform.position;
 
-            if (!linkedAlready)
-            {
-                // if fail
-                if (fail)
-                {
-                    //Debug.Log("Failed Link");
-                    // instantiate rogue planet with same attributes as planet2
-                    GameObject rogueObject = Instantiate(roguePrefab, planet2.transform.position, planet2.transform.localRotation, GameObject.Find("Sun").transform);
-                    rogueIncrement++;
-                    rogueObject.name = "Rogue " + rogueIncrement;
-                    rogueObject.tag = "Rogue";
-                    planets.Add(rogueObject); // add to Planets List
-                    roguePlanets.Add(rogueObject); // add to roguePlanets list
-                    Rogue rogueScript = rogueObject.GetComponent<Rogue>(); // get Planet script to access attributes
-                    rogueScript.planetPlaced = true;
-                    rogueScript.orbitProgress = secondPlanetScript.orbitProgress; // restore original orbitProgress
-                                                                                  // restore segments
-                    rogueScript.segments = 36;
-                    // restore original orbitPath
-                    rogueScript.orbitPath.xAxis = secondPlanetScript.orbitPath.xAxis;
-                    rogueScript.orbitPath.yAxis = secondPlanetScript.orbitPath.yAxis;
-                    rogueScript.linkedWith.Add(planet1.GetComponent<Planet>());
-                    // remove planet2 from planet1's linkedWith List
-                    firstPlanetScript.linkedWith.Remove(planet2.GetComponent<Planet>());
-                    // add rogueObject to planet1's linkedWith List
-                    firstPlanetScript.linkedWith.Add(rogueObject.GetComponent<Planet>());
-                    planets.Remove(planet2); // remove from Planets List
-                    Destroy(planet2);
 
-                }
-                else
-                {
-                    linksuccessful = true;
-                    linktime = 0;
-                    firstPlanetScript.linkedWith.Add(planet2.GetComponent<Planet>());
-                    secondPlanetScript.linkedWith.Add(planet1.GetComponent<Planet>());
+			}
+			
+		
+		}
+		if (linking) {
 
-                    // show confirmation box successful link
-                    if (level != 1)
-                    {
-                        cp.ShowPanel("Link Successful!", planet1.name + " and " + planet2.name + " have successfully linked!");
-                    }
 
-                    // also update log
-                }
+			if (planet1 != null && planet2 != null) {
+				// if the other planet is already been linked, no chance to fail the link
+				if (secondPlanetScript.linkedWith.Count > 0) {
+					fail = false;
+				} else { // otherwise chance to fail
+					CalculateFail ();
+				}
 
-            }
-            ResetLinking();
+				if (!linkedAlready) {
+					// if fail
+					if (fail) {
+						//Debug.Log("Failed Link");
+						// instantiate rogue planet with same attributes as planet2
+						GameObject rogueObject = Instantiate (roguePrefab, planet2.transform.position, planet2.transform.localRotation, GameObject.Find ("Sun").transform);
+						rogueIncrement++;
+						rogueObject.name = "Rogue " + rogueIncrement;
+						rogueObject.tag = "Rogue";
+						planets.Add (rogueObject); // add to Planets List
+						roguePlanets.Add (rogueObject); // add to roguePlanets list
+						Rogue rogueScript = rogueObject.GetComponent<Rogue> (); // get Planet script to access attributes
+						rogueScript.planetPlaced = true;
+						rogueScript.orbitProgress = secondPlanetScript.orbitProgress; // restore original orbitProgress
+						// restore segments
+						rogueScript.segments = 36;
+						// restore original orbitPath
+						rogueScript.orbitPath.xAxis = secondPlanetScript.orbitPath.xAxis;
+						rogueScript.orbitPath.yAxis = secondPlanetScript.orbitPath.yAxis;
+						rogueScript.linkedWith.Add (planet1.GetComponent<Planet> ());
+						// remove planet2 from planet1's linkedWith List
+						firstPlanetScript.linkedWith.Remove (planet2.GetComponent<Planet> ());
+						// add rogueObject to planet1's linkedWith List
+						firstPlanetScript.linkedWith.Add (rogueObject.GetComponent<Planet> ());
+						planets.Remove (planet2); // remove from Planets List
+						Destroy (planet2);
 
-        }
-        else
-        {
-            ResetLinking();
-        }
+					} else {
+						linksuccessful = true;
+						linktime = 0;
+						firstPlanetScript.linkedWith.Add (planet2.GetComponent<Planet> ());
+						secondPlanetScript.linkedWith.Add (planet1.GetComponent<Planet> ());
+
+						// show confirmation box successful link
+						if (level != 1) {
+							cp.ShowPanel ("Link Successful!", planet1.name + " and " + planet2.name + " have successfully linked!");
+						}
+
+						// also update log
+					}
+
+				}
+				ResetLinking ();
+
+			} else {
+				ResetLinking ();
+			}
+		}
 
         foreach (var planet in planets)
         {
