@@ -156,11 +156,8 @@ public class GameController : MonoBehaviour
         //playButton = GameObject.Find("End Turn Button").GetComponent<Button>();
         //playButton.onClick.AddListener(Simulate);
 
-
-
         linkButton = GameObject.Find("Link To Button").GetComponent<Button>();
         linkButton.onClick.AddListener(StartLink);
-
 
         AttackButton = GameObject.Find("Attack To Button").GetComponent<Button>();
         AttackButton.onClick.AddListener(StartAttack);
@@ -677,8 +674,11 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            notBuiltTooltip.SetActive(false);
-
+            if (notBuiltTooltip != null)
+            {
+                notBuiltTooltip.SetActive(false);
+            }
+            
             // update UI when no planet is selected
             //planetText.text = "No Planet Selected";
             //carbonText.text = 0.ToString();
