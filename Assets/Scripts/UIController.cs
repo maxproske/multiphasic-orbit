@@ -68,6 +68,7 @@ public class UIController : MonoBehaviour
     public Button leftTechnology4Button;
     public Button leftTechnology5Button;
     private bool fadeCoroutineRunning;
+    public Button leftAttackToButton;
 
 	/* Declare Right Panel
 	   ========================================================================== */
@@ -475,7 +476,7 @@ public class UIController : MonoBehaviour
         SetTooltip((RectTransform)leftBuildingButton.transform, Constants.TOOLTIP_LEFT_BUILDING_BUTTON);
         SetTooltip((RectTransform)leftTechnology1Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON);
         SetTooltip((RectTransform)leftTechnology2Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON);
-        //SetTooltip((RectTransform)leftLinkToButton.transform, Constants.TOOLTIP_LEFT_LINK_TO_BUTTON);
+        SetTooltip((RectTransform)leftLinkToButton.transform, Constants.TOOLTIP_LEFT_LINK_TO_BUTTON);
         SetTooltip((RectTransform)leftTechnology3Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON);
         SetTooltip((RectTransform)leftTechnology4Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON);
         SetTooltip((RectTransform)leftTechnology5Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON);

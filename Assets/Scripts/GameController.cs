@@ -156,25 +156,25 @@ public class GameController : MonoBehaviour
         //playButton = GameObject.Find("End Turn Button").GetComponent<Button>();
         //playButton.onClick.AddListener(Simulate);
 
-        linkButton = GameObject.Find("Link To Button").GetComponent<Button>();
+        linkButton = ui.leftLinkToButton.GetComponent<Button>();
         linkButton.onClick.AddListener(StartLink);
 
-        AttackButton = GameObject.Find("Attack To Button").GetComponent<Button>();
+        AttackButton = ui.leftAttackToButton.GetComponent<Button>();
         AttackButton.onClick.AddListener(StartAttack);
 
-        tech1 = GameObject.Find("Tech 1").GetComponent<Button>();
+        tech1 = ui.leftTechnology1Button.GetComponent<Button>();
         tech1.onClick.AddListener(settech1);
 
-        tech2 = GameObject.Find("Tech 2").GetComponent<Button>();
+        tech2 = ui.leftTechnology2Button.GetComponent<Button>();
         tech2.onClick.AddListener(settech2);
 
-        tech3 = GameObject.Find("Tech 3").GetComponent<Button>();
+        tech3 = ui.leftTechnology3Button.GetComponent<Button>();
         tech3.onClick.AddListener(settech3);
 
-        tech4 = GameObject.Find("Tech 4").GetComponent<Button>();
+        tech4 = ui.leftTechnology4Button.GetComponent<Button>();
         tech4.onClick.AddListener(settech4);
 
-        tech5 = GameObject.Find("Tech 5").GetComponent<Button>();
+        tech5 = ui.leftTechnology5Button.GetComponent<Button>();
         tech5.onClick.AddListener(settech5);
 
 
