@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1162587192549634}
+  m_IsPrefabParent: 1
+--- !u!1 &1162587192549634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4768375716393280}
+  - component: {fileID: 114019207287768288}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4768375716393280
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162587192549634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114019207287768288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162587192549634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d376b1648d50b450c80ecca7050b1914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GAME_STATE: 0
+  PREVIOUS_GAME_STATE: 0
+  playButton: {fileID: 0}
+  simulate: 0
+  canBuild: 0
+  planetsParent: {fileID: 0}
+  rightPlanetaryPanel: {fileID: 0}
+  attacking: 0
+  AttackButton: {fileID: 0}
+  planets: []
+  linkButton: {fileID: 0}
+  placing: 0
+  linking: 0
+  firstPlanet: 0
+  linkedAlready: 0
+  planet1: {fileID: 0}
+  planet2: {fileID: 0}
+  selected: {fileID: 0}
+  fail: 0
+  turn: 0
+  roguePrefab: {fileID: 1302749218511646, guid: 2163a4daf871d214c9c7c4b3b5355776,
+    type: 2}
+  roguePlanets: []
+  microSkillTreeParent: {fileID: 0}
+  microSkillTree: {fileID: 1050443543319092, guid: 09b7382369042e040a0adcd991cdf3bc,
+    type: 2}
+  microSkillTreeNames: []
+  tech1: {fileID: 0}
+  tech2: {fileID: 0}
+  tech3: {fileID: 0}
+  tech4: {fileID: 0}
+  tech5: {fileID: 0}
+  notBuiltTooltip: {fileID: 1877538991920062, guid: a05f759c5092601449b9abcad9713910,
+    type: 2}
+  linkingText: {fileID: 0}
+  planetText: {fileID: 0}
+  carbonText: {fileID: 0}
+  nitrogenText: {fileID: 0}
+  hydrogenText: {fileID: 0}
+  carbonIncrement: 0
+  siliconIncrement: 0
+  ammoniaIncrement: 0
+  methaneIncrement: 0
+  germaniumIncrement: 0
+  acetyleneIncrement: 0
+  rogueIncrement: 0
+  storm: 0
+  linksuccessful: 0
+  sun: {fileID: 0}
+  carbon: {fileID: 1302749218511646, guid: 12bc9233f6f2e85479e0b58d91364364, type: 2}
+  nitrogen: {fileID: 1302749218511646, guid: aa091a671b56bb34e83ecaf777d71379, type: 2}
+  hydrogen: {fileID: 1302749218511646, guid: d07a4537f3b2bae489979dba3031ecf6, type: 2}
+  go: {fileID: 0}
+  planetPlaced: 0
+  ui: {fileID: 0}
+  stone: {fileID: 0}
+  water: {fileID: 0}
+  gas: {fileID: 0}
+  level: 1
+  m: {fileID: 0}
+  shot: {fileID: 0}
+  missionPanel: {fileID: 0}
+  genericMissionPanel: {fileID: 1393508523193676, guid: 49460af36aac4834c9618a4e178cf13b,
+    type: 2}
+  l: {fileID: 0}
+  cp: {fileID: 0}
