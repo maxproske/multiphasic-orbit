@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IndicatorUI : MonoBehaviour {
+public class IndicatorController : MonoBehaviour {
 	
 	private float speed = 0.2f; // Closer to zero = faster
 	private float bounceDistance = 0.333f; // Pixels to bounce left
