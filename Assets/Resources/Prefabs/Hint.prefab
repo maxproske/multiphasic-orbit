@@ -66,10 +66,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1984504198311470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85de71628c4320a4da08ee992fe76b83, type: 3}
+  m_Script: {fileID: 11500000, guid: fa4f3c327e3b25b43ada09c6687512c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotated: 0
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  fill: 1
+  thickness: 5
+  sides: 3
+  rotation: 0
+  VerticesDistances:
+  - 0
+  - 0
+  - 0
+  m_Texture: {fileID: 0}
 --- !u!222 &222150075200236304
 CanvasRenderer:
   m_ObjectHideFlags: 1

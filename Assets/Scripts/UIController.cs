@@ -82,8 +82,12 @@ public class UIController : MonoBehaviour
 
 	/* Declare Tooltips
 	   ========================================================================== */
-    public GameObject tooltipPrefab;
     public GameObject tooltipContainer;
+
+    /* Declare Hints
+	   ========================================================================== */
+    public GameObject hintContainer;
+
 
     // GameController
     private GameController gc;
@@ -113,6 +117,8 @@ public class UIController : MonoBehaviour
         /* Initialize External Scripts
            ====================================================================== */
         SetupTooltipController();
+        SetupHintController();
+                
 	}
 
 	/* Set Top Panel
@@ -469,22 +475,28 @@ public class UIController : MonoBehaviour
         SetTooltip((RectTransform)leftBuildingButton.transform, Constants.TOOLTIP_LEFT_BUILDING_BUTTON);
         SetTooltip((RectTransform)leftTechnology1Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_1_BUTTON);
         SetTooltip((RectTransform)leftTechnology2Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_2_BUTTON);
-        SetTooltip((RectTransform)leftLinkToButton.transform, Constants.TOOLTIP_LEFT_LINK_TO_BUTTON);
+        //SetTooltip((RectTransform)leftLinkToButton.transform, Constants.TOOLTIP_LEFT_LINK_TO_BUTTON);
         SetTooltip((RectTransform)leftTechnology3Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_3_BUTTON);
         SetTooltip((RectTransform)leftTechnology4Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON);
         SetTooltip((RectTransform)leftTechnology5Button.transform, Constants.TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON);
     }
 
-    public void SetMission1()
-    {
-
-    }
-
-    public void SetTooltip(RectTransform rt, string myString) {
+    public void SetTooltip(RectTransform rt, string myString)
+     {
         TooltipController tc = rt.gameObject.AddComponent<TooltipController>();
         tc.myString = myString;
     }
 
+    private void SetupHintController ()
+    {
+        // Right Panel
+        SetHint((RectTransform)rightStoneButton.transform);
+        rightStoneButton.GetComponent<HintController>().active = true;
+    }
+
+    public void SetHint(RectTransform rt) {
+        HintController hc = rt.gameObject.AddComponent<HintController>();
+    }
 
    	/* Update Left Panel
 	   ========================================================================== */ 
