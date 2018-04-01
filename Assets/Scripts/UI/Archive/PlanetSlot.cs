@@ -60,8 +60,8 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 // Create a new planet
                 go = Instantiate(carbon) as GameObject;
                 // increment planet name
-                gc.carbonIncrement++;
-                go.name = "Carbon " + gc.carbonIncrement;
+                gc.stoneIncrement++;
+                go.name = "Carbon " + gc.stoneIncrement;
                 // Make planet a child object of the Sun
                 go.transform.parent = sun.transform;
                 // Add planet to array of planets
@@ -76,8 +76,8 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 // Create a new planet
                 go = Instantiate(silicon) as GameObject;
                 // increment planet name
-                gc.siliconIncrement++;
-                go.name = "Silicon " + gc.siliconIncrement;
+                gc.gasIncrement++;
+                go.name = "Silicon " + gc.gasIncrement;
                 // Make planet a child object of the Sun
                 go.transform.parent = sun.transform;
                 // Add planet to array of planets
@@ -92,8 +92,8 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 // Create a new planet
                 go = Instantiate(ammonia) as GameObject;
                 // increment planet name
-                gc.ammoniaIncrement++;
-                go.name = "Ammonia " + gc.ammoniaIncrement;
+                gc.waterIncrement++;
+                go.name = "Ammonia " + gc.waterIncrement;
                 // Make planet a child object of the Sun
                 go.transform.parent = sun.transform;
                 // Add planet to array of planets
@@ -286,7 +286,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     // Create a new planet
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
-                    gc.carbonIncrement--;
+                    gc.stoneIncrement--;
                     Debug.Log("2");
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
@@ -305,7 +305,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     // Create a new planet
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
-                    gc.siliconIncrement--;
+                    gc.gasIncrement--;
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
                     //go.transform.parent = sun.transform;
@@ -322,7 +322,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     // Create a new planet
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
-                    gc.ammoniaIncrement--;
+                    gc.waterIncrement--;
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
                     //go.transform.parent = sun.transform;

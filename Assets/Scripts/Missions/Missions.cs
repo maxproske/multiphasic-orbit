@@ -41,8 +41,10 @@ public class Missions : MonoBehaviour
                 //cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
                 cp.ShowPanel("Novice Test", "It's going to be a bit more difficult now. Rogue planets may appear and attack and steal from your planets.");
                 break;
-            default:
+            case 3:
                 cp.ShowPanel("Full License Test", "An unknown amount of Rogue planets will appear. Eliminate them all to prove that you are worthy of a full license.");
+                break;
+            default:
                 break;
         }
 

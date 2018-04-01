@@ -83,13 +83,12 @@ MonoBehaviour:
   tech3: {fileID: 0}
   tech4: {fileID: 0}
   tech5: {fileID: 0}
-  notBuiltTooltip: {fileID: 0}
   linkingText: {fileID: 0}
   planetText: {fileID: 0}
   carbonText: {fileID: 0}
   nitrogenText: {fileID: 0}
   hydrogenText: {fileID: 0}
-  carbonIncrement: 0
+  stoneIncrement: 0
   siliconIncrement: 0
   ammoniaIncrement: 0
   methaneIncrement: 0
@@ -99,15 +98,15 @@ MonoBehaviour:
   storm: 0
   linksuccessful: 0
   sun: {fileID: 0}
-  carbon: {fileID: 1553271096678006, guid: 939ad656ea80d844681b4a86b33cddfa, type: 2}
-  nitrogen: {fileID: 0}
-  hydrogen: {fileID: 0}
+  stone: {fileID: 1715351460301162, guid: c02cc6560db574e458cca2cfb6bea0e1, type: 2}
+  water: {fileID: 1856874224995336, guid: 6b98707b29931bd49b363ff72b9a95b6, type: 2}
+  gas: {fileID: 1420884546460054, guid: bac1bb52dcb6872468daab36cd7cede7, type: 2}
   go: {fileID: 0}
   planetPlaced: 0
   ui: {fileID: 0}
-  stone: {fileID: 0}
-  water: {fileID: 0}
-  gas: {fileID: 0}
+  stoneButton: {fileID: 0}
+  waterButton: {fileID: 0}
+  gasButton: {fileID: 0}
   level: 0
   m: {fileID: 0}
   shot: {fileID: 0}

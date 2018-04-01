@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
     public Button tech5;
 
 
-    public GameObject notBuiltTooltip;
+    //public GameObject notBuiltTooltip;
     private int notBuiltTooltipTimer;
 
     // texts
@@ -72,9 +72,9 @@ public class GameController : MonoBehaviour
     public Text hydrogenText;
 
     // track how many of each planet built
-    public int carbonIncrement = 0;
-    public int siliconIncrement = 0;
-    public int ammoniaIncrement = 0;
+    public int stoneIncrement = 0;
+    public int gasIncrement = 0;
+    public int waterIncrement = 0;
     public int methaneIncrement = 0;
     public int germaniumIncrement = 0;
     public int acetyleneIncrement = 0;
@@ -88,9 +88,9 @@ public class GameController : MonoBehaviour
 
     // planet placing variables
     public Transform sun; // Reference to planet objects parent
-    public GameObject carbon; // Reference to prefab carbon to generate
-    public GameObject nitrogen; // Reference to prefab carbon to generate
-    public GameObject hydrogen; // Reference to prefab carbon to generate
+    public GameObject stone; // Reference to prefab carbon to generate
+    public GameObject water; // Reference to prefab carbon to generate
+    public GameObject gas; // Reference to prefab carbon to generate
     public GameObject go; // New planet game object
     private Planet p; // Access new planet script
     public bool planetPlaced; // Flag for drawing planet orbit in realtime
@@ -98,9 +98,9 @@ public class GameController : MonoBehaviour
     public UIController ui;
 
     // planetary ui buttons
-    public Button stone;
-    public Button water;
-    public Button gas;
+    public Button stoneButton;
+    public Button waterButton;
+    public Button gasButton;
 
     public int level;
 
@@ -189,9 +189,9 @@ public class GameController : MonoBehaviour
         simulate = false;
         canBuild = true;
 
-        stone.interactable = true;
-        water.interactable = false;
-        gas.interactable = false;
+        stoneButton.interactable = true;
+        waterButton.interactable = false;
+        gasButton.interactable = false;
 
         ResetLinking();
 
@@ -674,10 +674,10 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            if (notBuiltTooltip != null)
-            {
-                notBuiltTooltip.SetActive(false);
-            }
+            //if (notBuiltTooltip != null)
+            //{
+            //    notBuiltTooltip.SetActive(false);
+            //}
             
             // update UI when no planet is selected
             //planetText.text = "No Planet Selected";
@@ -821,7 +821,7 @@ public class GameController : MonoBehaviour
                     // Create a new planet
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
-                    carbonIncrement--;
+                    stoneIncrement--;
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
                     //go.transform.parent = sun.transform;
@@ -839,7 +839,7 @@ public class GameController : MonoBehaviour
                     // Create a new planet
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
-                    siliconIncrement--;
+                    gasIncrement--;
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
                     //go.transform.parent = sun.transform;
@@ -857,7 +857,7 @@ public class GameController : MonoBehaviour
                     // Create a new planet
                     //go = Instantiate(carbon) as GameObject;
                     // increment planet name
-                    ammoniaIncrement--;
+                    waterIncrement--;
                     //go.name = "Carbon " + gc.carbonIncrement;
                     // Make planet a child object of the Sun
                     //go.transform.parent = sun.transform;
@@ -879,10 +879,10 @@ public class GameController : MonoBehaviour
         SetBuildingActive(false);
 
         // Create a new planet
-        go = Instantiate(carbon) as GameObject;
+        go = Instantiate(stone) as GameObject;
         // increment planet name
-        carbonIncrement++;
-        go.name = "Carbon " + carbonIncrement;
+        stoneIncrement++;
+        go.name = "Carbon " + stoneIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -896,10 +896,10 @@ public class GameController : MonoBehaviour
         SetBuildingActive(false);
 
         // Create a new planet
-        go = Instantiate(nitrogen) as GameObject;
+        go = Instantiate(water) as GameObject;
         // increment planet name
-        ammoniaIncrement++;
-        go.name = "Nitrogen " + ammoniaIncrement;
+        waterIncrement++;
+        go.name = "Nitrogen " + waterIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -913,10 +913,10 @@ public class GameController : MonoBehaviour
         SetBuildingActive(false);
 
         // Create a new planet
-        go = Instantiate(hydrogen) as GameObject;
+        go = Instantiate(gas) as GameObject;
         // increment planet name
-        siliconIncrement++;
-        go.name = "Hydrogen " + siliconIncrement;
+        gasIncrement++;
+        go.name = "Hydrogen " + gasIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -930,15 +930,15 @@ public class GameController : MonoBehaviour
         Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
         if (canBuild)
         {
-            stone.interactable = active;
+            stoneButton.interactable = active;
 
-            if (carbonIncrement > 0)
+            if (stoneIncrement > 0)
             {
-                water.interactable = active;
+                waterButton.interactable = active;
             }
-            if (ammoniaIncrement > 0)
+            if (waterIncrement > 0)
             {
-                gas.interactable = active;
+                gasButton.interactable = active;
             }
         }
         // Only call once per planet per turn
