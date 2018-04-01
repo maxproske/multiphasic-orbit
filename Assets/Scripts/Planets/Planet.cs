@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -137,7 +136,7 @@ public class Planet : MonoBehaviour
     }
 
     public void SetLineRendererTint(Color c){
-        //lr.material.SetColor("_TintColor", c);
+        lr.material.SetColor("_TintColor", c);
     }
 
     public void Awake()
@@ -687,8 +686,4 @@ public class Planet : MonoBehaviour
 		stormsheid = true;
 	}
 
-    public static implicit operator Planet(GameObject v)
-    {
-        throw new NotImplementedException();
-    }
 }

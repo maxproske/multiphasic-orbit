@@ -201,7 +201,7 @@ public class GameController : MonoBehaviour
 
         //planetButtons = planetsParent.GetComponentsInChildren<Button>();
 
-        if (currentScene.name != "Sandbox")
+        if (level != 0)
         {
             // initialize lists
             planets = new List<GameObject>();
@@ -482,247 +482,244 @@ public class GameController : MonoBehaviour
         }
 
 
-        if (selected != null)
+
+        if (planets.Contains(selected) || planetScript != null)
         {
-            if (planets.Contains(selected) || planetScript != null)
+
+            if (!linking && !placing && selected.GetComponent("Planet"))
+            {
+                planetScript = selected.GetComponent<Planet>(); // get Planet script to access attributes
+            }
+            if (ui.selectedPlanet == null)
+            {
+                playButton.interactable = true;
+            }
+
+
+
+            // Prevent SetSelectedPlanet from being called 60 times/second,
+            // Only on new selection
+            if (ui.selectedPlanet != planetScript)
+            {
+                ui.SetSelectedPlanet(planetScript);
+            }
+            ui.leftTechnologyPanel.ForceUpdateRectTransforms();
+
+            if (planetScript.iflinkactive)
             {
 
-                if (!linking && !placing && selected.GetComponent("Planet"))
-                {
-                    planetScript = selected.GetComponent<Planet>(); // get Planet script to access attributes
-                }
-                if (ui.selectedPlanet == null)
-                {
-                    playButton.interactable = true;
-                }
+                linkButton.gameObject.SetActive(true);
 
-
-
-                // Prevent SetSelectedPlanet from being called 60 times/second,
-                // Only on new selection
-                if (ui.selectedPlanet != planetScript)
-                {
-                    ui.SetSelectedPlanet(planetScript);
-                }
-                ui.leftTechnologyPanel.ForceUpdateRectTransforms();
-
-                if (planetScript.iflinkactive)
-                {
-
-                    linkButton.gameObject.SetActive(true);
-
-                    linkButton.interactable = true;
-                }
-                else
-                {
-
-                    linkButton.gameObject.SetActive(false);
-                }
-
-                if (planetScript.ifattackactive)
-                {
-
-                    AttackButton.gameObject.SetActive(true);
-                    AttackButton.interactable = true;
-                }
-                else
-                {
-
-                    AttackButton.gameObject.SetActive(false);
-                }
-
-
-                if (!linking && !placing && Input.GetMouseButtonUp(0))
-                {
-
-                    if (planetScript.iftech1 == 1)
-                    {
-
-                        planetScript.iftech1 = 2;
-                    }
-                    if (planetScript.iftech2 == 1)
-                    {
-
-                        planetScript.iftech2 = 2;
-                    }
-                    if (planetScript.iftech3 == 1)
-                    {
-
-                        planetScript.iftech3 = 2;
-                    }
-                    if (planetScript.iftech4 == 1)
-                    {
-
-                        planetScript.iftech4 = 2;
-                    }
-                    if (planetScript.iftech5 == 1)
-                    {
-
-                        planetScript.iftech5 = 2;
-                    }
-                }
-                else
-                {
-                    //notBuiltTooltip.SetActive(true);
-                    notBuiltTooltipTimer++;
-                }
-
-                // update UI
-                if (planetScript.turnsToBuild < 1)
-                {
-                    //planetText.text = planetScript.name;
-                }
-                // Do not allow the player to click on the planet while it's rotating
-                else if (!placing)
-                {
-                    //planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
-                    // Enable text
-                    // carbonText.enabled = true;
-                    // nitrogenText.enabled = true;
-                    // hydrogenText.enabled = true;
-                    // // Enable parent text
-                    // carbonText.transform.parent.GetComponent<Text>().enabled = true;
-                    // nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
-                    // hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
-                }
-
-                // carbonText.text = planetScript.carbon.ToString();
-                // nitrogenText.text = planetScript.nitrogen.ToString();
-                // hydrogenText.text = planetScript.hydrogen.ToString();
-
-                // What is the name of the game object to create
-                var mstName = selected.name + " Skill Tree";
-
-                // Make play button green after clicking planet for the first time
-
-
-                tech1.interactable = false;
-                tech2.interactable = false;
-                tech3.interactable = false;
-                tech4.interactable = false;
-                tech5.interactable = false;
-
-
-
-                if (planetScript.carbon >= 10 && planetScript.iftech1 == 0)
-                {
-
-
-                    tech1.interactable = true;
-
-                }
-                else if (planetScript.hydrogen >= 5 && planetScript.nitrogen >= 5 && planetScript.carbon >= 5 && planetScript.iftech1 == 3 && planetScript.iftech2 == 0)
-                {
-
-                    tech2.interactable = true;
-
-                }
-                else if (planetScript.hydrogen >= 15 && planetScript.nitrogen >= 10 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 0)
-                {
-
-                    tech3.interactable = true;
-
-                }
-                else if (planetScript.nitrogen >= 15 && planetScript.carbon >= 15 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 0)
-                {
-
-                    tech4.interactable = true;
-
-                }
-                else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 3 && planetScript.iftech5 == 0)
-                {
-
-                    tech5.interactable = true;
-
-                }
-
-
-                // Open Skill Tree only if it hasn't been created yet
-                // check if is built 
-                //                notBuiltTooltip.SetActive(false);
-
-
-
-                // Create a new micro skill tree
-                //Debug.Log("Creating micro skill tree for " + selected.name);
-                //                     mst = Instantiate(microSkillTree) as GameObject;
-                //
-                //                     // Upon creation, add it to the list of unique skill trees
-                //                     microSkillTreeNames.Add(mstName);
-                //
-                //                     // Name the panel
-                //                     mst.name = mstName;
-                //
-                //                     // Associate the game object with its skill tree
-                //                     mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
-                //
-                //                     // Make micro skill tree a child object of parent
-                //                     mst.transform.SetParent(microSkillTreeParent.transform);
-                //                     mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                //                     mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
-                //                     mst.SetActive(true);
-                //                     // Access the planet's script and set title
-                //                     mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
-                //                }
-                // Open if the panel has been created, but is disabled
-                //                else if (!linking && !placing && Input.GetMouseButtonUp(0))
-                //                {
-                //                     // Bad programming to enable nested inactive game object
-                //					Transform[] ts = GameObject.Find("Technology 1 Panel").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
-                // //					Debug.Log(mstName);
-                // 					foreach (Transform t in ts)
-                //                     {
-                // 						if (t.gameObject.name.Contains (" Skill Tree")) {
-                // //							Debug.Log (t.gameObject.name);
-                // 							//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
-                // 							if (t.gameObject.name == mstName) {
-                // 								// Toggle skill tree on and off by clicking the planet
-                // 								//t.gameObject.SetActive(true);
-                // 								t.gameObject.SetActive (true);
-                //							} else if (t.gameObject.name == "Technology 1 Panel") {
-                //							
-                // 							} else {
-                // 								t.gameObject.SetActive (false);
-                // 							}
-                // 						}
-                //                     }
-                //                }
-                //            }
-
-                // Change game state when selecting Carbon 1
-                // if (GAME_STATE == Constants.TURN_3_TECH_TREE && selected.name == "Carbon 1")
-                // {
-                //     GAME_STATE = Constants.TURN_3_TECH_SLOT;
-                // }
-                // // There can only be two planets at this state, so clicking Carbon 1 again shouldn't progress the game
-                // else if (GAME_STATE == Constants.TURN_3_TECH_TREE_2 && selected.name != "Carbon 1")
-                // {
-                //     GAME_STATE = Constants.TURN_3_TECH_SLOT_2;
-                // }
+                linkButton.interactable = true;
             }
             else
             {
-                //if (notBuiltTooltip != null)
-                //{
-                //    notBuiltTooltip.SetActive(false);
-                //}
 
-                // update UI when no planet is selected
-                //planetText.text = "No Planet Selected";
-                //carbonText.text = 0.ToString();
-                //nitrogenText.text = 0.ToString();
-                //hydrogenText.text = 0.ToString();
-                // Disable text
-                //carbonText.enabled = false;
-                //nitrogenText.enabled = false;
-                //hydrogenText.enabled = false;
-                // Disable parent text
-                //carbonText.transform.parent.GetComponent<Text>().enabled = false;
-                //nitrogenText.transform.parent.GetComponent<Text>().enabled = false;
-                //hydrogenText.transform.parent.GetComponent<Text>().enabled = false;
+                linkButton.gameObject.SetActive(false);
             }
+
+            if (planetScript.ifattackactive)
+            {
+
+                AttackButton.gameObject.SetActive(true);
+                AttackButton.interactable = true;
+            }
+            else
+            {
+
+                AttackButton.gameObject.SetActive(false);
+            }
+
+
+            if (!linking && !placing && Input.GetMouseButtonUp(0))
+            {
+
+                if (planetScript.iftech1 == 1)
+                {
+
+                    planetScript.iftech1 = 2;
+                }
+                if (planetScript.iftech2 == 1)
+                {
+
+                    planetScript.iftech2 = 2;
+                }
+                if (planetScript.iftech3 == 1)
+                {
+
+                    planetScript.iftech3 = 2;
+                }
+                if (planetScript.iftech4 == 1)
+                {
+
+                    planetScript.iftech4 = 2;
+                }
+                if (planetScript.iftech5 == 1)
+                {
+
+                    planetScript.iftech5 = 2;
+                }
+            }
+            else
+            {
+                //notBuiltTooltip.SetActive(true);
+                notBuiltTooltipTimer++;
+            }
+
+            // update UI
+            if (planetScript.turnsToBuild < 1)
+            {
+                //planetText.text = planetScript.name;
+            }
+            // Do not allow the player to click on the planet while it's rotating
+            else if (!placing)
+            {
+                //planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
+                // Enable text
+                // carbonText.enabled = true;
+                // nitrogenText.enabled = true;
+                // hydrogenText.enabled = true;
+                // // Enable parent text
+                // carbonText.transform.parent.GetComponent<Text>().enabled = true;
+                // nitrogenText.transform.parent.GetComponent<Text>().enabled = true;
+                // hydrogenText.transform.parent.GetComponent<Text>().enabled = true;
+            }
+
+            // carbonText.text = planetScript.carbon.ToString();
+            // nitrogenText.text = planetScript.nitrogen.ToString();
+            // hydrogenText.text = planetScript.hydrogen.ToString();
+
+            // What is the name of the game object to create
+            var mstName = selected.name + " Skill Tree";
+
+            // Make play button green after clicking planet for the first time
+
+
+            tech1.interactable = false;
+            tech2.interactable = false;
+            tech3.interactable = false;
+            tech4.interactable = false;
+            tech5.interactable = false;
+
+
+
+            if (planetScript.carbon >= 10 && planetScript.iftech1 == 0)
+            {
+
+
+                tech1.interactable = true;
+
+            }
+            else if (planetScript.hydrogen >= 5 && planetScript.nitrogen >= 5 && planetScript.carbon >= 5 && planetScript.iftech1 == 3 && planetScript.iftech2 == 0)
+            {
+
+                tech2.interactable = true;
+
+            }
+            else if (planetScript.hydrogen >= 15 && planetScript.nitrogen >= 10 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 0)
+            {
+
+                tech3.interactable = true;
+
+            }
+            else if (planetScript.nitrogen >= 15 && planetScript.carbon >= 15 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 0)
+            {
+
+                tech4.interactable = true;
+
+            }
+            else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 3 && planetScript.iftech5 == 0)
+            {
+
+                tech5.interactable = true;
+
+            }
+
+
+            // Open Skill Tree only if it hasn't been created yet
+            // check if is built 
+            //                notBuiltTooltip.SetActive(false);
+
+
+
+            // Create a new micro skill tree
+            //Debug.Log("Creating micro skill tree for " + selected.name);
+            //                     mst = Instantiate(microSkillTree) as GameObject;
+            //
+            //                     // Upon creation, add it to the list of unique skill trees
+            //                     microSkillTreeNames.Add(mstName);
+            //
+            //                     // Name the panel
+            //                     mst.name = mstName;
+            //
+            //                     // Associate the game object with its skill tree
+            //                     mst.GetComponent<TechnologySkillTree>().planetScript = planetScript;
+            //
+            //                     // Make micro skill tree a child object of parent
+            //                     mst.transform.SetParent(microSkillTreeParent.transform);
+            //                     mst.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            //                     mst.transform.localPosition = new Vector3(350.0f, -50.0f, 0.0f);
+            //                     mst.SetActive(true);
+            //                     // Access the planet's script and set title
+            //                     mst.transform.Find("Title").Find("Title Text").GetComponent<Text>().text = mstName;
+            //                }
+            // Open if the panel has been created, but is disabled
+            //                else if (!linking && !placing && Input.GetMouseButtonUp(0))
+            //                {
+            //                     // Bad programming to enable nested inactive game object
+            //					Transform[] ts = GameObject.Find("Technology 1 Panel").transform.GetComponentsInChildren<Transform>(true); // bool includeInactive = true 
+            // //					Debug.Log(mstName);
+            // 					foreach (Transform t in ts)
+            //                     {
+            // 						if (t.gameObject.name.Contains (" Skill Tree")) {
+            // //							Debug.Log (t.gameObject.name);
+            // 							//Debug.Log ("Found " + fromGameObject.name + "'s " + t.gameObject.name);
+            // 							if (t.gameObject.name == mstName) {
+            // 								// Toggle skill tree on and off by clicking the planet
+            // 								//t.gameObject.SetActive(true);
+            // 								t.gameObject.SetActive (true);
+            //							} else if (t.gameObject.name == "Technology 1 Panel") {
+            //							
+            // 							} else {
+            // 								t.gameObject.SetActive (false);
+            // 							}
+            // 						}
+            //                     }
+            //                }
+            //            }
+
+            // Change game state when selecting Carbon 1
+            // if (GAME_STATE == Constants.TURN_3_TECH_TREE && selected.name == "Carbon 1")
+            // {
+            //     GAME_STATE = Constants.TURN_3_TECH_SLOT;
+            // }
+            // // There can only be two planets at this state, so clicking Carbon 1 again shouldn't progress the game
+            // else if (GAME_STATE == Constants.TURN_3_TECH_TREE_2 && selected.name != "Carbon 1")
+            // {
+            //     GAME_STATE = Constants.TURN_3_TECH_SLOT_2;
+            // }
         }
-       
+        else
+        {
+            //if (notBuiltTooltip != null)
+            //{
+            //    notBuiltTooltip.SetActive(false);
+            //}
+
+            // update UI when no planet is selected
+            //planetText.text = "No Planet Selected";
+            //carbonText.text = 0.ToString();
+            //nitrogenText.text = 0.ToString();
+            //hydrogenText.text = 0.ToString();
+            // Disable text
+            //carbonText.enabled = false;
+            //nitrogenText.enabled = false;
+            //hydrogenText.enabled = false;
+            // Disable parent text
+            //carbonText.transform.parent.GetComponent<Text>().enabled = false;
+            //nitrogenText.transform.parent.GetComponent<Text>().enabled = false;
+            //hydrogenText.transform.parent.GetComponent<Text>().enabled = false;
+        }
 
 
         // When player is placing planet
@@ -1100,7 +1097,7 @@ public class GameController : MonoBehaviour
             fail = false;
         }
 
-        //fail = true;
+        fail = true;
     }
 
 
