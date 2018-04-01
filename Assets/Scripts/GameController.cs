@@ -795,8 +795,9 @@ public class GameController : MonoBehaviour
                                 //ui.SetNoPlanetSelected();
 
                                 // Uncomment to open planet properties automatically
-                                ui.selectedPlanet = p; //  highlight planet orbit
-                                ui.SetSelectedPlanet(p.GetComponent<Planet>()); // populate left panel with data
+                                //Debug.Log("setting from gc");
+                                planetScript = p;                                                                
+                                ui.SetSelectedPlanet(planetScript); // populate left panel with data
                                 ui.OpenLeftPanel(); // open the panel
                                 playButton.interactable = true; // make play button interactable
                                 GAME_STATE = Constants.LEARNERS_MISSION_3; // advance to mission 3

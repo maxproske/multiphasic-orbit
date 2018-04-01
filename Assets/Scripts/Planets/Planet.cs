@@ -135,8 +135,26 @@ public class Planet : MonoBehaviour
         turnsToDie = 0;
     }
 
-    public void SetLineRendererTint(Color c){
-        //lr.material.SetColor("_TintColor", c);
+    // Set Orbit Color (takes selected, deselected, or hovered)
+    public void SetOrbitColor(string state = "")
+    {
+        Color color = Color.white;
+        switch (state) 
+        {
+            case "selected":
+                color.a = 1f;
+                break;
+            case "deselected":
+                color.a = 0.04f;
+                break;
+            case "hovered":
+                color.a = 0.2f;
+                break;
+            default:
+                color.a = 0f;
+                break;
+        }
+        lr.material.SetColor("_TintColor", color);
     }
 
     public void Awake()
@@ -145,9 +163,7 @@ public class Planet : MonoBehaviour
         lr = GetComponent<LineRenderer>();
 		lr.startWidth = 2f;
 
-        Color color = Color.white;
-        color.a = 0.04f;
-        lr.material.SetColor("_TintColor", color);
+        SetOrbitColor("deselected"); // Deselected by default
 
         // Calculate ellipse right when we start the game
         if (orbitingObject.transform.parent != null)
@@ -373,6 +389,7 @@ public class Planet : MonoBehaviour
 
     void OnMouseOver()
     {
+
         //Debug.Log("ui.selectedPlanet != this:" + (ui.selectedPlanet != this).ToString());
         ifHover = true;
         if (ui.selectedPlanet != this)

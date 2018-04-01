@@ -139,13 +139,19 @@ public class UIController : MonoBehaviour
 
     public void SetSelectedPlanet (Planet p = null)
 	{
+
 		// Planet selected
 		if (p != null) 
 		{
+            //Debug.Log("Planet selected");
             // Set global variables
             this.previousPlanet = this.selectedPlanet;
             this.selectedPlanet = p;
-		}
+		} 
+        else 
+        {
+            //Debug.Log("No planet selected");
+        }
 
         // Update the planet
         UpdateSelectedPlanet();
@@ -153,7 +159,6 @@ public class UIController : MonoBehaviour
 
     public void UpdateSelectedPlanet ()
     {
-
         //Debug.Log("UpdateSelectedPlanet() called.");
         if (selectedPlanet != null) 
 		{
@@ -212,17 +217,16 @@ public class UIController : MonoBehaviour
 
     public void SetSelectedOrbit() 
     {
+        // Hide orbit of previous planet, only if it exists
         if (previousPlanet != null) 
         {
-            // Hide orbit of previous planet
-            Color previousColor = Color.white;
-            previousColor.a = 0.04f;
-            previousPlanet.SetLineRendererTint(previousColor);
-
-            // Highlight orbit of selected planet
-            Color selectedColor = Color.white;
-            selectedColor.a = 1f;
-            selectedPlanet.SetLineRendererTint(selectedColor);
+            //Debug.Log("previousPlanet: " + previousPlanet.name + ", selectedPlanet: " + selectedPlanet.name);
+            previousPlanet.SetOrbitColor("deselected");
+        }
+        if (selectedPlanet != null) 
+		{
+            // Highlight orbit of selected planet every time
+            selectedPlanet.SetOrbitColor("selected");
         }
     }
 
