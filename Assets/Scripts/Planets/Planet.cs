@@ -136,7 +136,7 @@ public class Planet : MonoBehaviour
     }
 
     public void SetLineRendererTint(Color c){
-        lr.material.SetColor("_TintColor", c);
+        //lr.material.SetColor("_TintColor", c);
     }
 
     public void Awake()
@@ -187,7 +187,7 @@ public class Planet : MonoBehaviour
         if (!planetPlaced)
         {
            // Debug.Log("StartCoroutine (AnimateOrbit (1)); called from Planet.cs");
-            placing = StartCoroutine(AnimateOrbit(1));
+            placing = StartCoroutine(AnimateOrbit(Constants.ANIMATE_SPEED_TEST));
         }
 
         //add a collider for this planet

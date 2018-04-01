@@ -52,18 +52,11 @@ public class Sandbox : MonoBehaviour
         RandomlyPlacePlanets(gas, gasAmount, resourceAmount);
 
         gc.ui.selectedPlanet = p; //  highlight planet orbit
-        gc.ui.SetSelectedPlanet(p.GetComponent<Planet>()); // populate left panel with data
+        gc.ui.SetSelectedPlanet(p); // populate left panel with data
         gc.ui.OpenLeftPanel(); // open the panel
         gc.ui.UpdateSelectedPlanet();
 
-        if (gc.tech1 != null)
-        {
-            gc.tech1.interactable = true;
-            gc.tech2.interactable = true;
-            gc.tech3.interactable = true;
-            gc.tech4.interactable = true;
-            gc.tech5.interactable = true;
-        }
+        gc.playButton.interactable = true;
     }
 
     void RandomlyPlacePlanets(GameObject prefab, int planetAmount, int resourceAmount)
@@ -94,6 +87,8 @@ public class Sandbox : MonoBehaviour
             // add planet to planets list
             gc.planets.Add(go);
 
+            gc.selected = go;
+
             // access planet script
             p = go.GetComponent<Planet>();
 
@@ -104,16 +99,22 @@ public class Sandbox : MonoBehaviour
             // randomly set orbit progress
             p.orbitProgress = Random.Range(0f, 1f);
 
-            // set planetPlaced to false
-            p.planetPlaced = true;
-
             // set turnsToBuild to built status
             p.turnsToBuild = -1;
+
+            // set population to show left panel at start
+            p.population = 1;
+
+            // planetPlaced to true to stop AnimateOrbit
+            p.planetPlaced = true;
 
             // set planet starting resource amount
             p.carbon = resourceAmount;
             p.nitrogen = resourceAmount;
             p.hydrogen = resourceAmount;
+
+            // set gc planetScript to p
+            gc.planetScript = p;
         }
     }
 }

@@ -40,6 +40,9 @@
     public const int CARBON_ATTACK_POWER = 3;
     public const int CARBON_TURNS_TO_DIE = 2;
 
+    public const float ANIMATE_SPEED_TEST = 0.2f;
+    public const int ANIMATE_SPEED_PLAY = 1;
+
     // Constants for missions
     public const int MISSION_1 = 31;
 

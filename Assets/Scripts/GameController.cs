@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
     // scripts
     private Planet firstPlanetScript;
     private Planet secondPlanetScript;
-    private Planet planetScript;
+    public Planet planetScript;
     private PlanetSlot planetSlotScript;
     // GameObjects
     public GameObject planet1;
@@ -137,6 +137,9 @@ public class GameController : MonoBehaviour
         //m = GameObject.Find("Missions").GetComponent<Missions>();
         //cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
         //l = log.GetComponent<Log>();
+
+      
+
         currentScene = SceneManager.GetActiveScene();
 
         switch (currentScene.name)
@@ -319,6 +322,11 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Simulate();
+        }
+
 
         if (shot != null)
         {
@@ -1096,8 +1104,6 @@ public class GameController : MonoBehaviour
         {
             fail = false;
         }
-
-        fail = true;
     }
 
 
@@ -1353,7 +1359,7 @@ public class GameController : MonoBehaviour
                     l.UpdateLogPlanet(planet.name, "has finished building");
                     l.LogBackLog();
                 }
-                planetScript.StartCoroutine(planetScript.AnimateOrbit(1));
+                planetScript.StartCoroutine(planetScript.AnimateOrbit(Constants.ANIMATE_SPEED_TEST));
 
 
             }

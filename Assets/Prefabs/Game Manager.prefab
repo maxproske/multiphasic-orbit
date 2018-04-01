@@ -66,6 +66,7 @@ MonoBehaviour:
   linking: 0
   firstPlanet: 0
   linkedAlready: 0
+  planetScript: {fileID: 0}
   planet1: {fileID: 0}
   planet2: {fileID: 0}
   selected: {fileID: 0}
