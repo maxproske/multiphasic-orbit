@@ -325,7 +325,11 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Simulate();
+            if (!simulate)
+            {
+                Simulate();
+            }
+            
         }
 
 
