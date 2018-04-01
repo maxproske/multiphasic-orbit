@@ -31,6 +31,11 @@ public class Missions : MonoBehaviour
         reward = false;
         rogueDieIncrement = 0;
 
+        InitializeMissions();
+    }
+
+    public void CPShownAtStartOfLevel()
+    {
         switch (gc.level)
         {
             case 1:
@@ -47,7 +52,10 @@ public class Missions : MonoBehaviour
             default:
                 break;
         }
+    }
 
+    private void InitializeMissions()
+    {
         switch (gc.level)
         {
             case 1:
@@ -74,7 +82,6 @@ public class Missions : MonoBehaviour
                     gc.AddMissionsToUI(mission);
                 }
                 break;
-
         }
 
         // reset all missions to incompleted

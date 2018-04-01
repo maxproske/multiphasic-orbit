@@ -138,7 +138,7 @@ public class GameController : MonoBehaviour
         //cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
         //l = log.GetComponent<Log>();
 
-      
+        
 
         currentScene = SceneManager.GetActiveScene();
 
@@ -158,6 +158,7 @@ public class GameController : MonoBehaviour
                 break;
         }
 
+        m.CPShownAtStartOfLevel();
 
         //l.ToggleLog();
 
