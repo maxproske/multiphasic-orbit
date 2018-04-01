@@ -130,5 +130,18 @@ public class HintController : MonoBehaviour
 	{
         // If tooltip is already properly positioned
         go2.SetActive (state);
+
+        // Because PolygonUI is dumb, we need to mark the graphics
+        // as dirty to redraw. Calling SetActive(true) is not enough.
+        StartCoroutine(redrawHintAfterDelay());
+	}
+
+	IEnumerator redrawHintAfterDelay()
+	{
+		// Wait...
+		yield return new WaitForSeconds(0.05f); // The parameter is the number of seconds to wait
+		// Do something...
+		UnityEngine.UI.Extensions.PolygonUI pui = go2.GetComponent<UnityEngine.UI.Extensions.PolygonUI>();
+		pui.SetAllDirty();
 	}
 }

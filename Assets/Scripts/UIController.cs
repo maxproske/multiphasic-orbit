@@ -495,6 +495,12 @@ public class UIController : MonoBehaviour
         rightStoneButton.GetComponent<HintController>().active = true;
     }
 
+    // Enable or disable a hint from any script
+    public void SetHintActive(RectTransform rt, bool active) 
+    {
+        rt.GetComponent<HintController>().SetHintActive(active);
+    }
+
     public void SetHint(RectTransform rt) {
         HintController hc = rt.gameObject.AddComponent<HintController>();
     }

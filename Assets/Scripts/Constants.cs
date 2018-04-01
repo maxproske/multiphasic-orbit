@@ -1,4 +1,6 @@
 ﻿public static class Constants {
+    public const int LEARNERS_MISSION_1 = 0;
+    public const int LEARNERS_MISSION_2 = 1;
 
 	// Constants for hint indicator
 	public const int TURN_1_SKILL_TREE = 0;

@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour
 
         // states
         // Disable hints
-        var hintsDisabled = true;
+        var hintsDisabled = false;
 
         // Pass state
         GAME_STATE = hintsDisabled ? -1 : 0;
