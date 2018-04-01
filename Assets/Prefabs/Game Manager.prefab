@@ -107,10 +107,11 @@ MonoBehaviour:
   stoneButton: {fileID: 0}
   waterButton: {fileID: 0}
   gasButton: {fileID: 0}
-  level: 1
+  level: 0
   m: {fileID: 0}
   shot: {fileID: 0}
   missionPanel: {fileID: 0}
-  genericMissionPanel: {fileID: 0}
+  genericMissionPanel: {fileID: 1393508523193676, guid: 49460af36aac4834c9618a4e178cf13b,
+    type: 2}
   l: {fileID: 0}
   cp: {fileID: 0}
