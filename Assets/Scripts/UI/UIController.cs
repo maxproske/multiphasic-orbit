@@ -492,7 +492,7 @@ public class UIController : MonoBehaviour
     {
         // Right Panel
         SetHint((RectTransform)rightStoneButton.transform);
-        rightStoneButton.GetComponent<HintController>().active = true;
+        SetHint((RectTransform)rightNextTurnButton.transform);
     }
 
     // Enable or disable a hint from any script

@@ -29,25 +29,33 @@ public class State : MonoBehaviour {
 			DisableAllHints();
 
 			// Handle the event
-			switch (current)
+            switch (gc.level)
 			{
-            // Opened level select screen
-            case Constants.LEARNERS_MISSION_1:
-                // Start the learner's test.
+                case 1:
+                switch (current)
+                {
+                    // Opened level select screen
+                    case Constants.LEARNERS_MISSION_1:
+                        // Start the learner's test.
+                        break;
+                    // Learners test turn 1 started
+                    case Constants.LEARNERS_MISSION_2:
+                        // Build a stone planet.
+                        ui.SetHintActive((RectTransform)ui.rightStoneButton.transform, true);
+                        break;
+                    // Placed stone planet
+                    case Constants.LEARNERS_MISSION_3:
+                        // Nothing yet.
+                        break;
+                    default:
+                        Debug.Log("Default state. We shouldn't be here.");
+                        break;
+                }
                 break;
-            // Learners test turn 1 started
-			case Constants.LEARNERS_MISSION_2:
-                // Build a stone planet.
-                ui.SetHintActive((RectTransform)ui.rightStoneButton.transform, true);
-				break;
-            // Placed stone planet
-            case Constants.LEARNERS_MISSION_3:
-                // Nothing yet.
-                break;
-			default:
-				Debug.Log("We shouldn't be here.");
-				break;
-			}
+                default:
+                    //Debug.Log("Default level. We shouldn't be here.");
+                    break;
+            }
 		}
 		// Set global previous state variable as we exit
 		gc.PREVIOUS_GAME_STATE = current;

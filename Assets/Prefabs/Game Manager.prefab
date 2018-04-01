@@ -107,7 +107,7 @@ MonoBehaviour:
   stoneButton: {fileID: 0}
   waterButton: {fileID: 0}
   gasButton: {fileID: 0}
-  level: 0
+  level: 1
   m: {fileID: 0}
   shot: {fileID: 0}
   missionPanel: {fileID: 0}

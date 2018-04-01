@@ -751,9 +751,16 @@ public class GameController : MonoBehaviour
 
                             if (ui.selectedPlanet == null)
                             {
-                                // Instead of having no planet selected, automatically select for the first planet
-                                ui.SetNoPlanetSelected();
-                                GAME_STATE = Constants.LEARNERS_MISSION_3;
+                                // Uncomment to make player have to click on planet to open properties
+                                //ui.SetNoPlanetSelected();
+                                
+                                // Uncomment to open planet properties automatically
+                                ui.selectedPlanet = p; //  highlight planet orbit
+                                ui.SetSelectedPlanet(p.GetComponent<Planet>()); // populate left panel with data
+                                ui.OpenLeftPanel(); // open the panel
+                                playButton.interactable = true; // make play button interactable
+                                ui.SetHintActive((RectTransform)ui.rightNextTurnButton.transform, true);
+                                GAME_STATE = Constants.LEARNERS_MISSION_3; // advance to mission 3
                             }
                             else
                             {
