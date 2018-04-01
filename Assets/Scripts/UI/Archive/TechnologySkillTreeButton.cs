@@ -30,14 +30,14 @@ public class TechnologySkillTreeButton : MonoBehaviour, IPointerEnterHandler, IP
 			// Toggle the panel
 			microSkillTree.SetActive (!microSkillTree.activeSelf);
 
-			// Handle player clicking skill tree when skill tree is open
-			if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
-				gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
-			}
-			// Switch the hint indicator
-			if (microSkillTree.activeSelf && gc.GAME_STATE == Constants.TURN_3_TECH_TREE) {
-				gc.GAME_STATE = Constants.TURN_3_TECH_SLOT;
-			}
+			// // Handle player clicking skill tree when skill tree is open
+			// if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
+			// 	gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
+			// }
+			// // Switch the hint indicator
+			// if (microSkillTree.activeSelf && gc.GAME_STATE == Constants.TURN_3_TECH_TREE) {
+			// 	gc.GAME_STATE = Constants.TURN_3_TECH_SLOT;
+			// }
 		}
 	}
 }

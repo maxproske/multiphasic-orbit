@@ -535,7 +535,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                notBuiltTooltip.SetActive(true);
+                //notBuiltTooltip.SetActive(true);
                 notBuiltTooltipTimer++;
             }
 
@@ -662,15 +662,15 @@ public class GameController : MonoBehaviour
             //            }
 
             // Change game state when selecting Carbon 1
-            if (GAME_STATE == Constants.TURN_3_TECH_TREE && selected.name == "Carbon 1")
-            {
-                GAME_STATE = Constants.TURN_3_TECH_SLOT;
-            }
-            // There can only be two planets at this state, so clicking Carbon 1 again shouldn't progress the game
-            else if (GAME_STATE == Constants.TURN_3_TECH_TREE_2 && selected.name != "Carbon 1")
-            {
-                GAME_STATE = Constants.TURN_3_TECH_SLOT_2;
-            }
+            // if (GAME_STATE == Constants.TURN_3_TECH_TREE && selected.name == "Carbon 1")
+            // {
+            //     GAME_STATE = Constants.TURN_3_TECH_SLOT;
+            // }
+            // // There can only be two planets at this state, so clicking Carbon 1 again shouldn't progress the game
+            // else if (GAME_STATE == Constants.TURN_3_TECH_TREE_2 && selected.name != "Carbon 1")
+            // {
+            //     GAME_STATE = Constants.TURN_3_TECH_SLOT_2;
+            // }
         }
         else
         {
@@ -703,10 +703,13 @@ public class GameController : MonoBehaviour
             //playButton.interactable = false;
 
             // Update the game state
-            if (GAME_STATE == Constants.TURN_1_PLANET_SLOT)
-            {
-                GAME_STATE = Constants.TURN_1_PLACE_PLANET;
-            }
+            if (GAME_STATE == Constants.LEARNERS_MISSION_1) state.DisableAllHints();
+
+            // // Update the game state
+            // if (GAME_STATE == Constants.TURN_1_PLANET_SLOT)
+            // {
+            //     GAME_STATE = Constants.TURN_1_PLACE_PLANET;
+            // }
 
             // Calculate 3D mouse coordinates
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -726,17 +729,17 @@ public class GameController : MonoBehaviour
                             // Allow player to end turn
                             //GameObject.Find("End Turn Button").GetComponent<Button>().interactable = true;
 
-                            // Update the game state
-                            if (GAME_STATE == Constants.TURN_1_PLACE_PLANET)
-                            {
-                                GAME_STATE = Constants.TURN_1_END_TURN;
-                            }
+                            // // Update the game state
+                            // if (GAME_STATE == Constants.TURN_1_PLACE_PLANET)
+                            // {
+                            //     GAME_STATE = Constants.TURN_1_END_TURN;
+                            // }
 
-                            // Update the game state
-                            if (GAME_STATE == Constants.TURN_2_PLACE_PLANET)
-                            {
-                                GAME_STATE = Constants.TURN_2_END_TURN;
-                            }
+                            // // Update the game state
+                            // if (GAME_STATE == Constants.TURN_2_PLACE_PLANET)
+                            // {
+                            //     GAME_STATE = Constants.TURN_2_END_TURN;
+                            // }
 
                             // only stops coroutine if it is running
                             if (p.placingCoroutineRunning)
@@ -748,7 +751,9 @@ public class GameController : MonoBehaviour
 
                             if (ui.selectedPlanet == null)
                             {
+                                // Instead of having no planet selected, automatically select for the first planet
                                 ui.SetNoPlanetSelected();
+                                GAME_STATE = Constants.LEARNERS_MISSION_2;
                             }
                             else
                             {

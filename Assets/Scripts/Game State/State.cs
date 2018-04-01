@@ -26,7 +26,7 @@ public class State : MonoBehaviour {
 		if (previous != current)
 		{
 			// Something has changed...
-			disableAllHints();
+			DisableAllHints();
 
 			// Handle the event
 			switch (current)
@@ -44,7 +44,7 @@ public class State : MonoBehaviour {
 		gc.PREVIOUS_GAME_STATE = current;
 	}
 
-    void disableAllHints()
+    public void DisableAllHints()
 	{
         foreach(RectTransform hint in ui.hintContainer.transform)
         {
