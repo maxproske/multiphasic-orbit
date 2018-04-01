@@ -51,6 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60561405602ae8c428a6b22b6c846e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stone: {fileID: 0}
-  water: {fileID: 0}
-  gas: {fileID: 0}
+  stone: {fileID: 1715351460301162, guid: c02cc6560db574e458cca2cfb6bea0e1, type: 2}
+  water: {fileID: 1856874224995336, guid: 6b98707b29931bd49b363ff72b9a95b6, type: 2}
+  gas: {fileID: 1420884546460054, guid: bac1bb52dcb6872468daab36cd7cede7, type: 2}
+  sun: {fileID: 0}
+  stoneAmount: 2
+  waterAmount: 2
+  gasAmount: 2
+  rogueAmount: 0
+  resourceAmount: 200

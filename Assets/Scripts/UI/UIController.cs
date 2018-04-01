@@ -111,9 +111,15 @@ public class UIController : MonoBehaviour
 	       ====================================================================== */
 		SetSelectedPlanet (null);
 
-		/* Initialize Right Panel
+        /* Initialize Right Panel
 		   ====================================================================== */
-        SetPlayInteractive(false);
+        if (gc.level != 0)
+        {
+            SetPlayInteractive(false);
+        } else
+        {
+            SetPlayInteractive(true);
+        }
 
         /* Initialize External Scripts
            ====================================================================== */
