@@ -35,6 +35,9 @@ public class State : MonoBehaviour {
                 // Make stone button active
                 ui.SetHintActive((RectTransform)ui.rightStoneButton.transform, true);
 				break;
+            case Constants.LEARNERS_MISSION_2:
+                // Nothing yet.
+                break;
 			default:
 				Debug.Log("We shouldn't be here.");
 				break;
