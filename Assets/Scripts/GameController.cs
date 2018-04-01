@@ -703,7 +703,7 @@ public class GameController : MonoBehaviour
             //playButton.interactable = false;
 
             // Update the game state
-            if (GAME_STATE == Constants.LEARNERS_MISSION_1) state.DisableAllHints();
+            if (GAME_STATE == Constants.LEARNERS_MISSION_2) state.DisableAllHints();
 
             // // Update the game state
             // if (GAME_STATE == Constants.TURN_1_PLANET_SLOT)
@@ -753,7 +753,7 @@ public class GameController : MonoBehaviour
                             {
                                 // Instead of having no planet selected, automatically select for the first planet
                                 ui.SetNoPlanetSelected();
-                                GAME_STATE = Constants.LEARNERS_MISSION_2;
+                                GAME_STATE = Constants.LEARNERS_MISSION_3;
                             }
                             else
                             {

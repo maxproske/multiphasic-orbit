@@ -31,11 +31,17 @@ public class State : MonoBehaviour {
 			// Handle the event
 			switch (current)
 			{
-			case Constants.LEARNERS_MISSION_1:
-                // Make stone button active
+            // Opened level select screen
+            case Constants.LEARNERS_MISSION_1:
+                // Start the learner's test.
+                break;
+            // Learners test turn 1 started
+			case Constants.LEARNERS_MISSION_2:
+                // Build a stone planet.
                 ui.SetHintActive((RectTransform)ui.rightStoneButton.transform, true);
 				break;
-            case Constants.LEARNERS_MISSION_2:
+            // Placed stone planet
+            case Constants.LEARNERS_MISSION_3:
                 // Nothing yet.
                 break;
 			default:

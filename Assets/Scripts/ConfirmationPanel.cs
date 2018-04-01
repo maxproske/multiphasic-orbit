@@ -50,6 +50,11 @@ public class ConfirmationPanel : MonoBehaviour
     private void ClosePanel()
     {
         panel.SetActive(false);
+        
+        // Update game state on panel close
+        //Debug.Log(gc.GAME_STATE);
+
+        if (gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
     }
 
     public void NextLevel()
