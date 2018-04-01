@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: 2. Open Planet Properties Panel
+  m_Name: Binary Planets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,11 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Open Planet Properties Panel
-  missionDescription: 
-  missionReward: 
-  postMissionMessage: Nice work! You figured out how to access the Properties Panel.
-    Here you will find information about how many resources the planet has, population,
-    health, and access to the technology tree.
-  postMissionHint: 
-  completed: 1
+  missionName: Binary Planets
+  missionDescription: Build another stone planet.
+  missionReward: 4 of each resource.
+  postMissionMessage: You now need to pass enough turns until your planets can link
+    together.
+  completed: 0

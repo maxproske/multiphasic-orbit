@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: 1. Place Planet
+  m_Name: Planet Inspector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,11 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Place Planet
-  missionDescription: Place at least <b>1</b> Planet.
-  missionReward: 
-  postMissionMessage: "Good job! You\u2019ve placed your first planet. Keep placing
-    planets at your own discretion to achieve a thriving solar system! "
-  postMissionHint: Each planet has a certain of properties for you to manage and explore.
-    Click around to figure out how to access it.
-  completed: 1
+  missionName: Planet Inspector
+  missionDescription: Open properties panel.
+  missionReward: 4 stone.
+  postMissionMessage: You've placed your first planet. You can continue placing planets
+    at your own discretion. Each planet has special properties for you to manage and
+    explore.
+  completed: 0
