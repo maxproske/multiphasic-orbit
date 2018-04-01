@@ -55,8 +55,8 @@ MonoBehaviour:
   water: {fileID: 1856874224995336, guid: 6b98707b29931bd49b363ff72b9a95b6, type: 2}
   gas: {fileID: 1420884546460054, guid: bac1bb52dcb6872468daab36cd7cede7, type: 2}
   sun: {fileID: 0}
-  stoneAmount: 2
-  waterAmount: 2
-  gasAmount: 2
+  stoneAmount: 1
+  waterAmount: 1
+  gasAmount: 1
   rogueAmount: 0
   resourceAmount: 200
