@@ -498,6 +498,7 @@ public class UIController : MonoBehaviour
     // Enable or disable a hint from any script
     public void SetHintActive(RectTransform rt, bool active) 
     {
+        //Debug.Log("Set " + rt.name + "'s hint " + active.ToString());
         rt.GetComponent<HintController>().SetHintActive(active);
     }
 

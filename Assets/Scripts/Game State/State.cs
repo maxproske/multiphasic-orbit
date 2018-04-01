@@ -45,6 +45,7 @@ public class State : MonoBehaviour {
                         break;
                     // Placed stone planet
                     case Constants.LEARNERS_MISSION_3:
+                        ui.SetHintActive((RectTransform)ui.rightNextTurnButton.transform, true);
                         // Nothing yet.
                         break;
                     default:

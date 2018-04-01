@@ -759,7 +759,6 @@ public class GameController : MonoBehaviour
                                 ui.SetSelectedPlanet(p.GetComponent<Planet>()); // populate left panel with data
                                 ui.OpenLeftPanel(); // open the panel
                                 playButton.interactable = true; // make play button interactable
-                                ui.SetHintActive((RectTransform)ui.rightNextTurnButton.transform, true);
                                 GAME_STATE = Constants.LEARNERS_MISSION_3; // advance to mission 3
                             }
                             else
