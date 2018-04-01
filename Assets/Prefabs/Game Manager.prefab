@@ -89,8 +89,8 @@ MonoBehaviour:
   nitrogenText: {fileID: 0}
   hydrogenText: {fileID: 0}
   stoneIncrement: 0
-  siliconIncrement: 0
-  ammoniaIncrement: 0
+  gasIncrement: 0
+  waterIncrement: 0
   methaneIncrement: 0
   germaniumIncrement: 0
   acetyleneIncrement: 0
