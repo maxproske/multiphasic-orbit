@@ -213,6 +213,7 @@ public class GameController : MonoBehaviour
             roguePlanets = new List<GameObject>();
         }
         
+        ui.SetPhase("Planning");
 
         // initialize flags
         simulate = false;
@@ -672,6 +673,7 @@ public class GameController : MonoBehaviour
             // Do not allow the player to click on the planet while it's rotating
             else if (!placing)
             {
+                ui.SetPhase("Ready To Simulate");
                 //planetText.text = planetScript.turnsToBuild + " turns left to build: " + planetScript.name;
                 // Enable text
                 // carbonText.enabled = true;
@@ -826,6 +828,8 @@ public class GameController : MonoBehaviour
             // Update the global placing variable
             placing = true;
             //playButton.interactable = false;
+
+            ui.SetPhase("Placing");
 
             // Update the game state
             if (GAME_STATE == Constants.LEARNERS_MISSION_2) state.DisableAllHints();
@@ -1269,6 +1273,8 @@ public class GameController : MonoBehaviour
     public void Simulate()
     {
         AddTurn();
+
+        ui.SetPhase("Simulating...");
 
         simulate = true;
         canBuild = true;

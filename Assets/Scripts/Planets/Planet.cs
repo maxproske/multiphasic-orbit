@@ -543,6 +543,7 @@ public class Planet : MonoBehaviour
             nitrogen += addNitrogen * collectionMultiplier;
             hydrogen += addHydrogen * collectionMultiplier;
 
+            ui.SetPhase("Planning");
             gc.simulate = false;
             gc.playButton.interactable = true;
             //gc.ToggleInteractability(true);
