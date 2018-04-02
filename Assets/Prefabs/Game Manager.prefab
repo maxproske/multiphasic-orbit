@@ -116,3 +116,5 @@ MonoBehaviour:
     type: 2}
   l: {fileID: 0}
   cp: {fileID: 0}
+  cp2: {fileID: 0}
+  choosecase: 0
