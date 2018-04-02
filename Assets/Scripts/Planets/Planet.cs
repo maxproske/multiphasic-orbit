@@ -632,13 +632,25 @@ public class Planet : MonoBehaviour
         {
 
             // Pass in t value (i/segments)
-            Vector2 position2D = orbitPath.Evaluate((float)i / (float)segments);
+            Vector3 position3D = orbitPath.Evaluate((float)i / (float)segments);
 
             // Debug
             //Debug.Log ("Position of sun: (" + orbitingObject.transform.parent.localPosition.x + ", " + orbitingObject.transform.parent.localPosition.z + ")");
 
+            
             // Set point at i equal to a new Vector2 of (x,y) and 0 for z value
-            points[i] = new Vector3(position2D.x + orbitingObject.transform.parent.localPosition.x, 0f, position2D.y + orbitingObject.transform.parent.localPosition.z);
+            points[i] = new Vector3(
+                position3D.x + orbitingObject.transform.parent.localPosition.x, 
+                position3D.z + orbitingObject.transform.parent.localPosition.z, 
+                position3D.y + orbitingObject.transform.parent.localPosition.y
+            );
+
+            if (i == 24) points[i].y *= 1000;
+            if (i == 25) points[i] = new Vector3(99999999,99999,99999);
+            if (i == 26) points[i].y *= 1000;
+            if (i == 74) points[i].y *= 1000;
+            if (i == 75) points[i] = new Vector3(99999999,-99999,99999);
+            if (i == 76) points[i].y *= 1000;
         }
         // Remember we have segments + 1, and are 0-indexing
         // Very last point in the array is equal to first point, completing the ellipse
@@ -646,6 +658,7 @@ public class Planet : MonoBehaviour
 
         // Set LineRenderer using newer method positionCount
         lr.positionCount = segments + 1;
+
         // Pass in points array
         lr.SetPositions(points);
     }
@@ -662,11 +675,11 @@ public class Planet : MonoBehaviour
     public void SetOrbitingObjectPosition()
     {
         // Pass in current orbit progress
-        Vector2 orbitPos = orbitPath.Evaluate(orbitProgress);
+        Vector3 orbitPos = orbitPath.Evaluate(orbitProgress);
 
         // Set its local position to a new vector position
         // Set z axis as orbitPos.y
-        orbitingObject.localPosition = new Vector3(orbitPos.x, 0, orbitPos.y);
+        orbitingObject.localPosition = new Vector3(orbitPos.x, orbitPos.z, orbitPos.y);
     }
 
 

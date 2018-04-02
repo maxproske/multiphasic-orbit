@@ -928,8 +928,20 @@ public class GameController : MonoBehaviour
 
                                 // Simulate orbit path (absolute so the orbit direction doesn't change)
                                 p.enabled = true;
+
+                                //Debug.Log("(" + location.x + ", " + location.z + ")");
+
+                                if (location.x > -100 && location.x < 100) location.x = 100;
+                                if (location.z > -100 && location.z < 100) location.z = 100;
+
                                 p.orbitPath.xAxis = (Mathf.Abs(location.x));
                                 p.orbitPath.yAxis = (Mathf.Abs(location.z));
+
+                                // float radiusX = location.x;
+                                // if (radiusX < 100) radiusX = 100;
+                                // float radiusZ = location.z;
+                                // if (radiusZ < 100) radiusZ = 100;
+
                                 //float scale = 1.0f;
                                 //p.transform.localScale = new Vector3(scale, scale, scale);
                             }
@@ -1021,6 +1033,8 @@ public class GameController : MonoBehaviour
         planets.Add(go);
         // Access the planet's script
         p = go.GetComponent<Carbon>();
+        p.orbitPath.xAxis = Random.Range(100f, 300f);
+        p.orbitPath.yAxis = Random.Range(100f, 300f);
     }
     public void placeNitrogenPlanet()
     {
@@ -1038,6 +1052,8 @@ public class GameController : MonoBehaviour
         planets.Add(go);
         // Access the planet's script
         p = go.GetComponent<Ammonia>();
+        p.orbitPath.xAxis = Random.Range(100f, 300f);
+        p.orbitPath.yAxis = Random.Range(100f, 300f);
     }
     public void placeHydrogenPlanet()
     {
@@ -1055,6 +1071,8 @@ public class GameController : MonoBehaviour
         planets.Add(go);
         // Access the planet's script
         p = go.GetComponent<Silicon>();
+        p.orbitPath.xAxis = Random.Range(100f, 300f);
+        p.orbitPath.yAxis = Random.Range(100f, 300f);
     }
 
     public void SetBuildingActive(bool active)

@@ -64,8 +64,8 @@ Material:
     - _GlossyReflections: 1
     - _GridOffsetX: 0
     - _GridOffsetY: 2
-    - _GridSpacingX: 40
-    - _GridSpacingY: 40
+    - _GridSpacingX: 20
+    - _GridSpacingY: 20
     - _GridThickness: 4
     - _Metallic: 0
     - _Mode: 0
