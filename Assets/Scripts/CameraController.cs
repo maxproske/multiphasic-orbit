@@ -88,8 +88,8 @@ public class CameraController : MonoBehaviour {
 	public static float ClampAngle(float angle, float min, float max)
 	{
 		// Prevent camera view from crossing y=0
-		if (angle < -20) {
-			angle = -20f;
+		if (angle < -10) {
+			angle = -10f;
 		}
 
 		if (angle < -360F)
