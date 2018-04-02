@@ -645,12 +645,15 @@ public class Planet : MonoBehaviour
                 position3D.y + orbitingObject.transform.parent.localPosition.y
             );
 
-            if (i == 24) points[i].y *= 1000;
-            if (i == 25) points[i] = new Vector3(99999999,99999,99999);
-            if (i == 26) points[i].y *= 1000;
-            if (i == 74) points[i].y *= 1000;
-            if (i == 75) points[i] = new Vector3(99999999,-99999,99999);
-            if (i == 76) points[i].y *= 1000;
+            if (Constants.ORBIT_4D)
+            {
+                if (i == 24) points[i].y *= 1000;
+                if (i == 25) points[i] = new Vector3(99999999,99999,99999);
+                if (i == 26) points[i].y *= 1000;
+                if (i == 74) points[i].y *= 1000;
+                if (i == 75) points[i] = new Vector3(99999999,-99999,99999);
+                if (i == 76) points[i].y *= 1000;
+            }
         }
         // Remember we have segments + 1, and are 0-indexing
         // Very last point in the array is equal to first point, completing the ellipse
