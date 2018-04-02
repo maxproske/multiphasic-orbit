@@ -102,9 +102,9 @@ public class Planet : MonoBehaviour
     // trading
     public int maxResourceType = 0;
     public int maxResource = 0;
-    private int tradecarbon = 0;
-    private int tradenitrogen = 0;
-    private int tradehydrogen = 0;
+    public int tradecarbon = 0;
+    public int tradenitrogen = 0;
+    public int tradehydrogen = 0;
 
     public string planetname = " ";
 
@@ -302,9 +302,7 @@ public class Planet : MonoBehaviour
             }
             if (count > 60)
             {
-				tradecarbon = 0;
-				tradenitrogen = 0;
-				tradehydrogen = 0;
+	
 				preCarbon = carbon;
 				preNitrogen = nitrogen;
 				preHydrogen = hydrogen;
@@ -542,12 +540,43 @@ public class Planet : MonoBehaviour
             carbon += addCarbon * collectionMultiplier;
             nitrogen += addNitrogen * collectionMultiplier;
             hydrogen += addHydrogen * collectionMultiplier;
-
+			if (turnsToBuild < 1) {
+				gc.summary += planetname + " collected" + addCarbon + " stones, " + addNitrogen + " water, " + addHydrogen + " gas.\n";
+			}
+			if (linkedWith.Count>0) {
+					
+					
+				gc.summary+=" It traded"+tradecarbon+" stones, "+tradenitrogen+" water, "+tradehydrogen+" gas.\n";
+			}
+			if (iftech1 == 3) {
+				gc.summary+=" It learned collecting more resources technology\n";
+				iftech1 = 4;
+			}
+			if (iftech2 == 3) {
+				gc.summary+=" It learned linking technology\n";
+				iftech2 = 4;
+			}
+			if (iftech3 == 3) {
+				gc.summary+=" It learned more linking chance technology\n";
+				iftech3 = 4;
+			}
+			if (iftech4 == 3) {
+				gc.summary+=" It learned stormsheid technology\n";
+				iftech4 = 4;
+			}
+			if (iftech5 == 3) {
+				gc.summary+=" It learned attacking technology\n";
+				iftech5 = 4;
+			}
             ui.SetPhase("Planning");
+			gc.showsummary = true;
             gc.simulate = false;
             gc.playButton.interactable = true;
             //gc.ToggleInteractability(true);
             gc.SetBuildingActive(true);
+			tradecarbon = 0;
+			tradenitrogen = 0;
+			tradehydrogen = 0;
         }
     }
 
@@ -602,6 +631,7 @@ public class Planet : MonoBehaviour
 
             yield return null;
         }
+
 
         // Add turn if a planet is building
         gc.SetBuildingActive(true);
@@ -690,6 +720,7 @@ public class Planet : MonoBehaviour
 
 	//depends on the planets, we can adjust it.
 	public void addResourceTechnology(){
+
 		carbon -= 10;
 		moreResource = true;
 		if (moreResource == true) {

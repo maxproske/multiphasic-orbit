@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour
 
     private Scene currentScene;
 
-
+	private float camerasize=600;
     // log
     //public GameObject log;
     public Log l;
@@ -130,6 +130,12 @@ public class GameController : MonoBehaviour
 
 	public ChoosePanel cp2;
 	public int choosecase = 0;
+
+	public string summary="";
+	public bool showsummary=false;
+
+	public GameObject leftpanel;
+	public GameObject rightpanel;
     // Use this for initialization
     void Start()
     {
@@ -325,6 +331,23 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (simulate == true) {
+//			ui.gameObject.SetActive (false);
+
+			leftpanel.SetActive(false);
+			rightpanel.SetActive(false);
+			Camera.main.orthographicSize = 310;
+		} else {
+//			ui.gameObject.SetActive (true);
+			leftpanel.SetActive(true);
+			rightpanel.SetActive(true);
+			Camera.main.orthographicSize = camerasize;
+		}
+
+		if (showsummary == true) {
+			cp.ShowPanel("Summary", summary);
+			showsummary = false;
+		}
 		//if click nobutton
 		if  (cp2.yesorno == -1) {
 			//try to link 
@@ -710,25 +733,25 @@ public class GameController : MonoBehaviour
                 tech1.interactable = true;
 
             }
-            else if (planetScript.hydrogen >= 5 && planetScript.nitrogen >= 5 && planetScript.carbon >= 5 && planetScript.iftech1 == 3 && planetScript.iftech2 == 0)
+            else if (planetScript.hydrogen >= 5 && planetScript.nitrogen >= 5 && planetScript.carbon >= 5 && planetScript.iftech1 == 4 && planetScript.iftech2 == 0)
             {
 
                 tech2.interactable = true;
 
             }
-            else if (planetScript.hydrogen >= 15 && planetScript.nitrogen >= 10 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 0)
+            else if (planetScript.hydrogen >= 15 && planetScript.nitrogen >= 10 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 0)
             {
 
                 tech3.interactable = true;
 
             }
-            else if (planetScript.nitrogen >= 15 && planetScript.carbon >= 15 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 0)
+            else if (planetScript.nitrogen >= 15 && planetScript.carbon >= 15 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 4 && planetScript.iftech4 == 0)
             {
 
                 tech4.interactable = true;
 
             }
-            else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.iftech1 == 3 && planetScript.iftech2 == 3 && planetScript.iftech3 == 3 && planetScript.iftech4 == 3 && planetScript.iftech5 == 0)
+            else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 4 && planetScript.iftech4 == 4 && planetScript.iftech5 == 0)
             {
 
                 tech5.interactable = true;
@@ -1273,9 +1296,9 @@ public class GameController : MonoBehaviour
     public void Simulate()
     {
         AddTurn();
-
+		summary = "";
         ui.SetPhase("Simulating...");
-
+		camerasize = Camera.main.orthographicSize;
         simulate = true;
         canBuild = true;
         buildingActive = false;
@@ -1311,6 +1334,7 @@ public class GameController : MonoBehaviour
         {
             if (planet1 != null && planet2 != null)
             {
+				summary += planet1.GetComponent<Planet> ().planetname + " attacked " + planet2.GetComponent<Planet> ().planetname + " and " + planet2.GetComponent<Planet> ().planetname + " lose 50 hp.\n";
                 shot = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 shot.transform.localScale = new Vector3(8f, 8f, 8f);
                 shot.transform.position = planet1.transform.position;
@@ -1362,8 +1386,11 @@ public class GameController : MonoBehaviour
                         firstPlanetScript.linkedWith.Remove(planet2.GetComponent<Planet>());
                         // add rogueObject to planet1's linkedWith List
                         firstPlanetScript.linkedWith.Add(rogueObject.GetComponent<Planet>());
+						summary += "The linking between "+firstPlanetScript.planetname+"and " + planet2.GetComponent<Planet>().planetname+" is fail. " +planet2.GetComponent<Planet>().planetname+" became a rogue planet .\n";
+					
                         planets.Remove(planet2); // remove from Planets List
                         Destroy(planet2);
+
 
                     }
                     else
@@ -1372,13 +1399,13 @@ public class GameController : MonoBehaviour
                         linktime = 0;
                         firstPlanetScript.linkedWith.Add(planet2.GetComponent<Planet>());
                         secondPlanetScript.linkedWith.Add(planet1.GetComponent<Planet>());
-
+						summary += firstPlanetScript.planetname + " successfully linked with " + secondPlanetScript.planetname+".\n";
                         // show confirmation box successful link
-                        if (level != 1)
-                        {
-                            cp.ShowPanel("Link Successful!", planet1.name + " and " + planet2.name + " have successfully linked!");
-                        }
-
+//                        if (level != 1)
+//                        {
+//                            cp.ShowPanel("Link Successful!", planet1.name + " and " + planet2.name + " have successfully linked!");
+//                        }
+//
                         // also update log
                     }
 
