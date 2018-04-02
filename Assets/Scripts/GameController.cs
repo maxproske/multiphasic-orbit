@@ -128,7 +128,8 @@ public class GameController : MonoBehaviour
 
     public ConfirmationPanel cp;
 
-
+	public ChoosePanel cp2;
+	public int choosecase = 0;
     // Use this for initialization
     void Start()
     {
@@ -323,6 +324,63 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		//if click nobutton
+		if  (cp2.yesorno == -1) {
+			//try to link 
+			if (choosecase == 1) {
+					linking = false;
+					firstPlanet = false;
+					linkedAlready = false;
+					planet1 = null;
+					planet2 = null;
+					choosecase = 0;
+					cp2.yesorno = 0;
+			}
+
+			//try to attack
+			if (choosecase == 4) {
+				attacking = false;
+				firstPlanet = false;
+
+				planet1 = null;
+				planet2 = null;
+				choosecase = 0;
+				cp2.yesorno = 0;
+			}
+			cp2.yesorno = 0;
+			choosecase = 0;
+		}
+
+		//if click yesbutton
+		if (cp2.yesorno == 1) {
+			////try to cancel link
+			if (choosecase == 2) {
+	
+				linking = false;
+				firstPlanet = false;
+				linkedAlready = false;
+				planet1 = null;
+				planet2 = null;
+				choosecase = 0;
+				cp2.yesorno = 0;
+			}
+		
+
+			//try to cancel attacking
+			if (choosecase == 3) {
+		
+				attacking = false;
+				firstPlanet = false;
+
+				planet1 = null;
+				planet2 = null;
+				choosecase = 0;
+				cp2.yesorno = 0;
+			
+			}
+			cp2.yesorno=0;
+			choosecase = 0;
+		}
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!simulate)
@@ -331,6 +389,18 @@ public class GameController : MonoBehaviour
             }
             
         }
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			if (attacking) {
+				cp2.ShowPanel("Cancel Attacking", "Do you want to cancel the attacking?");
+				choosecase = 3;
+			}
+			if (linking) {
+				cp2.ShowPanel("Cancel Linking", "Do you want to cancel the linking?");
+				choosecase = 2;
+			}
+
+		}
 
 
         if (shot != null)
@@ -442,6 +512,7 @@ public class GameController : MonoBehaviour
                                 {
                                     //Debug.Log("Already linked");
                                     linkedAlready = true;
+									cp.ShowPanel("Link Cannot Be Assigned", selected.name + " have already linked");
                                 }
                             }
                             if (!linkedAlready)
@@ -450,7 +521,8 @@ public class GameController : MonoBehaviour
                                 secondPlanetScript = planet2.GetComponent<Planet>();
                                 // if both variables are set
 
-                                cp.ShowPanel("Link Assigned", planet1.name + " and " + planet2.name + " have been assigned to link during simulation.");
+								cp2.ShowPanel("Assigning Linking", "Do you want to link "+ planet1.name + " and " + planet2.name+"?");
+								choosecase = 1;
                             }
                         }
                     }
@@ -461,6 +533,17 @@ public class GameController : MonoBehaviour
                     // check if is non-rogue and has Planet script
 
                     // if selected is not planet 1
+					if (selected != planet1 && !selected.CompareTag("Rogue"))
+					{
+						//									
+
+
+				
+						if (cp2.yesorno == 0 && choosecase == 0) {
+							cp.ShowPanel ("Attacking cannot be assigned", "You can only attack rogue planet. ");
+						}
+
+					}
 
                     if (selected != planet1 && selected.CompareTag("Rogue"))
                     {
@@ -470,6 +553,8 @@ public class GameController : MonoBehaviour
                         secondPlanetScript = planet2.GetComponent<Planet>();
                         // if both variables are set
 
+						cp2.ShowPanel("Assigning Attacking", "Do you want to attack "+ planet2.name+"?");
+						choosecase = 4;
 
                     }
 
@@ -479,27 +564,27 @@ public class GameController : MonoBehaviour
             }
         }
 
-        // if linking, reset
-        if (linking && Input.GetKeyDown(KeyCode.Escape))
-        {
-            ResetLinking();
-        }
-
-        if (attacking && Input.GetKeyDown(KeyCode.Escape))
-        {
-            attacking = false;
-            firstPlanet = false;
-            simulate = false;
-            planet1 = null;
-            planet2 = null;
-        }
-
+//        // if linking, reset
+//        if (linking && Input.GetKeyDown(KeyCode.Escape))
+//        {
+//            ResetLinking();
+//        }
+//
+//        if (attacking && Input.GetKeyDown(KeyCode.Escape))
+//        {
+//            attacking = false;
+//            firstPlanet = false;
+//            simulate = false;
+//            planet1 = null;
+//            planet2 = null;
+//        }
+//
 
 
         if (planets.Contains(selected) || planetScript != null)
         {
 
-            if (!linking && !placing && selected.GetComponent("Planet"))
+			if (!attacking && !linking && !placing && selected.GetComponent("Planet"))
             {
                 planetScript = selected.GetComponent<Planet>(); // get Planet script to access attributes
             }
