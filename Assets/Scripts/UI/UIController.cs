@@ -14,12 +14,17 @@ using UnityEngine.EventSystems;
 // -- Update just the health.
 // ui.UpdateHealth();
 
+// -- Set Phase
+// ui.SetPhase("Planning");
+// ui.SetPhase("Choose a planet for " + p.name + " to link with");
+
 public class UIController : MonoBehaviour 
 {
 	/* Declare Top Panel
 	   ========================================================================== */
 	// Turn Panel
 	public Text topTurnText;
+    public Text topPhaseText;
 	// Distance Panel
 	public Text topDistanceText;
 
@@ -105,6 +110,7 @@ public class UIController : MonoBehaviour
 		/* Initialize Top Panel
 	       ====================================================================== */
 		SetTurn (1);
+        SetPhase ("Planning");
 		SetDistance (0);
 
 		/* Initialize Left Panel
@@ -127,6 +133,14 @@ public class UIController : MonoBehaviour
 	public void SetTurn (int turn = 1)
 	{
 		topTurnText.text = "Turn " + turn.ToString ();
+	}
+
+    public void SetPhase (string myString = "No Phase Set")
+	{
+		Text myHiddenParentText = topPhaseText.GetComponent<Text> ();
+		Text myVisualChildText = topPhaseText.GetComponentsInChildren<Text> ()[1].GetComponent<Text>();
+		myHiddenParentText.text = myVisualChildText.text = myString;
+		topPhaseText.text = myString;
 	}
 
 	public void SetDistance (int distance = 20)
