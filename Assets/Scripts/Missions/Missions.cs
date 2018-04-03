@@ -39,7 +39,8 @@ public class Missions : MonoBehaviour
         switch (gc.level)
         {
             case 1:
-                cp.ShowPanel("Learner's Test Begins", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\nBuild a planet to start!");
+                cp.ShowPanel("Welcome to the Learner's Test", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\nSelect a planet type to start building your solar system!");
+                cp.confirmButton.onClick.AddListener(cp.CheckMissions); // change function of button to change level/scene
                 break;
             case 2:
                 //cp.ShowPanel("N Test", "Sorry, N Test is currently not available...\r\n\r\nClick OK to replay!");
@@ -50,6 +51,7 @@ public class Missions : MonoBehaviour
                 cp.ShowPanel("Full License Test", "An unknown amount of Rogue planets will appear. Eliminate them all to prove that you are worthy of a full license.");
                 break;
             default:
+                cp.ShowPanel("Welcome to the Learner's Test", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\nSelect a planet type to start building your solar system!");
                 break;
         }
     }
@@ -103,202 +105,156 @@ public class Missions : MonoBehaviour
     public void OnNotify(GameObject mission)
     {
         m = mission.GetComponent<Mission>();
-        //switch (m.missionName)
-        //{
-        //    case "Birth of a Universe":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
-        //        if (gc.planets.Count > 0)
-        //        {
-        //            Complete(mission);
-        //            Reward(mission);
-        //        }
-        //        else
-        //        {
-        //            //Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //        }
-        //        break;
-        //    case "Open Planet Properties Panel":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
-        //        if (gc.selected != null && gc.selected.CompareTag("Planet"))
-        //        {
-        //            Complete(mission);
-        //            Reward(mission);
-        //        }
-        //        else
-        //        {
-        //            //Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //        }
-        //        break;
-        //    case "Simulate":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
-        //        if (gc.simulate)
-        //        {
-        //            Complete(mission);
-        //            Reward(mission);
-        //        }
-        //        else
-        //        {
-        //            //Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //        }
-        //        break;
-        //    case "Assign a Planet to Learn High Energy Magnetics":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+        switch (m.missionName)
+        {
+            case "A Whole New World":
+                if (gc.planets.Count > 0)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                break;
+            case "Living in a Simulation":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                if (gc.simulate)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                break;
+            case "Planet in Training":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
 
-        //        foreach (var planet in gc.planets)
-        //        {
-        //            p = planet.GetComponent<Planet>();
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
 
-        //            if (p.moreResource)
-        //            {
-        //                Complete(mission);
-        //                Reward(mission);
-        //            }
-        //            else
-        //            {
-        //                //Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //            }
-        //        }
-        //        break;
-        //    case "Assign a planet to learn Interplanetary Networking":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                    if (p.moreResource)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                    else
+                    {
+                        //Debug.Log("Mission: " + m.missionName + " incomplete.");
+                    }
+                }
+                break;
+            case "Interplanetary Networking":
+                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
 
-        //        foreach (var planet in gc.planets)
-        //        {
-        //            p = planet.GetComponent<Planet>();
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
 
-        //            if (p.iflinkactive)
-        //            {
-        //                Complete(mission);
-        //                Reward(mission);
-        //            }
-        //            else
-        //            {
-        //                //Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //            }
-        //        }
-        //        break;
-        //    case "Assign a Planet to Learn a Negative Mass Mechanics":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
-        //        //if (gc.planets.Count > 0)
-        //        //{
-        //        //    Complete(mission);
-        //        //    Reward(mission);
-        //        //}
-        //        //else
-        //        //{
-        //        //    Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //        //}
-        //        break;
-        //    case "Assign another planet to learn Interplanetary Networking":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
-        //        int planetsLearnIP = 0;
-        //        foreach (var planet in gc.planets)
-        //        {
-        //            p = planet.GetComponent<Planet>();
+                    if (p.iflinkactive)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                }
+                break;
+            case "Binary Planets":
+                if (gc.planets.Count > 1)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                break;
+            case "Social Network":
+                if (gc.planets.Count > 1)
+                {
+                    if (p.iflinkactive)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                }
+                break;
+            case "Together Forever":
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
 
-        //            if (p.iflinkactive)
-        //            {
-        //                planetsLearnIP++;
+                    if (p.linkedWith.Count > 0)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                        cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
+                        cp.confirmButton.onClick.AddListener(cp.NextLevel); // change function of button to change level/scene
+                    }
+                }
+                break;
 
-        //            }
-        //        }
-        //        if (planetsLearnIP > 1)
-        //        {
-        //            Complete(mission);
-        //            Reward(mission);
-        //        }
-        //        else
-        //        {
-        //            //Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //        }
-        //        break;
-        //    case "Successfully Link Two Planets":
-        //        //Debug.Log("Checking Mission: " + m.missionName + " progress...");
-        //        foreach (var planet in gc.planets)
-        //        {
-        //            p = planet.GetComponent<Planet>();
+            //// level 2
+            //case "Link With One Planet":
+            //    foreach (var planet in gc.planets)
+            //    {
+            //        p = planet.GetComponent<Planet>();
 
-        //            if (p.linkedWith.Count > 0)
-        //            {
-        //                Complete(mission);
-        //                Reward(mission);
-        //                cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
-        //                cp.confirmButton.onClick.AddListener(cp.NextLevel); // change function of button to change level/scene
-        //            }
-        //            else
-        //            {
-        //                //Debug.Log("Mission: " + m.missionName + " incomplete.");
-        //            }
-        //        }
-        //        break;
+            //        if (p.linkedWith.Count > 0)
+            //        {
+            //            Complete(mission);
+            //            reward = true;
+            //        }
+            //    }
+            //    if (reward)
+            //    {
+            //        Reward(mission);
+            //    }
+            //    break;
+            //case "Learn Attack Tech":
+            //    foreach (var planet in gc.planets)
+            //    {
+            //        p = planet.GetComponent<Planet>();
+            //        if (p.ifattackactive)
+            //        {
+            //            Complete(mission);
+            //            Reward(mission);
+            //        }
+            //    }
+            //    break;
+            //case "Defeat One Rogue Planet":
+            //    foreach (var rogue in gc.roguePlanets)
+            //    {
+            //        r = rogue.GetComponent<Rogue>();
+            //        if (r.die)
+            //        {
+            //            Complete(mission);
+            //            Reward(mission);
+            //            cp.ShowPanel("Rogue Planet Defeated", "Get ready for your final test!");
+            //            cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
+            //            return;
+            //        }
 
-        //    // level 2
-        //    case "Link With One Planet":
-        //        foreach (var planet in gc.planets)
-        //        {
-        //            p = planet.GetComponent<Planet>();
+            //    }
+            //    break;
+            //case "Defeat 3 Rogue Planets Before Turn 100":
+            //    if (gc.turn < 100)
+            //    {
+            //        foreach (var rogue in gc.roguePlanets)
+            //        {
+            //            r = rogue.GetComponent<Rogue>();
+            //            if (r.die)
+            //            {
+            //                rogueDieIncrement++;
 
-        //            if (p.linkedWith.Count > 0)
-        //            {
-        //                Complete(mission);
-        //                reward = true;
-        //            }
-        //        }
-        //        if (reward)
-        //        {
-        //            Reward(mission);
-        //        }
-        //        break;
-        //    case "Learn Attack Tech":
-        //        foreach (var planet in gc.planets)
-        //        {
-        //            p = planet.GetComponent<Planet>();
-        //            if (p.ifattackactive)
-        //            {
-        //                Complete(mission);
-        //                Reward(mission);
-        //            }
-        //        }
-        //        break;
-        //    case "Defeat One Rogue Planet":
-        //        foreach (var rogue in gc.roguePlanets)
-        //        {
-        //            r = rogue.GetComponent<Rogue>();
-        //            if (r.die)
-        //            {
-        //                Complete(mission);
-        //                Reward(mission);
-        //                cp.ShowPanel("Rogue Planet Defeated", "Get ready for your final test!");
-        //                cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
-        //                return;
-        //            }
+            //            }
+            //            if (rogueDieIncrement > 2)
+            //            {
+            //                Complete(mission);
+            //                Reward(mission);
+            //                cp.ShowPanel("Congratulations!", "You now have a full license to go on and build solar systems. Be safe!\r\n\r\nClick OK to replay!");
+            //                cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
+            //                return;
+            //            }
 
-        //        }
-        //        break;
-        //    case "Defeat 3 Rogue Planets Before Turn 100":
-        //        if (gc.turn < 100)
-        //        {
-        //            foreach (var rogue in gc.roguePlanets)
-        //            {
-        //                r = rogue.GetComponent<Rogue>();
-        //                if (r.die)
-        //                {
-        //                    rogueDieIncrement++;
-
-        //                }
-        //                if (rogueDieIncrement > 2)
-        //                {
-        //                    Complete(mission);
-        //                    Reward(mission);
-        //                    cp.ShowPanel("Congratulations!", "You now have a full license to go on and build solar systems. Be safe!\r\n\r\nClick OK to replay!");
-        //                    cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
-        //                    return;
-        //                }
-
-        //            }
-        //        }
-        //        break;
-        //}
+            //        }
+            //    }
+            //    break;
+            default:
+                break;
+        }
     }
 
     // used to reward
@@ -309,19 +265,9 @@ public class Missions : MonoBehaviour
 
         switch (m.missionName)
         {
-            case "Link With One Planet":
-                foreach (var planet in gc.planets)
-                {
-                    p = planet.GetComponent<Planet>();
-
-                    if (!planet.name.Contains("Rogue"))
-                    {
-                        p.carbon += 100;
-                        p.hydrogen += 100;
-                        p.nitrogen += 100;
-                        gc.l.UpdateLogPlanetRes(planet.name, 100, 100, 100);
-                    }
-                }
+            case "A Whole New World":
+                // reward first planet with 2 stone
+                gc.planets[0].GetComponent<Planet>().carbon += 2;
                 reward = false;
                 break;
         }
@@ -341,7 +287,7 @@ public class Missions : MonoBehaviour
             GameObject ms = GameObject.Find(mission.name + "(Clone)"); // find the instantiated game object of the same name that is set as a child to one of the mission buttons
             Button button = ms.transform.parent.transform.Find("Mission Button").GetComponent<Button>(); // get the particular mission button
             ColorBlock cb = button.GetComponent<Button>().colors;
-            cb.normalColor = new Color(0.298f, 0.686f, 0.313f); // set the button color to same green as play button
+            cb.disabledColor = new Color(0.298f, 0.686f, 0.313f); // set the button color to same green as play button
             button.colors = cb;
 
             //if (m.postMissionHint != "") // if there is post mission hint, show confirmation panel with message and hint - assumes when there is a hint, there is a message
@@ -350,7 +296,11 @@ public class Missions : MonoBehaviour
             //}
             //else if (m.postMissionMessage != "")// else just show confirmation panel with just message
             //{
-                cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage);
+            if (!gc.simulate)
+            {
+                cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.missionReward);
+            }
+            
             //}
 
             gc.l.UpdateLogMission(m.missionName, m.missionReward);
@@ -365,6 +315,7 @@ public class Missions : MonoBehaviour
             if (!mission.GetComponent<Mission>().completed)
             {
                 OnNotify(mission);
+                gc.ui.UpdateSelectedPlanet();
             }
         }
     }

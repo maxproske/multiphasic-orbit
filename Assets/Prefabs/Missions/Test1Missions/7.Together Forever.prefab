@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: Planet Inspector
+  m_Name: 7.Together Forever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,10 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Planet Inspector
-  missionDescription: Open properties panel.
-  missionReward: 4 stone.
-  postMissionMessage: You've placed your first planet. You can continue placing planets
-    at your own discretion. Each planet has special properties for you to manage and
-    explore.
+  missionName: Together Forever
+  missionDescription: Establish link between planets.
+  missionReward: Learner's certificate.
+  postMissionMessage: Establish link between planets.
   completed: 0

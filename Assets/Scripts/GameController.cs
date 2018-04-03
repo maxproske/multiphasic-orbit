@@ -230,8 +230,6 @@ public class GameController : MonoBehaviour
         gasButton.interactable = false;
 
         ResetLinking();
-
-
     }
 
     public void AddMissionsToUI(GameObject mission)
@@ -243,14 +241,14 @@ public class GameController : MonoBehaviour
         // set all buttons to incomplete red 
         Button button = go.transform.GetChild(0).GetComponent<Button>(); // get the particular mission button
         ColorBlock cb = button.GetComponent<Button>().colors;
-        cb.normalColor = new Color(0.894f, 0.266f, 0.266f); // set the button color to same green as play button
+        cb.disabledColor = new Color(0.894f, 0.266f, 0.266f); // set the button color to same green as play button
         button.colors = cb;
 
         Text panelText = go.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>(); // get Text of Mission Panel
 
-        //panelText.text = mission.GetComponent<Mission>().missionName; // change text of Mission Panel to missionName
-        missionIncrement++;
-        panelText.text = "Mission " + missionIncrement;
+        panelText.text = mission.GetComponent<Mission>().missionName; // change text of Mission Panel to missionName
+        //missionIncrement++;
+        //panelText.text = "Mission " + missionIncrement;
 
 
         // Set tooltip for Mission Panel
@@ -407,7 +405,7 @@ public class GameController : MonoBehaviour
 		}
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!simulate)
+            if (playButton.interactable)
             {
                 Simulate();
             }
@@ -1357,7 +1355,11 @@ public class GameController : MonoBehaviour
                 }
                 else
                 { // otherwise chance to fail
-                    CalculateFail();
+                    if (level != 1)
+                    {
+                        CalculateFail();
+                    }
+                    
                 }
 
                 if (!linkedAlready)

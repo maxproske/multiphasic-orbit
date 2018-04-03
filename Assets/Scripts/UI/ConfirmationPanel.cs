@@ -39,12 +39,12 @@ public class ConfirmationPanel : MonoBehaviour
         messageText.text = message;
     }
 
-    public void ShowPanel(string title, string message, string hint)
+    public void ShowPanel(string title, string message, string reward)
     {
         panel.SetActive(true);
         titleText.text = title;
         messageText.text = message;
-        messageText.text += "\r\n" + hint;
+        messageText.text += "\r\n\r\n" + "<b>Reward: " + reward + "</b>";
     }
 
     private void ClosePanel()
@@ -70,5 +70,10 @@ public class ConfirmationPanel : MonoBehaviour
     public void Final()
     {
         SceneManager.LoadScene("Final");
+    }
+
+    public void CheckMissions()
+    {
+        gc.m.CheckMissions(gc.m.missions);
     }
 }

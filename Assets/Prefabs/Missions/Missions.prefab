@@ -55,11 +55,10 @@ MonoBehaviour:
   reward: 0
   missions: []
   Test1Missions:
-  - {fileID: 1959671137344680, guid: 3c0fe4a3d2d4c2c43bd2c5f668729488, type: 2}
   - {fileID: 1959671137344680, guid: 08bd3067812703944bfbc29cc69ccb77, type: 2}
-  - {fileID: 1959671137344680, guid: 8e29fbd5e8f566f449cab1a6acc42182, type: 2}
-  - {fileID: 1959671137344680, guid: 3adab7b79ab72d2489c5e4da54375445, type: 2}
+  - {fileID: 1959671137344680, guid: 4a083b114552d3d4694555a830f94b71, type: 2}
   - {fileID: 1959671137344680, guid: 1087a24f54abf4145a42e2ffcc0ad92f, type: 2}
+  - {fileID: 1959671137344680, guid: 63bcf062fb58b464dba9b0a67ce6f3c7, type: 2}
   - {fileID: 1959671137344680, guid: 77dc1aeb5d954e0429d59c57b24cc801, type: 2}
   - {fileID: 1959671137344680, guid: 96195e93f5fd9d041a4be1434786c046, type: 2}
   - {fileID: 1959671137344680, guid: 5335976df1cb4a841999014040d2093e, type: 2}

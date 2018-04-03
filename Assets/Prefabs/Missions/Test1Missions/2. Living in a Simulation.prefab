@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: Living in a Simulation
+  m_Name: 2. Living in a Simulation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,8 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionName: Living in a Simulation
   missionDescription: Play end turn simulation.
-  missionReward: 2 of each resource.
-  postMissionMessage: You figured out how toa ccess the Properties panel. Here you'll
-    find information about the resources, population, health and technology of your
-    planet. Next, click the Play button to end your turn.
+  missionReward: 4 of each resource.
+  postMissionMessage: Simulation Complete! Once there are no more actions to be completed
+    you may hit the Play Button. Next, learn your first technology and press Play.
   completed: 0
