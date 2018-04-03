@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Defeat 3 Rogue Planets Before Turn 100
-  missionDescription: 
-  missionReward: 
-  postMissionMessage: 
-  completed: 1
+  missionName: Godlike
+  missionDescription: Complete any 5 missions to earn your Full License certification.
+  missionReward: Full license certificate.
+  postMissionMessage: YOU ARE A GOD! You've rightfully earned your Full License certification,
+    and your place among the stars! If you are a masochist, and want to prove yourself.
+    Do you want to play the credits, or complete all missions?
+  completed: 0

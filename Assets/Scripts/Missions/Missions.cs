@@ -45,7 +45,7 @@ public class Missions : MonoBehaviour
                 .ToArray();
         totalMissions = missionsPool.Length;
 
-        for (int i = 0; i < totalMissions - 1; i++)
+        for (int i = 0; i < totalMissions; i++)
         {
             possibleMissionIndexes.Add(i);
         }
@@ -104,6 +104,8 @@ public class Missions : MonoBehaviour
             default:
                 Debug.Log("Playing Level 3");
 
+                
+
                 // add missions from Test1Missions to missions to play with list called missions
                 for (int i = 0; i < test3MissionsAmount; i++)
                 {
@@ -112,8 +114,13 @@ public class Missions : MonoBehaviour
                     possibleMissionIndexes.RemoveAt(randomEntry);
                     GameObject missionToAdd = missionsPool[randomNumberToUse]; // get random mission from missionsPool
 
-                    Test3Missions.Add(missionToAdd);
+                    //Test3Missions.Add(missionToAdd);
                     gc.AddMissionsToUI(missionToAdd);
+                }
+
+                foreach (var mission in Test3Missions)
+                {
+                    gc.AddMissionsToUI(mission);
                 }
                 break;
         }
