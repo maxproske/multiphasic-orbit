@@ -96,7 +96,7 @@ public class UIController : MonoBehaviour
 
 
     // GameController
-    private GameController gc;
+    public GameController gc;
 
     private void Awake()
     {

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: 2. Learn Attack Tech
+  m_Name: 2. Waterworld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Learn Attack Tech
-  missionDescription: 
-  missionReward: 
-  postMissionMessage: 
-  postMissionHint: 
+  missionName: Waterworld
+  missionDescription: Build a water planet.
+  missionReward: 20 water.
+  postMissionMessage: Your stone planet is now being traded water every turn, and
+    can upgrade their technology. make your stone planet learn Extraplanetary Ballistics
+    to defend itself.
   completed: 0

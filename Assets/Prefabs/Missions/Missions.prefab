@@ -66,5 +66,6 @@ MonoBehaviour:
   - {fileID: 1959671137344680, guid: 02034db316776b941b3d5df761bc79ec, type: 2}
   - {fileID: 1959671137344680, guid: 31f5bb4603abef5458053c84d768cf76, type: 2}
   - {fileID: 1959671137344680, guid: bbc425cc340e9854aa006f1845c4fbfa, type: 2}
+  - {fileID: 1959671137344680, guid: 69e3f801e1d2a53439c52be7dff59394, type: 2}
   Test3Missions:
   - {fileID: 1959671137344680, guid: b883c6840e5500248873bd86dd3c54aa, type: 2}

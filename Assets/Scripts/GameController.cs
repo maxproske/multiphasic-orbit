@@ -136,6 +136,8 @@ public class GameController : MonoBehaviour
 
 	public GameObject leftpanel;
 	public GameObject rightpanel;
+
+    private bool failOnce;
     // Use this for initialization
     void Start()
     {
@@ -145,7 +147,7 @@ public class GameController : MonoBehaviour
         //cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
         //l = log.GetComponent<Log>();
 
-        
+        failOnce = true;
 
         currentScene = SceneManager.GetActiveScene();
 
@@ -230,6 +232,8 @@ public class GameController : MonoBehaviour
         gasButton.interactable = false;
 
         ResetLinking();
+
+        m.InitializeMissions();
     }
 
     public void AddMissionsToUI(GameObject mission)
@@ -1186,57 +1190,64 @@ public class GameController : MonoBehaviour
 
     private void CalculateFail()
     {
-        //chance to fail
-        int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier) - firstPlanetScript.addlinkchance - secondPlanetScript.addlinkchance;
-        //        		Debug.Log(difftier);
+        if (failOnce)
+        {
+            fail = true;
+            failOnce = false;
+        } else
+        {
+            //chance to fail
+            int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier) - firstPlanetScript.addlinkchance - secondPlanetScript.addlinkchance;
+            //        		Debug.Log(difftier);
 
-        if (difftier < 0)
-        {
-            fail = false;
-        }
-        else if (difftier == 0)
-        {
-            int chance = Random.Range(0, 10);
-            //            			Debug.Log (chance);
-            if (chance == 0)
+            if (difftier < 0)
             {
-                fail = true;
-                failtime = 0;
+                fail = false;
             }
-        }
-        else if (difftier == 1)
-        {
-            int chance = Random.Range(0, 10);
-            //            			Debug.Log (chance);
-            if (chance < 2)
+            else if (difftier == 0)
             {
-                fail = true;
-                failtime = 0;
+                int chance = Random.Range(0, 10);
+                //            			Debug.Log (chance);
+                if (chance == 0)
+                {
+                    fail = true;
+                    failtime = 0;
+                }
             }
-        }
-        else if (difftier == 2)
-        {
-            int chance = Random.Range(0, 10);
-            //            			Debug.Log (chance);
-            if (chance < 3)
+            else if (difftier == 1)
             {
-                fail = true;
-                failtime = 0;
+                int chance = Random.Range(0, 10);
+                //            			Debug.Log (chance);
+                if (chance < 2)
+                {
+                    fail = true;
+                    failtime = 0;
+                }
             }
-        }
-        else if (difftier > 2)
-        {   //this one for test it work 
-            int chance = Random.Range(0, 10);
-            //            			Debug.Log (chance);
-            if (chance < 10)
+            else if (difftier == 2)
             {
-                fail = true;
-                failtime = 0;
+                int chance = Random.Range(0, 10);
+                //            			Debug.Log (chance);
+                if (chance < 3)
+                {
+                    fail = true;
+                    failtime = 0;
+                }
             }
-        }
-        else
-        {
-            fail = false;
+            else if (difftier > 2)
+            {   //this one for test it work 
+                int chance = Random.Range(0, 10);
+                //            			Debug.Log (chance);
+                if (chance < 10)
+                {
+                    fail = true;
+                    failtime = 0;
+                }
+            }
+            else
+            {
+                fail = false;
+            }
         }
     }
 

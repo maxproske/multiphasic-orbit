@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(LineRenderer))]
 public class Planet : MonoBehaviour
 {
-	public bool die=false;
+    public bool die = false;
     // class fields
     public int tier;
     public int addCarbon;
@@ -24,19 +24,19 @@ public class Planet : MonoBehaviour
     public int halfaddCarbon;
     public int halfaddNitrogen;
     public int halfaddHydrogen;
-	public int addlinkchance;
-	public bool stormsheid = false;
-	public bool moreResource = false;
+    public int addlinkchance;
+    public bool stormsheid = false;
+    public bool moreResource = false;
     public int technologyLevel = 0;
-	public bool iflinkactive=false;
-	public bool ifattackactive=false;
+    public bool iflinkactive = false;
+    public bool ifattackactive = false;
 
 
-	public int iftech1;
-	public int iftech2;
-	public int iftech3;
-	public int iftech4;
-	public int iftech5;
+    public int iftech1;
+    public int iftech2;
+    public int iftech3;
+    public int iftech4;
+    public int iftech5;
     // Get a reference to the LineRenderer
     LineRenderer lr;
 
@@ -49,9 +49,9 @@ public class Planet : MonoBehaviour
     public Transform orbitingObject;
 
     // Serialized ellipse object
-    
 
-	public EllipseTester orbitPath;
+
+    public EllipseTester orbitPath;
 
     // How far along the path of the ellipse we are
     // Clamp between 0-1
@@ -87,10 +87,10 @@ public class Planet : MonoBehaviour
     // GUI
     private float rectx, recty;
     public Vector3 pos;
-	public Sprite planetSprite;
-	public int population = 0;
-	public int health;
-	public int maxHealth;
+    public Sprite planetSprite;
+    public int population = 0;
+    public int health;
+    public int maxHealth;
 
     // collecting
     public bool collecting = false;
@@ -112,10 +112,10 @@ public class Planet : MonoBehaviour
     public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
     public LineRenderer[] links;
     public GameObject[] lines;
-	private int preCarbon = 0;
-	private int preHydrogen = 0;
-	private int preNitrogen = 0;
-	private GUIStyle guiStyle = new GUIStyle(); 
+    private int preCarbon = 0;
+    private int preHydrogen = 0;
+    private int preNitrogen = 0;
+    private GUIStyle guiStyle = new GUIStyle();
 
     private UIController ui;
     // Move here so it is referencable by the UI script
@@ -139,7 +139,7 @@ public class Planet : MonoBehaviour
     public void SetOrbitColor(string state = "")
     {
         Color color = Color.white;
-        switch (state) 
+        switch (state)
         {
             case "selected":
                 color.a = 1f;
@@ -161,7 +161,7 @@ public class Planet : MonoBehaviour
     {
         // Get reference when we start the game
         lr = GetComponent<LineRenderer>();
-		lr.startWidth = 2f;
+        lr.startWidth = 2f;
 
         SetOrbitColor("deselected"); // Deselected by default
 
@@ -175,7 +175,7 @@ public class Planet : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
-        ui = GameObject.Find ("Canvas").GetComponent<UIController> ();
+        ui = GameObject.Find("Canvas").GetComponent<UIController>();
 
         lines = new GameObject[10];
         links = new LineRenderer[10];
@@ -184,11 +184,11 @@ public class Planet : MonoBehaviour
             lines[i] = new GameObject();
             links[i] = lines[i].AddComponent<LineRenderer>();
             links[i].SetWidth(0.8f, 0.8f);
-	
-		
 
-			links [i].SetColors (Color.red, Color.red);
-		
+
+
+            links[i].SetColors(Color.red, Color.red);
+
         }
 
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
@@ -202,7 +202,7 @@ public class Planet : MonoBehaviour
 
         if (!planetPlaced)
         {
-           // Debug.Log("StartCoroutine (AnimateOrbit (1)); called from Planet.cs");
+            // Debug.Log("StartCoroutine (AnimateOrbit (1)); called from Planet.cs");
             placing = StartCoroutine(AnimateOrbit(Constants.ANIMATE_SPEED_TEST));
         }
 
@@ -239,42 +239,52 @@ public class Planet : MonoBehaviour
 
     public void FixedUpdate()
     {
-		if (die == true) {
-			this.gameObject.SetActive (false);
-
-			foreach (var line in lines) {
-				line.SetActive (false);
-			}
-		}
-        // Constant rotation
-        if (fastUniverse) 
+        if (die == true)
         {
-            transform.Rotate (9*Time.deltaTime, 40*Time.deltaTime, 9*Time.deltaTime);
-        } 
-        else {
-            transform.Rotate (3*Time.deltaTime, 18*Time.deltaTime, 4*Time.deltaTime);
+            this.gameObject.SetActive(false);
+
+            foreach (var line in lines)
+            {
+                line.SetActive(false);
+            }
         }
-        
+        // Constant rotation
+        if (fastUniverse)
+        {
+            transform.Rotate(9 * Time.deltaTime, 40 * Time.deltaTime, 9 * Time.deltaTime);
+        }
+        else
+        {
+            transform.Rotate(3 * Time.deltaTime, 18 * Time.deltaTime, 4 * Time.deltaTime);
+        }
 
-		if (die == false) {
-			if (linkedWith.Count > 0) {
-				
-				for (int i = 0; i < linkedWith.Count; i++) {
 
-					if (linkedWith [i].die == false) {
-						//change the line renderer color here
-						if (linkedWith [i].CompareTag ("Rogue")) {
+        if (die == false)
+        {
+            if (linkedWith.Count > 0)
+            {
 
-							links [i].SetColors (Color.red, Color.red);
-						}
-						links [i].SetPosition (0, transform.position);
-						links [i].SetPosition (1, linkedWith [i].transform.position);
-					} else {
-						lines [i].SetActive (false);
-					}
-				}
-			}
-		}
+                for (int i = 0; i < linkedWith.Count; i++)
+                {
+
+                    if (linkedWith[i].die == false)
+                    {
+                        //change the line renderer color here
+                        if (linkedWith[i].CompareTag("Rogue"))
+                        {
+
+                            links[i].SetColors(Color.red, Color.red);
+                        }
+                        links[i].SetPosition(0, transform.position);
+                        links[i].SetPosition(1, linkedWith[i].transform.position);
+                    }
+                    else
+                    {
+                        lines[i].SetActive(false);
+                    }
+                }
+            }
+        }
         if (Application.isPlaying && lr != null)
         {
             CalculateEllipse();
@@ -302,10 +312,10 @@ public class Planet : MonoBehaviour
             }
             if (count > 60)
             {
-	
-				preCarbon = stone;
-				preNitrogen = water;
-				preHydrogen = gas;
+
+                preCarbon = stone;
+                preNitrogen = water;
+                preHydrogen = gas;
                 count = 0;
                 collecting = false;
                 //gc.simulate = false;
@@ -414,66 +424,73 @@ public class Planet : MonoBehaviour
     //Function that can show the resource of this object
     void CollectNow()
     {
-		guiStyle.fontSize = 20;
-		guiStyle.normal.textColor = Color.white;
-		if(gc.storm&&stormsheid==false){
-			guiStyle.normal.textColor = Color.cyan;
-		}
+        guiStyle.fontSize = 20;
+        guiStyle.normal.textColor = Color.white;
+        if (gc.storm && stormsheid == false)
+        {
+            guiStyle.normal.textColor = Color.cyan;
+        }
 
         if (ifHover == true)
         {
-			//GUI.Box(new Rect(rectx + 20, Screen.height - recty, 300, 50), planetname + ": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen + "\n This is a Tier " + tier + " Planet.",guiStyle);
+            //GUI.Box(new Rect(rectx + 20, Screen.height - recty, 300, 50), planetname + ": Carbon: " + carbon + ", Nitrogen: " + nitrogen + ", Hydrogen: " + hydrogen + "\n This is a Tier " + tier + " Planet.",guiStyle);
 
         }
         //}
         // pop up of resources collected after simulation
         if (collecting == true/* && count > 30*/)
         {
-			stoneCollected = addCarbon * collectionMultiplier;
-			waterCollected = addNitrogen * collectionMultiplier;
-			gasCollected = addHydrogen * collectionMultiplier;
+            stoneCollected = addCarbon * collectionMultiplier;
+            waterCollected = addNitrogen * collectionMultiplier;
+            gasCollected = addHydrogen * collectionMultiplier;
 
             //Debug.Log("addCarbon: " + addCarbon + ", collectionMultiplier:" + collectionMultiplier);
 
-			if (linkedWith.Count == 0) {
-				// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + stoneCollected, guiStyle);
-				// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected, guiStyle);
-				// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected, guiStyle);
-			}
-			if (linkedWith.Count > 0) {
-				if (this.CompareTag ("Rogue")) {
-					if (this.die == false) {
-//						guiStyle.normal.textColor = Color.red;
-					
-						// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
-						// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
-						// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
-					}
-				} else {
-//					string ac = " ";
-//					string an = " ";
-//					string ah = " ";
-//					if (tradecarbon >= 0) {
-//						ac = " + ";
-//					} else if (tradecarbon < 0) {
-//						ac = " - ";
-//					}
-//					if (tradenitrogen >= 0) {
-//						an = " + ";
-//					} else if (tradenitrogen < 0) {
-//						an = " - ";
-//					}
-//					if (tradehydrogen >= 0) {
-//						ah = " + ";
-//					} else if (tradehydrogen < 0) {
-//						ah = " - ";
-//					}
-					// GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + stoneCollected + ac + Mathf.Abs (tradecarbon), guiStyle);
-					// GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected + an + Mathf.Abs (tradenitrogen), guiStyle);
-					// GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected + ah + Mathf.Abs (tradehydrogen), guiStyle);	
-				}
-			}
-		}
+            if (linkedWith.Count == 0)
+            {
+                // GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + stoneCollected, guiStyle);
+                // GUI.Label (new Rect (rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected, guiStyle);
+                // GUI.Label (new Rect (rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected, guiStyle);
+            }
+            if (linkedWith.Count > 0)
+            {
+                if (this.CompareTag("Rogue"))
+                {
+                    if (this.die == false)
+                    {
+                        //						guiStyle.normal.textColor = Color.red;
+
+                        // GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
+                        // GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
+                        // GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
+                    }
+                }
+                else
+                {
+                    //					string ac = " ";
+                    //					string an = " ";
+                    //					string ah = " ";
+                    //					if (tradecarbon >= 0) {
+                    //						ac = " + ";
+                    //					} else if (tradecarbon < 0) {
+                    //						ac = " - ";
+                    //					}
+                    //					if (tradenitrogen >= 0) {
+                    //						an = " + ";
+                    //					} else if (tradenitrogen < 0) {
+                    //						an = " - ";
+                    //					}
+                    //					if (tradehydrogen >= 0) {
+                    //						ah = " + ";
+                    //					} else if (tradehydrogen < 0) {
+                    //						ah = " - ";
+                    //					}
+                    // GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + stoneCollected + ac + Mathf.Abs (tradecarbon), guiStyle);
+                    // GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected + an + Mathf.Abs (tradenitrogen), guiStyle);
+                    // GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected + ah + Mathf.Abs (tradehydrogen), guiStyle);	
+                }
+            }
+        }
     }
 
     public void IncreasePopulation()
@@ -517,66 +534,73 @@ public class Planet : MonoBehaviour
             {
                 if (!planet.CompareTag("Rogue") && !this.CompareTag("Rogue"))
                 {
-//                    Debug.Log(this.name + " traded with: " + planet.name);
+                    //                    Debug.Log(this.name + " traded with: " + planet.name);
                     trade(planet);
                 }
-				if (planet.CompareTag("Rogue")&&planet.die==false)
-				{
-//					Debug.Log(this.name + " was stole by  " + planet.name);
-					tradecarbon--;
-					tradenitrogen--;
-					tradehydrogen--;
-				}
-				if (this.CompareTag("Rogue")&&this.die==false)
-				{
-//					Debug.Log(this.name + " stole from  " + planet.name);
-					tradecarbon++;
-					tradenitrogen++;
-					tradehydrogen++;
-				}
+                if (planet.CompareTag("Rogue") && planet.die == false)
+                {
+                    //					Debug.Log(this.name + " was stole by  " + planet.name);
+                    tradecarbon--;
+                    tradenitrogen--;
+                    tradehydrogen--;
+                }
+                if (this.CompareTag("Rogue") && this.die == false)
+                {
+                    //					Debug.Log(this.name + " stole from  " + planet.name);
+                    tradecarbon++;
+                    tradenitrogen++;
+                    tradehydrogen++;
+                }
 
             }
 
             stone += addCarbon * collectionMultiplier;
             water += addNitrogen * collectionMultiplier;
             gas += addHydrogen * collectionMultiplier;
-			if (turnsToBuild < 1) {
-				gc.summary += planetname + " collected" + addCarbon + " stones, " + addNitrogen + " water, " + addHydrogen + " gas.\n";
-			}
-			if (linkedWith.Count>0) {
-					
-					
-				gc.summary+=" It traded"+tradecarbon+" stones, "+tradenitrogen+" water, "+tradehydrogen+" gas.\n";
-			}
-			if (iftech1 == 3) {
-				gc.summary+=" It learned collecting more resources technology\n";
-				iftech1 = 4;
-			}
-			if (iftech2 == 3) {
-				gc.summary+=" It learned linking technology\n";
-				iftech2 = 4;
-			}
-			if (iftech3 == 3) {
-				gc.summary+=" It learned more linking chance technology\n";
-				iftech3 = 4;
-			}
-			if (iftech4 == 3) {
-				gc.summary+=" It learned stormsheid technology\n";
-				iftech4 = 4;
-			}
-			if (iftech5 == 3) {
-				gc.summary+=" It learned attacking technology\n";
-				iftech5 = 4;
-			}
+            if (turnsToBuild < 1)
+            {
+                gc.summary += planetname + " collected" + addCarbon + " stones, " + addNitrogen + " water, " + addHydrogen + " gas.\n";
+            }
+            if (linkedWith.Count > 0)
+            {
+
+
+                gc.summary += " It traded" + tradecarbon + " stones, " + tradenitrogen + " water, " + tradehydrogen + " gas.\n";
+            }
+            if (iftech1 == 3)
+            {
+                gc.summary += " It learned collecting more resources technology\n";
+                iftech1 = 4;
+            }
+            if (iftech2 == 3)
+            {
+                gc.summary += " It learned linking technology\n";
+                iftech2 = 4;
+            }
+            if (iftech3 == 3)
+            {
+                gc.summary += " It learned more linking chance technology\n";
+                iftech3 = 4;
+            }
+            if (iftech4 == 3)
+            {
+                gc.summary += " It learned stormsheid technology\n";
+                iftech4 = 4;
+            }
+            if (iftech5 == 3)
+            {
+                gc.summary += " It learned attacking technology\n";
+                iftech5 = 4;
+            }
             ui.SetPhase("Planning");
-			gc.showsummary = true;
+            gc.showsummary = true;
             gc.simulate = false;
             gc.playButton.interactable = true;
             //gc.ToggleInteractability(true);
             gc.SetBuildingActive(true);
-			tradecarbon = 0;
-			tradenitrogen = 0;
-			tradehydrogen = 0;
+            tradecarbon = 0;
+            tradenitrogen = 0;
+            tradehydrogen = 0;
         }
     }
 
@@ -613,7 +637,7 @@ public class Planet : MonoBehaviour
             float orbitSpeedMultiplier = universeMultiplier * Mathf.Pow(Mathf.Max(Mathf.Abs(orbitPath.xAxis), Mathf.Abs(orbitPath.yAxis)) / linearMultiplier, exponentialMultiplier);
 
 
-            
+
             // Division is one of the least efficient thing in basic C#
             // So use time.deltatime to see how far we're moving every frame
             // We want the inverse of orbitPeriod to see how fast we need to catch up
@@ -638,16 +662,20 @@ public class Planet : MonoBehaviour
 
         IncreasePopulation();
         CollectResources();
-        
+
         placingCoroutineRunning = false;
 
         // Update UI last
         ui.UpdateSelectedPlanet();
 
+        //gc.m.CheckMissions(gc.m.missions);
+
         // update how many resources collected per planet
         gc.l.UpdateLogPlanetRes(this.gameObject.name, stoneCollected, waterCollected, gasCollected);
 
         gc.l.LogBackLog();
+
+
     }
 
     // Calculate the ellipse
@@ -668,21 +696,21 @@ public class Planet : MonoBehaviour
             // Debug
             //Debug.Log ("Position of sun: (" + orbitingObject.transform.parent.localPosition.x + ", " + orbitingObject.transform.parent.localPosition.z + ")");
 
-            
+
             // Set point at i equal to a new Vector2 of (x,y) and 0 for z value
             points[i] = new Vector3(
-                position3D.x + orbitingObject.transform.parent.localPosition.x, 
-                position3D.z + orbitingObject.transform.parent.localPosition.z, 
+                position3D.x + orbitingObject.transform.parent.localPosition.x,
+                position3D.z + orbitingObject.transform.parent.localPosition.z,
                 position3D.y + orbitingObject.transform.parent.localPosition.y
             );
 
             if (Constants.ORBIT_4D)
             {
                 if (i == 24) points[i].y *= 1000;
-                if (i == 25) points[i] = new Vector3(99999999,99999,99999);
+                if (i == 25) points[i] = new Vector3(99999999, 99999, 99999);
                 if (i == 26) points[i].y *= 1000;
                 if (i == 74) points[i].y *= 1000;
-                if (i == 75) points[i] = new Vector3(99999999,-99999,99999);
+                if (i == 75) points[i] = new Vector3(99999999, -99999, 99999);
                 if (i == 76) points[i].y *= 1000;
             }
         }
@@ -718,37 +746,41 @@ public class Planet : MonoBehaviour
 
 
 
-	//depends on the planets, we can adjust it.
-	public void addResourceTechnology(){
+    //depends on the planets, we can adjust it.
+    public void addResourceTechnology()
+    {
 
-		stone -= 10;
-		moreResource = true;
-		if (moreResource == true) {
-			OriginaddCarbon += 2; 
-			OriginaddHydrogen += 2;
-			OriginaddNitrogen += 2;
-			halfaddCarbon += 1;
-			halfaddNitrogen += 1;
-			halfaddHydrogen += 1;
+        stone -= 10;
+        moreResource = true;
+        if (moreResource == true)
+        {
+            OriginaddCarbon += 2;
+            OriginaddHydrogen += 2;
+            OriginaddNitrogen += 2;
+            halfaddCarbon += 1;
+            halfaddNitrogen += 1;
+            halfaddHydrogen += 1;
 
-		}
-//		addHydrogen++;
-//		addNitrogen++;
-	}
+        }
+        //		addHydrogen++;
+        //		addNitrogen++;
+    }
 
-	//set the addlinkchance and it will effect the CalculateFail() function in the gamecontroller
-	public void linkchanceTechnology(){
-		gas -= 15;
-		water -= 10;
-		addlinkchance++;
-	}
+    //set the addlinkchance and it will effect the CalculateFail() function in the gamecontroller
+    public void linkchanceTechnology()
+    {
+        gas -= 15;
+        water -= 10;
+        addlinkchance++;
+    }
 
-	//set the storm shied and it will effect the Simulate() function in the gamcontroller
-	public void StormShiedTechnology(){
+    //set the storm shied and it will effect the Simulate() function in the gamcontroller
+    public void StormShiedTechnology()
+    {
 
-		stone -= 15;
-		water -= 15;
-		stormsheid = true;
-	}
+        stone -= 15;
+        water -= 15;
+        stormsheid = true;
+    }
 
 }

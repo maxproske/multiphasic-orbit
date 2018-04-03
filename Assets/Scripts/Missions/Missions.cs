@@ -31,7 +31,7 @@ public class Missions : MonoBehaviour
         reward = false;
         rogueDieIncrement = 0;
 
-        InitializeMissions();
+        //InitializeMissions();
     }
 
     public void CPShownAtStartOfLevel()
@@ -56,7 +56,7 @@ public class Missions : MonoBehaviour
         }
     }
 
-    private void InitializeMissions()
+    public void InitializeMissions()
     {
         switch (gc.level)
         {
@@ -85,9 +85,9 @@ public class Missions : MonoBehaviour
                 }
                 break;
             default:
-                Debug.Log("Playing Level 1");
+                Debug.Log("Playing Level 2");
                 // add missions from Test1Missions to missions to play with list called missions
-                foreach (var mission in Test1Missions)
+                foreach (var mission in Test2Missions)
                 {
                     gc.AddMissionsToUI(mission);
                 }
@@ -108,6 +108,7 @@ public class Missions : MonoBehaviour
 
         switch (m.missionName)
         {
+            // level 1
             case "A Whole New World":
                 if (gc.planets.Count > 0)
                 {
@@ -116,7 +117,6 @@ public class Missions : MonoBehaviour
                 }
                 break;
             case "Living in a Simulation":
-                //GameObject go = Test1Missions[1];
                 if (gc.simulate)
                 {
                     Complete(mission);
@@ -124,7 +124,6 @@ public class Missions : MonoBehaviour
                 }
                 break;
             case "Planet in Training":
-                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
 
                 foreach (var planet in gc.planets)
                 {
@@ -135,15 +134,9 @@ public class Missions : MonoBehaviour
                         Complete(mission);
                         Reward(mission);
                     }
-                    else
-                    {
-                        //Debug.Log("Mission: " + m.missionName + " incomplete.");
-                    }
                 }
                 break;
             case "Interplanetary Networking":
-                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
-
                 foreach (var planet in gc.planets)
                 {
                     p = planet.GetComponent<Planet>();
@@ -179,7 +172,7 @@ public class Missions : MonoBehaviour
                         Complete(mission);
                         Reward(mission);
                     }
-                    
+
                 }
                 break;
             case "Together Forever":
@@ -197,76 +190,75 @@ public class Missions : MonoBehaviour
                 }
                 break;
 
-            //// level 2
-            //case "Link With One Planet":
-            //    foreach (var planet in gc.planets)
-            //    {
-            //        p = planet.GetComponent<Planet>();
 
-            //        if (p.linkedWith.Count > 0)
-            //        {
-            //            Complete(mission);
-            //            reward = true;
-            //        }
-            //    }
-            //    if (reward)
-            //    {
-            //        Reward(mission);
-            //    }
-            //    break;
-            //case "Learn Attack Tech":
-            //    foreach (var planet in gc.planets)
-            //    {
-            //        p = planet.GetComponent<Planet>();
-            //        if (p.ifattackactive)
-            //        {
-            //            Complete(mission);
-            //            Reward(mission);
-            //        }
-            //    }
-            //    break;
-            //case "Defeat One Rogue Planet":
-            //    foreach (var rogue in gc.roguePlanets)
-            //    {
-            //        r = rogue.GetComponent<Rogue>();
-            //        if (r.die)
-            //        {
-            //            Complete(mission);
-            //            Reward(mission);
-            //            cp.ShowPanel("Rogue Planet Defeated", "Get ready for your final test!");
-            //            cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
-            //            return;
-            //        }
+            // level 2
+            case "Linking Planets":
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
 
-            //    }
-            //    break;
-            //case "Defeat 3 Rogue Planets Before Turn 100":
-            //    if (gc.turn < 100)
-            //    {
-            //        foreach (var rogue in gc.roguePlanets)
-            //        {
-            //            r = rogue.GetComponent<Rogue>();
-            //            if (r.die)
-            //            {
-            //                rogueDieIncrement++;
+                    if (p.linkedWith.Count > 0)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                }
+                break;
+            case "Waterworld":
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
 
-            //            }
-            //            if (rogueDieIncrement > 2)
-            //            {
-            //                Complete(mission);
-            //                Reward(mission);
-            //                cp.ShowPanel("Congratulations!", "You now have a full license to go on and build solar systems. Be safe!\r\n\r\nClick OK to replay!");
-            //                cp.confirmButton.onClick.AddListener(cp.Restart); // change function of button to change level/scene
-            //                return;
-            //            }
+                    if (planet.name.Contains("Water"))
+                    {
+                        if (p.turnsToBuild < 1)
+                        {
+                            Complete(mission);
+                            Reward(mission);
+                        }
+                    }
+                }
+                break;
+            case "Charging Lasers":
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
 
-            //        }
-            //    }
-            //    break;
+                    if (p.ifattackactive)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                }
+                break;
+            case "IMA FIRIN MAH LAZOR":
+                // if all previous missions need to be completed before final
+                //int missionsComplete = 0;
+                //for (int i = 0; i < missions.Count - 1; i++)
+                //{
+                //    if (missions[i].GetComponent<Mission>().completed)
+                //    {
+                //        missionsComplete++;
+                //    }
+
+                //}
+                //if (missionsComplete == missions.Count - 1)
+                //{
+                if (gc.attacking && gc.simulate)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                    cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
+                    cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
+                }
+                //}
+
+                break;
             default:
                 break;
         }
     }
+
 
     // used to reward
     public void Reward(GameObject mission)
@@ -276,6 +268,7 @@ public class Missions : MonoBehaviour
 
         switch (m.missionName)
         {
+            // level 1
             case "A Whole New World":
                 foreach (var planet in gc.planets)
                 {
@@ -329,6 +322,32 @@ public class Missions : MonoBehaviour
                     planet.GetComponent<Planet>().water += 6;
                     planet.GetComponent<Planet>().gas += 6;
                 }
+                break;
+
+            // level 2
+            case "Linking Planets":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 10;
+                    planet.GetComponent<Planet>().water += 10;
+                    planet.GetComponent<Planet>().gas += 10;
+                }
+                break;
+            case "Waterworld":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().water += 20;
+                }
+                break;
+            case "Charging Lasers":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 20;
+                    planet.GetComponent<Planet>().water += 20;
+                    planet.GetComponent<Planet>().gas += 20;
+                }
+                break;
+            case "IMA FIRIN MAH LAZOR":
                 break;
             default:
                 break;

@@ -164,7 +164,7 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
 		}
 	}
 
-	void tooltipSetActive(bool state) 
+	public void tooltipSetActive(bool state) 
 	{
         // If tooltip is already properly positioned
         go2.SetActive (state);

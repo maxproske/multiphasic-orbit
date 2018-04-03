@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: 1. Link With One Planet
+  m_Name: 4. IMA FIRIN MAH LAZOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf17cf33e349e14d97974e2268dc6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionName: Link With One Planet
-  missionDescription: 
-  missionReward: All planets linked with another will be awarded 100 of each resource
-  postMissionMessage: 
-  postMissionHint: 
+  missionName: IMA FIRIN MAH LAZOR
+  missionDescription: Attack rogue planet.
+  missionReward: Novice certificate.
+  postMissionMessage: You have defended your planet and the solar system is in peace
+    again. You have passed the Novice test, and have earned Novice certification.
+    You are now eligible to take your full license. Remember to link different planet
+    types together to avoid creating hostile Rogue planets.
   completed: 0
