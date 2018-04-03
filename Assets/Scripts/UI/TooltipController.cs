@@ -120,6 +120,15 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
                 tooltipHasWidth = true;
             }
         }
+
+        if (ui.gc.simulate)
+        {
+            RectTransform[] children = go2.GetComponentsInChildren<RectTransform>(true);
+            foreach (var child in children)
+            {
+                tooltipSetActive(false);
+            }
+        } 
     }
 
 	void UpdateTooltip ()
