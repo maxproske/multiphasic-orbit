@@ -81,17 +81,17 @@ public class Log : MonoBehaviour
     {
         //AddNewLine();
 
-        if (planetName.Contains("Carbon"))
+        if (planetName.Contains("Stone"))
         {
             planetColor = stoneColor;
         }
 
-        if (planetName.Contains("Nitrogen"))
+        if (planetName.Contains("Water"))
         {
             planetColor = waterColor;
         }
 
-        if (planetName.Contains("Hydrogen"))
+        if (planetName.Contains("Gas"))
         {
             planetColor = gasColor;
         }
@@ -122,17 +122,17 @@ public class Log : MonoBehaviour
     {
         //AddNewLine();
 
-        if (planetName.Contains("Carbon"))
+        if (planetName.Contains("Stone"))
         {
             planetColor = stoneColor;
         }
 
-        if (planetName.Contains("Nitrogen"))
+        if (planetName.Contains("Water"))
         {
             planetColor = waterColor;
         }
 
-        if (planetName.Contains("Hydrogen"))
+        if (planetName.Contains("Gas"))
         {
             planetColor = gasColor;
         }

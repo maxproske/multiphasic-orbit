@@ -724,32 +724,32 @@ public class GameController : MonoBehaviour
 
 
 
-            if (planetScript.carbon >= 10 && planetScript.iftech1 == 0)
+            if (planetScript.stone >= 10 && planetScript.iftech1 == 0)
             {
 
 
                 tech1.interactable = true;
 
             }
-            else if (planetScript.hydrogen >= 5 && planetScript.nitrogen >= 5 && planetScript.carbon >= 5 && planetScript.iftech1 == 4 && planetScript.iftech2 == 0)
+            else if (planetScript.gas >= 5 && planetScript.water >= 5 && planetScript.stone >= 5 && planetScript.iftech1 == 4 && planetScript.iftech2 == 0)
             {
 
                 tech2.interactable = true;
 
             }
-            else if (planetScript.hydrogen >= 15 && planetScript.nitrogen >= 10 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 0)
+            else if (planetScript.gas >= 15 && planetScript.water >= 10 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 0)
             {
 
                 tech3.interactable = true;
 
             }
-            else if (planetScript.nitrogen >= 15 && planetScript.carbon >= 15 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 4 && planetScript.iftech4 == 0)
+            else if (planetScript.water >= 15 && planetScript.stone >= 15 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 4 && planetScript.iftech4 == 0)
             {
 
                 tech4.interactable = true;
 
             }
-            else if (planetScript.hydrogen >= 20 && planetScript.nitrogen >= 20 && planetScript.carbon >= 20 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 4 && planetScript.iftech4 == 4 && planetScript.iftech5 == 0)
+            else if (planetScript.gas >= 20 && planetScript.water >= 20 && planetScript.stone >= 20 && planetScript.iftech1 == 4 && planetScript.iftech2 == 4 && planetScript.iftech3 == 4 && planetScript.iftech4 == 4 && planetScript.iftech5 == 0)
             {
 
                 tech5.interactable = true;
@@ -1051,7 +1051,7 @@ public class GameController : MonoBehaviour
         go = Instantiate(stone) as GameObject;
         // increment planet name
         stoneIncrement++;
-        go.name = "Carbon " + stoneIncrement;
+        go.name = "Stone " + stoneIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -1070,7 +1070,7 @@ public class GameController : MonoBehaviour
         go = Instantiate(water) as GameObject;
         // increment planet name
         waterIncrement++;
-        go.name = "Nitrogen " + waterIncrement;
+        go.name = "Water " + waterIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -1089,7 +1089,7 @@ public class GameController : MonoBehaviour
         go = Instantiate(gas) as GameObject;
         // increment planet name
         gasIncrement++;
-        go.name = "Hydrogen " + gasIncrement;
+        go.name = "Gas " + gasIncrement;
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -1435,9 +1435,9 @@ public class GameController : MonoBehaviour
 
             if (planetScript.iftech2 == 2)
             {
-                planetScript.carbon -= 5;
-                planetScript.nitrogen -= 5;
-                planetScript.hydrogen -= 5;
+                planetScript.stone -= 5;
+                planetScript.water -= 5;
+                planetScript.gas -= 5;
                 planetScript.iflinkactive = true;
                 planetScript.iftech2 = 3;
 
@@ -1456,9 +1456,9 @@ public class GameController : MonoBehaviour
             }
             if (planetScript.iftech5 == 2)
             {
-                planetScript.carbon -= 20;
-                planetScript.nitrogen -= 20;
-                planetScript.hydrogen -= 20;
+                planetScript.stone -= 20;
+                planetScript.water -= 20;
+                planetScript.gas -= 20;
                 planetScript.ifattackactive = true;
                 planetScript.iftech5 = 3;
             }

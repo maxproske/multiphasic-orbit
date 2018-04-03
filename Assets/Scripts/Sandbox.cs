@@ -109,9 +109,9 @@ public class Sandbox : MonoBehaviour
             p.planetPlaced = true;
 
             // set planet starting resource amount
-            p.carbon = resourceAmount;
-            p.nitrogen = resourceAmount;
-            p.hydrogen = resourceAmount;
+            p.stone = resourceAmount;
+            p.water = resourceAmount;
+            p.gas = resourceAmount;
 
             // set gc planetScript to p
             gc.planetScript = p;

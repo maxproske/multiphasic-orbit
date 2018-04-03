@@ -34,17 +34,17 @@ public class Rogue : Planet
 			foreach (var dominatedPlanet in linkedWith) {
 				dominatedPlanetScript = dominatedPlanet.GetComponent<Planet> ();
 				// take away and add to this rogue planet's resources only if dominatedPlanet has more than 0 of that resource
-				if (dominatedPlanetScript.carbon > 0) {
-					dominatedPlanetScript.carbon -= sCarbon;
-					carbon += sCarbon;
+				if (dominatedPlanetScript.stone > 0) {
+					dominatedPlanetScript.stone -= sCarbon;
+					stone += sCarbon;
 				}
-				if (dominatedPlanetScript.nitrogen > 0) {
-					dominatedPlanetScript.nitrogen -= sNitrogen;
-					nitrogen += sNitrogen;
+				if (dominatedPlanetScript.water > 0) {
+					dominatedPlanetScript.water -= sNitrogen;
+					water += sNitrogen;
 				}
-				if (dominatedPlanetScript.hydrogen > 0) {
-					dominatedPlanetScript.hydrogen -= sHydrogen;
-					hydrogen += sHydrogen;
+				if (dominatedPlanetScript.gas > 0) {
+					dominatedPlanetScript.gas -= sHydrogen;
+					gas += sHydrogen;
 				}
 			}
 		}

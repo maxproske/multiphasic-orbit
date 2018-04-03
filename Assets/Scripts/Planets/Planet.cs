@@ -70,9 +70,9 @@ public class Planet : MonoBehaviour
     public bool planetPlaced;
 
     // Resource Counters
-    public int carbon;
-    public int nitrogen;
-    public int hydrogen;
+    public int stone;
+    public int water;
+    public int gas;
 
     // scripts 
     private GameController gc; // Access Game Controller script
@@ -303,9 +303,9 @@ public class Planet : MonoBehaviour
             if (count > 60)
             {
 	
-				preCarbon = carbon;
-				preNitrogen = nitrogen;
-				preHydrogen = hydrogen;
+				preCarbon = stone;
+				preNitrogen = water;
+				preHydrogen = gas;
                 count = 0;
                 collecting = false;
                 //gc.simulate = false;
@@ -345,24 +345,24 @@ public class Planet : MonoBehaviour
 
         if (maxResourceType == 1)
         {
-            carbon -= 1;
+            stone -= 1;
             tradecarbon -= 1;
-            temp.carbon += 1;
+            temp.stone += 1;
             temp.tradecarbon += 1;
         }
         if (maxResourceType == 2)
         {
-            nitrogen -= 1;
+            water -= 1;
             tradenitrogen -= 1;
-            temp.nitrogen += 1;
+            temp.water += 1;
             temp.tradenitrogen += 1;
 
         }
         if (maxResourceType == 3)
         {
-            hydrogen -= 1;
+            gas -= 1;
             tradehydrogen -= 1;
-            temp.hydrogen += 1;
+            temp.gas += 1;
             temp.tradehydrogen += 1;
         }
 
@@ -370,16 +370,16 @@ public class Planet : MonoBehaviour
 
     void getMaxResource()
     {
-        maxResource = Mathf.Max(carbon, nitrogen, hydrogen);
-        if (maxResource == carbon)
+        maxResource = Mathf.Max(stone, water, gas);
+        if (maxResource == stone)
         {
             maxResourceType = 1;
         }
-        if (maxResource == nitrogen)
+        if (maxResource == water)
         {
             maxResourceType = 2;
         }
-        if (maxResource == hydrogen)
+        if (maxResource == gas)
         {
             maxResourceType = 3;
         }
@@ -537,9 +537,9 @@ public class Planet : MonoBehaviour
 
             }
 
-            carbon += addCarbon * collectionMultiplier;
-            nitrogen += addNitrogen * collectionMultiplier;
-            hydrogen += addHydrogen * collectionMultiplier;
+            stone += addCarbon * collectionMultiplier;
+            water += addNitrogen * collectionMultiplier;
+            gas += addHydrogen * collectionMultiplier;
 			if (turnsToBuild < 1) {
 				gc.summary += planetname + " collected" + addCarbon + " stones, " + addNitrogen + " water, " + addHydrogen + " gas.\n";
 			}
@@ -721,7 +721,7 @@ public class Planet : MonoBehaviour
 	//depends on the planets, we can adjust it.
 	public void addResourceTechnology(){
 
-		carbon -= 10;
+		stone -= 10;
 		moreResource = true;
 		if (moreResource == true) {
 			OriginaddCarbon += 2; 
@@ -738,16 +738,16 @@ public class Planet : MonoBehaviour
 
 	//set the addlinkchance and it will effect the CalculateFail() function in the gamecontroller
 	public void linkchanceTechnology(){
-		hydrogen -= 15;
-		nitrogen -= 10;
+		gas -= 15;
+		water -= 10;
 		addlinkchance++;
 	}
 
 	//set the storm shied and it will effect the Simulate() function in the gamcontroller
 	public void StormShiedTechnology(){
 
-		carbon -= 15;
-		nitrogen -= 15;
+		stone -= 15;
+		water -= 15;
 		stormsheid = true;
 	}
 

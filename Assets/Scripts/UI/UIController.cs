@@ -177,9 +177,9 @@ public class UIController : MonoBehaviour
         if (selectedPlanet != null) 
 		{
 			// Replace placeholder values with planet data
-			SetSelectedName (selectedPlanet.planetname);
+			SetSelectedName (selectedPlanet.name);
 			SetSelectedPreview (selectedPlanet.planetSprite);
-			SetSelectedResources (selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
+			SetSelectedResources (selectedPlanet.stone, selectedPlanet.water, selectedPlanet.gas);
             SetSelectedResourcesCollected(selectedPlanet.stoneCollected, selectedPlanet.waterCollected, selectedPlanet.gasCollected);
 			SetSelectedPopulation (selectedPlanet.population);
 			SetSelectedHealth (selectedPlanet.health, selectedPlanet.maxHealth);
@@ -531,7 +531,7 @@ public class UIController : MonoBehaviour
         // Planet selected
         if (selectedPlanet != null)
         {
-            SetSelectedResources(selectedPlanet.carbon, selectedPlanet.nitrogen, selectedPlanet.hydrogen);
+            SetSelectedResources(selectedPlanet.stone, selectedPlanet.water, selectedPlanet.gas);
 			SetSelectedResourcesCollected(selectedPlanet.addCarbon, selectedPlanet.addNitrogen, selectedPlanet.addHydrogen);
         }
         // No planet selected

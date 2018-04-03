@@ -105,6 +105,7 @@ public class Missions : MonoBehaviour
     public void OnNotify(GameObject mission)
     {
         m = mission.GetComponent<Mission>();
+
         switch (m.missionName)
         {
             case "A Whole New World":
@@ -115,7 +116,7 @@ public class Missions : MonoBehaviour
                 }
                 break;
             case "Living in a Simulation":
-                //Debug.Log("Checking Mission: " + m.missionName + " progress...");
+                //GameObject go = Test1Missions[1];
                 if (gc.simulate)
                 {
                     Complete(mission);
@@ -162,13 +163,23 @@ public class Missions : MonoBehaviour
                 }
                 break;
             case "Social Network":
+                int planetsWithLinkTech = 0;
                 if (gc.planets.Count > 1)
                 {
-                    if (p.iflinkactive)
+                    foreach (var planet in gc.planets)
+                    {
+                        if (planet.GetComponent<Planet>().iflinkactive)
+                        {
+                            planetsWithLinkTech++;
+                        }
+                    }
+
+                    if (planetsWithLinkTech > 1)
                     {
                         Complete(mission);
                         Reward(mission);
                     }
+                    
                 }
                 break;
             case "Together Forever":
@@ -266,9 +277,60 @@ public class Missions : MonoBehaviour
         switch (m.missionName)
         {
             case "A Whole New World":
-                // reward first planet with 2 stone
-                gc.planets[0].GetComponent<Planet>().carbon += 2;
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 2;
+
+                }
                 reward = false;
+                break;
+            case "Living in a Simulation":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 2;
+                    planet.GetComponent<Planet>().water += 2;
+                    planet.GetComponent<Planet>().gas += 2;
+
+                }
+                reward = false;
+                break;
+            case "Planet in Training":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 4;
+                    planet.GetComponent<Planet>().water += 4;
+                    planet.GetComponent<Planet>().gas += 4;
+
+                }
+                reward = false;
+                break;
+            case "Interplanetary Networking":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 4;
+
+                }
+                reward = false;
+                break;
+            case "Binary Planets":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 4;
+                    planet.GetComponent<Planet>().water += 4;
+                    planet.GetComponent<Planet>().gas += 4;
+
+                }
+                reward = false;
+                break;
+            case "Social Network":
+                foreach (var planet in gc.planets)
+                {
+                    planet.GetComponent<Planet>().stone += 6;
+                    planet.GetComponent<Planet>().water += 6;
+                    planet.GetComponent<Planet>().gas += 6;
+                }
+                break;
+            default:
                 break;
         }
 
@@ -300,7 +362,7 @@ public class Missions : MonoBehaviour
             {
                 cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.missionReward);
             }
-            
+
             //}
 
             gc.l.UpdateLogMission(m.missionName, m.missionReward);

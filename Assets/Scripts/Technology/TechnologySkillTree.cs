@@ -38,12 +38,12 @@ public class TechnologySkillTree : MonoBehaviour {
 			if (mathematics == 0) {
 				if (buttons [i].transform.parent.name == "Mathematics") buttons[i].interactable = false;
 			}
-			if (mathematics > 0&&planetScript.hydrogen>15) {
+			if (mathematics > 0&&planetScript.gas>15) {
 				Debug.Log (buttons [i].transform.parent.name);
 				if (buttons [i].transform.parent.name == "Mathematics Technology Slot") buttons[i].interactable = false;
 				if (buttons [i].transform.parent.name == "Interplanetary Networking Technology Slot") buttons[i].interactable = true;
 			}
-			if (interplanetaryNetworking > 0 &&planetScript.carbon>20&& planetScript.hydrogen>10) {
+			if (interplanetaryNetworking > 0 &&planetScript.stone>20&& planetScript.gas>10) {
 				if (buttons [i].transform.parent.name == "Interplanetary Networking Technology Slot") buttons[i].interactable = false;
 				if (buttons [i].transform.parent.name == "Mass Particle Displacement Technology Slot") buttons[i].interactable = true;
 			}

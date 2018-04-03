@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionName: Living in a Simulation
   missionDescription: Play end turn simulation.
-  missionReward: 4 of each resource.
+  missionReward: 2 of each resource.
   postMissionMessage: Simulation Complete! Once there are no more actions to be completed
     you may hit the Play Button. Next, learn your first technology and press Play.
-  completed: 0
+  completed: 1

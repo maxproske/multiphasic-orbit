@@ -53,6 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionName: Planet in Training
   missionDescription: Learn high energy magnetics.
-  missionReward: 4 stone.
+  missionReward: 4 of each resource.
   postMissionMessage: Something about how this technology increases resource collection
   completed: 0
