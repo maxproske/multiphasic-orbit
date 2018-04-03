@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4358836782303510}
   - component: {fileID: 114626865713161110}
   m_Layer: 0
-  m_Name: 1. Defeat 3 Rogue Planets Before Turn 100
+  m_Name: Z. Godlike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,5 +55,4 @@ MonoBehaviour:
   missionDescription: 
   missionReward: 
   postMissionMessage: 
-  postMissionHint: 
   completed: 1

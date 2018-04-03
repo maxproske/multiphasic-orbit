@@ -70,4 +70,4 @@ MonoBehaviour:
   Test3Missions: []
   test3MissionsAmount: 3
   possibleMissionIndexes: 
-  totalMissions: 5
+  totalMissions: 0

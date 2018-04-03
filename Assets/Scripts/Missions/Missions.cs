@@ -25,6 +25,7 @@ public class Missions : MonoBehaviour
 
     public List<int> possibleMissionIndexes;
     public int totalMissions;
+    GameObject[] missionsPool;
 
     // Use this for initialization
     void Start()
@@ -38,6 +39,11 @@ public class Missions : MonoBehaviour
         rogueDieIncrement = 0;
 
         possibleMissionIndexes = new List<int>();
+
+        missionsPool = Resources.LoadAll("Prefabs/MissionsPool", typeof(GameObject))
+                .Cast<GameObject>()
+                .ToArray();
+        totalMissions = missionsPool.Length;
 
         for (int i = 0; i < totalMissions - 1; i++)
         {
@@ -97,10 +103,7 @@ public class Missions : MonoBehaviour
                 break;
             default:
                 Debug.Log("Playing Level 3");
-                GameObject[] missionsPool = Resources.LoadAll("Prefabs/MissionsPool", typeof(GameObject))
-                .Cast<GameObject>()
-         .ToArray();
-                totalMissions = missionsPool.Length;
+
                 // add missions from Test1Missions to missions to play with list called missions
                 for (int i = 0; i < test3MissionsAmount; i++)
                 {
