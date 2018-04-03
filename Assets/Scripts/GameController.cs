@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour
 
     private Scene currentScene;
 
-	private float camerasize=600;
+    private float camerasize = 600;
     // log
     //public GameObject log;
     public Log l;
@@ -128,14 +128,14 @@ public class GameController : MonoBehaviour
 
     public ConfirmationPanel cp;
 
-	public ChoosePanel cp2;
-	public int choosecase = 0;
+    public ChoosePanel cp2;
+    public int choosecase = 0;
 
-	public string summary="";
-	public bool showsummary=false;
+    public string summary = "";
+    public bool showsummary = false;
 
-	public GameObject leftpanel;
-	public GameObject rightpanel;
+    public GameObject leftpanel;
+    public GameObject rightpanel;
 
     private bool failOnce;
     // Use this for initialization
@@ -220,7 +220,7 @@ public class GameController : MonoBehaviour
             planets = new List<GameObject>();
             roguePlanets = new List<GameObject>();
         }
-        
+
         ui.SetPhase("Planning");
 
         // initialize flags
@@ -333,100 +333,118 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (simulate == true) {
-//			ui.gameObject.SetActive (false);
+        if (!linking && !simulate && !attacking)
+        {
+            ui.SetPhase("Planning");
+        }
 
-			leftpanel.SetActive(false);
-			rightpanel.SetActive(false);
-			Camera.main.orthographicSize = 310;
-		} else {
-//			ui.gameObject.SetActive (true);
-			leftpanel.SetActive(true);
-			rightpanel.SetActive(true);
-			Camera.main.orthographicSize = camerasize;
-		}
 
-		if (showsummary == true) {
-			cp.ShowPanel("Summary", summary);
-			showsummary = false;
-		}
-		//if click nobutton
-		if  (cp2.yesorno == -1) {
-			//try to link 
-			if (choosecase == 1) {
-					linking = false;
-					firstPlanet = false;
-					linkedAlready = false;
-					planet1 = null;
-					planet2 = null;
-					choosecase = 0;
-					cp2.yesorno = 0;
-			}
+        if (simulate == true)
+        {
+            //			ui.gameObject.SetActive (false);
 
-			//try to attack
-			if (choosecase == 4) {
-				attacking = false;
-				firstPlanet = false;
+            leftpanel.SetActive(false);
+            rightpanel.SetActive(false);
+            Camera.main.orthographicSize = 310;
+        }
+        else
+        {
+            //			ui.gameObject.SetActive (true);
+            leftpanel.SetActive(true);
+            rightpanel.SetActive(true);
+            Camera.main.orthographicSize = camerasize;
+        }
 
-				planet1 = null;
-				planet2 = null;
-				choosecase = 0;
-				cp2.yesorno = 0;
-			}
-			cp2.yesorno = 0;
-			choosecase = 0;
-		}
+        if (showsummary == true)
+        {
+            cp.ShowPanel("Summary", summary);
+            showsummary = false;
+        }
+        //if click nobutton
+        if (cp2.yesorno == -1)
+        {
+            //try to link 
+            if (choosecase == 1)
+            {
+                linking = false;
+                firstPlanet = false;
+                linkedAlready = false;
+                planet1 = null;
+                planet2 = null;
+                choosecase = 0;
+                cp2.yesorno = 0;
+            }
 
-		//if click yesbutton
-		if (cp2.yesorno == 1) {
-			////try to cancel link
-			if (choosecase == 2) {
-	
-				linking = false;
-				firstPlanet = false;
-				linkedAlready = false;
-				planet1 = null;
-				planet2 = null;
-				choosecase = 0;
-				cp2.yesorno = 0;
-			}
-		
+            //try to attack
+            if (choosecase == 4)
+            {
+                attacking = false;
+                firstPlanet = false;
 
-			//try to cancel attacking
-			if (choosecase == 3) {
-		
-				attacking = false;
-				firstPlanet = false;
+                planet1 = null;
+                planet2 = null;
+                choosecase = 0;
+                cp2.yesorno = 0;
+            }
+            cp2.yesorno = 0;
+            choosecase = 0;
+        }
 
-				planet1 = null;
-				planet2 = null;
-				choosecase = 0;
-				cp2.yesorno = 0;
-			
-			}
-			cp2.yesorno=0;
-			choosecase = 0;
-		}
+        //if click yesbutton
+        if (cp2.yesorno == 1)
+        {
+            ////try to cancel link
+            if (choosecase == 2)
+            {
+
+                linking = false;
+                firstPlanet = false;
+                linkedAlready = false;
+                planet1 = null;
+                planet2 = null;
+                choosecase = 0;
+                cp2.yesorno = 0;
+            }
+
+
+            //try to cancel attacking
+            if (choosecase == 3)
+            {
+
+                attacking = false;
+                firstPlanet = false;
+
+                planet1 = null;
+                planet2 = null;
+                choosecase = 0;
+                cp2.yesorno = 0;
+
+            }
+            cp2.yesorno = 0;
+            choosecase = 0;
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (playButton.interactable)
             {
                 Simulate();
             }
-            
-        }
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			if (attacking) {
-				cp2.ShowPanel("Cancel Attacking", "Do you want to cancel the attacking?");
-				choosecase = 3;
-			}
-			if (linking) {
-				cp2.ShowPanel("Cancel Linking", "Do you want to cancel the linking?");
-				choosecase = 2;
-			}
 
-		}
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (attacking)
+            {
+                cp2.ShowPanel("Cancel Attacking", "Do you want to cancel the attacking?");
+                choosecase = 3;
+            }
+            if (linking)
+            {
+                cp2.ShowPanel("Cancel Linking", "Do you want to cancel the linking?");
+                choosecase = 2;
+            }
+
+        }
 
 
         if (shot != null)
@@ -513,6 +531,7 @@ public class GameController : MonoBehaviour
                 // get first and second planets to link
                 if (linking)
                 {
+
                     // can only select built non-rogue planets to link with other built non-rogue planets
                     // check if is non-rogue and has Planet script
                     if (selected != planet1 && !selected.CompareTag("Rogue") && selected.GetComponent("Planet") as Planet != null)
@@ -526,6 +545,7 @@ public class GameController : MonoBehaviour
                         if (selected.GetComponent<Planet>().turnsToBuild < 1 && !selected.GetComponent<Planet>().iflinkactive)
                         {
                             cp.ShowPanel("Link Cannot Be Assigned", selected.name + " must also have Interplanetary Linking learned");
+                            linking = false;
                         }
 
                         if (selected.GetComponent<Planet>().turnsToBuild < 1 && selected.GetComponent<Planet>().iflinkactive)
@@ -538,7 +558,7 @@ public class GameController : MonoBehaviour
                                 {
                                     //Debug.Log("Already linked");
                                     linkedAlready = true;
-									cp.ShowPanel("Link Cannot Be Assigned", selected.name + " have already linked");
+                                    cp.ShowPanel("Link Cannot Be Assigned", selected.name + " have already linked");
                                 }
                             }
                             if (!linkedAlready)
@@ -547,8 +567,8 @@ public class GameController : MonoBehaviour
                                 secondPlanetScript = planet2.GetComponent<Planet>();
                                 // if both variables are set
 
-								cp2.ShowPanel("Assigning Linking", "Do you want to link "+ planet1.name + " and " + planet2.name+"?");
-								choosecase = 1;
+                                cp2.ShowPanel("Assigning Linking", "Do you want to link " + planet1.name + " and " + planet2.name + "?");
+                                choosecase = 1;
                             }
                         }
                     }
@@ -559,17 +579,19 @@ public class GameController : MonoBehaviour
                     // check if is non-rogue and has Planet script
 
                     // if selected is not planet 1
-					if (selected != planet1 && !selected.CompareTag("Rogue"))
-					{
-						//									
+                    if (selected != planet1 && !selected.CompareTag("Rogue"))
+                    {
+                        //									
 
 
-				
-						if (cp2.yesorno == 0 && choosecase == 0) {
-							cp.ShowPanel ("Attacking cannot be assigned", "You can only attack rogue planet. ");
-						}
 
-					}
+                        if (cp2.yesorno == 0 && choosecase == 0)
+                        {
+                            cp.ShowPanel("Attacking cannot be assigned", "You can only attack rogue planet. ");
+                            attacking = false;
+                        }
+
+                    }
 
                     if (selected != planet1 && selected.CompareTag("Rogue"))
                     {
@@ -579,8 +601,8 @@ public class GameController : MonoBehaviour
                         secondPlanetScript = planet2.GetComponent<Planet>();
                         // if both variables are set
 
-						cp2.ShowPanel("Assigning Attacking", "Do you want to attack "+ planet2.name+"?");
-						choosecase = 4;
+                        cp2.ShowPanel("Assigning Attacking", "Do you want to attack " + planet2.name + "?");
+                        choosecase = 4;
 
                     }
 
@@ -590,27 +612,27 @@ public class GameController : MonoBehaviour
             }
         }
 
-//        // if linking, reset
-//        if (linking && Input.GetKeyDown(KeyCode.Escape))
-//        {
-//            ResetLinking();
-//        }
-//
-//        if (attacking && Input.GetKeyDown(KeyCode.Escape))
-//        {
-//            attacking = false;
-//            firstPlanet = false;
-//            simulate = false;
-//            planet1 = null;
-//            planet2 = null;
-//        }
-//
+        //        // if linking, reset
+        //        if (linking && Input.GetKeyDown(KeyCode.Escape))
+        //        {
+        //            ResetLinking();
+        //        }
+        //
+        //        if (attacking && Input.GetKeyDown(KeyCode.Escape))
+        //        {
+        //            attacking = false;
+        //            firstPlanet = false;
+        //            simulate = false;
+        //            planet1 = null;
+        //            planet2 = null;
+        //        }
+        //
 
 
         if (planets.Contains(selected) || planetScript != null)
         {
 
-			if (!attacking && !linking && !placing && selected.GetComponent("Planet"))
+            if (!attacking && !linking && !placing && selected.GetComponent("Planet"))
             {
                 planetScript = selected.GetComponent<Planet>(); // get Planet script to access attributes
             }
@@ -910,7 +932,7 @@ public class GameController : MonoBehaviour
 
                                 // Uncomment to open planet properties automatically
                                 //Debug.Log("setting from gc");
-                                planetScript = p;                                                                
+                                planetScript = p;
                                 ui.SetSelectedPlanet(planetScript); // populate left panel with data
                                 ui.OpenLeftPanel(); // open the panel
                                 playButton.interactable = true; // make play button interactable
@@ -1142,7 +1164,7 @@ public class GameController : MonoBehaviour
             }
             linking = true;
 
-
+            ui.SetPhase("Choose a planet for " + ui.selectedPlanet.name + " to link to...");
         }
         else
         {
@@ -1176,6 +1198,7 @@ public class GameController : MonoBehaviour
                 planet1 = firstPlanetScript.gameObject;
             }
             attacking = true;
+            ui.SetPhase("Choose a planet for " + ui.selectedPlanet.name + " to attack...");
         }
         else
         {
@@ -1194,7 +1217,8 @@ public class GameController : MonoBehaviour
         {
             fail = true;
             failOnce = false;
-        } else
+        }
+        else
         {
             //chance to fail
             int difftier = Mathf.Abs(firstPlanetScript.tier - secondPlanetScript.tier) - firstPlanetScript.addlinkchance - secondPlanetScript.addlinkchance;
@@ -1305,9 +1329,9 @@ public class GameController : MonoBehaviour
     public void Simulate()
     {
         AddTurn();
-		summary = "";
+        summary = "";
         ui.SetPhase("Simulating...");
-		camerasize = Camera.main.orthographicSize;
+        camerasize = Camera.main.orthographicSize;
         simulate = true;
         canBuild = true;
         buildingActive = false;
@@ -1343,7 +1367,7 @@ public class GameController : MonoBehaviour
         {
             if (planet1 != null && planet2 != null)
             {
-				summary += planet1.GetComponent<Planet> ().planetname + " attacked " + planet2.GetComponent<Planet> ().planetname + " and " + planet2.GetComponent<Planet> ().planetname + " lose 50 hp.\n";
+                summary += planet1.GetComponent<Planet>().planetname + " attacked " + planet2.GetComponent<Planet>().planetname + " and " + planet2.GetComponent<Planet>().planetname + " lose 50 hp.\n";
                 shot = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 shot.transform.localScale = new Vector3(8f, 8f, 8f);
                 shot.transform.position = planet1.transform.position;
@@ -1355,6 +1379,7 @@ public class GameController : MonoBehaviour
         }
         if (linking)
         {
+
 
 
             if (planet1 != null && planet2 != null)
@@ -1370,7 +1395,7 @@ public class GameController : MonoBehaviour
                     {
                         CalculateFail();
                     }
-                    
+
                 }
 
                 if (!linkedAlready)
@@ -1399,8 +1424,8 @@ public class GameController : MonoBehaviour
                         firstPlanetScript.linkedWith.Remove(planet2.GetComponent<Planet>());
                         // add rogueObject to planet1's linkedWith List
                         firstPlanetScript.linkedWith.Add(rogueObject.GetComponent<Planet>());
-						summary += "The linking between "+firstPlanetScript.planetname+"and " + planet2.GetComponent<Planet>().planetname+" is fail. " +planet2.GetComponent<Planet>().planetname+" became a rogue planet .\n";
-					
+                        summary += "The linking between " + firstPlanetScript.planetname + "and " + planet2.GetComponent<Planet>().planetname + " is fail. " + planet2.GetComponent<Planet>().planetname + " became a rogue planet .\n";
+
                         planets.Remove(planet2); // remove from Planets List
                         Destroy(planet2);
 
@@ -1412,13 +1437,13 @@ public class GameController : MonoBehaviour
                         linktime = 0;
                         firstPlanetScript.linkedWith.Add(planet2.GetComponent<Planet>());
                         secondPlanetScript.linkedWith.Add(planet1.GetComponent<Planet>());
-						summary += firstPlanetScript.planetname + " successfully linked with " + secondPlanetScript.planetname+".\n";
+                        summary += firstPlanetScript.planetname + " successfully linked with " + secondPlanetScript.planetname + ".\n";
                         // show confirmation box successful link
-//                        if (level != 1)
-//                        {
-//                            cp.ShowPanel("Link Successful!", planet1.name + " and " + planet2.name + " have successfully linked!");
-//                        }
-//
+                        //                        if (level != 1)
+                        //                        {
+                        //                            cp.ShowPanel("Link Successful!", planet1.name + " and " + planet2.name + " have successfully linked!");
+                        //                        }
+                        //
                         // also update log
                     }
 
