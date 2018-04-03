@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Missions : MonoBehaviour
 {
@@ -19,6 +21,10 @@ public class Missions : MonoBehaviour
     public List<GameObject> Test1Missions; // add these missions into the missions
     public List<GameObject> Test2Missions;
     public List<GameObject> Test3Missions;
+    public int test3MissionsAmount;
+
+    public List<int> possibleMissionIndexes;
+    public int totalMissions;
 
     // Use this for initialization
     void Start()
@@ -31,7 +37,12 @@ public class Missions : MonoBehaviour
         reward = false;
         rogueDieIncrement = 0;
 
-        //InitializeMissions();
+        possibleMissionIndexes = new List<int>();
+
+        for (int i = 0; i < totalMissions - 1; i++)
+        {
+            possibleMissionIndexes.Add(i);
+        }
     }
 
     public void CPShownAtStartOfLevel()
@@ -85,11 +96,21 @@ public class Missions : MonoBehaviour
                 }
                 break;
             default:
-                Debug.Log("Playing Level 2");
+                Debug.Log("Playing Level 3");
+                GameObject[] missionsPool = Resources.LoadAll("Prefabs/MissionsPool", typeof(GameObject))
+                .Cast<GameObject>()
+         .ToArray();
+                totalMissions = missionsPool.Length;
                 // add missions from Test1Missions to missions to play with list called missions
-                foreach (var mission in Test2Missions)
+                for (int i = 0; i < test3MissionsAmount; i++)
                 {
-                    gc.AddMissionsToUI(mission);
+                    int randomEntry = Random.Range(0, possibleMissionIndexes.Count);
+                    int randomNumberToUse = possibleMissionIndexes[randomEntry];
+                    possibleMissionIndexes.RemoveAt(randomEntry);
+                    GameObject missionToAdd = missionsPool[randomNumberToUse]; // get random mission from missionsPool
+
+                    Test3Missions.Add(missionToAdd);
+                    gc.AddMissionsToUI(missionToAdd);
                 }
                 break;
         }
@@ -400,4 +421,5 @@ public class Missions : MonoBehaviour
             }
         }
     }
+
 }
