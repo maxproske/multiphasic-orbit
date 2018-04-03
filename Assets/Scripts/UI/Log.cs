@@ -28,12 +28,13 @@ public class Log : MonoBehaviour
         gasColor = "#795548FF";
         textToLog = "";
         ToggleLog();
+
+        ToLog("<b>Turn 1</b>");
+        LogBackLog();
     }
 
     public void ToggleLog()
     {
-        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
-
         if (log.activeSelf)
         {
             log.SetActive(false);
@@ -42,12 +43,12 @@ public class Log : MonoBehaviour
         {
             log.SetActive(true);
         }
+
+        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
     }
 
     public void UpdateLogPlanet(string planetName, string message)
     {
-        //AddNewLine();
-
         if (planetName.Contains("Carbon"))
         {
             planetColor = stoneColor;
@@ -64,14 +65,7 @@ public class Log : MonoBehaviour
         }
 
         // backlog text first and then log
-
-        //AddTurnToLog();
-        //LogText.text += "Planet ";
-        //LogText.text += ChangeColor(planetColor, planetName);
-        //LogText.text += " " + message;
-
         ToLog(AddNewLine());
-        ToLog(AddTurnToLog());
         ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" " + message);
@@ -79,8 +73,6 @@ public class Log : MonoBehaviour
 
     public void UpdateLogPlanetRes(string planetName, int stone, int water, int gas)
     {
-        //AddNewLine();
-
         if (planetName.Contains("Stone"))
         {
             planetColor = stoneColor;
@@ -95,22 +87,15 @@ public class Log : MonoBehaviour
         {
             planetColor = gasColor;
         }
+
         // backlog text first and then log
-
-        //AddTurnToLog();
-        //LogText.text += "Planet ";
-        //LogText.text += ChangeColor(planetColor, planetName);
-        //LogText.text += " " + message;
-
         ToLog(AddNewLine());
-        ToLog(AddTurnToLog());
         ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" has collected: ");
-        ToLog(ChangeColor(stoneColor, stone.ToString() + " Stone ")) ;
+        ToLog(ChangeColor(stoneColor, stone.ToString() + " Stone "));
         ToLog(ChangeColor(waterColor, water.ToString() + " Water "));
         ToLog(ChangeColor(gasColor, gas.ToString() + " Gas "));
-        //ToLog(" " + message);
     }
 
     public void UpdateLogTrade(string planetName1, string planetName2, string message)
@@ -120,8 +105,6 @@ public class Log : MonoBehaviour
 
     public void UpdateLogTech(string planetName, string tech, string effect)
     {
-        //AddNewLine();
-
         if (planetName.Contains("Stone"))
         {
             planetColor = stoneColor;
@@ -138,17 +121,7 @@ public class Log : MonoBehaviour
         }
 
         color = "#2fbf18";
-
-        //AddTurnToLog();
-        //LogText.text += "Planet ";
-        //LogText.text += ChangeColor(planetColor, planetName);
-        //LogText.text += " has learned ";
-        //LogText.text += ChangeColor(color, tech) + "!";
-        //LogText.text += " " + "<b>" + effect + "</b>";
-
-        // backlog text first and then log
         ToLog(AddNewLine());
-        ToLog(AddTurnToLog());
         ToLog("Planet ");
         ToLog(ChangeColor(planetColor, planetName));
         ToLog(" has learned ");
@@ -158,23 +131,9 @@ public class Log : MonoBehaviour
 
     public void UpdateLogMission(string missionName, string missionReward)
     {
-        //AddNewLine();
-
         color = "#f2dd54";
-        //AddTurnToLog();
-        //LogText.text += "Mission ";
-        //LogText.text += ChangeColor(color, missionName);
-        //LogText.text += " completed!";
-
-        //if (missionReward != "")
-        //{
-        //    LogText.text += "<b>" + " Reward: " + missionReward + "</b>";
-        //}
-
         // backlog text first and then log
-
         ToLog(AddNewLine());
-        ToLog(AddTurnToLog());
         ToLog("Mission ");
         ToLog(ChangeColor(color, missionName));
         ToLog(" completed!");
@@ -190,30 +149,19 @@ public class Log : MonoBehaviour
         return "<color=" + color + ">" + text + "</color>";
     }
 
-    //private void AddTurnToLog()
-    //{
-    //    LogText.text += "[Turn " + gc.turn + "] ";
-    //}
-
-    private string AddTurnToLog()
+    public string AddTurnToLog()
     {
-        return "[Turn " + gc.turn + "] ";
-    }
 
-    //private void AddNewLine()
-    //{
-    //    if (LogText.text != "")
-    //    {
-    //        LogText.text += "\r\n";
-    //    }
-    //}
+        return "\r\n\r\n<b>Turn " + gc.turn + "</b>";
+    }
 
     private string AddNewLine()
     {
         if (LogText.text != "")
         {
             return "\r\n";
-        } else
+        }
+        else
         {
             return null;
         }
@@ -226,15 +174,8 @@ public class Log : MonoBehaviour
 
     public void LogBackLog()
     {
-        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
         LogText.text += textToLog;
         textToLog = ""; // reset textToLog
+        myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
     }
-
-    // mission
-    // trading
-    // technology
-    // planet
-    // highlight planets, technology
-    // log turn
 }

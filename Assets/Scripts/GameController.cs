@@ -210,7 +210,7 @@ public class GameController : MonoBehaviour
         tech5 = ui.leftTechnology5Button.GetComponent<Button>();
         tech5.onClick.AddListener(settech5);
 
-
+        
 
         //planetButtons = planetsParent.GetComponentsInChildren<Button>();
 
@@ -328,6 +328,8 @@ public class GameController : MonoBehaviour
         //Debug.Log(planets.Count);
         //Debug.Log("Turn " + turn);
         ui.SetTurn(turn);
+        l.ToLog(l.AddTurnToLog());
+        l.LogBackLog();
     }
 
     // Update is called once per frame
