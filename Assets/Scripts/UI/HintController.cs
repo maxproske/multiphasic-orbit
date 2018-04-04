@@ -83,6 +83,10 @@ public class HintController : MonoBehaviour
        StartCoroutine (Play ());
     }
 
+    void Awake() {
+        
+    }
+
     void Update ()
     {
         if (!hintHasWidth) 
@@ -130,15 +134,16 @@ public class HintController : MonoBehaviour
 
     public void SetHintActive(bool state) 
 	{
-        // If tooltip is already properly positioned
-        if (!go2.activeSelf)
+        
+        if (state)
         {
-            go2.SetActive (state);
-
             // Because PolygonUI is dumb, we need to mark the graphics
             // as dirty to redraw. Calling SetActive(true) is not enough.
             StartCoroutine(redrawHintAfterDelay());
         }
+
+        // If tooltip is already properly positioned
+        go2.SetActive (state);
 	}
 
 	IEnumerator redrawHintAfterDelay()

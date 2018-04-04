@@ -360,23 +360,6 @@ public class GameController : MonoBehaviour
             ui.SetPhase("Ready To Simulate");
         }
 
-
-        if (simulate == true)
-        {
-            //			ui.gameObject.SetActive (false);
-
-            leftpanel.SetActive(false);
-            rightpanel.SetActive(false);
-            Camera.main.orthographicSize = 310;
-        }
-        else
-        {
-            //			ui.gameObject.SetActive (true);
-            leftpanel.SetActive(true);
-            rightpanel.SetActive(true);
-            Camera.main.orthographicSize =600;
-        }
-
         if (showsummary == true)
         {
             cp3.ShowPanel("Summary", summary);
@@ -1347,6 +1330,9 @@ public class GameController : MonoBehaviour
 
     public void Simulate()
     {
+        // Hide all tooltips upon simulation
+        ui.HideAllTooltips();
+
         AddTurn();
         summary = "";
         ui.SetPhase("Simulating...");

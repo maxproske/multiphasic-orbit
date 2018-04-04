@@ -59,7 +59,7 @@ public class ChoosePanel : MonoBehaviour
 		// Update game state on panel close
 		//Debug.Log(gc.GAME_STATE);
 
-		if (gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
+		if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
 	}
 
 
@@ -71,7 +71,7 @@ public class ChoosePanel : MonoBehaviour
 		// Update game state on panel close
 		//Debug.Log(gc.GAME_STATE);
 
-		if (gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
+		if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
 	}
 	private void ClosePaneln()
 	{
@@ -81,7 +81,7 @@ public class ChoosePanel : MonoBehaviour
 		// Update game state on panel close
 		//Debug.Log(gc.GAME_STATE);
 
-		if (gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
+		if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
 	}
 
 

@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class BuildButtons : MonoBehaviour {
 
+    private GameController gc;
     private Button myButton;
     private bool last;
     private bool current;
 
     void Start ()
     {
+        gc = GameObject.Find ("Game Manager").GetComponent<GameController> ();
         myButton = this.GetComponent<Button>();
 		//myButton.onClick.AddListener(Clicked);
 
@@ -32,6 +34,12 @@ public class BuildButtons : MonoBehaviour {
 
     public void Clicked()
     {
+        // Dismiss tooltip when clicking Tech 1
+        if(GameController.level == 1 && gc.turn == 2 && gameObject.name == "Tech 1")
+        {
+            gc.GAME_STATE = Constants.LEARNERS_MISSION_5;
+        }
+
         // Button was clicked
         //Debug.Log(myButton.IsInteractable());
 

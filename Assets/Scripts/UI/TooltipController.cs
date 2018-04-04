@@ -14,7 +14,7 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
 	private int paddingLeft = 0; // Additional extra left padding
 
 	// Declare private variables
-	private bool mouseHover;
+	public bool mouseHover;
 	private Text myHiddenParentText; // Reference to text that resizes box
 	private Text myVisualChildText; // Reference to visible text
 	private Text myHiddenParentText2; // Reference to text that resizes box
@@ -121,17 +121,17 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
             }
         }
 
-        if (ui.gc.simulate)
-        {
-            RectTransform[] children = go2.GetComponentsInChildren<RectTransform>(true);
-            foreach (var child in children)
-            {
-                tooltipSetActive(false);
-            }
-        } 
+        // if (ui.gc.simulate)
+        // {
+        //     TooltipController[] children = myParent.GetComponentsInChildren<TooltipController>(true);
+        //     foreach (var child in children)
+        //     {
+        //         child.tooltipSetActive(false);
+        //     }
+        // }
     }
 
-	void UpdateTooltip ()
+	public void UpdateTooltip ()
 	{
 		go2.transform.position = go.transform.position;
 

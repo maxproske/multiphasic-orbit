@@ -125,7 +125,6 @@ public class UIController : MonoBehaviour
            ====================================================================== */
         SetupTooltipController();
         SetupHintController();
-                
 	}
 
 	/* Set Top Panel
@@ -501,9 +500,23 @@ public class UIController : MonoBehaviour
     }
 
     public void SetTooltip(RectTransform rt, string myString)
-     {
+    {
         TooltipController tc = rt.gameObject.AddComponent<TooltipController>();
         tc.myString = myString;
+    }
+
+    public void HideAllTooltips()
+    {
+        // Hide tooltips
+        RectTransform[] children = tooltipContainer.GetComponentsInChildren<RectTransform>();
+        foreach (var child in children)
+        {
+            //Debug.Log(child.name);
+            if (child.name == "Tooltip(Clone)") 
+            {
+                child.gameObject.SetActive(false);
+            }
+        }  
     }
 
     private void SetupHintController ()
@@ -520,7 +533,10 @@ public class UIController : MonoBehaviour
     public void SetHintActive(RectTransform rt, bool active) 
     {
         //Debug.Log("Set " + rt.name + "'s hint " + active.ToString());
-        rt.GetComponent<HintController>().SetHintActive(active);
+        if (rt.GetComponent<HintController>() != null)
+        {
+            rt.GetComponent<HintController>().SetHintActive(active);
+        }
     }
 
     public void SetHint(RectTransform rt) {

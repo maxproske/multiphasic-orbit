@@ -9,8 +9,11 @@ public class PlayButton : MonoBehaviour {
     private bool last;
     private bool current;
 
+    private UIController ui;
+
     void Start ()
     {
+        ui = GameObject.Find("Canvas").GetComponent<UIController>();
         myButton = this.GetComponent<Button>();
         last = current = myButton.IsInteractable();
         Clicked();
@@ -28,6 +31,12 @@ public class PlayButton : MonoBehaviour {
 
     public void Clicked()
     {
+        // Hide triangle hint pointer on simulate
+        if ((RectTransform)gameObject.transform != null)
+        {
+            ui.SetHintActive((RectTransform)gameObject.transform, false);
+        }
+
         Image[] myImage = myButton.GetComponentsInChildren<Image>();
         if (myImage != null)
         {

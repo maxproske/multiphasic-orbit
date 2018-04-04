@@ -53,9 +53,12 @@ public class State : MonoBehaviour {
                         // Learn high energy magnetics.
                         StartCoroutine(PauseThenActivateMission4());
                         break;
+                    // Learned high energy magnetics.
                     case Constants.LEARNERS_MISSION_5:
-                        // Nothing yet.
+                        // Build another stone planet.
+                        ui.SetHintActive((RectTransform)ui.rightStoneButton.transform, true);
                         break;
+                    // Built another stone planet.
                     case Constants.LEARNERS_MISSION_6:
                         // Nothing yet.
                         break;
