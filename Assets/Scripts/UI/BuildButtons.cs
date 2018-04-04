@@ -14,9 +14,10 @@ public class BuildButtons : MonoBehaviour {
     {
         gc = GameObject.Find ("Game Manager").GetComponent<GameController> ();
         myButton = this.GetComponent<Button>();
-		//myButton.onClick.AddListener(Clicked);
+		myButton.onClick.AddListener(OnClick);
 
-        last = current = myButton.IsInteractable();
+        last = myButton.IsInteractable();
+        current = myButton.IsInteractable();
     }
 
     void Update()
@@ -32,8 +33,11 @@ public class BuildButtons : MonoBehaviour {
         last = current;
     }
 
-    public void Clicked()
+    // Made another onclick function that is only triggered for the purpose of MISSIONS
+    private void OnClick()
     {
+        //Debug.Log("Clicked");
+
         // Dismiss tooltip when clicking Tech 1
         if(GameController.level == 1 && gc.turn == 2 && gameObject.name == "Tech 1")
         {
@@ -41,15 +45,27 @@ public class BuildButtons : MonoBehaviour {
             gc.GAME_STATE = Constants.LEARNERS_MISSION_3; // Point at end turn button
         }
         // Dismiss tooltip when clicking Tech 1
-        else if(GameController.level == 1 && gc.turn == 3 && gc.GAME_STATE == Constants.LEARNERS_MISSION_5 && gameObject.name == "Tech 2")
+        else if(GameController.level == 1 && gc.turn >= 3 && gc.GAME_STATE == Constants.LEARNERS_MISSION_5 && gameObject.name == "Tech 2")
         {
             //Debug.Log("Constants.LEARNERS_MISSION_5_PLAY");
             gc.GAME_STATE = Constants.LEARNERS_MISSION_5_PLAY; // Point at end turn button
+            gc.numInterplanetaryNetworking++; // Flag to help Learner's test know when to tell the player to start linking
         }
+        // Set this condition so numInterplanetaryNetworking doesn't increment past 2
+        if (GameController.level == 1 && gameObject.name == "Tech 2" && gc.GAME_STATE == Constants.LEARNERS_MISSION_6) 
+        {
+            gc.GAME_STATE = Constants.LEARNERS_MISSION_6_PLAY;
+            gc.numInterplanetaryNetworking++; // Flag to help Learner's test know when to tell the player to start linking
+        }
+
+        //Debug.Log("gc.numInterplanetaryNetworking: " + gc.numInterplanetaryNetworking);
 
         // Button was clicked
         //Debug.Log(myButton.IsInteractable());
+    }
 
+    public void Clicked()
+    {
         Text myText = myButton.GetComponentInChildren<Text>();
         if (myText != null) {
             // Button contains text

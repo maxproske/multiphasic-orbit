@@ -7,7 +7,9 @@
     public const int LEARNERS_MISSION_5 = 4;
     public const int LEARNERS_MISSION_5_PLAY = 100; // Extra hint pointing ot play button we may remove in the future
     public const int LEARNERS_MISSION_6 = 5;
+    public const int LEARNERS_MISSION_6_PLAY = 101; // Extra hint pointing ot play button we may remove in the future
     public const int LEARNERS_MISSION_7 = 6;
+    public const int LEARNERS_MISSION_7_PLAY = 102;
 
 	// Constants for hint indicator
 	public const int TURN_1_SKILL_TREE = 0;

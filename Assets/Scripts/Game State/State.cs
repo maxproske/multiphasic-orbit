@@ -69,9 +69,24 @@ public class State : MonoBehaviour {
                         // Build another stone planet.
                         ui.SetHintActive((RectTransform)ui.rightStoneButton.transform, true);
                         break;
+                    // We may remove this in the future, not necessary to redirect player to play button
+                    case Constants.LEARNERS_MISSION_6_PLAY:
+                        //Debug.Log("case Constants.LEARNERS_MISSION_6_PLAY:");
+                        ui.SetHintActive((RectTransform)ui.rightNextTurnButton.transform, true);
+                        // Silence is golden.
+                        break;
                     // Built another stone planet.
                     case Constants.LEARNERS_MISSION_7:
+                        // Establish link between planets.
+                        ui.SetHintActive((RectTransform)ui.leftLinkToButton.transform, true);
+                        break;
+                    // Established link between planets.
+                    case Constants.LEARNERS_MISSION_7_PLAY:
                         // Nothing yet
+                        break;
+                    case 1000:
+                        // Nothing yet
+                        Debug.Log("Something wrong happened, because State.UpdateState() fellthru to the last switch case!");
                         break;
                     default:
                         Debug.Log("Default state. We shouldn't be here.");

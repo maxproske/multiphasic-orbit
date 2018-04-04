@@ -143,6 +143,7 @@ public class GameController : MonoBehaviour
     private bool failOnce;
 
 	public Text summaryText;
+    public int numInterplanetaryNetworking; // Num of planets that have learned this skill. For learners test.
 
     private void Awake()
     {

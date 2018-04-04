@@ -528,6 +528,7 @@ public class UIController : MonoBehaviour
         // Left Panel
         SetHint((RectTransform)leftTechnology1Button.transform);
         SetHint((RectTransform)leftTechnology2Button.transform);
+        SetHint((RectTransform)leftLinkToButton.transform);
     }
 
     // Enable or disable a hint from any script
