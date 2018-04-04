@@ -365,6 +365,12 @@ public class GameController : MonoBehaviour
         {
             cp3.ShowPanel("Summary", summary);
             showsummary = false;
+			foreach (var planet in planets) {
+				planet.GetComponent<Planet> ().tradecarbon = 0;
+				planet.GetComponent<Planet> ().tradehydrogen = 0;
+				planet.GetComponent<Planet> ().tradenitrogen= 0;
+
+			}
         }
         //if click nobutton
         if (cp2.yesorno == -1)
@@ -1344,6 +1350,7 @@ public class GameController : MonoBehaviour
     {
         // Hide all tooltips upon simulation
         ui.HideAllTooltips();
+
 
         AddTurn();
         summary = "";

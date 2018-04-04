@@ -112,9 +112,7 @@ public class Planet : MonoBehaviour
     public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
     public LineRenderer[] links;
     public GameObject[] lines;
-    private int preCarbon = 0;
-    private int preHydrogen = 0;
-    private int preNitrogen = 0;
+
     private GUIStyle guiStyle = new GUIStyle();
 
     private UIController ui;
@@ -313,9 +311,8 @@ public class Planet : MonoBehaviour
             if (count > 60)
             {
 
-                preCarbon = stone;
-                preNitrogen = water;
-                preHydrogen = gas;
+     
+
                 count = 0;
                 collecting = false;
                 //gc.simulate = false;
@@ -356,25 +353,38 @@ public class Planet : MonoBehaviour
         if (maxResourceType == 1)
         {
             stone -= 1;
-            tradecarbon -= 1;
-            temp.stone += 1;
-            temp.tradecarbon += 1;
-        }
-        if (maxResourceType == 2)
+            
+ 
+        }else if (maxResourceType == 2)
         {
             water -= 1;
-            tradenitrogen -= 1;
-            temp.water += 1;
-            temp.tradenitrogen += 1;
+           
+ 
 
-        }
-        if (maxResourceType == 3)
+        }else if (maxResourceType == 3)
         {
             gas -= 1;
-            tradehydrogen -= 1;
-            temp.gas += 1;
-            temp.tradehydrogen += 1;
+        
+
         }
+
+		if (temp.maxResourceType == 1)
+		{
+			stone += 1;
+	
+
+		}else if (temp.maxResourceType == 2)
+		{
+			water += 1;
+		
+
+
+		}else if (temp.maxResourceType == 3)
+		{
+			gas += 1;
+
+
+		}	
 
     }
 
@@ -536,6 +546,21 @@ public class Planet : MonoBehaviour
                 {
                     //                    Debug.Log(this.name + " traded with: " + planet.name);
                     trade(planet);
+					if (this.maxResourceType == 1) {
+						tradecarbon--;
+					} else if (this.maxResourceType == 2) {
+						tradenitrogen--;
+					} else if (this.maxResourceType == 3) {
+						tradehydrogen--;
+					}
+
+					if (planet.maxResourceType == 1) {
+						tradecarbon++;
+					} else if (planet.maxResourceType == 2) {
+						tradenitrogen++;
+					} else if (planet.maxResourceType == 3) {
+						tradehydrogen++;
+					}
                 }
                 if (planet.CompareTag("Rogue") && planet.die == false)
                 {
@@ -598,9 +623,7 @@ public class Planet : MonoBehaviour
             gc.playButton.interactable = true;
             //gc.ToggleInteractability(true);
             gc.SetBuildingActive(true);
-            tradecarbon = 0;
-            tradenitrogen = 0;
-            tradehydrogen = 0;
+    
         }
     }
 
