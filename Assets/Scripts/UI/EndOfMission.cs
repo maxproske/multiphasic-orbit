@@ -14,8 +14,13 @@ public class EndOfMission : MonoBehaviour
 
     public GameObject panel;
 
+    private Missions m;
+
     private void Start()
     {
+        m = GameObject.Find("Missions").GetComponent<Missions>();
+
+        m.eom = this;
         panel.SetActive(false);
         SetPanelProperties();
     }
