@@ -51,16 +51,27 @@ public class State : MonoBehaviour {
                     // Played end turn simulation.
                     case Constants.LEARNERS_MISSION_4:
                         // Learn high energy magnetics.
-                        StartCoroutine(PauseThenActivateMission4());
+                        //StartCoroutine(PauseThenActivateMission4());
+                        ui.SetHintActive((RectTransform)ui.leftTechnology1Button.transform, true);
                         break;
                     // Learned high energy magnetics.
                     case Constants.LEARNERS_MISSION_5:
+                        // Learn Interplanetary Networking
+                        ui.SetHintActive((RectTransform)ui.leftTechnology2Button.transform, true);
+                        break;
+                    // We may remove this in the future, not necessary to redirect player to play button
+                    case Constants.LEARNERS_MISSION_5_PLAY:
+                        // Press Play
+                        ui.SetHintActive((RectTransform)ui.rightNextTurnButton.transform, true);
+                        break;
+                    // Learned Interplanetary Networking
+                    case Constants.LEARNERS_MISSION_6:
                         // Build another stone planet.
                         ui.SetHintActive((RectTransform)ui.rightStoneButton.transform, true);
                         break;
                     // Built another stone planet.
-                    case Constants.LEARNERS_MISSION_6:
-                        // Nothing yet.
+                    case Constants.LEARNERS_MISSION_7:
+                        // Nothing yet
                         break;
                     default:
                         Debug.Log("Default state. We shouldn't be here.");

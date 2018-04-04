@@ -37,7 +37,14 @@ public class BuildButtons : MonoBehaviour {
         // Dismiss tooltip when clicking Tech 1
         if(GameController.level == 1 && gc.turn == 2 && gameObject.name == "Tech 1")
         {
-            gc.GAME_STATE = Constants.LEARNERS_MISSION_5;
+            //Debug.Log("Set Constants.LEARNERS_MISSION_3");
+            gc.GAME_STATE = Constants.LEARNERS_MISSION_3; // Point at end turn button
+        }
+        // Dismiss tooltip when clicking Tech 1
+        else if(GameController.level == 1 && gc.turn == 3 && gc.GAME_STATE == Constants.LEARNERS_MISSION_5 && gameObject.name == "Tech 2")
+        {
+            //Debug.Log("Constants.LEARNERS_MISSION_5_PLAY");
+            gc.GAME_STATE = Constants.LEARNERS_MISSION_5_PLAY; // Point at end turn button
         }
 
         // Button was clicked

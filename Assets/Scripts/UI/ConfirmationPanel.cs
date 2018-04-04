@@ -57,6 +57,8 @@ public class ConfirmationPanel : MonoBehaviour
 
         if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
         if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_3 && gc.turn == 2 && gc.canBuild) gc.GAME_STATE = Constants.LEARNERS_MISSION_4;
+        if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_3 && gc.turn == 3 && gc.canBuild) gc.GAME_STATE = Constants.LEARNERS_MISSION_5;
+        if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_5_PLAY && gc.turn == 4 && gc.canBuild) gc.GAME_STATE = Constants.LEARNERS_MISSION_6;
     }
 
     public void NextLevel()

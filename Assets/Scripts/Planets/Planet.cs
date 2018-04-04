@@ -326,12 +326,12 @@ public class Planet : MonoBehaviour
                     // Go to next step if the skill tree isn't open
                     if (GameObject.Find("Macro Skill Tree") == null)
                     {
-                        gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
+                        //gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
                     }
                     else
                     {
                         // Otherwide, skip ahead
-                        gc.GAME_STATE = Constants.TURN_2_PLANET_SLOT;
+                        //gc.GAME_STATE = Constants.TURN_2_PLANET_SLOT;
                     }
                 }
                 else if (gc.GAME_STATE == Constants.TURN_2_WATCH_SIMULATION)
@@ -341,7 +341,7 @@ public class Planet : MonoBehaviour
                     //button.interactable = true;
 
                     // Go to next step if the skill tree isn't open
-                    gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
+                    //gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
                 }
             }
         }

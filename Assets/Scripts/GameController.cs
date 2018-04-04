@@ -880,8 +880,10 @@ public class GameController : MonoBehaviour
 
             ui.SetPhase("Placing");
 
-            // Update the game state
+            // Dismiss hint after clicking stone button
             if (GAME_STATE == Constants.LEARNERS_MISSION_2) state.DisableAllHints();
+            if (GAME_STATE == Constants.LEARNERS_MISSION_6) state.DisableAllHints();
+            //if (GAME_STATE == Constants.LEARNERS_MISSION_5) state.DisableAllHints();
 
             // // Update the game state
             // if (GAME_STATE == Constants.TURN_1_PLANET_SLOT)
@@ -943,7 +945,8 @@ public class GameController : MonoBehaviour
                             else
                             {
                                 playButton.interactable = true;
-                                //ui.UpdateSelectedPlanet();
+                                planetScript = p;
+                                ui.SetSelectedPlanet(planetScript);
                             }
 
                             planetPlaced = true;
@@ -1130,10 +1133,18 @@ public class GameController : MonoBehaviour
 
     public void SetBuildingActive(bool active)
     {
+        //Debug.Log(GAME_STATE);
         Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
         if (canBuild)
         {
             stoneButton.interactable = active;
+
+            // Disable the stone button depending on the status of the Learner's Test
+            if (level == 1 && GAME_STATE != Constants.LEARNERS_MISSION_5_PLAY)
+            {
+                // Only enable when we are on Mission 6
+                stoneButton.interactable = false;
+            }
 
             if (stoneIncrement > 0)
             {

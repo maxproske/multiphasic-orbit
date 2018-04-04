@@ -32,14 +32,14 @@ public class PlanetarySkillTreeButton : MonoBehaviour, IPointerEnterHandler, IPo
 
 			// Switch the hint indicator
 			if (macroSkillTree.activeSelf && gc.GAME_STATE == Constants.TURN_1_SKILL_TREE) {
-				gc.GAME_STATE = Constants.TURN_1_PLANET_SLOT;
+				//gc.GAME_STATE = Constants.TURN_1_PLANET_SLOT;
 			}
 			// Handle player clicking skill tree when skill tree is open
 			else if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT) {
-				gc.GAME_STATE = Constants.TURN_1_SKILL_TREE;
+				//gc.GAME_STATE = Constants.TURN_1_SKILL_TREE;
 			}
 			else if (gc.GAME_STATE == Constants.TURN_2_SKILL_TREE) {
-				gc.GAME_STATE = Constants.TURN_2_PLANET_SLOT;
+				//gc.GAME_STATE = Constants.TURN_2_PLANET_SLOT;
 			}
 		}
 	}

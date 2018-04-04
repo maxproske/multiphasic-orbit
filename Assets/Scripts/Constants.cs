@@ -5,6 +5,7 @@
     public const int LEARNERS_MISSION_3 = 2;
     public const int LEARNERS_MISSION_4 = 3;
     public const int LEARNERS_MISSION_5 = 4;
+    public const int LEARNERS_MISSION_5_PLAY = 100; // Extra hint pointing ot play button we may remove in the future
     public const int LEARNERS_MISSION_6 = 5;
     public const int LEARNERS_MISSION_7 = 6;
 
