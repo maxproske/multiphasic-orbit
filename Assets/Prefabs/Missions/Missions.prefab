@@ -71,5 +71,5 @@ MonoBehaviour:
   - {fileID: 1959671137344680, guid: b883c6840e5500248873bd86dd3c54aa, type: 2}
   test3MissionsAmount: 5
   possibleMissionIndexes: 
-  totalMissions: 0
+  totalMissions: 5
   eom: {fileID: 114355035499800050, guid: d583414724e606d4da6d0bb511903231, type: 2}
