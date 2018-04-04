@@ -51,7 +51,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             // Update the game state
             if (gc.GAME_STATE == Constants.TURN_2_PLANET_SLOT && (clickedSlot.name == "Silicon" || clickedSlot.name == "Ammonia" || clickedSlot.name == "Methane"))
             {
-                gc.GAME_STATE = Constants.TURN_2_PLACE_PLANET;
+                //gc.GAME_STATE = Constants.TURN_2_PLACE_PLANET;
             }
 
             // if button's name is Carbon
@@ -188,7 +188,7 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             // Update the game state
             if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT)
             {
-                gc.GAME_STATE = Constants.TURN_1_PLACE_PLANET;
+                //gc.GAME_STATE = Constants.TURN_1_PLACE_PLANET;
             }
 
             // Calculate 3D mouse coordinates
@@ -212,13 +212,13 @@ public class PlanetSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                             // Update the game state
                             if (gc.GAME_STATE == Constants.TURN_1_PLACE_PLANET)
                             {
-                                gc.GAME_STATE = Constants.TURN_1_END_TURN;
+                                //gc.GAME_STATE = Constants.TURN_1_END_TURN;
                             }
 
                             // Update the game state
                             if (gc.GAME_STATE == Constants.TURN_2_PLACE_PLANET)
                             {
-                                gc.GAME_STATE = Constants.TURN_2_END_TURN;
+                                //gc.GAME_STATE = Constants.TURN_2_END_TURN;
                             }
 
                             // only stops coroutine if it is running

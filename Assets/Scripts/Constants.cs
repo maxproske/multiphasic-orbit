@@ -1,29 +1,34 @@
-﻿public static class Constants {
+﻿public static class Constants
+{
     public const int LEARNERS_MISSION_1 = 0;
     public const int LEARNERS_MISSION_2 = 1;
     public const int LEARNERS_MISSION_3 = 2;
+    public const int LEARNERS_MISSION_4 = 3;
+    public const int LEARNERS_MISSION_5 = 4;
+    public const int LEARNERS_MISSION_6 = 5;
+    public const int LEARNERS_MISSION_7 = 6;
 
 	// Constants for hint indicator
 	public const int TURN_1_SKILL_TREE = 0;
-	public const int TURN_1_PLANET_SLOT = 1;
-	public const int TURN_1_PLACE_PLANET = 2;
-	public const int TURN_1_END_TURN = 3;
-	public const int TURN_1_WATCH_SIMULATION = 4;
+	public const int TURN_1_PLANET_SLOT = 0;
+	public const int TURN_1_PLACE_PLANET = 0;
+	public const int TURN_1_END_TURN = 0;
+	public const int TURN_1_WATCH_SIMULATION = 0;
 
-	public const int TURN_2_SKILL_TREE = 10;
-	public const int TURN_2_PLANET_SLOT = 11;
-	public const int TURN_2_PLACE_PLANET = 12;
-	public const int TURN_2_END_TURN = 13;
-	public const int TURN_2_WATCH_SIMULATION = 14;
+	public const int TURN_2_SKILL_TREE = 0;
+	public const int TURN_2_PLANET_SLOT = 0;
+	public const int TURN_2_PLACE_PLANET = 0;
+	public const int TURN_2_END_TURN = 0;
+	public const int TURN_2_WATCH_SIMULATION = 0;
 
-	public const int TURN_3_TECH_TREE = 20;
-	public const int TURN_3_TECH_SLOT = 21;
-	public const int TURN_3_TECH_TREE_2 = 22;
-	public const int TURN_3_TECH_SLOT_2 = 23;
+	public const int TURN_3_TECH_TREE = 0;
+	public const int TURN_3_TECH_SLOT = 0;
+	public const int TURN_3_TECH_TREE_2 = 0;
+	public const int TURN_3_TECH_SLOT_2 = 0;
 
     // Constants for attributes
-    public const int DEFENSE = 30;
-    public const int ATTACK = 31;
+    public const int DEFENSE = 0;
+    public const int ATTACK = 1;
 
     // log types
     public const int PLANET = 41;

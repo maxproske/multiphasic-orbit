@@ -37,6 +37,8 @@ public class ConfirmationPanel : MonoBehaviour
         panel.SetActive(true);
         titleText.text = title;
         messageText.text = message;
+
+        // Clear tooltips
     }
 
     public void ShowPanel(string title, string message, string reward)
@@ -53,8 +55,10 @@ public class ConfirmationPanel : MonoBehaviour
         
         // Update game state on panel close
         //Debug.Log(gc.GAME_STATE);
+        //Debug.Log("turn " + gc.turn);
 
         if (gc.GAME_STATE == Constants.LEARNERS_MISSION_1) gc.GAME_STATE = Constants.LEARNERS_MISSION_2;
+        if (gc.GAME_STATE == Constants.LEARNERS_MISSION_3 && gc.turn == 2 && gc.canBuild) gc.GAME_STATE = Constants.LEARNERS_MISSION_4;
     }
 
     public void NextLevel()

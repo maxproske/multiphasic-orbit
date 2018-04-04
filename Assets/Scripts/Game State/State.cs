@@ -20,11 +20,11 @@ public class State : MonoBehaviour {
 	// This function updates the hint indicator
 	public void UpdateState(int previous, int current)
 	{
-        //Debug.Log(current);
-
 		// If previous game state is different than the current state
 		if (previous != current)
 		{
+            //Debug.Log(current);
+
 			// Something has changed...
 			DisableAllHints();
 
@@ -45,7 +45,18 @@ public class State : MonoBehaviour {
                         break;
                     // Placed stone planet
                     case Constants.LEARNERS_MISSION_3:
+                        // Play end turn simulation.
                         ui.SetHintActive((RectTransform)ui.rightNextTurnButton.transform, true);
+                        break;
+                    // Played end turn simulation.
+                    case Constants.LEARNERS_MISSION_4:
+                        // Learn high energy magnetics.
+                        StartCoroutine(PauseThenActivateMission4());
+                        break;
+                    case Constants.LEARNERS_MISSION_5:
+                        // Nothing yet.
+                        break;
+                    case Constants.LEARNERS_MISSION_6:
                         // Nothing yet.
                         break;
                     default:
@@ -68,6 +79,14 @@ public class State : MonoBehaviour {
         {
             hint.gameObject.SetActive(false);
         }
+	}
+
+	IEnumerator PauseThenActivateMission4()
+	{
+		// Wait...
+		yield return new WaitForSeconds(0.05f); // The parameter is the number of seconds to wait
+		// Do something...
+		ui.SetHintActive((RectTransform)ui.leftTechnology1Button.transform, true);
 	}
 
 	// void enablePlanetGlow(int index)

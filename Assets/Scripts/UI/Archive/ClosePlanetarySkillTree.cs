@@ -33,13 +33,13 @@ public class ClosePlanetarySkillTree : MonoBehaviour, IPointerEnterHandler, IPoi
 
 			// Set state backwards
 			if (gc.GAME_STATE == Constants.TURN_1_PLANET_SLOT) {
-				gc.GAME_STATE = Constants.TURN_1_SKILL_TREE;
+				//gc.GAME_STATE = Constants.TURN_1_SKILL_TREE;
 			}
 			else if (gc.GAME_STATE == Constants.TURN_2_PLANET_SLOT) {
-				gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
+				//gc.GAME_STATE = Constants.TURN_2_SKILL_TREE;
 			}
 			else if (gc.GAME_STATE == Constants.TURN_3_TECH_SLOT) {
-				gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
+				//gc.GAME_STATE = Constants.TURN_3_TECH_TREE;
 				// Enable the panel
 				this.GetComponent<TechnologySkillTreeButton> ().enabled = true;
 			}

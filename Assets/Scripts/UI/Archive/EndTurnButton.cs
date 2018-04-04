@@ -35,10 +35,10 @@ public class EndTurnButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 			// Actually on second thought, let the simulation run first before updating the game state...
 			if (gc.GAME_STATE == Constants.TURN_1_END_TURN) {
-				gc.GAME_STATE = Constants.TURN_1_WATCH_SIMULATION;
+				//gc.GAME_STATE = Constants.TURN_1_WATCH_SIMULATION;
 			}
 			if (gc.GAME_STATE == Constants.TURN_2_END_TURN) {
-				gc.GAME_STATE = Constants.TURN_2_WATCH_SIMULATION;
+				//gc.GAME_STATE = Constants.TURN_2_WATCH_SIMULATION;
 			}
 			mouseHover = false;
 		}

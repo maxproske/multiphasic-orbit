@@ -73,8 +73,9 @@ public class HintController : MonoBehaviour
         else
         {
             // Show tooltip on the right side of target
-            float offset = go2.transform.localPosition.x + (buttonPanelWidth/2) + margin;
-            go2.transform.localPosition = new Vector3 (offset, go2.transform.localPosition.y, 0);
+            float xOffset = go2.transform.localPosition.x + (buttonPanelWidth/2) + margin;
+            float yOffset = (go2.transform.localPosition.y > 350) ? -50 : go2.transform.localPosition.y;
+            go2.transform.localPosition = new Vector3 (xOffset, yOffset, 0);
             go2.transform.localScale = new Vector3(1, 1, 1); // Point left
         }
 
@@ -104,8 +105,8 @@ public class HintController : MonoBehaviour
         else
          {
             // Up-down
-			pointA = new Vector3 (0, bounceDistance / 2, 0);
-			pointB = pointA + new Vector3 (0, -bounceDistance, 0);
+			pointA = new Vector3 (bounceDistance / 2, 0, 0);
+			pointB = pointA + new Vector3 (-bounceDistance, 0, 0);
 		}
 		while (true) 
         {
@@ -118,7 +119,8 @@ public class HintController : MonoBehaviour
     {
 		float i = 0.0f;
 		float rate = 1.0f / time;
-		while (i < 1.0f) {
+		while (i < 1.0f) 
+        {
 			i += Time.deltaTime * rate;
             // Update x position of Hint attached to Hint Container
 			thisTransform.position = Vector3.Lerp(startPos + thisTransform.position, endPos + thisTransform.position, i);
@@ -129,11 +131,14 @@ public class HintController : MonoBehaviour
     public void SetHintActive(bool state) 
 	{
         // If tooltip is already properly positioned
-        go2.SetActive (state);
+        if (!go2.activeSelf)
+        {
+            go2.SetActive (state);
 
-        // Because PolygonUI is dumb, we need to mark the graphics
-        // as dirty to redraw. Calling SetActive(true) is not enough.
-        StartCoroutine(redrawHintAfterDelay());
+            // Because PolygonUI is dumb, we need to mark the graphics
+            // as dirty to redraw. Calling SetActive(true) is not enough.
+            StartCoroutine(redrawHintAfterDelay());
+        }
 	}
 
 	IEnumerator redrawHintAfterDelay()

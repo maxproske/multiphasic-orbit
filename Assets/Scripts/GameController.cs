@@ -333,6 +333,10 @@ public class GameController : MonoBehaviour
         turn++;
         //Debug.Log(planets.Count);
         //Debug.Log("Turn " + turn);
+
+        // Advance game state
+        //Debug.Log((GAME_STATE == Constants.LEARNERS_MISSION_2).ToString() + ", " + (level == 1).ToString() + ", " + (turn == 2).ToString());
+
         ui.SetTurn(turn);
         l.ToLog(l.AddTurnToLog());
         l.LogBackLog();
@@ -765,10 +769,7 @@ public class GameController : MonoBehaviour
 
             if (planetScript.stone >= 10 && planetScript.iftech1 == 0)
             {
-
-
                 tech1.interactable = true;
-
             }
             else if (planetScript.gas >= 5 && planetScript.water >= 5 && planetScript.stone >= 5 && planetScript.iftech1 == 4 && planetScript.iftech2 == 0)
             {
