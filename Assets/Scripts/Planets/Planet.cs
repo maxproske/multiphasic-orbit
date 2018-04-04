@@ -559,7 +559,7 @@ public class Planet : MonoBehaviour
             gas += addHydrogen * collectionMultiplier;
             if (turnsToBuild < 1)
             {
-                gc.summary += planetname + " collected" + addCarbon + " stones, " + addNitrogen + " water, " + addHydrogen + " gas.\n";
+				gc.summary += planetname + " collected" + addCarbon * collectionMultiplier + " stones, " + addNitrogen * collectionMultiplier + " water, " + addHydrogen * collectionMultiplier + " gas.\n";
             }
             if (linkedWith.Count > 0)
             {
