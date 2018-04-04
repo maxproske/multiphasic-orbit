@@ -55,4 +55,4 @@ MonoBehaviour:
   missionDescription: Establish link between planets.
   missionReward: Learner's certificate.
   postMissionMessage: Establish link between planets.
-  completed: 0
+  completed: 1

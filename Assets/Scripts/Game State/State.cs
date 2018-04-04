@@ -29,7 +29,7 @@ public class State : MonoBehaviour {
 			DisableAllHints();
 
 			// Handle the event
-            switch (gc.level)
+            switch (GameController.level)
 			{
                 case 1:
                 switch (current)

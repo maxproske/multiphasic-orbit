@@ -27,12 +27,15 @@ public class Missions : MonoBehaviour
     public int totalMissions;
     GameObject[] missionsPool;
 
+    public EndOfMission eom;
+
     // Use this for initialization
     void Start()
     {
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         m = GameObject.Find("Missions").GetComponent<Mission>();
         cp = confirmationPanel.GetComponent<ConfirmationPanel>();
+        
 
         gc.m = this;
         reward = false;
@@ -53,7 +56,7 @@ public class Missions : MonoBehaviour
 
     public void CPShownAtStartOfLevel()
     {
-        switch (gc.level)
+        switch (GameController.level)
         {
             case 1:
                 cp.ShowPanel("Welcome to the Learner's Test", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\nSelect a planet type to start building your solar system!");
@@ -75,7 +78,7 @@ public class Missions : MonoBehaviour
 
     public void InitializeMissions()
     {
-        switch (gc.level)
+        switch (GameController.level)
         {
             case 1:
                 Debug.Log("Playing Level 1");
@@ -215,8 +218,9 @@ public class Missions : MonoBehaviour
                     {
                         Complete(mission);
                         Reward(mission);
-                        cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
-                        cp.confirmButton.onClick.AddListener(cp.NextLevel); // change function of button to change level/scene
+                        //cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
+                        //cp.confirmButton.onClick.AddListener(cp.NextLevel); // change function of button to change level/scene
+                        eom.ShowPanel();
                     }
                 }
                 break;
@@ -279,8 +283,9 @@ public class Missions : MonoBehaviour
                 {
                     Complete(mission);
                     Reward(mission);
-                    cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
-                    cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
+                    //cp.ShowPanel("Link Successful!", "You're ready for the next test. Click OK to advance. Good luck...");
+                    //cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
+                    eom.ShowPanel();
                 }
                 //}
 
@@ -408,7 +413,7 @@ public class Missions : MonoBehaviour
             //}
             //else if (m.postMissionMessage != "")// else just show confirmation panel with just message
             //{
-            if (!gc.simulate)
+            if (!gc.simulate && mission != missions[missions.Count-1])
             {
                 cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.missionReward);
             }

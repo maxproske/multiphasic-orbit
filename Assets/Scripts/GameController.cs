@@ -103,7 +103,7 @@ public class GameController : MonoBehaviour
     public Button waterButton;
     public Button gasButton;
 
-    public int level;
+    public static int level;
 
     // missions
     public Missions m;
@@ -138,17 +138,9 @@ public class GameController : MonoBehaviour
     public GameObject rightpanel;
 
     private bool failOnce;
-    // Use this for initialization
-    void Start()
+
+    private void Awake()
     {
-        // when the script has started, then assign these scripts
-        //ui = GameObject.Find("Canvas").GetComponent<UIController>();
-        //m = GameObject.Find("Missions").GetComponent<Missions>();
-        //cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
-        //l = log.GetComponent<Log>();
-
-        failOnce = true;
-
         currentScene = SceneManager.GetActiveScene();
 
         switch (currentScene.name)
@@ -166,6 +158,20 @@ public class GameController : MonoBehaviour
                 level = 0;
                 break;
         }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        // when the script has started, then assign these scripts
+        //ui = GameObject.Find("Canvas").GetComponent<UIController>();
+        //m = GameObject.Find("Missions").GetComponent<Missions>();
+        //cp = GameObject.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
+        //l = log.GetComponent<Log>();
+
+        failOnce = true;
+
+        
 
         m.CPShownAtStartOfLevel();
 
@@ -335,9 +341,14 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!linking && !simulate && !attacking)
+        if (planet1 != null && planet2 != null)
         {
             ui.SetPhase("Planning");
+        }
+
+        if (planetPlaced)
+        {
+            ui.SetPhase("Ready To Simulate");
         }
 
 
