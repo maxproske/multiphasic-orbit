@@ -99,15 +99,24 @@ public class Missions : MonoBehaviour
             case 3:
                 Debug.Log("Playing Level 3");
                 // add missions from Test1Missions to missions to play with list called missions
+                for (int i = 0; i < test3MissionsAmount; i++)
+                {
+                    int randomEntry = Random.Range(0, possibleMissionIndexes.Count);
+                    int randomNumberToUse = possibleMissionIndexes[randomEntry];
+                    possibleMissionIndexes.RemoveAt(randomEntry);
+                    GameObject missionToAdd = missionsPool[randomNumberToUse]; // get random mission from missionsPool
+
+                    //Test3Missions.Add(missionToAdd);
+                    gc.AddMissionsToUI(missionToAdd);
+                }
+
                 foreach (var mission in Test3Missions)
                 {
                     gc.AddMissionsToUI(mission);
                 }
                 break;
             default:
-                Debug.Log("Playing Level 3");
-
-                
+                Debug.Log("Choosing missions for pool...");
 
                 // add missions from Test1Missions to missions to play with list called missions
                 for (int i = 0; i < test3MissionsAmount; i++)

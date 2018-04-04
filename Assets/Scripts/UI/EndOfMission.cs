@@ -49,7 +49,6 @@ public class EndOfMission : MonoBehaviour
             case 3:
                 break;
             default:
-                Debug.Log("Default");
                 title.text = "Learner's Test Complete!";
                 message.text = "Congratulations on passing your Learner's Test! You are rewarded with Learner's certification, and are now eligible to take your Novice test.";
                 buttonText.text = "Start Novice Test!";
