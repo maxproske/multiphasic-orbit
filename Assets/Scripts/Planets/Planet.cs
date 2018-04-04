@@ -108,6 +108,7 @@ public class Planet : MonoBehaviour
 
     public string planetname = " ";
 
+	public List<GameObject> tradeship=new List<GameObject>();
     // linking
     public List<Planet> linkedWith = new List<Planet>(); // Each planet will have their own list of planets they have linked with
     public LineRenderer[] links;
@@ -188,7 +189,7 @@ public class Planet : MonoBehaviour
             links[i].SetColors(Color.red, Color.red);
 
         }
-
+	
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
 
         orbitPeriod = 0.001f;
@@ -456,50 +457,6 @@ public class Planet : MonoBehaviour
 
             //Debug.Log("addCarbon: " + addCarbon + ", collectionMultiplier:" + collectionMultiplier);
 
-            if (linkedWith.Count == 0)
-            {
-                // GUI.Label (new Rect (rectx, Screen.height - recty - 50, 100, 50), "Carbon: " + preCarbon + " + " + stoneCollected, guiStyle);
-                // GUI.Label (new Rect (rectx, Screen.height - recty - 30, 100, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected, guiStyle);
-                // GUI.Label (new Rect (rectx, Screen.height - recty - 10, 100, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected, guiStyle);
-            }
-            if (linkedWith.Count > 0)
-            {
-                if (this.CompareTag("Rogue"))
-                {
-                    if (this.die == false)
-                    {
-                        //						guiStyle.normal.textColor = Color.red;
-
-                        // GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + tradecarbon, guiStyle);
-                        // GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + tradenitrogen, guiStyle);
-                        // GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + tradehydrogen, guiStyle);	
-                    }
-                }
-                else
-                {
-                    //					string ac = " ";
-                    //					string an = " ";
-                    //					string ah = " ";
-                    //					if (tradecarbon >= 0) {
-                    //						ac = " + ";
-                    //					} else if (tradecarbon < 0) {
-                    //						ac = " - ";
-                    //					}
-                    //					if (tradenitrogen >= 0) {
-                    //						an = " + ";
-                    //					} else if (tradenitrogen < 0) {
-                    //						an = " - ";
-                    //					}
-                    //					if (tradehydrogen >= 0) {
-                    //						ah = " + ";
-                    //					} else if (tradehydrogen < 0) {
-                    //						ah = " - ";
-                    //					}
-                    // GUI.Label (new Rect (rectx, Screen.height - recty - 50, 150, 50), "Carbon: " + preCarbon + " + " + stoneCollected + ac + Mathf.Abs (tradecarbon), guiStyle);
-                    // GUI.Label (new Rect (rectx, Screen.height - recty - 30, 150, 50), "Nitrogen: " + preNitrogen + " + " + waterCollected + an + Mathf.Abs (tradenitrogen), guiStyle);
-                    // GUI.Label (new Rect (rectx, Screen.height - recty - 10, 150, 50), "Hydrogen: " + preHydrogen + " + " + gasCollected + ah + Mathf.Abs (tradehydrogen), guiStyle);	
-                }
-            }
         }
     }
 
@@ -575,6 +532,7 @@ public class Planet : MonoBehaviour
                     tradecarbon++;
                     tradenitrogen++;
                     tradehydrogen++;
+					gc.summary += " Rogue planet attacked " +planet.planetname+" and "+planet.planetname+" losed 25 hp!\n";
                 }
 
             }

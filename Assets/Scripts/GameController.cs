@@ -112,7 +112,7 @@ public class GameController : MonoBehaviour
 
     public GameObject shot;
 
-
+	public List<GameObject> tradeship;
     // missions
     public GameObject missionPanel;
     public GameObject genericMissionPanel;
@@ -465,6 +465,7 @@ public class GameController : MonoBehaviour
             if (shot.transform.position == planet2.transform.position)
             {
                 secondPlanetScript.health -= 50;
+
                 if (secondPlanetScript.health <= 0)
                 {
                     secondPlanetScript.die = true;
@@ -479,6 +480,25 @@ public class GameController : MonoBehaviour
                 Destroy(shot);
             }
         }
+//		if (simulate) {
+//			foreach (var planet in planets) {
+//				
+//				planetScript = planet.GetComponent<Planet> ();
+//				for (int i = 0; i < planetScript.linkedWith.Count; i++) {
+//					planetScript.tradeship[i].transform.position=Vector3.MoveTowards(planetScript.tradeship[i].transform.position, planetScript.linkedWith[i].transform.position, 150 * Time.deltaTime);
+//
+//					if (planetScript.tradeship [i].transform.position == planetScript.linkedWith [i].transform.position) {
+//						Destroy (planetScript.tradeship [i]);
+//					}
+//				}
+//			
+//			
+//
+//			}
+//	
+//		}
+
+
         // toggle log
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -1563,6 +1583,18 @@ public class GameController : MonoBehaviour
                     l.UpdateLogPlanet(planet.name, "has finished building");
                     l.LogBackLog();
                 }
+
+//				if (planetScript.linkedWith.Count > 0) {
+//					for(int i=0;i<planetScript.linkedWith.Count;i++){
+//						if (!planetScript.CompareTag ("Rogue") && !planetScript.linkedWith[i].CompareTag ("Rogue")) {
+//							planetScript.tradeship[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+//							planetScript.tradeship[i].transform.localScale = new Vector3(8f, 8f, 8f);
+//							planetScript.tradeship[i].transform.position = planet.transform.position;
+//					
+//
+//						}
+//					}
+//				}
                 planetScript.StartCoroutine(planetScript.AnimateOrbit(Constants.ANIMATE_SPEED_TEST));
 
 
