@@ -465,6 +465,7 @@ public class Planet : MonoBehaviour
         if (turnsToBuild < 1)
         {
             population = (int)(population + 1);
+			gc.summary += "\n"+planetname + "'s population increase 1 billion.\n";
         }
     }
 
@@ -542,7 +543,7 @@ public class Planet : MonoBehaviour
             gas += addHydrogen * collectionMultiplier;
             if (turnsToBuild < 1)
             {
-				gc.summary += "\n"+planetname + " collected" + addCarbon * collectionMultiplier + " stones, " + addNitrogen * collectionMultiplier + " water, " + addHydrogen * collectionMultiplier + " gas.\n";
+				gc.summary += "It collected" + addCarbon * collectionMultiplier + " stones, " + addNitrogen * collectionMultiplier + " water, " + addHydrogen * collectionMultiplier + " gas.\n";
             }
             if (linkedWith.Count > 0)
             {
