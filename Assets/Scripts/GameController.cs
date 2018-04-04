@@ -129,6 +129,9 @@ public class GameController : MonoBehaviour
     public ConfirmationPanel cp;
 
     public ChoosePanel cp2;
+
+	public ConfirmationPanel cp3;
+
     public int choosecase = 0;
 
     public string summary = "";
@@ -138,6 +141,8 @@ public class GameController : MonoBehaviour
     public GameObject rightpanel;
 
     private bool failOnce;
+
+	public Text summaryText;
 
     private void Awake()
     {
@@ -369,12 +374,12 @@ public class GameController : MonoBehaviour
             //			ui.gameObject.SetActive (true);
             leftpanel.SetActive(true);
             rightpanel.SetActive(true);
-            Camera.main.orthographicSize = camerasize;
+            Camera.main.orthographicSize =600;
         }
 
         if (showsummary == true)
         {
-            cp.ShowPanel("Summary", summary);
+            cp3.ShowPanel("Summary", summary);
             showsummary = false;
         }
         //if click nobutton

@@ -559,37 +559,37 @@ public class Planet : MonoBehaviour
             gas += addHydrogen * collectionMultiplier;
             if (turnsToBuild < 1)
             {
-				gc.summary += planetname + " collected" + addCarbon * collectionMultiplier + " stones, " + addNitrogen * collectionMultiplier + " water, " + addHydrogen * collectionMultiplier + " gas.\n";
+				gc.summary += "\n"+planetname + " collected" + addCarbon * collectionMultiplier + " stones, " + addNitrogen * collectionMultiplier + " water, " + addHydrogen * collectionMultiplier + " gas.\n";
             }
             if (linkedWith.Count > 0)
             {
 
 
-                gc.summary += " It traded" + tradecarbon + " stones, " + tradenitrogen + " water, " + tradehydrogen + " gas.\n";
+                gc.summary += "It traded" + tradecarbon + " stones, " + tradenitrogen + " water, " + tradehydrogen + " gas.\n";
             }
             if (iftech1 == 3)
             {
-                gc.summary += " It learned collecting more resources technology\n";
+                gc.summary += "It learned collecting more resources technology\n";
                 iftech1 = 4;
             }
             if (iftech2 == 3)
             {
-                gc.summary += " It learned linking technology\n";
+                gc.summary += "It learned linking technology\n";
                 iftech2 = 4;
             }
             if (iftech3 == 3)
             {
-                gc.summary += " It learned more linking chance technology\n";
+                gc.summary += "It learned more linking chance technology\n";
                 iftech3 = 4;
             }
             if (iftech4 == 3)
             {
-                gc.summary += " It learned stormsheid technology\n";
+                gc.summary += "It learned stormsheid technology\n";
                 iftech4 = 4;
             }
             if (iftech5 == 3)
             {
-                gc.summary += " It learned attacking technology\n";
+                gc.summary += "It learned attacking technology\n";
                 iftech5 = 4;
             }
             ui.SetPhase("Planning");
