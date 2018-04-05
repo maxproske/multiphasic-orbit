@@ -36,8 +36,10 @@ public class BuildButtons : MonoBehaviour {
     // Made another onclick function that is only triggered for the purpose of MISSIONS
     private void OnClick()
     {
-        //Debug.Log("Clicked");
+		Debug.Log(gameObject.name);
+		Debug.Log (gc.turn);
 
+		Debug.Log (gc.turn);
         // Dismiss tooltip when clicking Tech 1
         if(GameController.level == 1 && gc.turn == 2 && gameObject.name == "Tech 1")
         {
@@ -45,9 +47,9 @@ public class BuildButtons : MonoBehaviour {
             gc.GAME_STATE = Constants.LEARNERS_MISSION_3; // Point at end turn button
         }
         // Dismiss tooltip when clicking Tech 1
-        else if(GameController.level == 1 && gc.turn >= 3 && gc.GAME_STATE == Constants.LEARNERS_MISSION_5 && gameObject.name == "Tech 2")
+        if(GameController.level == 1 && gc.turn >= 3 && gc.GAME_STATE == Constants.LEARNERS_MISSION_3 && gameObject.name == "Tech 2")
         {
-            //Debug.Log("Constants.LEARNERS_MISSION_5_PLAY");
+            Debug.Log("Constants.LEARNERS_MISSION_5_PLAY");
             gc.GAME_STATE = Constants.LEARNERS_MISSION_5_PLAY; // Point at end turn button
             gc.numInterplanetaryNetworking++; // Flag to help Learner's test know when to tell the player to start linking
         }

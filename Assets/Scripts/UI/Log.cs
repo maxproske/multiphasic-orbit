@@ -386,3 +386,5 @@ public class Log : MonoBehaviour
         myScrollRect.verticalNormalizedPosition = 0f; // scroll to bottom
     }
 }
+
+//

@@ -1184,6 +1184,16 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224080025025302218, guid: a1e2ea2f458a534419e2ce74e2a81cf9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 224080025025302218, guid: a1e2ea2f458a534419e2ce74e2a81cf9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1e2ea2f458a534419e2ce74e2a81cf9, type: 2}
   m_IsPrefabParent: 0
@@ -1455,7 +1465,7 @@ Prefab:
         type: 2}
       propertyPath: cp3
       value: 
-      objectReference: {fileID: 959585165}
+      objectReference: {fileID: 0}
     - target: {fileID: 114019207287768288, guid: 2b9b1294de274bc42961692b175fd2b2,
         type: 2}
       propertyPath: leftpanel
@@ -1470,16 +1480,10 @@ Prefab:
         type: 2}
       propertyPath: summaryText
       value: 
-      objectReference: {fileID: 1337545924}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b9b1294de274bc42961692b175fd2b2, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &959585165 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114523510941705444, guid: a1e2ea2f458a534419e2ce74e2a81cf9,
-    type: 2}
-  m_PrefabInternal: {fileID: 338923855}
-  m_Script: {fileID: 11500000, guid: c41d5b8c6afd3da49be0eadf514bac2a, type: 3}
 --- !u!114 &1184540797 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114613032914317524, guid: a1e2ea2f458a534419e2ce74e2a81cf9,
@@ -1492,12 +1496,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 338923855}
   m_Script: {fileID: 11500000, guid: 17514360aaf844177a86956dcb33ceaf, type: 3}
---- !u!114 &1337545924 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114384248315497048, guid: a1e2ea2f458a534419e2ce74e2a81cf9,
-    type: 2}
-  m_PrefabInternal: {fileID: 338923855}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1503712842
 Prefab:
   m_ObjectHideFlags: 0
