@@ -54,6 +54,10 @@
     // Constants for missions
     public const int MISSION_1 = 31;
 
+    public const string LEVEL_1_SCENE_NAME = "Main";
+    public const string LEVEL_2_SCENE_NAME = "Level2";
+    public const string LEVEL_3_SCENE_NAME = "Final";
+
     // Strings for tooltips
     // https://docs.unity3d.com/Manual/StyledText.html
     //
