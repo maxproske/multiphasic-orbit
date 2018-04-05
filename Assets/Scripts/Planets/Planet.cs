@@ -474,13 +474,7 @@ public class Planet : MonoBehaviour
 
     public void CollectResources()
     {
-        // Run before collecting universes, so collectionMultiplier is never 0.
-        //if (fastUniverse)
-        //{
-        //    collectionMultiplier = 4;
-        //}
-        //else
-        //{
+        collectionMultiplier = 1;
 
         if (population > 0)
         {
