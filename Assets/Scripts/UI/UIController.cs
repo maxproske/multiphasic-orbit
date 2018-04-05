@@ -94,6 +94,10 @@ public class UIController : MonoBehaviour
 	   ========================================================================== */
     public GameObject hintContainer;
 
+    /* Declare Orbital Plane
+	   ========================================================================== */
+    public RectTransform orbitalPlanes;
+
 
     // GameController
     public GameController gc;
@@ -125,6 +129,10 @@ public class UIController : MonoBehaviour
            ====================================================================== */
         SetupTooltipController();
         SetupHintController();
+
+        /* Initialize Orbital Plane
+           ====================================================================== */
+        SetupOrbitalPlane();
 	}
 
 	/* Set Top Panel
@@ -531,6 +539,26 @@ public class UIController : MonoBehaviour
         SetHint((RectTransform)leftLinkToButton.transform);
     }
 
+    public void SetupOrbitalPlane ()
+    {
+        switch(GameController.level)
+        {
+            case 1:
+                 SetOrbitalPlaneActive(false);
+                 break;
+            case 2:
+                 SetOrbitalPlaneActive(false);
+                 break;
+            case 3:
+                 SetOrbitalPlaneActive(false);
+                 break;
+            default:
+                 SetOrbitalPlaneActive(true);
+                 break;
+            break;
+        }
+    }
+
     // Enable or disable a hint from any script
     public void SetHintActive(RectTransform rt, bool active) 
     {
@@ -589,6 +617,11 @@ public class UIController : MonoBehaviour
         {
             SetSelectedHealth();
         }
+    }
+
+    public void SetOrbitalPlaneActive (bool active)
+    {
+        orbitalPlanes.gameObject.SetActive(active);
     }
 
     /* Animations

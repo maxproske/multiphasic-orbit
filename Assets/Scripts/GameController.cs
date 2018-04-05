@@ -156,15 +156,19 @@ public class GameController : MonoBehaviour
         {
             case "Main":
                 level = 1;
+                ORBIT_4D = false;
                 break;
             case "Level2":
                 level = 2;
+                ORBIT_4D = false;
                 break;
             case "Final":
                 level = 3;
+                ORBIT_4D = true;
                 break;
             default:
                 level = 0;
+                ORBIT_4D = false;
                 break;
         }
     }
@@ -179,8 +183,6 @@ public class GameController : MonoBehaviour
         //l = log.GetComponent<Log>();
 
         failOnce = true;
-
-        ORBIT_4D = true;
 
         m.CPShownAtStartOfLevel();
 
@@ -359,6 +361,14 @@ public class GameController : MonoBehaviour
             ui.SetPhase("Planning");
         }
 
+        if (placing || planetPlaced)
+        {
+            ui.SetOrbitalPlaneActive(true);
+        }
+        else {
+            ui.SetOrbitalPlaneActive(false);
+        }
+
         if (planetPlaced)
         {
             ui.SetPhase("Ready To Simulate");
@@ -444,7 +454,6 @@ public class GameController : MonoBehaviour
             {
                 Simulate();
             }
-
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -602,7 +611,7 @@ public class GameController : MonoBehaviour
                                 secondPlanetScript = planet2.GetComponent<Planet>();
                                 // if both variables are set
 
-                                cp2.ShowPanel("Assigning Linking", "Do you want to link " + planet1.name + " and " + planet2.name + "?");
+                                cp2.ShowPanel("Establishing Trade Link", "\r\nAre you sure you want to link " + planet1.name + " and " + planet2.name + "?");
                                 choosecase = 1;
                             }
                         }
@@ -1114,7 +1123,7 @@ public class GameController : MonoBehaviour
         go = Instantiate(stone) as GameObject;
         // increment planet name
         stoneIncrement++;
-        go.name = "Stone " + stoneIncrement;
+        go.name = "MRJJ-" + stoneIncrement + "s";
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -1133,7 +1142,7 @@ public class GameController : MonoBehaviour
         go = Instantiate(water) as GameObject;
         // increment planet name
         waterIncrement++;
-        go.name = "Water " + waterIncrement;
+        go.name = "MRJJ-" + waterIncrement + "w";
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
@@ -1152,7 +1161,7 @@ public class GameController : MonoBehaviour
         go = Instantiate(gas) as GameObject;
         // increment planet name
         gasIncrement++;
-        go.name = "Gas " + gasIncrement;
+        go.name = "MRJJ-" + gasIncrement + "g";
         // Make planet a child object of the Sun
         go.transform.parent = sun.transform;
         // Add planet to array of planets
