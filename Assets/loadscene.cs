@@ -17,6 +17,6 @@ public class loadscene : MonoBehaviour {
 
 	void LoadLevel()
 	{
-		SceneManager.LoadScene("SolarSystem");
+		SceneManager.LoadScene("Cutscene1");
 	}
 }
