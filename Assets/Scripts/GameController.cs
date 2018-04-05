@@ -87,6 +87,9 @@ public class GameController : MonoBehaviour
     public bool linksuccessful = false;
     private int linktime = 0;
 
+    // Universe
+    public static bool ORBIT_4D;
+
     // planet placing variables
     public Transform sun; // Reference to planet objects parent
     public GameObject stone; // Reference to prefab carbon to generate
@@ -177,7 +180,7 @@ public class GameController : MonoBehaviour
 
         failOnce = true;
 
-        
+        ORBIT_4D = true;
 
         m.CPShownAtStartOfLevel();
 
@@ -435,7 +438,7 @@ public class GameController : MonoBehaviour
             cp2.yesorno = 0;
             choosecase = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown("return") || Input.GetKeyDown("enter"))
         {
             if (playButton.interactable)
             {
@@ -1017,8 +1020,10 @@ public class GameController : MonoBehaviour
                                 if (location.x > -100 && location.x < 100) location.x = 100;
                                 if (location.z > -100 && location.z < 100) location.z = 100;
 
-                                p.orbitPath.xAxis = (Mathf.Abs(location.x));
-                                p.orbitPath.yAxis = (Mathf.Abs(location.z));
+                                float value = Mathf.Max(Mathf.Abs(location.x), Mathf.Abs(location.z));
+
+                                p.orbitPath.xAxis = (Mathf.Abs(value));
+                                p.orbitPath.yAxis = (Mathf.Abs(value));
 
                                 // float radiusX = location.x;
                                 // if (radiusX < 100) radiusX = 100;

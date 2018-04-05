@@ -27,7 +27,8 @@ public class EllipseTester {
         float x, y, z;
         float angle = Mathf.Deg2Rad * 360f * t;
 
-        if (Constants.ORBIT_4D) {
+        if (GameController.ORBIT_4D) 
+        {
             // We dont need to divide segments by i, because we already know
             // how far we are along the elipse (float t).
             // Cast both to floats, to make it a number between 0-1
@@ -35,7 +36,7 @@ public class EllipseTester {
             // Use Mathf.Deg2Rad, because Sin and Cosine work in radians, not degrees
             x = Mathf.Sin (angle) * xAxis;
             y = Mathf.Cos (angle) * yAxis;
-            float flatten = 30f;
+            float flatten = 10f;
             z = Mathf.Tan (angle) * (xAxis+yAxis)/flatten; // 0 for flat orbit
 
             if (z < -500) z = -99999;

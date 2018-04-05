@@ -74,7 +74,4 @@
     public const string TOOLTIP_LEFT_TECHNOLOGY_4_BUTTON = "Learn <b>Extraplanetary Ballistics</b>.;;- Can Attack Rogue Planets.;- Costs <b><color=#616161FF>15 stone</color></b>, <b><color=#2196F3FF>15 water</color></b>.";
     public const string TOOLTIP_LEFT_TECHNOLOGY_5_BUTTON = "Learn <b>Negative Mass Mechanics</b>.;;- Increases Attack Power by 50%.;- Costs <b><color=#616161FF>20 stone</color></b>, <b><color=#2196F3FF>20 water</color></b>, <b><color=#795548FF>20 gas</color></b>.";
     public const string TOOLTIP_LEFT_LINK_TO_BUTTON = "Select a target to link to.;;- Target must also know <b>Interplanetary Networking</b>.";
-
-    // Orbit type
-    public const bool ORBIT_4D = false;
 }

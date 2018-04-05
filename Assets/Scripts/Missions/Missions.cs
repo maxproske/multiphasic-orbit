@@ -59,7 +59,7 @@ public class Missions : MonoBehaviour
         switch (GameController.level)
         {
             case 1:
-                cp.ShowPanel("Welcome to the Learner's Test", "Left Click - Navigation\r\nRight Click - Rotate Camera\r\nScroll Wheel - Zoom in and out\r\nTAB - Open Mission Log\r\n\r\nSelect a planet type to start building your solar system!");
+                cp.ShowPanel("Welcome to the Learner's Test", "Use Right Click to Rotate Camera.\r\nUse Scroll Wheel to Zoom In and Out.\r\n\r\nPress Tab to open Mission Log.\r\n\r\nSelect a planet type to start building your solar system!");
                 cp.confirmButton.onClick.AddListener(cp.CheckMissions); // change function of button to change level/scene
                 break;
             case 2:

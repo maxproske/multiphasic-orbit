@@ -686,7 +686,7 @@ public class Planet : MonoBehaviour
                 position3D.y + orbitingObject.transform.parent.localPosition.y
             );
 
-            if (Constants.ORBIT_4D)
+            if (GameController.ORBIT_4D)
             {
                 if (i == 24) points[i].y *= 1000;
                 if (i == 25) points[i] = new Vector3(99999999, 99999, 99999);

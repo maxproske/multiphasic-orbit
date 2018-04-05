@@ -111,7 +111,7 @@ public class UIController : MonoBehaviour
 	       ====================================================================== */
 		SetTurn (1);
         SetPhase ("Planning");
-		SetDistance (0);
+		SetDistance (600);
 
 		/* Initialize Left Panel
 	       ====================================================================== */
