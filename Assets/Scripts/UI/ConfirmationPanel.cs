@@ -81,4 +81,9 @@ public class ConfirmationPanel : MonoBehaviour
         gc.m.CheckMissions(gc.m.missions);
                 if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_3 && gc.turn == 2 && gc.canBuild) gc.GAME_STATE = Constants.LEARNERS_MISSION_4;
     }
+
+    public void Title()
+    {
+        SceneManager.LoadScene("title");
+    }
 }

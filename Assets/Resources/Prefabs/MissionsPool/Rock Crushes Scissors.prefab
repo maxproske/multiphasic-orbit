@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionName: Rock Crushes Scissors
-  missionDescription: Link 3 rock planets together.
+  missionDescription: Link 3 Stone planets together.
   missionReward: 
   postMissionMessage: This new formation of planets is a military powerhouse and will
     defend ALL planets in your solar system from Rogue encounters.

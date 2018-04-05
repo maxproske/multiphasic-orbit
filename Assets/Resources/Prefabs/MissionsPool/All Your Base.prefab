@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionName: All Your Base
-  missionDescription: Defeat a rogue planet that has taken over multiple planets.
+  missionDescription: Have a planet link with 5 planets of any type
   missionReward: 
   postMissionMessage: 
   completed: 0

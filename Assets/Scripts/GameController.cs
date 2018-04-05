@@ -185,7 +185,7 @@ public class GameController : MonoBehaviour
 
         failOnce = true;
 
-        m.CPShownAtStartOfLevel();
+        //m.CPShownAtStartOfLevel();
 
         //l.ToggleLog();
 
@@ -251,7 +251,7 @@ public class GameController : MonoBehaviour
 
         ResetLinking();
 
-        m.InitializeMissions();
+        //m.InitializeMissions();
     }
 
     public void AddMissionsToUI(GameObject mission)
@@ -357,6 +357,11 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.F12))
+        {
+            SceneManager.LoadScene("title");
+        }
+
         if (planet1 != null && planet2 != null)
         {
             ui.SetPhase("Planning");

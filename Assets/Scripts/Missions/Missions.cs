@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
@@ -15,7 +15,7 @@ public class Missions : MonoBehaviour
     public GameObject confirmationPanel;
     private ConfirmationPanel cp;
     public bool reward;
-    private int rogueDieIncrement;
+    public int rogueDieIncrement;
 
     public List<GameObject> missions; // list of missions that will be played with
     public List<GameObject> Test1Missions; // add these missions into the missions
@@ -27,6 +27,8 @@ public class Missions : MonoBehaviour
     GameObject[] missionsPool;
 
     public EndOfMission eom;
+
+    private int completedMissions;
 
     // Audio
     private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
@@ -44,11 +46,12 @@ public class Missions : MonoBehaviour
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         m = GameObject.Find("Missions").GetComponent<Mission>();
         cp = confirmationPanel.GetComponent<ConfirmationPanel>();
-        
+
 
         gc.m = this;
         reward = false;
         rogueDieIncrement = 0;
+        completedMissions = 0;
 
         possibleMissionIndexes = new List<int>();
 
@@ -61,11 +64,14 @@ public class Missions : MonoBehaviour
         {
             possibleMissionIndexes.Add(i);
         }
+
+        CPShownAtStartOfLevel();
+        InitializeMissions();
     }
 
-    private void PlayMissionCompleteSound ()
+    private void PlayMissionCompleteSound()
     {
-        audioSource.PlayOneShot (missionCompleteAudioClip);
+        audioSource.PlayOneShot(missionCompleteAudioClip);
     }
 
     public void CPShownAtStartOfLevel()
@@ -290,18 +296,6 @@ public class Missions : MonoBehaviour
                 }
                 break;
             case "IMA FIRIN MAH LAZOR":
-                // if all previous missions need to be completed before final
-                //int missionsComplete = 0;
-                //for (int i = 0; i < missions.Count - 1; i++)
-                //{
-                //    if (missions[i].GetComponent<Mission>().completed)
-                //    {
-                //        missionsComplete++;
-                //    }
-
-                //}
-                //if (missionsComplete == missions.Count - 1)
-                //{
                 if (gc.attacking && gc.simulate)
                 {
                     Complete(mission);
@@ -310,8 +304,115 @@ public class Missions : MonoBehaviour
                     //cp.confirmButton.onClick.AddListener(cp.Final); // change function of button to change level/scene
                     eom.ShowPanel();
                 }
-                //}
+                break;
+            case "Rock Crushes Scissors":
+                int stoneCounter = 0;
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
 
+                    stoneCounter = 0;
+                    foreach (var link in p.linkedWith)
+                    {
+                        if (link.name.Contains("MRJJ") || link.name.Contains("Stone"))
+                        {
+                            stoneCounter++;
+                        }
+                    }
+                }
+
+                if (stoneCounter > 2)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                break;
+            case "For Great Justice":
+                if (rogueDieIncrement > 2)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                break;
+            case "Knowledge is Power":
+                int techCounter = 0;
+                foreach (var planet in gc.planets)
+                {
+                    if (planet.GetComponent<Planet>().ifattackactive || planet.GetComponent<Planet>().iftech5 == 3)
+                    {
+                        techCounter++;
+                    }
+                }
+                if (techCounter > 2)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                break;
+            case "All Your Base":
+                int linkCounter = 0;
+                foreach (var planet in gc.planets)
+                {
+                    p = planet.GetComponent<Planet>();
+
+                    linkCounter = 0;
+                    foreach (var link in p.linkedWith)
+                    {
+                        if (link.tag == "Planet")
+                        {
+                            linkCounter++;
+                        }
+                    }
+                }
+
+                if (linkCounter > 4)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                break;
+            case "Three's A Crowd":
+                foreach (var planet in gc.planets)
+                {
+                    if (planet.GetComponent<Planet>().population >= 300)
+                    {
+                        Complete(mission);
+                        Reward(mission);
+                    }
+                }
+                break;
+            case "Godlike":
+                if (completedMissions == missions.Count && gc.turn < 100)
+                {
+                    Complete(mission);
+                    Reward(mission);
+                }
+                else if (gc.turn > 100)
+                {
+                    cp.ShowPanel("Final Test Failed", "You have failed to complete all of the missions by Turn 100.");
+                    cp.confirmButton.onClick.AddListener(cp.Title); // change function of button to change level/scene
+                }
+                else if (gc.turn > 1 && gc.turn < 100)
+                {
+                    bool lose = false;
+                    foreach (var planet in gc.planets)
+                    {
+                        if (!lose)
+                        {
+                            if (planet.tag != "Rogue")
+                            {
+                                lose = false;
+                            }
+                            else
+                            {
+                                lose = true;
+                                cp.ShowPanel("Final Test Failed", "You have have lost all your planets");
+                                cp.confirmButton.onClick.AddListener(cp.Title); // change function of button to change level/scene
+                            }
+                        }
+
+                    }
+                }
                 break;
             default:
                 break;
@@ -417,6 +518,7 @@ public class Missions : MonoBehaviour
     // used to remove mission from in-progress list and add to completed list
     private void Complete(GameObject mission)
     {
+        completedMissions++;
         // Play audio jingle
         PlayMissionCompleteSound();
 
@@ -439,7 +541,7 @@ public class Missions : MonoBehaviour
             //}
             //else if (m.postMissionMessage != "")// else just show confirmation panel with just message
             //{
-            if (!gc.simulate && mission != missions[missions.Count-1])
+            if (!gc.simulate && mission != missions[missions.Count - 1])
             {
                 cp.ShowPanel("Mission: " + m.missionName + " completed!", m.postMissionMessage, m.missionReward);
             }
