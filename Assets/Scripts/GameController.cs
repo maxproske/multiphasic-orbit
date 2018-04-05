@@ -362,7 +362,7 @@ public class GameController : MonoBehaviour
             ui.SetPhase("Planning");
         }
 
-        if (placing || planetPlaced)
+        if (placing || planetPlaced || GameController.level == 3)
         {
             ui.SetOrbitalPlaneActive(true);
         }
