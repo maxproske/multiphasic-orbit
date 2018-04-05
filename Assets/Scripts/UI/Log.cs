@@ -9,9 +9,11 @@ public class Log : MonoBehaviour
     public Text LogText;
     string color;
     string planetColor;
+	string planetColor2;
     string stoneColor;
     string waterColor;
     string gasColor;
+	string rogueColor;
     public string textToLog;
     public ScrollRect myScrollRect;
     public GameObject log;
@@ -26,6 +28,7 @@ public class Log : MonoBehaviour
         stoneColor = "#616161FF";
         waterColor = "#2196F3FF";
         gasColor = "#795548FF";
+		rogueColor = "FF00001A";
         textToLog = "";
         ToggleLog();
 
@@ -98,10 +101,214 @@ public class Log : MonoBehaviour
         ToLog(ChangeColor(gasColor, gas.ToString() + " Gas "));
     }
 
-    public void UpdateLogTrade(string planetName1, string planetName2, string message)
-    {
 
+	public void UpdateLogPopulation(string planetName)
+	{
+		if (planetName.Contains("Stone"))
+		{
+			planetColor = stoneColor;
+		}
+
+		if (planetName.Contains("Water"))
+		{
+			planetColor = waterColor;
+		}
+
+		if (planetName.Contains("Gas"))
+		{
+			planetColor = gasColor;
+		}
+
+		// backlog text first and then log
+		ToLog(AddNewLine());
+		ToLog("The population of Planet ");
+		ToLog(ChangeColor(planetColor, planetName));
+		ToLog(" has increased 1 billion ");
+
+	}
+
+	public void UpdateLogTrade(string planetName1, string planetName2,  int stone, int water, int gas)
+    {
+		if (planetName1.Contains("Stone"))
+		{
+			planetColor = stoneColor;
+		}
+
+		if (planetName1.Contains("Water"))
+		{
+			planetColor = waterColor;
+		}
+
+		if (planetName1.Contains("Gas"))
+		{
+			planetColor = gasColor;
+		}
+		if (planetName2.Contains("Stone"))
+		{
+			planetColor2 = stoneColor;
+		}
+
+		if (planetName2.Contains("Water"))
+		{
+			planetColor2 = waterColor;
+		}
+
+		if (planetName2.Contains("Gas"))
+		{
+			planetColor2 = gasColor;
+		}
+
+		// backlog text first and then log
+		ToLog(AddNewLine());
+		ToLog("Planet ");
+		ToLog(ChangeColor(planetColor, planetName1));
+		ToLog(" used ");
+		if (stone < 0) {
+			stone *= -1;
+			ToLog (ChangeColor (stoneColor, stone.ToString () + " Stone "));
+			stone *= -1;
+		}
+		if (water < 0) {
+			water *= -1;
+			ToLog (ChangeColor (waterColor, water.ToString () + " Water "));
+			water *= -1;
+		}
+		if (gas < 0) {
+			gas *= -1;
+			ToLog (ChangeColor (gasColor, gas.ToString () + " Gas "));
+			gas *= -1;
+		}
+
+		ToLog(" to trade ");
+		if (stone > 0) {
+			ToLog (ChangeColor (stoneColor, stone.ToString () + " Stone "));
+		}
+		if (water > 0) {
+			ToLog (ChangeColor (waterColor, water.ToString () + " Water "));
+		}
+		if (gas > 0) {
+			ToLog (ChangeColor (gasColor, gas.ToString () + " Gas "));
+		}
+		ToLog(" from planet ");
+		ToLog(ChangeColor(planetColor2, planetName2));
     }
+
+
+	public void UpdateLogAttack(string planetName1, string planetName2)
+	{
+		if (planetName1.Contains("Stone"))
+		{
+			planetColor = stoneColor;
+		}
+
+		if (planetName1.Contains("Water"))
+		{
+			planetColor = waterColor;
+		}
+
+		if (planetName1.Contains("Gas"))
+		{
+			planetColor = gasColor;
+		}
+
+		planetColor2 = rogueColor;
+
+		// backlog text first and then log
+		ToLog(AddNewLine());
+		ToLog("Planet ");
+		ToLog(ChangeColor(planetColor, planetName1));
+		ToLog(" attacked planet ");
+		ToLog(ChangeColor(rogueColor, planetName2));
+		ToLog(" and decrease its hp by 50. ");
+
+	}
+
+	public void UpdateLogLinkSuccessful(string planetName1, string planetName2)
+	{
+		if (planetName1.Contains("Stone"))
+		{
+			planetColor = stoneColor;
+		}
+
+		if (planetName1.Contains("Water"))
+		{
+			planetColor = waterColor;
+		}
+
+		if (planetName1.Contains("Gas"))
+		{
+			planetColor = gasColor;
+		}
+		if (planetName2.Contains("Stone"))
+		{
+			planetColor2 = stoneColor;
+		}
+
+		if (planetName2.Contains("Water"))
+		{
+			planetColor2 = waterColor;
+		}
+
+		if (planetName2.Contains("Gas"))
+		{
+			planetColor2 = gasColor;
+		}
+
+
+
+		// backlog text first and then log
+		ToLog(AddNewLine());
+		ToLog("Planet ");
+		ToLog(ChangeColor(planetColor, planetName1));
+		ToLog(" successfully linked with planet ");
+		ToLog(ChangeColor(planetColor2, planetName2));
+
+	}
+
+	public void UpdateLogLinkFail(string planetName1, string planetName2)
+	{
+		if (planetName1.Contains("Stone"))
+		{
+			planetColor = stoneColor;
+		}
+
+		if (planetName1.Contains("Water"))
+		{
+			planetColor = waterColor;
+		}
+
+		if (planetName1.Contains("Gas"))
+		{
+			planetColor = gasColor;
+		}
+		if (planetName2.Contains("Stone"))
+		{
+			planetColor2 = stoneColor;
+		}
+
+		if (planetName2.Contains("Water"))
+		{
+			planetColor2 = waterColor;
+		}
+
+		if (planetName2.Contains("Gas"))
+		{
+			planetColor2 = gasColor;
+		}
+
+
+
+		// backlog text first and then log
+		ToLog(AddNewLine());
+		ToLog("The linking between Planet ");
+		ToLog(ChangeColor(planetColor, planetName1));
+		ToLog(" and planet ");
+		ToLog(ChangeColor(planetColor2, planetName2));
+		ToLog(" failed, planet ");
+		ToLog(ChangeColor(planetColor2, planetName2));
+		ToLog(" became a ");
+		ToLog(ChangeColor(rogueColor, "rogue planet"));
+	}
 
     public void UpdateLogTech(string planetName, string tech, string effect)
     {

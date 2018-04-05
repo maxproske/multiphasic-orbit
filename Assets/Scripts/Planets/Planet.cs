@@ -354,7 +354,7 @@ public class Planet : MonoBehaviour
         if (maxResourceType == 1)
         {
             stone -= 1;
-            
+
  
         }else if (maxResourceType == 2)
         {
@@ -465,7 +465,8 @@ public class Planet : MonoBehaviour
         if (turnsToBuild < 1)
         {
             population = (int)(population + 1);
-			gc.summary += "\n"+planetname + "'s population increase 1 billion.\n";
+			gc.l.UpdateLogPopulation (planetname);
+
         }
     }
 
@@ -519,6 +520,7 @@ public class Planet : MonoBehaviour
 					} else if (planet.maxResourceType == 3) {
 						tradehydrogen++;
 					}
+					gc.l.UpdateLogTrade (this.planetname, planet.planetname, tradecarbon, tradenitrogen, tradehydrogen);
                 }
                 if (planet.CompareTag("Rogue") && planet.die == false)
                 {
@@ -533,7 +535,8 @@ public class Planet : MonoBehaviour
                     tradecarbon++;
                     tradenitrogen++;
                     tradehydrogen++;
-					gc.summary += " Rogue planet attacked " +planet.planetname+" and "+planet.planetname+" losed 25 hp!\n";
+			
+					//gc.summary += " Rogue planet attacked " +planet.planetname+" and "+planet.planetname+" losed 25 hp!\n";
                 }
 
             }
@@ -543,42 +546,46 @@ public class Planet : MonoBehaviour
             gas += addHydrogen * collectionMultiplier;
             if (turnsToBuild < 1)
             {
-				gc.summary += "It collected" + addCarbon * collectionMultiplier + " stones, " + addNitrogen * collectionMultiplier + " water, " + addHydrogen * collectionMultiplier + " gas.\n";
+				
+				//gc.summary += "It collected" + addCarbon * collectionMultiplier + " stones, " + addNitrogen * collectionMultiplier + " water, " + addHydrogen * collectionMultiplier + " gas.\n";
             }
             if (linkedWith.Count > 0)
             {
 
 
-                gc.summary += "It traded" + tradecarbon + " stones, " + tradenitrogen + " water, " + tradehydrogen + " gas.\n";
+              //  gc.summary += "It traded" + tradecarbon + " stones, " + tradenitrogen + " water, " + tradehydrogen + " gas.\n";
             }
             if (iftech1 == 3)
             {
-                gc.summary += "It learned collecting more resources technology\n";
+               // gc.summary += "It learned collecting more resources technology\n";
                 iftech1 = 4;
             }
             if (iftech2 == 3)
             {
-                gc.summary += "It learned linking technology\n";
+               // gc.summary += "It learned linking technology\n";
                 iftech2 = 4;
             }
             if (iftech3 == 3)
             {
-                gc.summary += "It learned more linking chance technology\n";
+               // gc.summary += "It learned more linking chance technology\n";
                 iftech3 = 4;
             }
             if (iftech4 == 3)
             {
-                gc.summary += "It learned stormsheid technology\n";
+               // gc.summary += "It learned stormsheid technology\n";
                 iftech4 = 4;
             }
             if (iftech5 == 3)
             {
-                gc.summary += "It learned attacking technology\n";
+              //  gc.summary += "It learned attacking technology\n";
                 iftech5 = 4;
             }
             ui.SetPhase("Planning");
             gc.showsummary = true;
             gc.simulate = false;
+			tradecarbon = 0;
+			tradenitrogen = 0;
+			tradehydrogen = 0;
             gc.playButton.interactable = true;
             //gc.ToggleInteractability(true);
             gc.SetBuildingActive(true);
