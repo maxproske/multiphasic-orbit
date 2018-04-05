@@ -268,17 +268,14 @@ public class Planet : MonoBehaviour
 
                     if (linkedWith[i].die == false)
                     {
-                        LineRenderer lr = this.GetComponent<GameObject>().AddComponent<LineRenderer>();
                         //change the line renderer color here
                         if (linkedWith[i].CompareTag("Rogue"))
                         {
 
-                            //links[i].SetColors(Color.red, Color.red);
+                            links[i].SetColors(Color.red, Color.red);
                         }
                         links[i].SetPosition(0, transform.position);
                         links[i].SetPosition(1, linkedWith[i].transform.position);
-                        //lr.SetPosition(0, transform.position);
-                        //lr.SetPosition(0, linkedWith[i].transform.position);
                     }
                     else
                     {
@@ -474,7 +471,15 @@ public class Planet : MonoBehaviour
 
     public void CollectResources()
     {
-        collectionMultiplier = 1;
+        // Run before collecting universes, so collectionMultiplier is never 0.
+        if (fastUniverse)
+        {
+            collectionMultiplier = 4;
+        }
+        else
+        {
+            collectionMultiplier = 1;
+        }
 
         if (population > 0)
         {

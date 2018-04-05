@@ -106,6 +106,7 @@ public class GameController : MonoBehaviour
     public Button waterButton;
     public Button gasButton;
 
+    [SerializeField]
     public static int level;
 
     // missions
