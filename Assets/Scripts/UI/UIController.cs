@@ -201,7 +201,7 @@ public class UIController : MonoBehaviour
 
             // Enable last
             SetSelectionPanelActive(true);
-            SetPreviewPanelActive(true);
+            SetPreviewPanelActive(false);
             SetResourcePanelActive(true);
             SetStatusPanelActive(true);
             SetTechnologyPanelActive(selectedPlanet.population > 0);
