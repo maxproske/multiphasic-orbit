@@ -106,6 +106,7 @@ public class GameController : MonoBehaviour
     public Button waterButton;
     public Button gasButton;
 
+    [SerializeField]
     public static int level;
 
     // missions
@@ -1267,7 +1268,7 @@ public class GameController : MonoBehaviour
 
     private void CalculateFail()
     {
-        if (failOnce)
+        if (failOnce && level == 2)
         {
             fail = true;
             failOnce = false;
