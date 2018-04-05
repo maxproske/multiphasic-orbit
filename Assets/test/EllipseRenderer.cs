@@ -11,7 +11,7 @@ public class EllipseRenderer : MonoBehaviour {
 
 	LineRenderer lr;
 
-	[Range(3,36)]
+	[Range(100,100)]
 	public int segments;
 	public EllipseTester ellipse;
 

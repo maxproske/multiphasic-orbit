@@ -41,7 +41,7 @@ public class Planet : MonoBehaviour
     LineRenderer lr;
 
     // Range attribute between 3 and 36 to determine # of segments in ellipse
-    [Range(3, 36)]
+    [Range(100, 100)]
     public int segments;
 
     // orbit

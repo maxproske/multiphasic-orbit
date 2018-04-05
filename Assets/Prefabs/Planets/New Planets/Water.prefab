@@ -315,19 +315,20 @@ MonoBehaviour:
   iftech3: 0
   iftech4: 0
   iftech5: 0
-  segments: 36
+  segments: 100
   orbitingObject: {fileID: 4704339283109026}
   orbitPath:
     xAxis: 2
     yAxis: 7
+    zAxis: 0
   orbitProgress: 0
   orbitPeriod: 3
   orbitSpeedMultiplier: 1
   fastUniverse: 0
   planetPlaced: 0
-  carbon: 0
-  nitrogen: 0
-  hydrogen: 0
+  stone: 0
+  water: 0
+  gas: 0
   placingCoroutineRunning: 0
   sc: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
@@ -338,7 +339,11 @@ MonoBehaviour:
   collecting: 0
   maxResourceType: 0
   maxResource: 0
+  tradecarbon: 0
+  tradenitrogen: 0
+  tradehydrogen: 0
   planetname: ' '
+  tradeship: []
   linkedWith: []
   links: []
   lines: []
