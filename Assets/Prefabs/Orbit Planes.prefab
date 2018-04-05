@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 33826651853125628}
   - component: {fileID: 64218803845600978}
   - component: {fileID: 23216008920689384}
+  - component: {fileID: 114448381550942514}
   m_Layer: 0
   m_Name: Orbit Plane
   m_TagString: Untagged
@@ -55,6 +56,7 @@ GameObject:
   - component: {fileID: 33759190013491074}
   - component: {fileID: 64590546769999144}
   - component: {fileID: 23381668377872752}
+  - component: {fileID: 114097184787469940}
   m_Layer: 0
   m_Name: Orbit Plane
   m_TagString: Untagged
@@ -69,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1653189542694502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -286, y: 64.30299, z: 11.03338}
+  m_LocalPosition: {x: -286, y: 0, z: 11.03338}
   m_LocalScale: {x: 40, y: 1, z: 80}
   m_Children: []
   m_Father: {fileID: 224402174102943246}
@@ -82,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371966511227354}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 114, y: 64.30299, z: 11.03338}
+  m_LocalPosition: {x: 114, y: 0, z: 11.03338}
   m_LocalScale: {x: 40, y: 1, z: 80}
   m_Children: []
   m_Father: {fileID: 224402174102943246}
@@ -198,6 +200,28 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114097184787469940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1653189542694502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db43e97c17bc2547814c93f366a9a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114448381550942514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371966511227354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db43e97c17bc2547814c93f366a9a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &224402174102943246
 RectTransform:
   m_ObjectHideFlags: 1
@@ -215,6 +239,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 93.17772, y: -64.30299}
+  m_AnchoredPosition: {x: 93.17772, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
