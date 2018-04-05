@@ -98,6 +98,10 @@ public class UIController : MonoBehaviour
 	   ========================================================================== */
     public RectTransform orbitalPlanes;
 
+    /* Declare Audio Source
+	   ========================================================================== */
+    private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
+
 
     // GameController
     public GameController gc;
@@ -107,6 +111,8 @@ public class UIController : MonoBehaviour
         // GameController
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         gc.ui = this;
+
+        gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()

@@ -22,16 +22,25 @@ public class Missions : MonoBehaviour
     public List<GameObject> Test2Missions;
     public List<GameObject> Test3Missions;
     public int test3MissionsAmount;
-
     public List<int> possibleMissionIndexes;
     public int totalMissions;
     GameObject[] missionsPool;
 
     public EndOfMission eom;
 
+    // Audio
+    private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
+    private AudioClip missionCompleteAudioClip;
+
     // Use this for initialization
     void Start()
     {
+        // Add audio source
+        gameObject.AddComponent<AudioSource>();
+        missionCompleteAudioClip = (AudioClip)Resources.Load<AudioClip>("Audio/mission-complete");
+        audioSource.volume = 0.1f;
+        audioSource.playOnAwake = false;
+
         gc = GameObject.Find("Game Manager").GetComponent<GameController>();
         m = GameObject.Find("Missions").GetComponent<Mission>();
         cp = confirmationPanel.GetComponent<ConfirmationPanel>();
@@ -52,6 +61,11 @@ public class Missions : MonoBehaviour
         {
             possibleMissionIndexes.Add(i);
         }
+    }
+
+    private void PlayMissionCompleteSound ()
+    {
+        audioSource.PlayOneShot (missionCompleteAudioClip);
     }
 
     public void CPShownAtStartOfLevel()
@@ -403,6 +417,9 @@ public class Missions : MonoBehaviour
     // used to remove mission from in-progress list and add to completed list
     private void Complete(GameObject mission)
     {
+        // Play audio jingle
+        PlayMissionCompleteSound();
+
         m = mission.GetComponent<Mission>();
         //Debug.Log("Mission: " + m.missionName + " completed!");
         if (!m.completed)

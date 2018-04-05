@@ -9,13 +9,13 @@ public class ClickSound : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private AudioClip clickAudioClip;
     private AudioClip hoverAudioClip;
     private Button button { get { return GetComponent<Button>(); } }
-    private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start () 
     {
         // Add audio source
-        gameObject.AddComponent<AudioSource>();
+        audioSource = GameObject.Find("Canvas").GetComponent<AudioSource>();
 
         // Load resources
         hoverAudioClip = (AudioClip)Resources.Load<AudioClip>("Audio/menu-fx-02");
@@ -23,7 +23,7 @@ public class ClickSound : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         clickAudioClip = (AudioClip)Resources.Load<AudioClip>("Audio/menu-fx-03");
         button.onClick.AddListener(() => PlaySoud());
 
-        audioSource.volume = 0.4f;
+        audioSource.volume = 0.7f;
         audioSource.playOnAwake = false;
     }
 
@@ -39,8 +39,11 @@ public class ClickSound : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
 	}
 
-    void PlaySoud ()
+    public void PlaySoud ()
     {
-        audioSource.PlayOneShot (clickAudioClip);
+        if (gameObject != null && audioSource != null)
+        {
+            audioSource.PlayOneShot (clickAudioClip);
+        }
     }
 }
