@@ -358,7 +358,11 @@ public class Log : MonoBehaviour
 
     public string AddTurnToLog()
     {
-
+        Debug.Log("gc.GAME_STATE " + gc.GAME_STATE + ", " + "gc.turn " + gc.turn);
+        if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_3 && gc.turn == 2) gc.GAME_STATE = Constants.LEARNERS_MISSION_4;
+        //if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_3 && gc.turn == 3) gc.GAME_STATE = Constants.LEARNERS_MISSION_5;
+        if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_5_PLAY && gc.turn == 4 && gc.canBuild) gc.GAME_STATE = Constants.LEARNERS_MISSION_6;
+        if (GameController.level == 1 && gc.GAME_STATE == Constants.LEARNERS_MISSION_6_PLAY) gc.GAME_STATE = Constants.LEARNERS_MISSION_7;
         return "\r\n\r\n<b>Turn " + gc.turn + "</b>";
     }
 

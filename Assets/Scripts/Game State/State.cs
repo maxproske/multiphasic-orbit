@@ -23,7 +23,7 @@ public class State : MonoBehaviour {
 		// If previous game state is different than the current state
 		if (previous != current)
 		{
-            //Debug.Log(current);
+            Debug.Log(current);
 
 			// Something has changed...
 			DisableAllHints();

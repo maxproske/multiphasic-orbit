@@ -1262,14 +1262,22 @@ public class GameController : MonoBehaviour
         Button[] _planetaryButtons = rightPlanetaryPanel.GetComponentsInChildren<Button>();
         if (canBuild)
         {
-            stoneButton.interactable = active;
+            if (level == 1 && stoneIncrement >= 2)
+            {
+                stoneButton.interactable = false;
+            }
+            else {
+                stoneButton.interactable = active;
+            }
 
             // Disable the stone button depending on the status of the Learner's Test
-            if (level == 1 && GAME_STATE != Constants.LEARNERS_MISSION_5_PLAY)
+            if (level == 1 && GAME_STATE != Constants.LEARNERS_MISSION_6)
             {
                 // Only enable when we are on Mission 6
                 stoneButton.interactable = false;
             }
+
+
 
             if (stoneIncrement > 0)
             {
