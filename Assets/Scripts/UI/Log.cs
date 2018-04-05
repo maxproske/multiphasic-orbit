@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Log : MonoBehaviour
 {
     private GameController gc;
-    public Text LogText;
+	[HideInInspector]
+	public Text LogText;
     string color;
     string planetColor;
     string planetColor2;
@@ -41,6 +42,9 @@ public class Log : MonoBehaviour
         if (log.activeSelf)
         {
             log.SetActive(false);
+			if (gc.turn % 5 == 0) {
+				LogText.text = "";
+			}
         }
         else
         {

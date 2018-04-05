@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour
     public GameObject leftpanel;
     public GameObject rightpanel;
 
-    private bool failOnce;
+    private bool failOnce;	
 
 	public Text summaryText;
     public int numInterplanetaryNetworking; // Num of planets that have learned this skill. For learners test.
@@ -357,6 +357,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyUp(KeyCode.F12))
         {
             SceneManager.LoadScene("title");
@@ -383,9 +384,11 @@ public class GameController : MonoBehaviour
         if (showsummary == true)
         {
 //            cp3.ShowPanel("Summary", summary);
-
+//
 			l.gameObject.SetActive(true);
+
             showsummary = false;
+
 			foreach (var planet in planets) {
 				planet.GetComponent<Planet> ().tradecarbon = 0;
 				planet.GetComponent<Planet> ().tradehydrogen = 0;
@@ -1483,6 +1486,9 @@ public class GameController : MonoBehaviour
         ui.HideAllTooltips();
 
 		l.gameObject.SetActive (false);
+		if (turn % 5 == 0) {
+			l.LogText.text = "";
+		}
         AddTurn();
         summary = "";
         ui.SetPhase("Simulating...");
