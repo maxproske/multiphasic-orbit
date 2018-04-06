@@ -644,7 +644,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: df1ef50e-cb67-4eb1-b10c-a763dcc713c0
-  projectName: multiphasic-prototype
+  projectName: multiphasic-orbit
   organizationId: mr-jj
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

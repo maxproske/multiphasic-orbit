@@ -474,11 +474,11 @@ public class Planet : MonoBehaviour
         // Run before collecting universes, so collectionMultiplier is never 0.
         if (fastUniverse)
         {
-            collectionMultiplier = 4;
+            collectionMultiplier = 2;
         }
         else
         {
-            collectionMultiplier = 1;
+            collectionMultiplier = 2;
         }
 
 
